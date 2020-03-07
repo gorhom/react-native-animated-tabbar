@@ -1,0 +1,74 @@
+{
+  "name": "@gorhom/animated-tabbar",
+  "version": "0.1.0",
+  "description": "later",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/src/index.d.ts",
+  "react-native": "src/index.tsx",
+  "files": [
+    "src",
+    "lib"
+  ],
+  "keywords": [
+    "react-native",
+    "ios",
+    "android",
+    "react-navigation",
+    "reanimated",
+    "tabbar",
+    "tab-bar",
+    "bottom-bar"
+  ],
+  "repository": "https://github.com/gorhom/react-native-animated-tabbar",
+  "author": "Mo Gorhom (https://github.com/gorhom)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gorhom/react-native-animated-tabbar/issues"
+  },
+  "homepage": "https://github.com/gorhom/react-native-animated-tabbar#readme",
+  "scripts": {
+    "test": "jest",
+    "typescript": "tsc --noEmit",
+    "lint": "eslint --ext .js,.ts,.tsx .",
+    "prepare": "bob build",
+    "release": "release-it",
+    "example": "yarn --cwd example",
+    "pods": "cd example/ios && node -e \"process.exit(require('os').platform() === 'darwin')\" || pod install",
+    "bootstrap": "yarn example && yarn && yarn pods"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@react-native-community/bob": "^0.10.0",
+    "@react-native-community/eslint-config": "^0.0.7",
+    "@release-it/conventional-changelog": "^1.1.0",
+    "@types/react": "^16.9.19",
+    "@types/react-native": "0.61.10",
+    "auto-changelog": "^1.16.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "prettier": "^1.19.1",
+    "react": "~16.9.0",
+    "react-native": "~0.61.5",
+    "release-it": "^13.0.0",
+    "typescript": "^3.8.3"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn lint && yarn typescript"
+    }
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": ["commonjs", "module", "typescript"]
+  }
+}
