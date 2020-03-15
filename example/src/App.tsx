@@ -1,25 +1,19 @@
-import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import AnimatedTabbar from '@gorhom/animated-tabbar';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import DummyScreen from './screens/DummyScreen';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [deviceName, setDeviceName] = React.useState('');
-
-  React.useEffect(() => {
-    AnimatedTabbar.getDeviceName().then(setDeviceName);
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Device name: {deviceName}</Text>
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={DummyScreen} />
+        <Tab.Screen name="Likes" component={DummyScreen} />
+        <Tab.Screen name="Search" component={DummyScreen} />
+        <Tab.Screen name="Profile" component={DummyScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
