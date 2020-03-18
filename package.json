@@ -38,16 +38,17 @@
     "bootstrap": "yarn example && yarn && yarn pods"
   },
   "dependencies": {
-    "react-native-redash": "^10.0.1"
+    "react-native-redash": "^10.0.1",
+    "use-memo-one": "^1.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@react-native-community/bob": "^0.10.0",
+    "@react-native-community/eslint-config": "^0.0.7",
     "@react-navigation/bottom-tabs": "^5.1.1",
     "@react-navigation/native": "^5.0.9",
     "@react-navigation/stack": "^5.1.1",
-    "@react-native-community/bob": "^0.10.0",
-    "@react-native-community/eslint-config": "^0.0.7",
     "@release-it/conventional-changelog": "^1.1.0",
     "@types/react": "^16.9.19",
     "@types/react-native": "0.61.10",
@@ -60,8 +61,8 @@
     "react": "~16.9.0",
     "react-native": "~0.61.5",
     "react-native-gesture-handler": "^1.6.0",
-    "react-native-safe-area-context": "^0.7.3",
     "react-native-reanimated": "^1.7.0",
+    "react-native-safe-area-context": "^0.7.3",
     "react-native-svg": "^12.0.3",
     "release-it": "^13.1.1",
     "typescript": "^3.8.3"

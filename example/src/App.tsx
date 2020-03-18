@@ -1,18 +1,108 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AnimatedTabBar from '@gorhom/animated-tabbar';
 import DummyScreen from './screens/DummyScreen';
+import HomeSVG from './svg/HomeSVG';
+import LikeSVG from './svg/LikeSVG';
+import SearchSVG from './svg/SearchSVG';
+import ProfileSVG from './svg/ProfileSVG';
+
+const tabOptions = {
+  Home: {
+    labelStyle: {
+      color: '#5B37B7',
+    },
+    icon: {
+      component: HomeSVG,
+      activeColor: 'rgba(91,55,183,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(223,215,243,1)',
+      inactiveColor: 'rgba(223,215,243,0)',
+    },
+  },
+  Likes: {
+    labelStyle: {
+      color: '#C9379D',
+    },
+    icon: {
+      component: LikeSVG,
+      activeColor: 'rgba(201,55,157,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(247,215,243,1)',
+      inactiveColor: 'rgba(247,215,243,0)',
+    },
+  },
+  Search: {
+    labelStyle: {
+      color: '#E6A919',
+    },
+    icon: {
+      component: SearchSVG,
+      activeColor: 'rgba(230,169,25,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(251,239,211,1)',
+      inactiveColor: 'rgba(251,239,211,0)',
+    },
+  },
+  Profile: {
+    labelStyle: {
+      color: '#1194AA',
+    },
+    icon: {
+      component: ProfileSVG,
+      activeColor: 'rgba(17,148,170,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(207,235,239,1)',
+      inactiveColor: 'rgba(207,235,239,0)',
+    },
+  },
+};
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={DummyScreen} />
-        <Tab.Screen name="Likes" component={DummyScreen} />
-        <Tab.Screen name="Search" component={DummyScreen} />
-        <Tab.Screen name="Profile" component={DummyScreen} />
+      <Tab.Navigator
+        tabBar={props => <AnimatedTabBar configs={tabOptions} {...props} />}
+      >
+        <Tab.Screen
+          name="Home"
+          initialParams={{
+            backgroundColor: tabOptions.Home.labelStyle.color,
+          }}
+          component={DummyScreen}
+        />
+        <Tab.Screen
+          name="Likes"
+          initialParams={{
+            backgroundColor: tabOptions.Likes.labelStyle.color,
+          }}
+          component={DummyScreen}
+        />
+        <Tab.Screen
+          name="Search"
+          initialParams={{
+            backgroundColor: tabOptions.Search.labelStyle.color,
+          }}
+          component={DummyScreen}
+        />
+        <Tab.Screen
+          name="Profile"
+          initialParams={{
+            backgroundColor: tabOptions.Profile.labelStyle.color,
+          }}
+          component={DummyScreen}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
