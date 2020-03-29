@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
+    fontSize: 43,
+    fontWeight: '600',
+    textTransform: 'uppercase',
     color: 'white',
   },
 });

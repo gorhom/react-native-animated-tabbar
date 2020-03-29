@@ -38,8 +38,7 @@
     "bootstrap": "yarn example && yarn && yarn pods"
   },
   "dependencies": {
-    "react-native-redash": "^10.0.1",
-    "use-memo-one": "^1.1.1"
+    "react-native-redash": "^10.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",

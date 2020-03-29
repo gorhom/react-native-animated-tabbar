@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar from '@gorhom/animated-tabbar';
+import AnimatedTabBar, { TabsConfigs } from '@gorhom/animated-tabbar';
 import DummyScreen from './screens/DummyScreen';
 import HomeSVG from './svg/HomeSVG';
 import LikeSVG from './svg/LikeSVG';
 import SearchSVG from './svg/SearchSVG';
 import ProfileSVG from './svg/ProfileSVG';
 
-const tabOptions = {
+const tabs: TabsConfigs = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -73,33 +73,35 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        tabBar={props => <AnimatedTabBar configs={tabOptions} {...props} />}
+        tabBar={props => (
+          <AnimatedTabBar duration={250} tabs={tabs} {...props} />
+        )}
       >
         <Tab.Screen
           name="Home"
           initialParams={{
-            backgroundColor: tabOptions.Home.labelStyle.color,
+            backgroundColor: tabs.Home.labelStyle.color,
           }}
           component={DummyScreen}
         />
         <Tab.Screen
           name="Likes"
           initialParams={{
-            backgroundColor: tabOptions.Likes.labelStyle.color,
+            backgroundColor: tabs.Likes.labelStyle.color,
           }}
           component={DummyScreen}
         />
         <Tab.Screen
           name="Search"
           initialParams={{
-            backgroundColor: tabOptions.Search.labelStyle.color,
+            backgroundColor: tabs.Search.labelStyle.color,
           }}
           component={DummyScreen}
         />
         <Tab.Screen
           name="Profile"
           initialParams={{
-            backgroundColor: tabOptions.Profile.labelStyle.color,
+            backgroundColor: tabs.Profile.labelStyle.color,
           }}
           component={DummyScreen}
         />
