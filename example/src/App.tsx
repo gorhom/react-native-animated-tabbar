@@ -74,7 +74,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator
         tabBar={props => (
-          <AnimatedTabBar duration={250} tabs={tabs} {...props} />
+          <AnimatedTabBar duration={500} tabs={tabs} {...props} />
         )}
       >
         <Tab.Screen
