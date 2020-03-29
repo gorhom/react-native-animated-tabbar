@@ -6,6 +6,7 @@ import { useSafeArea } from 'react-native-safe-area-context';
 import { CommonActions } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { AnimatedTabBarItem } from './item';
+import { TabsConfigs, AnimationConfigProps } from './types';
 import { styles } from './styles';
 
 Animated.addWhitelistedNativeProps({
@@ -14,13 +15,16 @@ Animated.addWhitelistedNativeProps({
   backgroundColor: true,
 });
 
-interface AnimatedTabBarProps extends BottomTabBarProps {
-  configs: any;
+interface AnimatedTabBarProps extends BottomTabBarProps, AnimationConfigProps {
+  /**
+   * Tabs configurations.
+   */
+  tabs: TabsConfigs;
 }
 
 export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   // props
-  const { state, navigation, descriptors, configs } = props;
+  const { state, navigation, descriptors, tabs, duration, easing } = props;
   const { routes } = state;
 
   // variables
@@ -80,15 +84,17 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
     <View style={containerStyle}>
       {routes.map((route, index) => {
         const { options } = descriptors[route.key];
-        const tabConfigs = configs[route.name];
+        const tabConfigs = tabs[route.name];
         const label = options.title !== undefined ? options.title : route.name;
         return (
           <AnimatedTabBarItem
             key={route.key}
             index={index}
             selectedIndex={selectedIndex}
-            configs={tabConfigs}
             label={label}
+            duration={duration}
+            easing={easing}
+            {...tabConfigs}
           />
         );
       })}

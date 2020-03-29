@@ -15,3 +15,20 @@ export interface TabConfig {
     inactiveColor: string;
   };
 }
+
+export interface TabsConfigs {
+  [key: string]: TabConfig;
+}
+
+export interface AnimationConfigProps {
+  /**
+   * Animation duration.
+   * @default 500
+   */
+  duration?: number;
+  /**
+   * Animation easing function.
+   * @default Easing.out(Easing.exp)
+   */
+  easing?: Animated.EasingFunction;
+}
