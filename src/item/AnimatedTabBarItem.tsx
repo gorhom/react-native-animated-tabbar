@@ -1,15 +1,35 @@
-import React, { memo, useCallback, useState, useMemo } from 'react';
-import { View, TouchableWithoutFeedback } from 'react-native';
-import Animated from 'react-native-reanimated';
-import { useMemoOne } from 'use-memo-one';
-import { interpolateColor, useValues } from 'react-native-redash';
-import { withTiming } from '../withTiming';
+import React, { useMemo, memo } from 'react';
+import { View } from 'react-native';
+import Animated, { Easing } from 'react-native-reanimated';
+import {
+  // @ts-ignore
+  PureNativeButton,
+  State,
+  createNativeWrapper,
+} from 'react-native-gesture-handler';
+import {
+  interpolateColor,
+  useValues,
+  withTransition,
+  panGestureHandler,
+} from 'react-native-redash';
 import { TabConfig } from '../types';
 import { styles } from './styles';
 
-const { interpolate, useCode, set, block, Clock } = Animated;
+const AnimatedRawButton = createNativeWrapper(
+  Animated.createAnimatedComponent(PureNativeButton),
+  {
+    shouldCancelWhenOutside: false,
+    shouldActivateOnStart: false,
+  }
+);
+
+const { add, interpolate, useCode, set, cond, eq } = Animated;
 
 interface AnimatedTabBarItemProps {
+  index: number;
+
+  selectedIndex: Animated.Value<number>;
   /**
    * The animated tab configuration.
    */
@@ -19,81 +39,42 @@ interface AnimatedTabBarItemProps {
    */
   label: string;
   /**
-   * The accessibility label for the tab.
-   */
-  accessibilityLabel?: string;
-  /**
-   * An unique ID for testing for the tab.
-   */
-  testID?: string;
-  /**
-   * Whether the tab is focused.
-   */
-  focused: boolean;
-  /**
    * Whether to allow scaling the font for the label for accessibility purposes.
    */
   allowFontScaling?: boolean;
-  /**
-   * Function to execute on press.
-   */
-  onPress: () => void;
-  /**
-   * Function to execute on long press.
-   */
-  onLongPress: () => void;
 }
 
 const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
   // props
-  const {
-    configs,
-    label,
-    testID,
-    accessibilityLabel,
-    focused,
-    allowFontScaling,
-    onPress,
-    onLongPress,
-  } = props;
-
-  // state
-  const [labelWidth, setLableWidth] = useState(0);
+  const { index, selectedIndex, configs, label, allowFontScaling } = props;
 
   // variables
+  const [labelWidth] = useValues([0], []);
   const minwidth = useMemo(() => 72, []);
-  const maxWidth = useMemo(() => labelWidth + 12 + minwidth, [
-    minwidth,
-    labelWidth,
-  ]);
+  const maxWidth = add(labelWidth, 12, minwidth);
 
   // animations
-  const { animatedClock } = useMemoOne(
-    () => ({ animatedClock: new Clock() }),
-    []
+  const animatedFocus = withTransition(cond(eq(selectedIndex, index), 1, 0), {
+    duration: 500,
+    easing: Easing.out(Easing.exp),
+  });
+  const { state, gestureHandler } = panGestureHandler();
+
+  useCode(
+    () =>
+      cond(eq(state, State.END), [
+        set(selectedIndex, index),
+        set(state, State.UNDETERMINED),
+      ]),
+    [selectedIndex, state, index]
   );
-  const [animatedFocus] = useValues([0], []);
+
   const animatedIconColor = interpolateColor(animatedFocus, {
     inputRange: [0, 1],
     outputRange: [configs.icon.inactiveColor, configs.icon.activeColor],
   });
 
-  useCode(
-    () =>
-      block([
-        set(
-          animatedFocus,
-          withTiming({
-            clock: animatedClock,
-            fromValue: animatedFocus,
-            toValue: focused ? 1 : 0,
-          })
-        ),
-      ]),
-    [focused]
-  );
-
-  // styles
+  //#region styles
   const containerStyle = [
     styles.container,
     {
@@ -129,16 +110,15 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
     },
   ];
   const labelStyle = [styles.label, configs.labelStyle];
+  //#endregion
 
   // callbacks
-  const handleTextlayout = useCallback(
-    ({ nativeEvent }) => {
-      if (labelWidth === 0) {
-        setLableWidth(nativeEvent.layout.width);
-      }
+  const handleTextlayout = ({
+    nativeEvent: {
+      // @ts-ignore
+      layout: { width },
     },
-    [labelWidth, setLableWidth]
-  );
+  }) => requestAnimationFrame(() => labelWidth.setValue(width));
 
   // render
   const renderIcon = () => {
@@ -147,14 +127,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
       : configs.icon.component;
   };
   return (
-    <TouchableWithoutFeedback
-      accessibilityLabel={accessibilityLabel}
-      accessibilityRole={'button'}
-      accessibilityStates={focused ? ['selected'] : []}
-      testID={testID}
-      onPress={onPress}
-      onLongPress={onLongPress}
-    >
+    <AnimatedRawButton {...gestureHandler}>
       <Animated.View style={containerStyle}>
         <Animated.View style={contentContainerStyle}>
           <View style={styles.iconContainer}>{renderIcon()}</View>
@@ -170,7 +143,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
           </Animated.Text>
         </Animated.View>
       </Animated.View>
-    </TouchableWithoutFeedback>
+    </AnimatedRawButton>
   );
 };
 

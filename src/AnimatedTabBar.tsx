@@ -1,11 +1,12 @@
 import React, { useCallback, useMemo } from 'react';
-import Animated from 'react-native-reanimated';
+import { View } from 'react-native';
+import Animated, { useCode, onChange, call } from 'react-native-reanimated';
+import { useValues } from 'react-native-redash';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { CommonActions } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { AnimatedTabBarItem } from './item';
 import { styles } from './styles';
-import { View } from 'react-native';
 
 Animated.addWhitelistedNativeProps({
   width: true,
@@ -24,6 +25,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
 
   // variables
   const safeArea = useSafeArea();
+  const [selectedIndex] = useValues([0], []);
 
   // styles
   const containerStyle = useMemo(
@@ -37,59 +39,51 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   );
 
   // callbacks
-  const handleItemPress = useCallback(
-    (name, key, focused) => () => {
+  const handleSelectedIndexChange = useCallback(
+    index => {
+      const { key, name } = state.routes[index];
       const event = navigation.emit({
         type: 'tabPress',
         target: key,
         canPreventDefault: true,
       });
 
-      if (!focused && !event.defaultPrevented) {
+      if (!event.defaultPrevented) {
         navigation.dispatch({
           ...CommonActions.navigate(name),
           target: state.key,
         });
       }
     },
-    [navigation, state]
+    [state, navigation]
   );
 
-  const handleItemLongPress = useCallback(
-    key => () => {
-      navigation.emit({
-        type: 'tabLongPress',
-        target: key,
-      });
-    },
-    [navigation]
+  // effects
+  useCode(
+    () =>
+      onChange(
+        selectedIndex,
+        call([selectedIndex], args => {
+          handleSelectedIndexChange(args[0]);
+        })
+      ),
+    [selectedIndex]
   );
 
   // render
   return (
     <View style={containerStyle}>
       {routes.map((route, index) => {
-        const focused = index === state.index;
         const { options } = descriptors[route.key];
         const tabConfigs = configs[route.name];
         const label = options.title !== undefined ? options.title : route.name;
-        const accessibilityLabel =
-          options.tabBarAccessibilityLabel !== undefined
-            ? options.tabBarAccessibilityLabel
-            : typeof label === 'string'
-            ? `${label}, tab, ${index + 1} of ${routes.length}`
-            : undefined;
-
         return (
           <AnimatedTabBarItem
             key={route.key}
+            index={index}
+            selectedIndex={selectedIndex}
             configs={tabConfigs}
-            focused={focused}
             label={label}
-            accessibilityLabel={accessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={handleItemPress(route.name, route.key, focused)}
-            onLongPress={handleItemLongPress(route.key)}
           />
         );
       })}
