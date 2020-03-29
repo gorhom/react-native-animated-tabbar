@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect } from 'react';
 import { View } from 'react-native';
 import Animated, { useCode, onChange, call } from 'react-native-reanimated';
 import { useValues } from 'react-native-redash';
@@ -59,6 +59,11 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   );
 
   // effects
+  useEffect(() => {
+    // @ts-ignore
+    selectedIndex.setValue(state.index);
+  }, [state, selectedIndex]);
+
   useCode(
     () =>
       onChange(
