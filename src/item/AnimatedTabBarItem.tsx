@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import {
   // @ts-ignore
-  PureNativeButton,
+  TouchableWithoutFeedback,
   State,
   createNativeWrapper,
 } from 'react-native-gesture-handler';
@@ -17,7 +17,7 @@ import { TabConfig } from '../types';
 import { styles } from './styles';
 
 const AnimatedRawButton = createNativeWrapper(
-  Animated.createAnimatedComponent(PureNativeButton),
+  Animated.createAnimatedComponent(TouchableWithoutFeedback),
   {
     shouldCancelWhenOutside: false,
     shouldActivateOnStart: false,
