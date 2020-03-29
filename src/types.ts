@@ -1,7 +1,7 @@
 import { TextStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-export interface TabConfig {
+export interface TabConfigsType {
   labelStyle: TextStyle;
   icon: {
     component:
@@ -16,8 +16,8 @@ export interface TabConfig {
   };
 }
 
-export interface TabsConfigs {
-  [key: string]: TabConfig;
+export interface TabsConfigsType {
+  [key: string]: TabConfigsType;
 }
 
 export interface AnimationConfigProps {

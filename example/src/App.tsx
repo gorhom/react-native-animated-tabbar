@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, { TabsConfigs } from '@gorhom/animated-tabbar';
+import AnimatedTabBar, { TabsConfigsType } from '@gorhom/animated-tabbar';
 import DummyScreen from './screens/DummyScreen';
 import HomeSVG from './svg/HomeSVG';
 import LikeSVG from './svg/LikeSVG';
 import SearchSVG from './svg/SearchSVG';
 import ProfileSVG from './svg/ProfileSVG';
 
-const tabs: TabsConfigs = {
+const tabs: TabsConfigsType = {
   Home: {
     labelStyle: {
       color: '#5B37B7',

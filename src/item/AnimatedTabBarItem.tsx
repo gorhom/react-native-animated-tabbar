@@ -12,7 +12,7 @@ import {
   withTransition,
   panGestureHandler,
 } from 'react-native-redash';
-import { TabConfig, AnimationConfigProps } from '../types';
+import { TabConfigsType, AnimationConfigProps } from '../types';
 import { styles } from './styles';
 
 const AnimatedRawButton = createNativeWrapper(
@@ -25,7 +25,7 @@ const AnimatedRawButton = createNativeWrapper(
 
 const { add, interpolate, useCode, set, cond, eq } = Animated;
 
-interface AnimatedTabBarItemProps extends AnimationConfigProps, TabConfig {
+interface AnimatedTabBarItemProps extends AnimationConfigProps, TabConfigsType {
   index: number;
   selectedIndex: Animated.Value<number>;
   label: string;
