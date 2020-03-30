@@ -18,7 +18,7 @@ npm install @gorhom/animated-tabbar
 
 ## Usage
 
-```ts
+```tsx
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -85,7 +85,7 @@ In order to animate the tab icon color, you will need to use the provded prop `c
 
 This example below should explain it better:
 
-```ts
+```tsx
 import React from 'react';
 import Animated from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
