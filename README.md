@@ -1,9 +1,9 @@
 # Animated TabBar [![npm](https://img.shields.io/npm/v/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
 
-An animated tab bar to be used with `React Navigation` created with `Reanimated`, inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
+a 60fps animated tab bar to be used with `React Navigation` created with `Reanimated` 😎, inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
 
 <p align="center">
-<img src="./preview.gif" width="400" height="300">
+<img src="./preview.gif" width="600" height="336">
 </p>
 
 ## Installation
@@ -85,15 +85,12 @@ In order to animate the tab icon color, you will need to use the provded prop `c
 
 This example below should explain it better:
 
-```tsx
+```ts
 import React from 'react';
 import Animated from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
-Animated.addWhitelistedNativeProps({
-  stroke: true,
-});
 
 interface AnimatedSVGProps {
   color: Animated.Node<string>;

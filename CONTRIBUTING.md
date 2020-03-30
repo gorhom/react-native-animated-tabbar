@@ -43,12 +43,6 @@ To fix formatting errors, run the following:
 yarn lint --fix
 ```
 
-Remember to add tests for your change if possible. Run the unit tests by:
-
-```sh
-yarn test
-```
-
 ### Commit message convention
 
 We follow the [conventional commits specification](https://www.conventionalcommits.org/en) for our commit messages:
@@ -62,7 +56,7 @@ We follow the [conventional commits specification](https://www.conventionalcommi
 
 Our pre-commit hooks verify that your commit message matches this format when committing.
 
-### Linting and tests
+### Linting
 
 [ESLint](https://eslint.org/), [Prettier](https://prettier.io/), [TypeScript](https://www.typescriptlang.org/)
 

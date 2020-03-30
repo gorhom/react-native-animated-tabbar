@@ -1,7 +1,7 @@
 {
   "name": "@gorhom/animated-tabbar",
   "version": "0.1.0",
-  "description": "later",
+  "description": "a 60fps animated tab bar to be used with `React Navigation` created with `Reanimated` 😎",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/src/index.d.ts",
@@ -28,10 +28,9 @@
   },
   "homepage": "https://github.com/gorhom/react-native-animated-tabbar#readme",
   "scripts": {
-    "test": "jest",
     "typescript": "tsc --noEmit",
     "lint": "eslint --ext .js,.ts,.tsx .",
-    "prepare": "bob build",
+    "build": "bob build",
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example/ios && node -e \"process.exit(require('os').platform() === 'darwin')\" || pod install",
