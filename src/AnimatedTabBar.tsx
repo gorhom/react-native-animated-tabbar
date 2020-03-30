@@ -6,7 +6,7 @@ import { useSafeArea } from 'react-native-safe-area-context';
 import { CommonActions } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { AnimatedTabBarItem } from './item';
-import { TabsConfigs, AnimationConfigProps } from './types';
+import { TabsConfigsType, AnimationConfigProps } from './types';
 import { styles } from './styles';
 
 Animated.addWhitelistedNativeProps({
@@ -19,7 +19,7 @@ interface AnimatedTabBarProps extends BottomTabBarProps, AnimationConfigProps {
   /**
    * Tabs configurations.
    */
-  tabs: TabsConfigs;
+  tabs: TabsConfigsType;
 }
 
 export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
