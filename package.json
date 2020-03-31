@@ -66,9 +66,6 @@
     "typescript": "^3.8.3"
   },
   "peerDependencies": {
-    "@react-navigation/bottom-tabs": ">=5.0.0",
-    "@react-navigation/native": ">=5.0.0",
-    "@react-navigation/stack": ">=5.0.0",
     "react": "*",
     "react-native": "*",
     "react-native-gesture-handler": ">=1.6.0",
