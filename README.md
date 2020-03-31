@@ -22,9 +22,9 @@ npm install @gorhom/animated-tabbar
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, {TabsConfigs} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfigsType} from '@gorhom/animated-tabbar';
 
-const tabs: TabsConfigs = {
+const tabs: TabsConfigsType = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
