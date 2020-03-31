@@ -1,6 +1,6 @@
-# Animated TabBar [![npm](https://img.shields.io/npm/v/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
+# Animated TabBar [![npm](https://badgen.net/npm/v/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
 
-a 60fps animated tab bar to be used with `React Navigation` created with `Reanimated` 😎, inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
+a 60fps animated tab bar to be used with `React Navigation v4 & v5` created with `Reanimated` 😎, inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
 
 <p align="center">
 <img src="./preview.gif" width="600" height="336">
@@ -18,66 +18,132 @@ npm install @gorhom/animated-tabbar
 
 ## Usage
 
-```tsx
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, {TabsConfigsType} from '@gorhom/animated-tabbar';
+<details>
+  <summary>React Navigation v5</summary>
 
-const tabs: TabsConfigsType = {
-  Home: {
-    labelStyle: {
-      color: '#5B37B7',
-    },
-    icon: {
-      component: /* ICON COMPONENT */,
-      activeColor: 'rgba(91,55,183,1)',
-      inactiveColor: 'rgba(0,0,0,1)',
-    },
-    background: {
-      activeColor: 'rgba(223,215,243,1)',
-      inactiveColor: 'rgba(223,215,243,0)',
-    },
-  },
-  Profile: {
-    labelStyle: {
-      color: '#1194AA',
-    },
-    icon: {
-      component: /* ICON COMPONENT */,
-      activeColor: 'rgba(17,148,170,1)',
-      inactiveColor: 'rgba(0,0,0,1)',
-    },
-    background: {
-      activeColor: 'rgba(207,235,239,1)',
-      inactiveColor: 'rgba(207,235,239,0)',
-    },
-  },
-};
+  ```tsx
+  import React from 'react';
+  import { NavigationContainer } from '@react-navigation/native';
+  import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+  import AnimatedTabBar, {TabsConfigsType} from '@gorhom/animated-tabbar';
 
-const Tab = createBottomTabNavigator();
+  const tabs: TabsConfigsType = {
+    Home: {
+      labelStyle: {
+        color: '#5B37B7',
+      },
+      icon: {
+        component: /* ICON COMPONENT */,
+        activeColor: 'rgba(91,55,183,1)',
+        inactiveColor: 'rgba(0,0,0,1)',
+      },
+      background: {
+        activeColor: 'rgba(223,215,243,1)',
+        inactiveColor: 'rgba(223,215,243,0)',
+      },
+    },
+    Profile: {
+      labelStyle: {
+        color: '#1194AA',
+      },
+      icon: {
+        component: /* ICON COMPONENT */,
+        activeColor: 'rgba(17,148,170,1)',
+        inactiveColor: 'rgba(0,0,0,1)',
+      },
+      background: {
+        activeColor: 'rgba(207,235,239,1)',
+        inactiveColor: 'rgba(207,235,239,0)',
+      },
+    },
+  };
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator
-        tabBar={props => (
-          <AnimatedTabBar tabs={tabs} {...props} />
-        )}
-      >
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-        />
-        <Tab.Screen
-          name="Profile"
-          component={HomeScreen}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
-  )
-}
-```
+  const Tab = createBottomTabNavigator();
+
+  export default function App() {
+    return (
+      <NavigationContainer>
+        <Tab.Navigator
+          tabBar={props => (
+            <AnimatedTabBar tabs={tabs} {...props} />
+          )}
+        >
+          <Tab.Screen
+            name="Home"
+            component={HomeScreen}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={ProfileScreen}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    )
+  }
+  ```
+</details>
+
+<details>
+  <summary>React Navigation v4</summary>
+
+  ```tsx
+  import React from 'react';
+  import {createAppContainer} from 'react-navigation';
+  import {createBottomTabNavigator} from 'react-navigation-tabs';
+  import {createStackNavigator} from 'react-navigation-stack';
+  import {SafeAreaProvider} from 'react-native-safe-area-context';
+  import AnimatedTabBar, {TabsConfigsType} from '@gorhom/animated-tabbar';
+
+  const tabs: TabsConfigsType = {
+    Home: {
+      labelStyle: {
+        color: '#5B37B7',
+      },
+      icon: {
+        component: /* ICON COMPONENT */,
+        activeColor: 'rgba(91,55,183,1)',
+        inactiveColor: 'rgba(0,0,0,1)',
+      },
+      background: {
+        activeColor: 'rgba(223,215,243,1)',
+        inactiveColor: 'rgba(223,215,243,0)',
+      },
+    },
+    Profile: {
+      labelStyle: {
+        color: '#1194AA',
+      },
+      icon: {
+        component: /* ICON COMPONENT */,
+        activeColor: 'rgba(17,148,170,1)',
+        inactiveColor: 'rgba(0,0,0,1)',
+      },
+      background: {
+        activeColor: 'rgba(207,235,239,1)',
+        inactiveColor: 'rgba(207,235,239,0)',
+      },
+    },
+  };
+
+  const TabNavigator = createBottomTabNavigator(
+    {
+      Home: HomeScreen,
+      Profile: ProfileScreen,
+    },
+    {
+      tabBarComponent: props => <AnimatedTabBar tabs={tabs} {...props} />,
+    },
+  );
+
+  const AppContainer = createAppContainer(TabNavigator);
+
+  export default () => (
+    <SafeAreaProvider>
+      <AppContainer />
+    </SafeAreaProvider>
+  );
+  ```
+</details>
 
 ### Animated Icon
 
