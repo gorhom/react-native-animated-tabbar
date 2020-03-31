@@ -1,6 +1,6 @@
 {
   "name": "@gorhom/animated-tabbar",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "a 60fps animated tab bar to be used with `React Navigation` created with `Reanimated` 😎",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -66,8 +66,8 @@
     "typescript": "^3.8.3"
   },
   "peerDependencies": {
-    "@react-navigation/bottom-tabs": ">=5.0.0",	
-    "@react-navigation/native": ">=5.0.0",	
+    "@react-navigation/bottom-tabs": ">=5.0.0",
+    "@react-navigation/native": ">=5.0.0",
     "@react-navigation/stack": ">=5.0.0",
     "react": "*",
     "react-native": "*",
