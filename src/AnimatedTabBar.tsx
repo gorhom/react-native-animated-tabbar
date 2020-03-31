@@ -72,7 +72,6 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   };
 
   const getRouteTabConfigs = (route: Route<string>) => {
-    console.log(route);
     if (isReactNavigation5) {
       return tabs[route.name];
     } else {
