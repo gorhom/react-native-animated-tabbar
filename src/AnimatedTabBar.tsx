@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { View } from 'react-native';
 import Animated, { useCode, onChange, call } from 'react-native-reanimated';
 import { useValues } from 'react-native-redash';
 import { useSafeArea } from 'react-native-safe-area-context';
-import { CommonActions } from '@react-navigation/native';
+import { CommonActions, Route } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { AnimatedTabBarItem } from './item';
 import { TabsConfigsType, AnimationConfigProps } from './types';
@@ -24,10 +24,28 @@ interface AnimatedTabBarProps extends BottomTabBarProps, AnimationConfigProps {
 
 export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   // props
-  const { state, navigation, descriptors, tabs, duration, easing } = props;
-  const { routes } = state;
+  const { navigation, tabs, duration, easing } = props;
 
   // variables
+  const isReactNavigation5 = props.state ? true : false;
+  // @ts-ignore
+  const {
+    routes,
+    index: navigationIndex,
+    key: navigationKey,
+  }: { routes: Route<string>[]; index: number; key: string } = useMemo(() => {
+    if (isReactNavigation5) {
+      return props.state;
+    } else {
+      return {
+        // @ts-ignore
+        index: props.navigation.state.index,
+        // @ts-ignore
+        routes: props.navigation.state.routes,
+        ket: '',
+      };
+    }
+  }, [props, isReactNavigation5]);
   const safeArea = useSafeArea();
   const [selectedIndex] = useValues([0], []);
 
@@ -43,9 +61,28 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   );
 
   // callbacks
-  const handleSelectedIndexChange = useCallback(
-    index => {
-      const { key, name } = state.routes[index];
+  const getRouteLabel = (route: Route<string>) => {
+    if (isReactNavigation5) {
+      const { descriptors } = props;
+      const { options } = descriptors[route.key];
+      return options.title !== undefined ? options.title : route.name;
+    } else {
+      return route.key;
+    }
+  };
+
+  const getRouteTabConfigs = (route: Route<string>) => {
+    console.log(route);
+    if (isReactNavigation5) {
+      return tabs[route.name];
+    } else {
+      return tabs[route.key];
+    }
+  };
+
+  const handleSelectedIndexChange = (index: number) => {
+    if (isReactNavigation5) {
+      const { key, name } = routes[index];
       const event = navigation.emit({
         type: 'tabPress',
         target: key,
@@ -55,18 +92,21 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
       if (!event.defaultPrevented) {
         navigation.dispatch({
           ...CommonActions.navigate(name),
-          target: state.key,
+          target: navigationKey,
         });
       }
-    },
-    [state, navigation]
-  );
+    } else {
+      // @ts-ignore
+      const { onTabPress } = props;
+      onTabPress({ route: routes[index] });
+    }
+  };
 
   // effects
   useEffect(() => {
     // @ts-ignore
-    selectedIndex.setValue(state.index);
-  }, [state, selectedIndex]);
+    selectedIndex.setValue(navigationIndex);
+  }, [navigationIndex, selectedIndex]);
 
   useCode(
     () =>
@@ -83,9 +123,8 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   return (
     <View style={containerStyle}>
       {routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const tabConfigs = tabs[route.name];
-        const label = options.title !== undefined ? options.title : route.name;
+        const configs = getRouteTabConfigs(route);
+        const label = getRouteLabel(route);
         return (
           <AnimatedTabBarItem
             key={route.key}
@@ -94,7 +133,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
             label={label}
             duration={duration}
             easing={easing}
-            {...tabConfigs}
+            {...configs}
           />
         );
       })}
