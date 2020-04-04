@@ -3,7 +3,7 @@
 a 60fps animated tab bar to be used with `React Navigation v4 & v5` created with `Reanimated` 😎, inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
 
 <p align="center">
-<img src="./preview.gif" width="600" height="336">
+<img src="./preview.gif">
 </p>
 
 ## Installation
@@ -14,7 +14,7 @@ yarn add @gorhom/animated-tabbar
 npm install @gorhom/animated-tabbar
 ```
 
-> Also, you need to install [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated), [react-native-gesture-handler](https://github.com/software-mansion/react-native-reanimated) & [react-native-svg](https://github.com/react-native-community/react-native-svg)
+> Also, you need to install [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated), [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) & [react-native-svg](https://github.com/react-native-community/react-native-svg), and follow theirs installation instructions.
 
 ## Usage
 
@@ -210,8 +210,8 @@ export default AnimatedSVG;
 ## Built With ❤️
 
 - [react-navigation](https://github.com/react-navigation/react-navigation)
-- [react-native-gesture-handler](https://github.com/software-mansion/react-native-reanimated)
 - [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated)
+- [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler)
 - [react-native-redash](https://github.com/wcandillon/react-native-redash)
 - [react-native-svg](https://github.com/react-native-community/react-native-svg)
 - [@react-native-community/bob](https://github.com/react-native-community/bob)
