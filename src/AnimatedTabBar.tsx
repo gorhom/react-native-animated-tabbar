@@ -37,8 +37,6 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
     style: containerStyleOverride,
   } = props;
 
-  console.log(containerStyleOverride);
-
   // variables
   const isReactNavigation5 = props.state ? true : false;
   // @ts-ignore
