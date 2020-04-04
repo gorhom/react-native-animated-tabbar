@@ -26,7 +26,7 @@ assignees: ''
 
 | Library                         | Version |
 | ------------------------------- | ------- |
-| @gorhom/animated-tabbar version | x.x.x   |
+| @gorhom/animated-tabbar         | x.x.x   |
 | react-native                    | x.x.x   |
 | react-native-reanimated         | x.x.x   |
 | react-native-gesture-handler    | x.x.x   |
