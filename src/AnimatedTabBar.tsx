@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle, StyleProp } from 'react-native';
 import Animated, { useCode, onChange, call } from 'react-native-reanimated';
 import { useValues } from 'react-native-redash';
 import { useSafeArea } from 'react-native-safe-area-context';
@@ -20,11 +20,24 @@ interface AnimatedTabBarProps extends BottomTabBarProps, AnimationConfigProps {
    * Tabs configurations.
    */
   tabs: TabsConfigsType;
+
+  /**
+   * Root container style.
+   */
+  style?: StyleProp<ViewStyle>;
 }
 
 export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   // props
-  const { navigation, tabs, duration, easing } = props;
+  const {
+    navigation,
+    tabs,
+    duration,
+    easing,
+    style: containerStyleOverride,
+  } = props;
+
+  console.log(containerStyleOverride);
 
   // variables
   const isReactNavigation5 = props.state ? true : false;
@@ -53,11 +66,12 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   const containerStyle = useMemo(
     () => [
       styles.container,
+      containerStyleOverride,
       {
         paddingBottom: safeArea.bottom,
       },
     ],
-    [safeArea]
+    [safeArea, containerStyleOverride]
   );
 
   // callbacks
