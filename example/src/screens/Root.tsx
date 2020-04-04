@@ -8,6 +8,10 @@ const examples = [
     name: 'Bubble',
     slug: 'Bubble',
   },
+  {
+    name: 'Bubble Styled',
+    slug: 'BubbleStyled',
+  },
 ];
 
 const RootScreen = () => {
