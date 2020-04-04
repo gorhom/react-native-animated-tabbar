@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@gorhom/animated-tabbar": ["./src/index"]
+      "@gorhom/animated-tabbar": ["../src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
