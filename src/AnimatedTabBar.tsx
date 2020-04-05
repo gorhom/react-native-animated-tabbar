@@ -53,7 +53,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
         index: props.navigation.state.index,
         // @ts-ignore
         routes: props.navigation.state.routes,
-        ket: '',
+        key: '',
       };
     }
   }, [props, isReactNavigation5]);
