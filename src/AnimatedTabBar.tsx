@@ -64,10 +64,10 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   const containerStyle = useMemo(
     () => [
       styles.container,
-      containerStyleOverride,
       {
         paddingBottom: safeArea.bottom,
       },
+      containerStyleOverride,
     ],
     [safeArea, containerStyleOverride]
   );
