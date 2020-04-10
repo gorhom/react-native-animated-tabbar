@@ -25,6 +25,11 @@ interface AnimatedTabBarProps extends BottomTabBarProps, AnimationConfigProps {
    * Root container style.
    */
   style?: StyleProp<ViewStyle>;
+  
+  /**
+   * Bar item style
+   */
+  itemStyle?: StyleProp<ViewStyle>;
 }
 
 export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
@@ -35,6 +40,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
     duration,
     easing,
     style: containerStyleOverride,
+    itemStyle: itemStyleOverride,
   } = props;
 
   // variables
@@ -144,6 +150,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
             label={label}
             duration={duration}
             easing={easing}
+            containerStyle={itemStyleOverride}
             {...configs}
           />
         );
