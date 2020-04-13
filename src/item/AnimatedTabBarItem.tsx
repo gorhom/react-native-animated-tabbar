@@ -1,5 +1,5 @@
 import React, { useMemo, memo } from 'react';
-import { View } from 'react-native';
+import { View, StyleProp, ViewStyle } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import {
   TouchableWithoutFeedback,
@@ -30,6 +30,7 @@ interface AnimatedTabBarItemProps extends AnimationConfigProps, TabConfigsType {
   selectedIndex: Animated.Value<number>;
   label: string;
   allowFontScaling?: boolean;
+  containerStyle?: StyleProp<ViewStyle>
 }
 
 const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
@@ -44,6 +45,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
     labelStyle: labelStyleOverride,
     duration = 500,
     easing = Easing.out(Easing.exp),
+    containerStyle: containerStyleOverride,
   } = props;
 
   // variables
@@ -75,6 +77,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
   //#region styles
   const containerStyle = [
     styles.container,
+    containerStyleOverride,
     {
       width: interpolate(animatedFocus, {
         inputRange: [0, 1],
