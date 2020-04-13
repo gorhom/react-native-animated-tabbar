@@ -20,7 +20,7 @@ Animated.addWhitelistedNativeProps({
 });
 
 interface AnimatedTabBarProps
-  extends BottomTabBarProps,
+  extends Pick<BottomTabBarProps, 'state' | 'navigation' | 'descriptors'>,
     AnimationConfigProps,
     AnimatedTabBarItemConfigurableProps {
   /**
