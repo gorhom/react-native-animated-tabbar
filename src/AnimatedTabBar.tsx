@@ -1,17 +1,15 @@
-import React, { useMemo, useEffect } from 'react';
-import { View, ViewStyle, StyleProp } from 'react-native';
+import React, { useMemo, useEffect, useCallback } from 'react';
 import Animated, { useCode, onChange, call } from 'react-native-reanimated';
 import { useValues } from 'react-native-redash';
-import { useSafeArea } from 'react-native-safe-area-context';
 import { CommonActions, Route } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { AnimatedTabBarItem } from './item';
+import Presets from './presets';
 import {
   TabsConfigsType,
-  AnimationConfigProps,
-  AnimatedTabBarItemConfigurableProps,
+  TabBarViewProps,
+  TabBarItemConfigurableProps,
+  TabBarAnimationConfigurableProps,
 } from './types';
-import { styles } from './styles';
 
 Animated.addWhitelistedNativeProps({
   width: true,
@@ -21,17 +19,18 @@ Animated.addWhitelistedNativeProps({
 
 interface AnimatedTabBarProps
   extends Pick<BottomTabBarProps, 'state' | 'navigation' | 'descriptors'>,
-    AnimationConfigProps,
-    AnimatedTabBarItemConfigurableProps {
+    Pick<TabBarViewProps, 'style'>,
+    TabBarItemConfigurableProps,
+    TabBarAnimationConfigurableProps {
   /**
    * Tabs configurations.
    */
   tabs: TabsConfigsType;
 
   /**
-   * Root container style.
+   * Animation preset.
    */
-  style?: StyleProp<ViewStyle>;
+  preset?: keyof typeof Presets;
 }
 
 export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
@@ -39,12 +38,14 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   const {
     navigation,
     tabs,
-    duration,
-    easing,
-    style: containerStyleOverride,
+    descriptors,
+    preset = 'bubble',
+    style,
     itemInnerSpace,
     itemOuterSpace,
     iconSize,
+    duration,
+    easing,
   } = props;
 
   // variables
@@ -67,39 +68,44 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
       };
     }
   }, [props, isReactNavigation5]);
-  const safeArea = useSafeArea();
   const [selectedIndex] = useValues([0], []);
 
-  // styles
-  const containerStyle = useMemo(
-    () => [
-      styles.container,
-      containerStyleOverride,
-      {
-        paddingBottom: safeArea.bottom,
-      },
-    ],
-    [safeArea, containerStyleOverride]
+  //#region callbacks
+  const getRouteTitle = useCallback(
+    (route: Route<string>) => {
+      if (isReactNavigation5) {
+        const { options } = descriptors[route.key];
+        return options.tabBarLabel !== undefined &&
+          typeof options.tabBarLabel === 'string'
+          ? options.tabBarLabel
+          : options.title !== undefined
+          ? options.title
+          : route.name;
+      } else {
+        return route.key;
+      }
+    },
+    [isReactNavigation5, descriptors]
   );
 
-  // callbacks
-  const getRouteLabel = (route: Route<string>) => {
-    if (isReactNavigation5) {
-      const { descriptors } = props;
-      const { options } = descriptors[route.key];
-      return options.title !== undefined ? options.title : route.name;
-    } else {
-      return route.key;
-    }
-  };
+  const getRouteTabConfigs = useCallback(
+    (route: Route<string>) => {
+      if (isReactNavigation5) {
+        return tabs[route.name];
+      } else {
+        return tabs[route.key];
+      }
+    },
+    [isReactNavigation5, tabs]
+  );
 
-  const getRouteTabConfigs = (route: Route<string>) => {
-    if (isReactNavigation5) {
-      return tabs[route.name];
-    } else {
-      return tabs[route.key];
-    }
-  };
+  const getRoutes = useCallback(() => {
+    return routes.map(route => ({
+      title: getRouteTitle(route),
+      key: route.key,
+      ...getRouteTabConfigs(route),
+    }));
+  }, [routes, getRouteTitle, getRouteTabConfigs]);
 
   const handleSelectedIndexChange = (index: number) => {
     if (isReactNavigation5) {
@@ -122,13 +128,23 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
       onTabPress({ route: routes[index] });
     }
   };
+  //#endregion
 
-  // effects
+  //#region Effects
+  /**
+   * @DEV
+   * here we listen to React Navigation index and update
+   * selectedIndex value.
+   */
   useEffect(() => {
     // @ts-ignore
     selectedIndex.setValue(navigationIndex);
   }, [navigationIndex, selectedIndex]);
 
+  /**
+   * @DEV
+   * here we listen to selectedIndex and call `handleSelectedIndexChange`
+   */
   useCode(
     () =>
       onChange(
@@ -139,28 +155,21 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
       ),
     [selectedIndex]
   );
+  //#endregion
+
+  const PresetComponent = Presets[preset];
 
   // render
   return (
-    <View style={containerStyle}>
-      {routes.map((route, index) => {
-        const configs = getRouteTabConfigs(route);
-        const label = getRouteLabel(route);
-        return (
-          <AnimatedTabBarItem
-            key={route.key}
-            index={index}
-            selectedIndex={selectedIndex}
-            label={label}
-            duration={duration}
-            easing={easing}
-            itemInnerSpace={itemInnerSpace}
-            itemOuterSpace={itemOuterSpace}
-            iconSize={iconSize}
-            {...configs}
-          />
-        );
-      })}
-    </View>
+    <PresetComponent
+      style={style}
+      selectedIndex={selectedIndex}
+      routes={getRoutes()}
+      itemInnerSpace={itemInnerSpace}
+      itemOuterSpace={itemOuterSpace}
+      iconSize={iconSize}
+      duration={duration}
+      easing={easing}
+    />
   );
 };
