@@ -6,7 +6,11 @@ import { useSafeArea } from 'react-native-safe-area-context';
 import { CommonActions, Route } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { AnimatedTabBarItem } from './item';
-import { TabsConfigsType, AnimationConfigProps } from './types';
+import {
+  TabsConfigsType,
+  AnimationConfigProps,
+  AnimatedTabBarItemConfigurableProps,
+} from './types';
 import { styles } from './styles';
 
 Animated.addWhitelistedNativeProps({
@@ -15,7 +19,10 @@ Animated.addWhitelistedNativeProps({
   backgroundColor: true,
 });
 
-interface AnimatedTabBarProps extends BottomTabBarProps, AnimationConfigProps {
+interface AnimatedTabBarProps
+  extends Pick<BottomTabBarProps, 'state' | 'navigation' | 'descriptors'>,
+    AnimationConfigProps,
+    AnimatedTabBarItemConfigurableProps {
   /**
    * Tabs configurations.
    */
@@ -35,6 +42,8 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
     duration,
     easing,
     style: containerStyleOverride,
+    itemInnerSpace,
+    itemOuterSpace,
   } = props;
 
   // variables
@@ -144,6 +153,8 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
             label={label}
             duration={duration}
             easing={easing}
+            itemInnerSpace={itemInnerSpace}
+            itemOuterSpace={itemOuterSpace}
             {...configs}
           />
         );

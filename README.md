@@ -185,12 +185,14 @@ export default AnimatedSVG;
 
 ## Props
 
-| name     | required | default                      | description                                                                 |
-| -------- | -------- | ---------------------------- | --------------------------------------------------------------------------- |
-| duration | NO       | 500                          | Array of pages/slides `PaperOnboardingItemType` to present.                 |
-| easing   | NO       | Easing.out(Easing.exp)       | Safe area insets usually come from `react-native-safe-area-context`.        |
-| tabs     | YES      |                              | A dictionary for all tabs configurations, check `TabConfigsType` interface. |
-| style    | NO       | { backgroundColor: 'white' } | ViewStyle to be applied to the bottom bar container.                        |
+| name           | required | default                          | description                                                                 |
+| -------------- | -------- | -------------------------------- | --------------------------------------------------------------------------- |
+| duration       | NO       | 500                              | Duration for the tabs animation.                                             |
+| easing         | NO       | Easing.out(Easing.exp)           | `Reanimated Easing` function to be use for the tabs animation.        |
+| tabs           | YES      |                                  | A dictionary for all tabs configurations, check `TabConfigsType` interface. |
+| style          | NO       | { backgroundColor: 'white' }     | ViewStyle to be applied to the bottom bar container.                        |
+| itemInnerSpace | NO       | { vertical: 12, horizontal: 12 } | Inner space to be added to the item.                                        |
+| itemOuterSpace | NO       | { vertical: 12, horizontal: 12 } | Outer space to be added to the item.                                        |
 
 ### TabConfigsType
 
@@ -212,11 +214,11 @@ export default AnimatedSVG;
 
 ## Built With ❤️
 
-- [react-navigation](https://github.com/react-navigation/react-navigation)
 - [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated)
 - [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler)
 - [react-native-redash](https://github.com/wcandillon/react-native-redash)
 - [react-native-svg](https://github.com/react-native-community/react-native-svg)
+- [react-navigation](https://github.com/react-navigation/react-navigation)
 - [@react-native-community/bob](https://github.com/react-native-community/bob)
 
 ## Author

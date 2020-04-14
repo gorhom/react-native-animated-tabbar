@@ -32,3 +32,22 @@ export interface AnimationConfigProps {
    */
   easing?: Animated.EasingFunction;
 }
+
+interface Space {
+  vertical: number;
+  horizontal: number;
+}
+
+export interface AnimatedTabBarItemConfigurableProps {
+  /**
+   * Item padding space.
+   * @default 12
+   */
+  itemInnerSpace?: number | Space;
+
+  /**
+   * Item margin space.
+   * @default 12
+   */
+  itemOuterSpace?: number | Space;
+}
