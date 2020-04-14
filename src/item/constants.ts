@@ -1,6 +1,8 @@
-import { Easing } from 'react-native-reanimated';
+import Animated, { Easing } from 'react-native-reanimated';
 
-const DEFAULT_ITEM_ANIMATION_EASING = Easing.out(Easing.exp);
+const DEFAULT_ITEM_ANIMATION_EASING: Animated.EasingFunction = Easing.out(
+  Easing.exp
+);
 const DEFAULT_ITEM_ANIMATION_DURATION = 500;
 const DEFAULT_ITEM_INNER_SPACE = 12;
 const DEFAULT_ITEM_OUTER_SPACE = 12;
