@@ -62,6 +62,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
     easing = DEFAULT_ITEM_ANIMATION_EASING,
     itemInnerSpace,
     itemOuterSpace,
+    iconSize = DEFAULT_ITEM_ICON_SIZE,
   } = props;
 
   // variables
@@ -110,11 +111,9 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
    */
   const minWidth = useMemo(() => {
     return (
-      itemInnerHorizontalSpace * 2 +
-      DEFAULT_ITEM_ICON_SIZE +
-      itemOuterHorizontalSpace * 2
+      itemInnerHorizontalSpace * 2 + iconSize + itemOuterHorizontalSpace * 2
     );
-  }, [itemInnerHorizontalSpace, itemOuterHorizontalSpace]);
+  }, [itemInnerHorizontalSpace, itemOuterHorizontalSpace, iconSize]);
   /**
    * @DEV
    * max width is calculated by adding inner space with label width
@@ -149,7 +148,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
     {
       paddingHorizontal: itemInnerHorizontalSpace,
       paddingVertical: itemInnerVerticalSpace,
-      borderRadius: itemInnerVerticalSpace * 2 + DEFAULT_ITEM_ICON_SIZE,
+      borderRadius: itemInnerVerticalSpace * 2 + iconSize,
       backgroundColor: interpolateColor(animatedFocus, {
         inputRange: [0, 1],
         outputRange: [background.inactiveColor, background.activeColor],
@@ -167,6 +166,13 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
         inputRange: [0, 1],
         outputRange: [0, itemInnerHorizontalSpace + itemOuterHorizontalSpace],
       }),
+    },
+  ];
+  const iconContainerStyle = [
+    styles.iconContainer,
+    {
+      minHeight: iconSize,
+      minWidth: iconSize,
     },
   ];
   const labelStyle = [styles.label, labelStyleOverride];
@@ -193,7 +199,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
   // render
   const renderIcon = () => {
     return typeof icon.component === 'function'
-      ? icon.component({ color: animatedIconColor })
+      ? icon.component({ color: animatedIconColor, size: iconSize })
       : icon.component;
   };
 
@@ -201,7 +207,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
     <AnimatedRawButton {...gestureHandler}>
       <Animated.View style={containerStyle}>
         <Animated.View style={contentContainerStyle}>
-          <View style={styles.iconContainer}>{renderIcon()}</View>
+          <View style={iconContainerStyle}>{renderIcon()}</View>
         </Animated.View>
         <Animated.View style={labelContainerStyle}>
           <Animated.Text

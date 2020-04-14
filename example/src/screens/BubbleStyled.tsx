@@ -76,7 +76,9 @@ const BubbleStyledScreen = () => {
           backgroundColor: '#080808',
         },
       }}
-      tabBar={props => <AnimatedTabBar duration={500} tabs={tabs} {...props} />}
+      tabBar={props => (
+        <AnimatedTabBar iconSize={20} duration={500} tabs={tabs} {...props} />
+      )}
     >
       <Tab.Screen
         name="Home"

@@ -5,7 +5,10 @@ export interface TabConfigsType {
   labelStyle: TextStyle;
   icon: {
     component:
-      | ((props: { color: Animated.Node<string | number> }) => React.ReactNode)
+      | ((props: {
+          color: Animated.Node<string | number>;
+          size: number;
+        }) => React.ReactNode)
       | React.ReactNode;
     activeColor: string;
     inactiveColor: string;
@@ -50,4 +53,10 @@ export interface AnimatedTabBarItemConfigurableProps {
    * @default 12
    */
   itemOuterSpace?: number | Space;
+
+  /**
+   * icon size.
+   * @default 24
+   */
+  iconSize?: number;
 }

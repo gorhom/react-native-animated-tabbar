@@ -44,6 +44,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
     style: containerStyleOverride,
     itemInnerSpace,
     itemOuterSpace,
+    iconSize,
   } = props;
 
   // variables
@@ -155,6 +156,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
             easing={easing}
             itemInnerSpace={itemInnerSpace}
             itemOuterSpace={itemOuterSpace}
+            iconSize={iconSize}
             {...configs}
           />
         );
