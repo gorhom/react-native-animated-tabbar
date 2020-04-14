@@ -164,9 +164,9 @@ interface AnimatedSVGProps {
   color: Animated.Node<string>;
 }
 
-const AnimatedSVG = ({ color }: AnimatedSVGProps) => {
+const AnimatedSVG = ({ color, size }: AnimatedSVGProps) => {
   return (
-    <Svg width={20} height={22} viewBox="0 0 20 22">
+    <Svg width={size} height={size} viewBox="0 0 20 22">
       <AnimatedPath
         d="M1 8l9-7 9 7v11a2 2 0 01-2 2H3a2 2 0 01-2-2V8z"
         stroke={color}
@@ -187,12 +187,13 @@ export default AnimatedSVG;
 
 | name           | required | default                          | description                                                                 |
 | -------------- | -------- | -------------------------------- | --------------------------------------------------------------------------- |
-| duration       | NO       | 500                              | Duration for the tabs animation.                                             |
-| easing         | NO       | Easing.out(Easing.exp)           | `Reanimated Easing` function to be use for the tabs animation.        |
+| duration       | NO       | 500                              | Duration for the tabs animation.                                            |
+| easing         | NO       | Easing.out(Easing.exp)           | `Reanimated Easing` function to be use for the tabs animation.              |
 | tabs           | YES      |                                  | A dictionary for all tabs configurations, check `TabConfigsType` interface. |
 | style          | NO       | { backgroundColor: 'white' }     | ViewStyle to be applied to the bottom bar container.                        |
 | itemInnerSpace | NO       | { vertical: 12, horizontal: 12 } | Inner space to be added to the item.                                        |
 | itemOuterSpace | NO       | { vertical: 12, horizontal: 12 } | Outer space to be added to the item.                                        |
+| iconSize       | NO       | 24                               | Tab icon size.                                                              |
 
 ### TabConfigsType
 

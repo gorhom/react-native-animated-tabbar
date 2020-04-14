@@ -8,9 +8,9 @@ Animated.addWhitelistedNativeProps({
   stroke: true,
 });
 
-const HomeSVG = ({ color }: SVGProps) => {
+const HomeSVG = ({ color, size }: SVGProps) => {
   return (
-    <Svg width={20} height={22} viewBox="0 0 20 22">
+    <Svg width={size} height={size} viewBox="0 0 20 22">
       <AnimatedPath
         d="M1 8l9-7 9 7v11a2 2 0 01-2 2H3a2 2 0 01-2-2V8z"
         stroke={color}

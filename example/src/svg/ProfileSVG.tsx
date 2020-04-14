@@ -9,9 +9,9 @@ Animated.addWhitelistedNativeProps({
   stroke: true,
 });
 
-const ProfileSVG = ({ color }: SVGProps) => {
+const ProfileSVG = ({ color, size }: SVGProps) => {
   return (
-    <Svg width={18} height={20} viewBox="0 0 18 20">
+    <Svg width={size} height={size} viewBox="0 0 18 20">
       <G
         transform="translate(1 1)"
         strokeWidth={2}
