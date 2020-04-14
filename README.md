@@ -1,10 +1,10 @@
-# Animated TabBar [![npm](https://badgen.net/npm/v/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
-
-a 60fps animated tab bar to be used with `React Navigation v4 & v5` created with `Reanimated` 😎, inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
-
 <p align="center">
 <img src="./preview.gif">
 </p>
+
+# Animated TabBar [![npm](https://badgen.net/npm/v/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
+
+a 60fps animated tab bar to be used with `React Navigation v4 & v5` created with `Reanimated` with many variety of cool animations 😎 
 
 ## Installation
 
@@ -162,6 +162,7 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 interface AnimatedSVGProps {
   color: Animated.Node<string>;
+  size: number;
 }
 
 const AnimatedSVG = ({ color, size }: AnimatedSVGProps) => {
@@ -187,6 +188,7 @@ export default AnimatedSVG;
 
 | name           | required | default                          | description                                                                 |
 | -------------- | -------- | -------------------------------- | --------------------------------------------------------------------------- |
+| ⭐️ preset     | NO       | 'bubble'                         | Animation preset. `NEW ANIMATIONS COMING SOON 🎉`.                                                           |
 | duration       | NO       | 500                              | Duration for the tabs animation.                                            |
 | easing         | NO       | Easing.out(Easing.exp)           | `Reanimated Easing` function to be use for the tabs animation.              |
 | tabs           | YES      |                                  | A dictionary for all tabs configurations, check `TabConfigsType` interface. |
@@ -207,6 +209,17 @@ export default AnimatedSVG;
 | background      | YES      |         |                                                                                    |
 | ├ activeColor   | YES      |         | Color to be animated to when tab is active.                                        |
 | └ inactiveColor | YES      |         | Color to be animated to when tab is inactive.                                      |
+
+
+## Presets
+`COMING SOON`
+
+### Bubble Preset
+
+This preset is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
+
+![Bubble Preview](/docs/previews/bubble.gif)
+
 
 ## To Do
 
