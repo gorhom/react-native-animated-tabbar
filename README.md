@@ -1,10 +1,10 @@
 
-<center>
+<div align="center">
 <h1>Animated TabBar</h1>
 
 [![npm](https://badgen.net/npm/v/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar) [![npm](https://badgen.net/npm/license/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar) [![npm](https://badgen.net/npm/types/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
 
-</center>
+</div>
 
 <p align="center">
 <img src="./preview.gif">
@@ -264,5 +264,5 @@ MIT
 ---
 
 <p align="center">
-<img src="./logo.png">
+<a href="https://twitter.com/gorhom"><img src="./logo.png"></a>
 </p>
