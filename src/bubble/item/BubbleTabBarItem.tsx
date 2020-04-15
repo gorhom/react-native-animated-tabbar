@@ -50,6 +50,7 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
     itemInnerSpace,
     itemOuterSpace,
     iconSize,
+    isRTL,
   } = props;
 
   // variables
@@ -133,6 +134,7 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   const contentContainerStyle = [
     styles.contentContainer,
     {
+      flexDirection: isRTL ? 'row-reverse' : 'row',
       paddingHorizontal: itemInnerHorizontalSpace,
       paddingVertical: itemInnerVerticalSpace,
       borderRadius: itemInnerVerticalSpace * 2 + iconSize,
@@ -149,7 +151,7 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
         inputRange: [0.33, 1],
         outputRange: [0, 1],
       }),
-      right: interpolate(animatedFocus, {
+      [isRTL ? 'left' : 'right']: interpolate(animatedFocus, {
         inputRange: [0, 1],
         outputRange: [0, itemInnerHorizontalSpace + itemOuterHorizontalSpace],
       }),

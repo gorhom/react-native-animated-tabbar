@@ -1,5 +1,5 @@
 import React, { useMemo, memo } from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle, StyleProp } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
@@ -12,6 +12,7 @@ import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
   DEFAULT_ITEM_ICON_SIZE,
+  DEFAULT_ITEM_LAYOUT_DIRECTION,
 } from './constants';
 import { styles } from './styles';
 
@@ -27,6 +28,7 @@ const BubbleTabBarComponent = ({
   itemInnerSpace = DEFAULT_ITEM_INNER_SPACE,
   itemOuterSpace = DEFAULT_ITEM_OUTER_SPACE,
   iconSize = DEFAULT_ITEM_ICON_SIZE,
+  isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
 }: BubbleTabBarProps) => {
   //#region Hooks
@@ -34,15 +36,16 @@ const BubbleTabBarComponent = ({
   //#endregion
 
   //#region Styles
-  const containerStyle = useMemo(
+  const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [
       styles.container,
       containerStyleOverride,
       {
+        flexDirection: isRTL ? 'row-reverse' : 'row',
         paddingBottom: safeArea.bottom,
       },
     ],
-    [safeArea, containerStyleOverride]
+    [safeArea, containerStyleOverride, isRTL]
   );
   //#endregion
   return (
@@ -59,6 +62,7 @@ const BubbleTabBarComponent = ({
             itemInnerSpace={itemInnerSpace}
             itemOuterSpace={itemOuterSpace}
             iconSize={iconSize}
+            isRTL={isRTL}
             {...configs}
           />
         );

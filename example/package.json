@@ -16,7 +16,7 @@
     "@react-navigation/stack": "^5.2.9",
     "lodash.isequal": "^4.5.0",
     "react": "16.11.0",
-    "react-native": "0.62.1",
+    "react-native": "0.62.2",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-reanimated": "^1.7.1",
     "react-native-redash": "^10.1.1",
