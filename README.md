@@ -1,10 +1,28 @@
+
+<center>
+<h1>Animated TabBar</h1>
+
+[![npm](https://badgen.net/npm/v/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar) [![npm](https://badgen.net/npm/license/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar) [![npm](https://badgen.net/npm/types/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
+
+</center>
+
 <p align="center">
 <img src="./preview.gif">
 </p>
 
-# Animated TabBar [![npm](https://badgen.net/npm/v/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
+A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a variety of cool animation presets 😎.
 
-a 60fps animated tab bar to be used with `React Navigation v4 & v5` created with `Reanimated` with many variety of cool animations 😎 
+---
+
+## Table of Contents
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Props](#props)
+4. [Presets](#presets)
+    1. [Bubble Preset](#bubble-preset)
+5. [To Do](#to-do)
+5. [Credits](#built-with-❤️)
+5. [License](#license)
 
 ## Installation
 
@@ -212,7 +230,7 @@ export default AnimatedSVG;
 
 
 ## Presets
-`COMING SOON`
+Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets. 
 
 ### Bubble Preset
 
@@ -242,3 +260,9 @@ This preset is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalo
 ## License
 
 MIT
+
+---
+
+<p align="center">
+<img src="./logo.png">
+</p>
