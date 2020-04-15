@@ -1,5 +1,5 @@
 import React, { useMemo, memo } from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle, StyleProp } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
@@ -36,15 +36,16 @@ const BubbleTabBarComponent = ({
   //#endregion
 
   //#region Styles
-  const containerStyle = useMemo(
+  const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [
       styles.container,
       containerStyleOverride,
       {
+        flexDirection: isRTL ? 'row-reverse' : 'row',
         paddingBottom: safeArea.bottom,
       },
     ],
-    [safeArea, containerStyleOverride]
+    [safeArea, containerStyleOverride, isRTL]
   );
   //#endregion
   return (
