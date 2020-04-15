@@ -10,22 +10,15 @@ import {
   interpolateColor,
   useValues,
   withTransition,
-  panGestureHandler,
+  onGestureEvent,
 } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
+import { TabBarItemProps } from '../../types';
 import {
-  TabConfigsType,
-  AnimationConfigProps,
-  AnimatedTabBarItemConfigurableProps,
-} from '../types';
-import {
-  DEFAULT_ITEM_ANIMATION_DURATION,
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
-  DEFAULT_ITEM_ANIMATION_EASING,
-  DEFAULT_ITEM_ICON_SIZE,
-} from './constants';
+} from '../constants';
 import { styles } from './styles';
 
 const AnimatedRawButton = createNativeWrapper(
@@ -38,31 +31,25 @@ const AnimatedRawButton = createNativeWrapper(
 
 const { add, interpolate, useCode, set, cond, eq } = Animated;
 
-interface AnimatedTabBarItemProps
-  extends AnimationConfigProps,
-    TabConfigsType,
-    AnimatedTabBarItemConfigurableProps {
-  index: number;
-  selectedIndex: Animated.Value<number>;
-  label: string;
-  allowFontScaling?: boolean;
-}
+interface BubbleTabBarItemProps extends TabBarItemProps {}
 
-const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
+const gestureHandler = (state: Animated.Value<State>) =>
+  onGestureEvent({ state });
+
+const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   // props
   const {
     index,
     selectedIndex,
-    allowFontScaling,
     label,
     icon,
     background,
     labelStyle: labelStyleOverride,
-    duration = DEFAULT_ITEM_ANIMATION_DURATION,
-    easing = DEFAULT_ITEM_ANIMATION_EASING,
+    duration,
+    easing,
     itemInnerSpace,
     itemOuterSpace,
-    iconSize = DEFAULT_ITEM_ICON_SIZE,
+    iconSize,
   } = props;
 
   // variables
@@ -121,7 +108,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
   const maxWidth = add(labelWidth, itemInnerHorizontalSpace, minWidth);
 
   // animations
-  const { state, gestureHandler } = panGestureHandler();
+  const [state] = useValues([State.UNDETERMINED], [index]);
   const animatedFocus = withTransition(cond(eq(selectedIndex, index), 1, 0), {
     duration,
     easing,
@@ -204,7 +191,7 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
   };
 
   return (
-    <AnimatedRawButton {...gestureHandler}>
+    <AnimatedRawButton {...gestureHandler(state)}>
       <Animated.View style={containerStyle}>
         <Animated.View style={contentContainerStyle}>
           <View style={iconContainerStyle}>{renderIcon()}</View>
@@ -214,7 +201,6 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
             onLayout={handleTextlayout}
             style={labelStyle}
             numberOfLines={1}
-            allowFontScaling={allowFontScaling}
           >
             {label}
           </Animated.Text>
@@ -224,7 +210,9 @@ const AnimatedTabBarItemComponent = (props: AnimatedTabBarItemProps) => {
   );
 };
 
-export const AnimatedTabBarItem = memo(
-  AnimatedTabBarItemComponent,
+const BubbleTabBarItem = memo(
+  BubbleTabBarItemComponent,
   (prevProps, nextProps) => isEqual(prevProps, nextProps)
 );
+
+export default BubbleTabBarItem;
