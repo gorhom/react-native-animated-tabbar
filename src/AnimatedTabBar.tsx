@@ -30,7 +30,7 @@ interface AnimatedTabBarProps
   /**
    * Animation preset.
    */
-  preset?: keyof typeof Presets;
+  preset?: 'bubble';
 }
 
 export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
@@ -48,6 +48,15 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
     easing,
     isRTL,
   } = props;
+
+  // verify props
+  if (!Object.keys(Presets).includes(preset)) {
+    throw new Error(
+      `Wrong preset been provided. expected one of these: [${Object.keys(
+        Presets
+      ).join(', ')}], but found "${preset}".`
+    );
+  }
 
   // variables
   const isReactNavigation5 = props.state ? true : false;

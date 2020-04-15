@@ -1,7 +1,6 @@
 import React, { useMemo, memo } from 'react';
 import { View, ViewStyle, StyleProp } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
-import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import BubbleTabBarItem from './item';
@@ -16,10 +15,6 @@ import {
 } from './constants';
 import { styles } from './styles';
 
-interface BubbleTabBarProps extends TabBarViewProps {
-  selectedIndex: Animated.Value<number>;
-}
-
 const BubbleTabBarComponent = ({
   selectedIndex,
   routes,
@@ -30,7 +25,7 @@ const BubbleTabBarComponent = ({
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
-}: BubbleTabBarProps) => {
+}: TabBarViewProps) => {
   //#region Hooks
   const safeArea = useSafeArea();
   //#endregion

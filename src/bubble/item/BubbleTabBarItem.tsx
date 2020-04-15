@@ -31,12 +31,10 @@ const AnimatedRawButton = createNativeWrapper(
 
 const { add, interpolate, useCode, set, cond, eq } = Animated;
 
-interface BubbleTabBarItemProps extends TabBarItemProps {}
-
 const gestureHandler = (state: Animated.Value<State>) =>
   onGestureEvent({ state });
 
-const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
+const BubbleTabBarItemComponent = (props: TabBarItemProps) => {
   // props
   const {
     index,
