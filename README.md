@@ -212,6 +212,7 @@ export default AnimatedSVG;
 | itemInnerSpace | NO       | { vertical: 12, horizontal: 12 } | Inner space to be added to the item.                                        |
 | itemOuterSpace | NO       | { vertical: 12, horizontal: 12 } | Outer space to be added to the item.                                        |
 | iconSize       | NO       | 24                               | Tab icon size.                                                              |
+| isRTL       | NO       | false                               | Tab bar layout direction.                                                              |
 
 ### TabConfigsType
 
