@@ -12,6 +12,10 @@ const examples = [
     name: 'Bubble Styled',
     slug: 'BubbleStyled',
   },
+  {
+    name: 'Bubble RTL',
+    slug: 'BubbleRTL',
+  },
 ];
 
 const RootScreen = () => {

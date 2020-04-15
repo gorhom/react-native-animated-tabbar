@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import RootScreen from './screens/Root';
 import BubbleScreen from './screens/Bubble';
 import BubbleStyledScreen from './screens/BubbleStyled';
+import BubbleRTLScreen from './screens/BubbleRTL';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ export default function App() {
         <Stack.Screen name="Root" component={RootScreen} />
         <Stack.Screen name="Bubble" component={BubbleScreen} />
         <Stack.Screen name="BubbleStyled" component={BubbleStyledScreen} />
+        <Stack.Screen name="BubbleRTL" component={BubbleRTLScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
