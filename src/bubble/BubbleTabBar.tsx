@@ -12,6 +12,7 @@ import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
   DEFAULT_ITEM_ICON_SIZE,
+  DEFAULT_ITEM_LAYOUT_DIRECTION,
 } from './constants';
 import { styles } from './styles';
 
@@ -27,6 +28,7 @@ const BubbleTabBarComponent = ({
   itemInnerSpace = DEFAULT_ITEM_INNER_SPACE,
   itemOuterSpace = DEFAULT_ITEM_OUTER_SPACE,
   iconSize = DEFAULT_ITEM_ICON_SIZE,
+  isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
 }: BubbleTabBarProps) => {
   //#region Hooks
@@ -59,6 +61,7 @@ const BubbleTabBarComponent = ({
             itemInnerSpace={itemInnerSpace}
             itemOuterSpace={itemOuterSpace}
             iconSize={iconSize}
+            isRTL={isRTL}
             {...configs}
           />
         );

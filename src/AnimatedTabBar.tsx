@@ -46,6 +46,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
     iconSize,
     duration,
     easing,
+    isRTL,
   } = props;
 
   // variables
@@ -170,6 +171,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
       iconSize={iconSize}
       duration={duration}
       easing={easing}
+      isRTL={isRTL}
     />
   );
 };

@@ -53,10 +53,15 @@ export interface TabBarItemConfigurableProps {
    */
   itemOuterSpace?: number | Space;
   /**
-   * icon size.
+   * Icon size.
    * @default 24
    */
   iconSize?: number;
+  /**
+   * Item layout direction.
+   * @default false
+   */
+  isRTL?: boolean;
 }
 
 interface TabRoute extends TabConfigsType {
