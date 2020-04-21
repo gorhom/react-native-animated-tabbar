@@ -19,10 +19,13 @@ export interface TabConfigsType {
   };
 }
 
-export interface TabsConfigsType {
-  [key: string]: TabConfigsType;
+export type TabsConfigsType<
+  T = { [key: string]: TabConfigsType },
+  K extends keyof T = keyof T
+> = {
+  [key in K]: TabConfigsType
 }
-
+  
 export interface TabBarAnimationConfigurableProps {
   /**
    * Animation duration.
