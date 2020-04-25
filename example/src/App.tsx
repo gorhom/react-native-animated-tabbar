@@ -5,6 +5,7 @@ import RootScreen from './screens/Root';
 import BubbleScreen from './screens/Bubble';
 import BubbleStyledScreen from './screens/BubbleStyled';
 import BubbleRTLScreen from './screens/BubbleRTL';
+import FlashyScreen from './screens/Flashy'
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
         <Stack.Screen name="Bubble" component={BubbleScreen} />
         <Stack.Screen name="BubbleStyled" component={BubbleStyledScreen} />
         <Stack.Screen name="BubbleRTL" component={BubbleRTLScreen} />
+        <Stack.Screen name="Flashy" component={FlashyScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -5,16 +5,30 @@ import { version, description } from '../../../package.json';
 
 const examples = [
   {
-    name: 'Bubble',
-    slug: 'Bubble',
+    title: 'Bubble',
+    data: [
+      {
+        name: 'Default',
+        slug: 'Bubble',
+      },
+      {
+        name: 'Styled',
+        slug: 'BubbleStyled',
+      },
+      {
+        name: 'RTL',
+        slug: 'BubbleRTL',
+      },
+    ],
   },
   {
-    name: 'Bubble Styled',
-    slug: 'BubbleStyled',
-  },
-  {
-    name: 'Bubble RTL',
-    slug: 'BubbleRTL',
+    title: 'Flashy',
+    data: [
+      {
+        name: 'Default',
+        slug: 'Flashy',
+      },
+    ],
   },
 ];
 

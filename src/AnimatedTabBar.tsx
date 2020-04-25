@@ -30,7 +30,7 @@ interface AnimatedTabBarProps
   /**
    * Animation preset.
    */
-  preset?: 'bubble';
+  preset?: keyof typeof Presets;
 }
 
 export const AnimatedTabBar = (props: AnimatedTabBarProps) => {

@@ -12,12 +12,12 @@ const Tab = createBottomTabNavigator();
 const tabs: TabsConfigsType = {
   Home: {
     labelStyle: {
-      color: '#5B37B7',
+      color: '#1C1C6A',
     },
     icon: {
       component: HomeSVG,
-      activeColor: 'rgba(91,55,183,1)',
-      inactiveColor: 'rgba(0,0,0,1)',
+      activeColor: '#A2A2C3',
+      inactiveColor: '#A2A2C3',
     },
     background: {
       activeColor: 'rgba(223,215,243,1)',
@@ -26,12 +26,12 @@ const tabs: TabsConfigsType = {
   },
   Likes: {
     labelStyle: {
-      color: '#C9379D',
+      color: '#1C1C6A',
     },
     icon: {
       component: LikeSVG,
-      activeColor: 'rgba(201,55,157,1)',
-      inactiveColor: 'rgba(0,0,0,1)',
+      activeColor: '#A2A2C3',
+      inactiveColor: '#A2A2C3',
     },
     background: {
       activeColor: 'rgba(247,215,243,1)',
@@ -40,12 +40,12 @@ const tabs: TabsConfigsType = {
   },
   Search: {
     labelStyle: {
-      color: '#E6A919',
+      color: '#1C1C6A',
     },
     icon: {
       component: SearchSVG,
-      activeColor: 'rgba(230,169,25,1)',
-      inactiveColor: 'rgba(0,0,0,1)',
+      activeColor: '#A2A2C3',
+      inactiveColor: '#A2A2C3',
     },
     background: {
       activeColor: 'rgba(251,239,211,1)',
@@ -54,12 +54,12 @@ const tabs: TabsConfigsType = {
   },
   Profile: {
     labelStyle: {
-      color: '#1194AA',
+      color: '#1C1C6A',
     },
     icon: {
       component: ProfileSVG,
-      activeColor: 'rgba(17,148,170,1)',
-      inactiveColor: 'rgba(0,0,0,1)',
+      activeColor: '#A2A2C3',
+      inactiveColor: '#A2A2C3',
     },
     background: {
       activeColor: 'rgba(207,235,239,1)',
@@ -68,11 +68,17 @@ const tabs: TabsConfigsType = {
   },
 };
 
-const BubbleScreen = () => {
+const FlashyScreen = () => {
   return (
     <Tab.Navigator
-      tabBar={(props) => (
-        <AnimatedTabBar duration={500} tabs={tabs} {...props} />
+      tabBar={props => (
+        <AnimatedTabBar
+          preset="flashy"
+          duration={2000}
+          tabs={tabs}
+          itemInnerSpace={{ vertical: 24 }}
+          {...props}
+        />
       )}
     >
       <Tab.Screen
@@ -107,4 +113,4 @@ const BubbleScreen = () => {
   );
 };
 
-export default BubbleScreen;
+export default FlashyScreen;
