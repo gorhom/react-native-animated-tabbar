@@ -13,15 +13,12 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
-    backgroundColor: 'red'
   },
   icon: {},
   labelContainer: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue'
   },
   label: {
     color: '#000',
@@ -32,4 +29,10 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     position: 'absolute',
   },
+  indicator: {
+    position: 'absolute',
+    width: 6,
+    height: 6,
+    borderRadius: 8,
+  }
 });

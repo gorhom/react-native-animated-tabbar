@@ -1,11 +1,11 @@
 import React, { useMemo, memo } from 'react';
 import { ViewProperties, View } from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, { Extrapolate, multiply } from 'react-native-reanimated';
 import MaskedView from '@react-native-community/masked-view';
 import {
-  RawButton,
   RawButtonProperties,
   State,
+  TouchableWithoutFeedback,
   createNativeWrapper,
 } from 'react-native-gesture-handler';
 import {
@@ -27,12 +27,12 @@ import { styles } from './styles';
 
 const AnimatedRawButton = createNativeWrapper<
   RawButtonProperties & ViewProperties
->(Animated.createAnimatedComponent(RawButton), {
+>(Animated.createAnimatedComponent(TouchableWithoutFeedback), {
   shouldCancelWhenOutside: false,
   shouldActivateOnStart: false,
 });
 
-const { add, interpolate, useCode, set, cond, eq, divide } = Animated;
+const { add, interpolate, useCode, sub, set, cond, eq, divide } = Animated;
 
 const gestureHandler = (state: Animated.Value<State>) =>
   onGestureEvent({ state });
@@ -123,39 +123,54 @@ const FlashyTabBarItemComponent = (props: TabBarItemProps) => {
     {
       width: containerWidth,
       height: containerHeight,
-      // opacity: interpolate(animatedFocus, {
-      //   inputRange: [0, 1],
-      //   outputRange: [0, 1],
-      // }),
       transform: [
         {
           translateY: interpolate(animatedFocus, {
             inputRange: [0, 1],
-            outputRange: [iconSize * 0.5, 0],
+            outputRange: [multiply(labelHeight, 1), 0],
+            extrapolate: Extrapolate.CLAMP,
           }),
         },
       ],
-      // [isRTL ? 'left' : 'right']: interpolate(animatedFocus, {
-      //   inputRange: [0, 1],
-      //   outputRange: [0, itemInnerHorizontalSpace + itemOuterHorizontalSpace],
-      // }),
     },
   ];
   const labelStyle = [styles.label, labelStyleOverride];
+  const labelMaskStyle = [
+    styles.mask,
+    {
+      width: containerWidth,
+      height: multiply(labelHeight, 2),
+      transform: transformOrigin(
+        {
+          x: 0,
+          y: 0,
+        },
+        {
+          translateY: interpolate(animatedFocus, {
+            inputRange: [0.25, 1],
+            outputRange: [0, labelHeight],
+            extrapolate: Extrapolate.CLAMP,
+          }),
+          rotate: interpolate(animatedFocus, {
+            inputRange: [0, 0.5],
+            outputRange: [toRad(0), toRad(15)],
+            extrapolate: Extrapolate.CLAMP,
+          }),
+        }
+      ),
+    },
+  ];
   const iconContainerStyle = [
     styles.iconContainer,
     {
       width: containerWidth,
       height: containerHeight,
-      // opacity: interpolate(animatedFocus, {
-      //   inputRange: [0, 1],
-      //   outputRange: [1, 0],
-      // }),
       transform: [
         {
           translateY: interpolate(animatedFocus, {
             inputRange: [0, 1],
-            outputRange: [0, iconSize * -0.5],
+            outputRange: [0, iconSize * -1],
+            extrapolate: Extrapolate.CLAMP,
           }),
         },
       ],
@@ -168,9 +183,55 @@ const FlashyTabBarItemComponent = (props: TabBarItemProps) => {
       minWidth: iconSize,
     },
   ];
+  const iconMaskStyle = [
+    styles.mask,
+    {
+      width: containerWidth,
+      height: iconSize,
+      transform: transformOrigin(
+        {
+          x: 0,
+          y: 0,
+        },
+        {
+          translateY: interpolate(animatedFocus, {
+            inputRange: [0, 1],
+            outputRange: [itemInnerVerticalSpace, -iconSize],
+            extrapolate: Extrapolate.CLAMP,
+          }),
+          rotate: interpolate(animatedFocus, {
+            inputRange: [0, 0.5],
+            outputRange: [0, toRad(15)],
+            extrapolate: Extrapolate.CLAMP,
+          }),
+        }
+      ),
+    },
+  ];
+  const indicatorStyle = [
+    styles.indicator,
+    {
+      backgroundColor: labelStyleOverride.color,
+      left: divide(containerWidth, 2),
+      top: sub(containerHeight, itemInnerVerticalSpace / 2),
+      transform: transformOrigin(
+        {
+          x: 0,
+          y: 0,
+        },
+        {
+          translateX: -4,
+          translateY: -4,
+          scale: interpolate(animatedFocus, {
+            inputRange: [0.5, 1],
+            outputRange: [0, 1],
+            extrapolate: Extrapolate.CLAMP,
+          }),
+        }
+      ),
+    },
+  ];
   //#endregion
-
-  // callbacks
 
   // effects
   useCode(
@@ -190,8 +251,18 @@ const FlashyTabBarItemComponent = (props: TabBarItemProps) => {
     },
   }) =>
     requestAnimationFrame(() => {
-      // containerHeight.setValue(height);
       containerWidth.setValue(width);
+    });
+
+  const handleLabelLayout = ({
+    nativeEvent: {
+      // @ts-ignore
+      layout: { width, height },
+    },
+  }) =>
+    requestAnimationFrame(() => {
+      labelHeight.setValue(height);
+      labelWidth.setValue(width);
     });
 
   // render
@@ -203,70 +274,31 @@ const FlashyTabBarItemComponent = (props: TabBarItemProps) => {
 
   return (
     <Animated.View onLayout={handleCotnainerlayout} style={containerStyle}>
-      <MaskedView
-        maskElement={
-          <Animated.View
-            pointerEvents="none"
-            style={{
-              ...styles.mask,
-              // backgroundColor: 'red',
-              width: containerWidth,
-              height: containerHeight,
-              transform: transformOrigin(
-                {
-                  x: divide(containerWidth, 2),
-                  y: containerHeight / 2,
-                },
-                {
-                  rotate: interpolate(animatedFocus, {
-                    inputRange: [0, 1],
-                    outputRange: [0, toRad(90)],
-                  }),
-                }
-              ),
-            }}
-          />
-        }
-      >
+      <MaskedView maskElement={<Animated.View style={iconMaskStyle} />}>
         <Animated.View style={iconContainerStyle}>
           <View style={iconStyle}>{renderIcon()}</View>
         </Animated.View>
       </MaskedView>
 
-      <MaskedView
-        maskElement={
-          <Animated.View
-            pointerEvents="none"
-            style={{
-              ...styles.mask,
-              // backgroundColor: 'blue',
-              width: containerWidth,
-              height: containerHeight,
-              transform: transformOrigin(
-                {
-                  x: divide(containerWidth, -2),
-                  y: containerHeight / -2,
-                },
-                {
-                  rotate: interpolate(animatedFocus, {
-                    inputRange: [0, 1],
-                    outputRange: [toRad(90), 0],
-                  }),
-                }
-              ),
-            }}
-          />
-        }
-      >
+      <MaskedView maskElement={<Animated.View style={labelMaskStyle} />}>
         <Animated.View style={labelContainerStyle}>
-          <Animated.Text numberOfLines={1} style={labelStyle}>
+          <Animated.Text
+            numberOfLines={1}
+            style={labelStyle}
+            onLayout={handleLabelLayout}
+          >
             {label}
           </Animated.Text>
         </Animated.View>
       </MaskedView>
-      <AnimatedRawButton style={styles.root} {...gestureHandler(state)} />
+
+      <Animated.View style={indicatorStyle} />
+
+      <AnimatedRawButton
+        style={{ width: containerWidth, height: containerHeight }}
+        {...gestureHandler(state)}
+      />
     </Animated.View>
-    // <Animated.View style={containerStyle}></Animated.View>
   );
 };
 
