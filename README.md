@@ -17,7 +17,6 @@ A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a v
 2. [Usage](#usage)
 3. [Props](#props)
 4. [Presets](#presets)
-   1. [Bubble Preset](#bubble-preset)
 5. [To Do](#to-do)
 6. [Credits](#built-with-❤️)
 7. [License](#license)
@@ -41,9 +40,9 @@ npm install @gorhom/animated-tabbar
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, {TabsConfig} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
 
-const tabs: TabsConfig = {
+const tabs: TabsConfig<BubbleTabConfig> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -109,9 +108,9 @@ import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import AnimatedTabBar, {TabsConfig} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
 
-const tabs: TabsConfig = {
+const tabs: TabsConfig<BubbleTabConfig> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -212,35 +211,20 @@ export default AnimatedSVG;
 | itemInnerSpace | NO       | { vertical: 12, horizontal: 12 } | Inner space to be added to the item.                                        |
 | itemOuterSpace | NO       | { vertical: 12, horizontal: 12 } | Outer space to be added to the item.                                        |
 | iconSize       | NO       | 24                               | Tab icon size.                                                              |
-| isRTL       | NO       | false                               | Tab bar layout direction.                                                              |
-
-### TabConfigsType
-
-| name            | required | default | description                                                                        |
-| --------------- | -------- | ------- | ---------------------------------------------------------------------------------- |
-| icon            | YES      |         |                                                                                    |
-| ├ component     | YES      |         | Component to be render as tab icon, it will recevie an animated node prop `color`. |
-| ├ activeColor   | YES      |         | Color to be animated to when tab is active.                                        |
-| └ inactiveColor | YES      |         | Color to be animated to when tab is inactive.                                      |
-| labelStyle      | NO       |         | TextStyle to override tab label style.                                             |
-| background      | YES      |         |                                                                                    |
-| ├ activeColor   | YES      |         | Color to be animated to when tab is active.                                        |
-| └ inactiveColor | YES      |         | Color to be animated to when tab is inactive.                                      |
+| isRTL          | NO       | false                            | Tab bar layout direction.                                                   |
 
 ## Presets
 
 Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets.
 
-### Bubble Preset
-
-This preset is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
-
-![Bubble Preview](/docs/previews/bubble.gif)
+<table>
+      <tr><td><a href="./docs/bubble-preset">Bubble Preset</a></td></tr>
+      <tr><td><a href="./docs/bubble-preset"><img src="./docs/previews/bubble.gif" /></a></td></tr>
+</table>
 
 ## To Do
 
 - [ ] Add accessibility support.
-- [ ] Add more examples.
 
 ## Built With ❤️
 
