@@ -189,7 +189,11 @@ const BubbleTabBarItemComponent = (
   // render
   const renderIcon = () => {
     return typeof icon.component === 'function'
-      ? icon.component({ color: animatedIconColor, size: iconSize })
+      ? icon.component({
+          animatedFocus,
+          color: animatedIconColor,
+          size: iconSize,
+        })
       : icon.component;
   };
 
