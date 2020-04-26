@@ -1,2 +1,3 @@
 export { AnimatedTabBar as default } from './AnimatedTabBar';
-export { TabsConfigsType } from './types';
+export { BubbleTabConfig } from './bubble';
+export { TabsConfig } from './types';
