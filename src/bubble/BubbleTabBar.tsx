@@ -13,6 +13,7 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
 } from './constants';
 import { TabBarViewProps } from '../types';
+import { BubbleTabConfig } from './type';
 import { styles } from './styles';
 
 const BubbleTabBarComponent = ({
@@ -25,7 +26,7 @@ const BubbleTabBarComponent = ({
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
-}: TabBarViewProps) => {
+}: TabBarViewProps<BubbleTabConfig>) => {
   //#region Hooks
   const safeArea = useSafeArea();
   //#endregion

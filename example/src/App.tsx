@@ -5,7 +5,7 @@ import RootScreen from './screens/Root';
 import BubbleScreen from './screens/Bubble';
 import BubbleStyledScreen from './screens/BubbleStyled';
 import BubbleRTLScreen from './screens/BubbleRTL';
-import FlashyScreen from './screens/Flashy'
+import FlashyScreen from './screens/Flashy';
 
 const Stack = createStackNavigator();
 

@@ -18,11 +18,12 @@ import {
 } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import { TabBarItemProps } from '../../types';
 import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
 } from '../constants';
+import { TabBarItemProps } from '../../types';
+import { FlashyTabConfig } from '../types';
 import { styles } from './styles';
 
 const AnimatedRawButton = createNativeWrapper<
@@ -32,21 +33,22 @@ const AnimatedRawButton = createNativeWrapper<
   shouldActivateOnStart: false,
 });
 
-const { add, interpolate, useCode, sub, set, cond, eq, divide } = Animated;
+const { interpolate, useCode, sub, set, cond, eq, divide } = Animated;
 
 const gestureHandler = (state: Animated.Value<State>) =>
   onGestureEvent({ state });
 
 // export const toDeg = (rad: Val): Val => multiply(rad, 180 / Math.PI);
 
-const FlashyTabBarItemComponent = (props: TabBarItemProps) => {
+const FlashyTabBarItemComponent = (
+  props: TabBarItemProps & FlashyTabConfig
+) => {
   // props
   const {
     index,
     selectedIndex,
     label,
     icon,
-    background,
     labelStyle: labelStyleOverride,
     duration,
     easing,
