@@ -20,7 +20,7 @@ Animated.addWhitelistedNativeProps({
 
 const SearchSVG = ({ color, size }: SVGProps) => {
   return (
-    <Svg width={size} height={size} viewBox="0 0 20 20">
+    <Svg width={size} height={size} viewBox="0 0 24 21">
       <G
         transform="translate(1 1)"
         strokeWidth={2}
