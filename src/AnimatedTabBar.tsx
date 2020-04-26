@@ -3,9 +3,9 @@ import Animated, { useCode, onChange, call } from 'react-native-reanimated';
 import { useValues } from 'react-native-redash';
 import { CommonActions, Route } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import Presets from './presets';
+import Presets, { PresetEnum } from './presets';
 import {
-  TabsConfigsType,
+  TabsConfig,
   TabBarViewProps,
   TabBarItemConfigurableProps,
   TabBarAnimationConfigurableProps,
@@ -17,23 +17,25 @@ Animated.addWhitelistedNativeProps({
   backgroundColor: true,
 });
 
-interface AnimatedTabBarProps
+interface AnimatedTabBarProps<T extends PresetEnum>
   extends Pick<BottomTabBarProps, 'state' | 'navigation' | 'descriptors'>,
-    Pick<TabBarViewProps, 'style'>,
+    Pick<TabBarViewProps<{}>, 'style'>,
     TabBarItemConfigurableProps,
     TabBarAnimationConfigurableProps {
   /**
    * Tabs configurations.
    */
-  tabs: TabsConfigsType;
+  tabs: TabsConfig<typeof Presets[T]['$t']>;
 
   /**
    * Animation preset.
    */
-  preset?: 'bubble';
+  preset?: T;
 }
 
-export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
+export function AnimatedTabBar<T extends PresetEnum>(
+  props: AnimatedTabBarProps<T>
+) {
   // props
   const {
     navigation,
@@ -167,7 +169,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   );
   //#endregion
 
-  const PresetComponent = Presets[preset];
+  const PresetComponent = Presets[preset].component;
 
   // render
   return (
@@ -183,4 +185,4 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
       isRTL={isRTL}
     />
   );
-};
+}

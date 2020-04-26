@@ -1,5 +1,5 @@
 import React, { useMemo, memo } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import Animated from 'react-native-reanimated';
 import {
   TouchableWithoutFeedback,
@@ -14,11 +14,12 @@ import {
 } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import { TabBarItemProps } from '../../types';
 import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
 } from '../constants';
+import { TabBarItemProps } from '../../types';
+import { BubbleTabConfig } from '../type';
 import { styles } from './styles';
 
 const AnimatedRawButton = createNativeWrapper(
@@ -34,7 +35,9 @@ const { add, interpolate, useCode, set, cond, eq } = Animated;
 const gestureHandler = (state: Animated.Value<State>) =>
   onGestureEvent({ state });
 
-const BubbleTabBarItemComponent = (props: TabBarItemProps) => {
+const BubbleTabBarItemComponent = (
+  props: TabBarItemProps & BubbleTabConfig
+) => {
   // props
   const {
     index,
@@ -197,13 +200,13 @@ const BubbleTabBarItemComponent = (props: TabBarItemProps) => {
           <View style={iconContainerStyle}>{renderIcon()}</View>
         </Animated.View>
         <Animated.View style={labelContainerStyle}>
-          <Animated.Text
+          <Text
             onLayout={handleTextlayout}
             style={labelStyle}
             numberOfLines={1}
           >
             {label}
-          </Animated.Text>
+          </Text>
         </Animated.View>
       </Animated.View>
     </AnimatedRawButton>
