@@ -26,7 +26,7 @@ This will apply to the tab bar item label.
 
 Icon configurations.
 
-#### `component`
+##### `component`
 
 Icon component, this could be a function or a react node.
 
@@ -36,7 +36,7 @@ Icon component, this could be a function or a react node.
  */
 ```
 
-#### `activeColor`
+##### `activeColor`
 
 Icon active color.
 
@@ -46,7 +46,7 @@ Icon active color.
  */
 ```
 
-#### `inactiveColor`
+##### `inactiveColor`
 
 Icon inactive color.
 
@@ -60,7 +60,7 @@ Icon inactive color.
 
 Tab bar item background configurations.
 
-#### `activeColor`
+##### `activeColor`
 
 Background active color.
 
@@ -70,7 +70,7 @@ Background active color.
  */
 ```
 
-#### `inactiveColor`
+##### `inactiveColor`
 
 Background inactive color.
 

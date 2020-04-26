@@ -18,6 +18,8 @@ A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a v
     1. [Animated Icons](./docs/animated-icons.md)
 3. [Props](#props)
 4. [Presets](#presets)
+    1. [Bubble Preset](./docs/bubble-preset.md)
+    2. [Flashy Preset](./docs/flashy-preset.md)
 5. [To Do](#to-do)
 6. [Credits](#built-with)
 7. [License](#license)
@@ -174,7 +176,7 @@ Animation preset. `NEW ANIMATIONS COMING SOON 🎉`.
 ```ts
 /**
  * @optional
- * @type {PresetEnum}
+ * @type {PresetEnum} 'bubble' | 'flashy'
  * @default 'bubble'
  */
 ```
@@ -286,8 +288,8 @@ Tab bar layout and animation direction.
 Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets.
 
 <table>
-      <tr><td><a href="./docs/bubble-preset.md">Bubble Preset</a></td></tr>
-      <tr><td><a href="./docs/bubble-preset.md"><img src="./docs/previews/bubble.gif" /></a></td></tr>
+      <tr><td><a href="./docs/bubble-preset.md">Bubble Preset</a></td><td><a href="./docs/flashy-preset.md">Flashy Preset</a></td></tr>
+      <tr><td><a href="./docs/bubble-preset.md"><img src="./docs/previews/bubble.gif" /></a></td><td><a href="./docs/flashy-preset.md"><img src="./docs/previews/flashy.gif" /></a></td></tr>
 </table>
 
 ## To Do
