@@ -18,7 +18,7 @@ A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a v
 3. [Props](#props)
 4. [Presets](#presets)
 5. [To Do](#to-do)
-6. [Credits](#built-with-❤️)
+6. [Credits](#built-with)
 7. [License](#license)
 
 ## Installation
@@ -201,17 +201,119 @@ export default AnimatedSVG;
 
 ## Props
 
-| name           | required | default                          | description                                                                 |
-| -------------- | -------- | -------------------------------- | --------------------------------------------------------------------------- |
-| ⭐️ preset     | NO       | 'bubble'                         | Animation preset. `NEW ANIMATIONS COMING SOON 🎉`.                          |
-| duration       | NO       | 500                              | Duration for the tabs animation.                                            |
-| easing         | NO       | Easing.out(Easing.exp)           | `Reanimated Easing` function to be use for the tabs animation.              |
-| tabs           | YES      |                                  | A dictionary for all tabs configurations, check `TabConfigsType` interface. |
-| style          | NO       | { backgroundColor: 'white' }     | ViewStyle to be applied to the bottom bar container.                        |
-| itemInnerSpace | NO       | { vertical: 12, horizontal: 12 } | Inner space to be added to the item.                                        |
-| itemOuterSpace | NO       | { vertical: 12, horizontal: 12 } | Outer space to be added to the item.                                        |
-| iconSize       | NO       | 24                               | Tab icon size.                                                              |
-| isRTL          | NO       | false                            | Tab bar layout direction.                                                   |
+### `preset`
+
+Animation preset. `NEW ANIMATIONS COMING SOON 🎉`.
+
+```ts
+/**
+ * @optional
+ * @type {PresetEnum}
+ * @default 'bubble'
+ */
+```
+
+### `tabs`
+
+Tabs configurations
+
+```ts
+/**
+ * @required
+ * @type {TabsConfig<T>} T extends preset tab config.
+ */
+```
+
+### `style`
+
+View style to be applied to tab bar container.
+
+```ts
+/**
+ * @optional
+ * @type {ViewStyle}
+ */
+```
+
+### `duration`
+
+Animation duration.
+
+```ts
+/**
+ * @optional
+ * @type {number}
+ * @default 500
+ */
+```
+
+### `easing`
+
+Animation easing function.
+
+```ts
+/**
+ * @optional
+ * @type {Animated.EasingFunction}
+ * @default Easing.out(Easing.exp)
+ */
+```
+
+### `itemInnerSpace`
+
+Inner space to be added to the tab item.
+
+```ts
+/**
+ * @optional
+ * @type {Space | number}
+ * @default
+ * {
+ *   vertical: 12,
+ *   horizontal: 12
+ * }
+ */
+```
+
+### `itemOuterSpace`
+
+Outer space to be added to the tab item.
+
+```ts
+/**
+ * @optional
+ * @type {Space | number}
+ * @default
+ * {
+ *   vertical: 12,
+ *   horizontal: 12
+ * }
+ */
+```
+
+### `icon`
+
+Tab item icon size.
+
+```ts
+/**
+ * @optional
+ * @type {number}
+ * @default 24
+ */
+```
+
+### `isRTL`
+
+Tab bar layout and animation direction.
+
+```ts
+/**
+ * @optional
+ * @type {boolean}
+ * @default false
+ */
+```
 
 ## Presets
 
@@ -226,7 +328,7 @@ Originally `Animated TabBar` started with `Bubble` as the only animation preset 
 
 - [ ] Add accessibility support.
 
-## Built With ❤️
+<h2 id="built-with">Built With ❤️</h2>
 
 - [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated)
 - [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler)
