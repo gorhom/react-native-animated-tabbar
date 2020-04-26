@@ -32,7 +32,7 @@ Icon component, this could be a function or a react node.
 
 ```ts
 /**
- * @type {() => React.ReactNode | React.ReactNode}
+ * @type {(props: BubbleTabIconProps) => React.ReactNode | React.ReactNode}
  */
 ```
 
@@ -80,7 +80,9 @@ Background inactive color.
  */
 ```
 
-## Interface
+## Interfaces
+
+### `BubbleTabConfig`
 
 ```ts
 export interface BubbleTabConfig {
@@ -102,13 +104,10 @@ export interface BubbleTabConfig {
     /**
      * Tab bar item icon component, this could be a function or
      * a react node.
-     * @type {() => React.ReactNode | React.ReactNode}
+     * @type {(props: BubbleTabIconProps) => React.ReactNode | React.ReactNode}
      */
     component:
-      | ((props: {
-          color: Animated.Node<string | number>;
-          size: number;
-        }) => React.ReactNode)
+      | ((props: BubbleTabIconProps) => React.ReactNode)
       | React.ReactNode;
 
     /**
@@ -134,5 +133,15 @@ export interface BubbleTabConfig {
      */
     inactiveColor: string;
   };
+}
+```
+
+### `BubbleTabIconProps`
+
+```ts
+export interface BubbleTabIconProps {
+  animatedFocus: Animated.Node<number>;
+  color: Animated.Node<string | number>;
+  size: number;
 }
 ```

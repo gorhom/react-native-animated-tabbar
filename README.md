@@ -15,6 +15,7 @@ A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a v
 
 1. [Installation](#installation)
 2. [Usage](#usage)
+    1. [Animated Icons](./docs/animated-icons.md)
 3. [Props](#props)
 4. [Presets](#presets)
 5. [To Do](#to-do)
@@ -162,42 +163,7 @@ export default () => (
 
 </details>
 
-### Animated Icon
-
-In order to animate the tab icon color, you will need to use the provded prop `color` that will be provided to the icon.
-
-This example below should explain it better:
-
-```tsx
-import React from 'react';
-import Animated from 'react-native-reanimated';
-import Svg, { Path } from 'react-native-svg';
-
-const AnimatedPath = Animated.createAnimatedComponent(Path);
-
-interface AnimatedSVGProps {
-  color: Animated.Node<string>;
-  size: number;
-}
-
-const AnimatedSVG = ({ color, size }: AnimatedSVGProps) => {
-  return (
-    <Svg width={size} height={size} viewBox="0 0 20 22">
-      <AnimatedPath
-        d="M1 8l9-7 9 7v11a2 2 0 01-2 2H3a2 2 0 01-2-2V8z"
-        stroke={color}
-        strokeWidth={2}
-        fill="none"
-        fillRule="evenodd"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Svg>
-  );
-};
-
-export default AnimatedSVG;
-```
+> To configure animated icons, please have a look at [Animated Icons](./docs/animated-icons.md).
 
 ## Props
 
@@ -320,8 +286,8 @@ Tab bar layout and animation direction.
 Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets.
 
 <table>
-      <tr><td><a href="./docs/bubble-preset">Bubble Preset</a></td></tr>
-      <tr><td><a href="./docs/bubble-preset"><img src="./docs/previews/bubble.gif" /></a></td></tr>
+      <tr><td><a href="./docs/bubble-preset.md">Bubble Preset</a></td></tr>
+      <tr><td><a href="./docs/bubble-preset.md"><img src="./docs/previews/bubble.gif" /></a></td></tr>
 </table>
 
 ## To Do
