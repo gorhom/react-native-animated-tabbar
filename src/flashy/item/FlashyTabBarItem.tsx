@@ -72,7 +72,7 @@ const FlashyTabBarItemComponent = (
     itemInnerSpace,
     iconSize,
     indicator,
-    // isRTL,
+    isRTL,
   } = props;
 
   // variables
@@ -163,7 +163,7 @@ const FlashyTabBarItemComponent = (
           }),
           rotate: interpolate(animatedFocus, {
             inputRange: [0, 0.5],
-            outputRange: [toRad(0), toRad(15)],
+            outputRange: [toRad(0), toRad(isRTL ? -15 : 15)],
             extrapolate: Extrapolate.CLAMP,
           }),
         }
@@ -212,7 +212,7 @@ const FlashyTabBarItemComponent = (
           }),
           rotate: interpolate(animatedFocus, {
             inputRange: [0, 0.5],
-            outputRange: [0, toRad(15)],
+            outputRange: [0, toRad(isRTL ? -15 : 15)],
             extrapolate: Extrapolate.CLAMP,
           }),
         }

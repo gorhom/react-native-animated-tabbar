@@ -62,7 +62,7 @@ const FlashyStyledScreen = () => {
       tabBar={props => (
         <AnimatedTabBar
           preset="flashy"
-          duration={750}
+          duration={1000}
           tabs={tabs}
           iconSize={20}
           itemInnerSpace={24}
