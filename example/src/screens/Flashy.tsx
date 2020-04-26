@@ -15,38 +15,38 @@ const Tab = createBottomTabNavigator();
 const tabs: TabsConfig<FlashyTabConfig> = {
   Home: {
     labelStyle: {
-      color: '#1C1C6A',
+      color: '#5B37B7',
     },
     icon: {
       component: HomeSVG,
-      color: '#A2A2C3',
+      color: 'rgba(91,55,183,0.5)',
     },
   },
   Likes: {
     labelStyle: {
-      color: '#1C1C6A',
+      color: '#C9379D',
     },
     icon: {
       component: LikeSVG,
-      color: '#A2A2C3',
+      color: 'rgba(201,55,157,0.5)',
     },
   },
   Search: {
     labelStyle: {
-      color: '#1C1C6A',
+      color: '#E6A919',
     },
     icon: {
       component: SearchSVG,
-      color: '#A2A2C3',
+      color: 'rgba(230,169,25,0.5)',
     },
   },
   Profile: {
     labelStyle: {
-      color: '#1C1C6A',
+      color: '#1194AA',
     },
     icon: {
       component: ProfileSVG,
-      color: '#A2A2C3',
+      color: 'rgba(17,148,170,0.5)',
     },
   },
 };
@@ -55,7 +55,12 @@ const FlashyScreen = () => {
   return (
     <Tab.Navigator
       tabBar={props => (
-        <AnimatedTabBar preset="flashy" tabs={tabs} {...props} />
+        <AnimatedTabBar
+          preset="flashy"
+          duration={1000}
+          tabs={tabs}
+          {...props}
+        />
       )}
     >
       <Tab.Screen

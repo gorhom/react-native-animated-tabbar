@@ -80,7 +80,7 @@ const BubbleStyledScreen = () => {
         },
       }}
       tabBar={props => (
-        <AnimatedTabBar iconSize={20} duration={500} tabs={tabs} {...props} />
+        <AnimatedTabBar iconSize={20} duration={750} tabs={tabs} {...props} />
       )}
     >
       <Tab.Screen
