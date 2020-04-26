@@ -15,6 +15,7 @@ A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a v
 
 1. [Installation](#installation)
 2. [Usage](#usage)
+    1. [Animated Icons](./docs/animated-icons.md)
 3. [Props](#props)
 4. [Presets](#presets)
 5. [To Do](#to-do)
