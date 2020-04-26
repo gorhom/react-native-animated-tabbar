@@ -8,11 +8,11 @@ import {
   DEFAULT_ITEM_ANIMATION_DURATION,
   DEFAULT_ITEM_ANIMATION_EASING,
   DEFAULT_ITEM_INNER_SPACE,
-  DEFAULT_ITEM_OUTER_SPACE,
   DEFAULT_ITEM_ICON_SIZE,
   DEFAULT_ITEM_LAYOUT_DIRECTION,
 } from './constants';
 import { TabBarViewProps } from '../types';
+import { FlashyTabConfig } from './types';
 import { styles } from './styles';
 
 const FlashyTabBarComponent = ({
@@ -21,11 +21,10 @@ const FlashyTabBarComponent = ({
   duration = DEFAULT_ITEM_ANIMATION_DURATION,
   easing = DEFAULT_ITEM_ANIMATION_EASING,
   itemInnerSpace = DEFAULT_ITEM_INNER_SPACE,
-  itemOuterSpace = DEFAULT_ITEM_OUTER_SPACE,
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
-}: TabBarViewProps) => {
+}: TabBarViewProps<FlashyTabConfig>) => {
   //#region Hooks
   const safeArea = useSafeArea();
   //#endregion
@@ -56,7 +55,6 @@ const FlashyTabBarComponent = ({
             duration={duration}
             easing={easing}
             itemInnerSpace={itemInnerSpace}
-            itemOuterSpace={itemOuterSpace}
             iconSize={iconSize}
             isRTL={isRTL}
             {...configs}

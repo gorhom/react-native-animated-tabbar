@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     flex: 1,
   },
-  contentContainer: {},
   iconContainer: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
@@ -31,8 +30,5 @@ export const styles = StyleSheet.create({
   },
   indicator: {
     position: 'absolute',
-    width: 6,
-    height: 6,
-    borderRadius: 8,
   },
 });

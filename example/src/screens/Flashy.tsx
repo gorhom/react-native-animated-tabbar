@@ -1,6 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, { TabsConfigsType } from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {
+  TabsConfig,
+  FlashyTabConfig,
+} from '@gorhom/animated-tabbar';
 import DummyScreen from './Dummy';
 import HomeSVG from '../svg/HomeSVG';
 import LikeSVG from '../svg/LikeSVG';
@@ -9,19 +12,14 @@ import ProfileSVG from '../svg/ProfileSVG';
 
 const Tab = createBottomTabNavigator();
 
-const tabs: TabsConfigsType = {
+const tabs: TabsConfig<FlashyTabConfig> = {
   Home: {
     labelStyle: {
       color: '#1C1C6A',
     },
     icon: {
       component: HomeSVG,
-      activeColor: '#A2A2C3',
-      inactiveColor: '#A2A2C3',
-    },
-    background: {
-      activeColor: 'rgba(223,215,243,1)',
-      inactiveColor: 'rgba(223,215,243,0)',
+      color: '#A2A2C3',
     },
   },
   Likes: {
@@ -30,12 +28,7 @@ const tabs: TabsConfigsType = {
     },
     icon: {
       component: LikeSVG,
-      activeColor: '#A2A2C3',
-      inactiveColor: '#A2A2C3',
-    },
-    background: {
-      activeColor: 'rgba(247,215,243,1)',
-      inactiveColor: 'rgba(247,215,243,0)',
+      color: '#A2A2C3',
     },
   },
   Search: {
@@ -44,12 +37,7 @@ const tabs: TabsConfigsType = {
     },
     icon: {
       component: SearchSVG,
-      activeColor: '#A2A2C3',
-      inactiveColor: '#A2A2C3',
-    },
-    background: {
-      activeColor: 'rgba(251,239,211,1)',
-      inactiveColor: 'rgba(251,239,211,0)',
+      color: '#A2A2C3',
     },
   },
   Profile: {
@@ -58,12 +46,7 @@ const tabs: TabsConfigsType = {
     },
     icon: {
       component: ProfileSVG,
-      activeColor: '#A2A2C3',
-      inactiveColor: '#A2A2C3',
-    },
-    background: {
-      activeColor: 'rgba(207,235,239,1)',
-      inactiveColor: 'rgba(207,235,239,0)',
+      color: '#A2A2C3',
     },
   },
 };
@@ -77,7 +60,7 @@ const FlashyScreen = () => {
           duration={750}
           tabs={tabs}
           iconSize={20}
-          itemInnerSpace={{ vertical: 24 }}
+          itemInnerSpace={24}
           {...props}
         />
       )}

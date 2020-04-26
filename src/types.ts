@@ -46,7 +46,7 @@ export interface TabBarItemConfigurableProps {
   isRTL?: boolean;
 }
 
-interface TabRoute {
+export interface TabRoute {
   title: string;
   key: string;
 }

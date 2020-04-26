@@ -27,20 +27,40 @@ export interface FlashyTabConfig {
       | React.ReactNode;
 
     /**
-     * Icon active color.
+     * Icon color.
      * @type {string}
      */
-    activeColor: string;
+    color: string;
+  };
+  /**
+   * Tab bar item indicator config.
+   */
+  indicator?: {
     /**
-     * Icon inactive color.
-     * @type {string}
+     * To show or hide tab bar item indicator.
+     * @type {boolean}
+     * @default true
      */
-    inactiveColor: string;
+    visible?: boolean;
+
+    /**
+     * Indicator color
+     * @type {boolean}
+     * @default labelStyle.color
+     */
+    color?: string;
+
+    /**
+     * Indicator size
+     * @type {number}
+     * @default 6
+     */
+    size?: number;
   };
 }
 
 export interface FlashyTabIconProps {
   animatedFocus: Animated.Node<number>;
-  color: Animated.Node<string | number>;
+  color: string;
   size: number;
 }
