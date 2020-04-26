@@ -72,7 +72,7 @@ const FlashyTabBarItemComponent = (
     itemInnerSpace,
     iconSize,
     indicator,
-    isRTL,
+    // isRTL,
   } = props;
 
   // variables
@@ -94,19 +94,24 @@ const FlashyTabBarItemComponent = (
     itemInnerVerticalSpace,
   ]);
   const [containerWidth, labelHeight] = useValues([0, 0], []);
-  const { indicatorVisiblity, indicatorColor, indicatorSize } = useMemo(() => {
+
+  const {
+    size: _indicatorSize,
+    color: _indicatorColor,
+    visible: _indicatorVisible,
+  } = indicator || {
+    size: undefined,
+    color: undefined,
+    visible: undefined,
+  };
+  const { indicatorVisibility, indicatorColor, indicatorSize } = useMemo(() => {
     return {
-      indicatorVisiblity: indicator?.visible ?? DEFAULT_INDICATOR_VISIBLITY,
+      indicatorVisibility: _indicatorVisible ?? DEFAULT_INDICATOR_VISIBLITY,
       indicatorColor:
-        indicator?.color ?? labelStyleOverride.color ?? DEFAULT_INDICATOR_COLOR,
-      indicatorSize: indicator?.size ?? DEFAULT_INDICATOR_SIZE,
+        _indicatorColor ?? labelStyleOverride.color ?? DEFAULT_INDICATOR_COLOR,
+      indicatorSize: _indicatorSize ?? DEFAULT_INDICATOR_SIZE,
     };
-  }, [
-    indicator?.color,
-    indicator?.visible,
-    indicator?.size,
-    labelStyleOverride,
-  ]);
+  }, [_indicatorVisible, _indicatorColor, _indicatorSize, labelStyleOverride]);
 
   // animations
   const [state] = useValues([State.UNDETERMINED], [index]);
@@ -308,7 +313,7 @@ const FlashyTabBarItemComponent = (
         </Animated.View>
       </MaskedView>
 
-      {indicatorVisiblity && <Animated.View style={indicatorStyle} />}
+      {indicatorVisibility && <Animated.View style={indicatorStyle} />}
 
       <AnimatedRawButton
         style={{ width: containerWidth, height: containerHeight }}

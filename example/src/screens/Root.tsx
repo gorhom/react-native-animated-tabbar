@@ -28,6 +28,14 @@ const examples = [
         name: 'Default',
         slug: 'Flashy',
       },
+      {
+        name: 'Styled',
+        slug: 'FlashyStyled',
+      },
+      {
+        name: 'RTL',
+        slug: 'FlashyRTL',
+      },
     ],
   },
 ];

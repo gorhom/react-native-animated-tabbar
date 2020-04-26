@@ -15,74 +15,102 @@ const Tab = createBottomTabNavigator();
 const tabs: TabsConfig<FlashyTabConfig> = {
   Home: {
     labelStyle: {
-      color: '#1C1C6A',
+      color: 'white',
     },
     icon: {
       component: HomeSVG,
-      color: '#A2A2C3',
+      color: '#444',
+    },
+    indicator: {
+      size: 4,
+      color: '#5B37B7',
     },
   },
   Likes: {
     labelStyle: {
-      color: '#1C1C6A',
+      color: 'white',
     },
     icon: {
       component: LikeSVG,
-      color: '#A2A2C3',
+      color: '#444',
+    },
+    indicator: {
+      size: 4,
+      color: '#C9379D',
     },
   },
   Search: {
     labelStyle: {
-      color: '#1C1C6A',
+      color: 'white',
     },
     icon: {
       component: SearchSVG,
-      color: '#A2A2C3',
+      color: '#444',
+    },
+    indicator: {
+      size: 4,
+      color: '#E6A919',
     },
   },
   Profile: {
     labelStyle: {
-      color: '#1C1C6A',
+      color: 'white',
     },
     icon: {
       component: ProfileSVG,
-      color: '#A2A2C3',
+      color: '#444',
+    },
+    indicator: {
+      size: 4,
+      color: '#1194AA',
     },
   },
 };
 
-const FlashyScreen = () => {
+const FlashyStyledScreen = () => {
   return (
     <Tab.Navigator
+      tabBarOptions={{
+        style: {
+          backgroundColor: '#080808',
+        },
+      }}
       tabBar={props => (
-        <AnimatedTabBar preset="flashy" tabs={tabs} {...props} />
+        <AnimatedTabBar
+          preset="flashy"
+          duration={1000}
+          tabs={tabs}
+          iconSize={20}
+          itemInnerSpace={24}
+          {...props}
+        />
       )}
     >
       <Tab.Screen
         name="Home"
         initialParams={{
-          backgroundColor: tabs.Home.labelStyle.color,
+          backgroundColor: '#000',
         }}
         component={DummyScreen}
       />
       <Tab.Screen
         name="Likes"
         initialParams={{
-          backgroundColor: tabs.Likes.labelStyle.color,
+          backgroundColor: '#000',
         }}
         component={DummyScreen}
       />
       <Tab.Screen
         name="Search"
         initialParams={{
-          backgroundColor: tabs.Search.labelStyle.color,
+          backgroundColor: '#000',
         }}
         component={DummyScreen}
       />
       <Tab.Screen
         name="Profile"
         initialParams={{
-          backgroundColor: tabs.Profile.labelStyle.color,
+          backgroundColor: '#000',
         }}
         component={DummyScreen}
       />
@@ -90,4 +118,4 @@ const FlashyScreen = () => {
   );
 };
 
-export default FlashyScreen;
+export default FlashyStyledScreen;
