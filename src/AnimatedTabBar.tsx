@@ -11,6 +11,11 @@ import {
   TabBarAnimationConfigurableProps,
 } from './types';
 
+/**
+ * @DEV
+ * this is needed for react-native-svg to animate on the native thread.
+ * @external (https://github.com/software-mansion/react-native-reanimated/issues/537)
+ */
 Animated.addWhitelistedNativeProps({
   width: true,
   stroke: true,
