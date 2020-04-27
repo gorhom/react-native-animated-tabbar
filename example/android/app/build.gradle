@@ -127,7 +127,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.AnimatedTabbarExample"
+        applicationId "com.animatedtabbarexample"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
