@@ -1,6 +1,6 @@
 {
   "name": "@gorhom/animated-tabbar",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "a 60fps animated tab bar to be used with `React Navigation` created with `Reanimated` 😎",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
