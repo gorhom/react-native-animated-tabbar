@@ -86,7 +86,6 @@ export function AnimatedTabBar<T extends PresetEnum>(
     }
   }, [props, isReactNavigation5]);
   const [selectedIndex] = useValues([0], []);
-
   //#region callbacks
   const getRouteTitle = useCallback(
     (route: Route<string>) => {
@@ -116,7 +115,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
     [isReactNavigation5, tabs]
   );
 
-  const getRoutes = useCallback(() => {
+  const routesWithTabConfig = useMemo(() => {
     return routes.map(route => ({
       title: getRouteTitle(route),
       key: route.key,
@@ -181,7 +180,8 @@ export function AnimatedTabBar<T extends PresetEnum>(
     <PresetComponent
       style={style}
       selectedIndex={selectedIndex}
-      routes={getRoutes()}
+      // @ts-ignore
+      routes={routesWithTabConfig}
       itemInnerSpace={itemInnerSpace}
       itemOuterSpace={itemOuterSpace}
       iconSize={iconSize}

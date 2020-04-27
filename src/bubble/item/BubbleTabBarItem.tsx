@@ -19,7 +19,7 @@ import {
   DEFAULT_ITEM_OUTER_SPACE,
 } from '../constants';
 import { TabBarItemProps } from '../../types';
-import { BubbleTabConfig } from '../type';
+import { BubbleTabConfig } from '../types';
 import { styles } from './styles';
 
 const AnimatedRawButton = createNativeWrapper(

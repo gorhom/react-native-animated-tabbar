@@ -15,9 +15,11 @@ A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a v
 
 1. [Installation](#installation)
 2. [Usage](#usage)
-    1. [Animated Icons](./docs/animated-icons.md)
+   1. [Animated Icons](./docs/animated-icons.md)
 3. [Props](#props)
 4. [Presets](#presets)
+   1. [Bubble Preset](./docs/bubble-preset.md)
+   2. [Flashy Preset](./docs/flashy-preset.md)
 5. [To Do](#to-do)
 6. [Credits](#built-with)
 7. [License](#license)
@@ -167,127 +169,35 @@ export default () => (
 
 ## Props
 
-### `preset`
+| name     | description                                                                                    | required | type                                 | default  |
+| -------- | ---------------------------------------------------------------------------------------------- | -------- | ------------------------------------ | -------- |
+| `preset` | Animation preset, currently options are `['bubble', 'flashy']`.                                                                               | NO       | [`PresetEnum`](./src/presets.ts#L15) | 'bubble' |
+| `tabs`   | Tabs configurations. A generic dictionary of selected preset tab config.                       | YES      | [`TabsConfig<T>`](./src/types.ts#L4) |          |
+| `style`  | View style to be applied to tab bar container, default value will be based on selected preset. | NO       |                                      |          |
 
-Animation preset. `NEW ANIMATIONS COMING SOON 🎉`.
+### [TabBarAnimationConfigurableProps](./src/types.ts#L8)
 
-```ts
-/**
- * @optional
- * @type {PresetEnum}
- * @default 'bubble'
- */
-```
+| name       | description                                                                   | required | type                                                                                                      | default                |
+| ---------- | ----------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `duration` | Animation duration, default value will be based on selected preset.           | NO       | number                                                                                                    | 500                    |
+| `easing`   | `Reanimated` easing function, default value will be based on selected preset. | NO       | [`EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) | Easing.out(Easing.exp) |
 
-### `tabs`
+### [TabBarItemConfigurableProps](./src/types.ts#L26)
 
-Tabs configurations
-
-```ts
-/**
- * @required
- * @type {TabsConfig<T>} T extends preset tab config.
- */
-```
-
-### `style`
-
-View style to be applied to tab bar container.
-
-```ts
-/**
- * @optional
- * @type {ViewStyle}
- */
-```
-
-### `duration`
-
-Animation duration.
-
-```ts
-/**
- * @optional
- * @type {number}
- * @default 500
- */
-```
-
-### `easing`
-
-Animation easing function.
-
-```ts
-/**
- * @optional
- * @type {Animated.EasingFunction}
- * @default Easing.out(Easing.exp)
- */
-```
-
-### `itemInnerSpace`
-
-Inner space to be added to the tab item.
-
-```ts
-/**
- * @optional
- * @type {Space | number}
- * @default
- * {
- *   vertical: 12,
- *   horizontal: 12
- * }
- */
-```
-
-### `itemOuterSpace`
-
-Outer space to be added to the tab item.
-
-```ts
-/**
- * @optional
- * @type {Space | number}
- * @default
- * {
- *   vertical: 12,
- *   horizontal: 12
- * }
- */
-```
-
-### `icon`
-
-Tab item icon size.
-
-```ts
-/**
- * @optional
- * @type {number}
- * @default 24
- */
-```
-
-### `isRTL`
-
-Tab bar layout and animation direction.
-
-```ts
-/**
- * @optional
- * @type {boolean}
- * @default false
- */
-```
+| name             | description                                                                       | required | type                                    | default |
+| ---------------- | --------------------------------------------------------------------------------- | -------- | --------------------------------------- | ------- |
+| `itemInnerSpace` | Inner space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `itemOuterSpace` | Outer space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `iconSize`       | Tab item icon size.                                                               | NO       | number                                  | 24      |
+| `isRTL`          | Tab bar layout and animation direction.                                           | NO       | boolean                                 | false   |
 
 ## Presets
 
 Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets.
 
 <table>
-      <tr><td><a href="./docs/bubble-preset.md">Bubble Preset</a></td></tr>
-      <tr><td><a href="./docs/bubble-preset.md"><img src="./docs/previews/bubble.gif" /></a></td></tr>
+      <tr><td><a href="./docs/bubble-preset.md">Bubble Preset</a></td><td><a href="./docs/flashy-preset.md">Flashy Preset</a></td></tr>
+      <tr><td><a href="./docs/bubble-preset.md"><img src="./docs/previews/bubble.gif" /></a></td><td><a href="./docs/flashy-preset.md"><img src="./docs/previews/flashy.gif" /></a></td></tr>
 </table>
 
 ## To Do

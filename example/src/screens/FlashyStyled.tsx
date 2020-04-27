@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AnimatedTabBar, {
   TabsConfig,
-  BubbleTabConfig,
+  FlashyTabConfig,
 } from '@gorhom/animated-tabbar';
 import DummyScreen from './Dummy';
 import HomeSVG from '../svg/HomeSVG';
@@ -12,19 +12,18 @@ import ProfileSVG from '../svg/ProfileSVG';
 
 const Tab = createBottomTabNavigator();
 
-const tabs: TabsConfig<BubbleTabConfig> = {
+const tabs: TabsConfig<FlashyTabConfig> = {
   Home: {
     labelStyle: {
       color: 'white',
     },
     icon: {
       component: HomeSVG,
-      activeColor: 'rgba(255,255,255,1)',
-      inactiveColor: 'rgba(68,68,68,1)',
+      color: '#444',
     },
-    background: {
-      activeColor: 'rgba(51,51,51,1)',
-      inactiveColor: 'rgba(51,51,51,0)',
+    indicator: {
+      size: 4,
+      color: '#5B37B7',
     },
   },
   Likes: {
@@ -33,12 +32,11 @@ const tabs: TabsConfig<BubbleTabConfig> = {
     },
     icon: {
       component: LikeSVG,
-      activeColor: 'rgba(255,255,255,1)',
-      inactiveColor: 'rgba(68,68,68,1)',
+      color: '#444',
     },
-    background: {
-      activeColor: 'rgba(51,51,51,1)',
-      inactiveColor: 'rgba(51,51,51,0)',
+    indicator: {
+      size: 4,
+      color: '#C9379D',
     },
   },
   Search: {
@@ -47,12 +45,11 @@ const tabs: TabsConfig<BubbleTabConfig> = {
     },
     icon: {
       component: SearchSVG,
-      activeColor: 'rgba(255,255,255,1)',
-      inactiveColor: 'rgba(68,68,68,1)',
+      color: '#444',
     },
-    background: {
-      activeColor: 'rgba(51,51,51,1)',
-      inactiveColor: 'rgba(51,51,51,0)',
+    indicator: {
+      size: 4,
+      color: '#E6A919',
     },
   },
   Profile: {
@@ -61,17 +58,16 @@ const tabs: TabsConfig<BubbleTabConfig> = {
     },
     icon: {
       component: ProfileSVG,
-      activeColor: 'rgba(255,255,255,1)',
-      inactiveColor: 'rgba(68,68,68,1)',
+      color: '#444',
     },
-    background: {
-      activeColor: 'rgba(51,51,51,1)',
-      inactiveColor: 'rgba(51,51,51,0)',
+    indicator: {
+      size: 4,
+      color: '#1194AA',
     },
   },
 };
 
-const BubbleStyledScreen = () => {
+const FlashyStyledScreen = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -80,7 +76,14 @@ const BubbleStyledScreen = () => {
         },
       }}
       tabBar={props => (
-        <AnimatedTabBar iconSize={20} duration={750} tabs={tabs} {...props} />
+        <AnimatedTabBar
+          preset="flashy"
+          duration={1000}
+          tabs={tabs}
+          iconSize={20}
+          itemInnerSpace={24}
+          {...props}
+        />
       )}
     >
       <Tab.Screen
@@ -115,4 +118,4 @@ const BubbleStyledScreen = () => {
   );
 };
 
-export default BubbleStyledScreen;
+export default FlashyStyledScreen;

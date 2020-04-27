@@ -95,6 +95,7 @@ const BubbleRTLScreen = () => {
           tabBarLabel: 'الرئيسية',
         }}
         initialParams={{
+          name: 'الرئيسية',
           backgroundColor: '#000',
         }}
         component={DummyScreen}
@@ -105,6 +106,7 @@ const BubbleRTLScreen = () => {
           tabBarLabel: 'אהבתי',
         }}
         initialParams={{
+          name: 'אהבתי',
           backgroundColor: '#000',
         }}
         component={DummyScreen}
@@ -115,6 +117,7 @@ const BubbleRTLScreen = () => {
           tabBarLabel: 'ይፈልጉ',
         }}
         initialParams={{
+          name: 'ይፈልጉ',
           backgroundColor: '#000',
         }}
         component={DummyScreen}
@@ -125,6 +128,7 @@ const BubbleRTLScreen = () => {
           tabBarLabel: 'مشخصات',
         }}
         initialParams={{
+          name: 'مشخصات',
           backgroundColor: '#000',
         }}
         component={DummyScreen}
