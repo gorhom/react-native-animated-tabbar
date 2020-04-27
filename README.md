@@ -169,27 +169,27 @@ export default () => (
 
 ## Props
 
-| name     | description                                                              | required | type                                 | default  |
-| -------- | ------------------------------------------------------------------------ | -------- | ------------------------------------ | -------- |
-| `preset` | Animation preset.                                                        | NO       | [`PresetEnum`](./src/presets.ts#L15) | 'bubble' |
-| `tabs`   | Tabs configurations. A generic dictionary of selected preset tab config. | YES      | [`TabsConfig<T>`](./src/types.ts#L4) |          |
-| `style`  | View style to be applied to tab bar container.                           | NO       |                                      |          |
+| name     | description                                                                                    | required | type                                 | default  |
+| -------- | ---------------------------------------------------------------------------------------------- | -------- | ------------------------------------ | -------- |
+| `preset` | Animation preset, currently options are `bubble | flashy`.                                                                               | NO       | [`PresetEnum`](./src/presets.ts#L15) | 'bubble' |
+| `tabs`   | Tabs configurations. A generic dictionary of selected preset tab config.                       | YES      | [`TabsConfig<T>`](./src/types.ts#L4) |          |
+| `style`  | View style to be applied to tab bar container, default value will be based on selected preset. | NO       |                                      |          |
 
 ### [TabBarAnimationConfigurableProps](./src/types.ts#L8)
 
-| name       | description                | required | type                                                                                                               | default                |
-| ---------- | -------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------- |
-| `duration` | Animation duration.        | NO       | number                                                                                                             | 500                    |
-| `easing`   | Animation easing function. | NO       | [`Animated.EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) | Easing.out(Easing.exp) |
+| name       | description                                                                   | required | type                                                                                                      | default                |
+| ---------- | ----------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `duration` | Animation duration, default value will be based on selected preset.           | NO       | number                                                                                                    | 500                    |
+| `easing`   | `Reanimated` easing function, default value will be based on selected preset. | NO       | [`EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) | Easing.out(Easing.exp) |
 
 ### [TabBarItemConfigurableProps](./src/types.ts#L26)
 
-| name             | description                              | required | type                                    | default |
-| ---------------- | ---------------------------------------- | -------- | --------------------------------------- | ------- |
-| `itemInnerSpace` | Inner space to be added to the tab item. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
-| `itemOuterSpace` | Outer space to be added to the tab item. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
-| `iconSize`       | Tab item icon size.                      | NO       | number                                  | 24      |
-| `isRTL`          | Tab bar layout and animation direction.  | NO       | boolean                                 | false   |
+| name             | description                                                                       | required | type                                    | default |
+| ---------------- | --------------------------------------------------------------------------------- | -------- | --------------------------------------- | ------- |
+| `itemInnerSpace` | Inner space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `itemOuterSpace` | Outer space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `iconSize`       | Tab item icon size.                                                               | NO       | number                                  | 24      |
+| `isRTL`          | Tab bar layout and animation direction.                                           | NO       | boolean                                 | false   |
 
 ## Presets
 
