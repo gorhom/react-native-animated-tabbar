@@ -10,12 +10,12 @@
 | ------------- | --------------------------------------------------------- | -------- | --------------------- | ------------------ |
 | `labelStyle`  | This will apply to the tab bar item label.                | NO       | TextStyle             |                    |
 | `icon`        | Icon configurations.                                      | YES      | object                |                    |
-| `├ component` | Icon component, this could be a function or a react node. | YES      | [`ReactNode`]('#L46') |                    |
-| `└ color`     | Icon color.                                               | YES      | string                |                    |
+| `├component` | Icon component, this could be a function or a react node. | YES      | [`ReactNode`](#L46) |                    |
+| `└color`     | Icon color.                                               | YES      | string                |                    |
 | `indicator`   | Tab bar item indicator configurations.                    | YES      | object                |                    |
-| `├ visible`   | To show or hide tab bar item indicator.                   | NO       | boolean               | true               |
-| `├ size`      | Indicator size.                                           | NO       | number                | 6                  |
-| `└ color`     | Indicator color.                                          | NO       | string                | `labelStyle.color` |
+| `├visible`   | To show or hide tab bar item indicator.                   | NO       | boolean               | true               |
+| `├size`      | Indicator size.                                           | NO       | number                | 6                  |
+| `└color`     | Indicator color.                                          | NO       | string                | `label color` |
 
 ## Interfaces
 

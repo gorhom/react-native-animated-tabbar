@@ -10,12 +10,12 @@
 | ----------------- | --------------------------------------------------------- | -------- | --------------------- | ------- |
 | `labelStyle`      | This will apply to the tab bar item label.                | NO       | TextStyle             |         |
 | `icon`            | Icon configurations.                                      | YES      | object                |         |
-| `├ component`     | Icon component, this could be a function or a react node. | YES      | [`ReactNode`]('#L46') |         |
-| `├ activeColor`   | Icon active color.                                        | YES      | string                |         |
-| `└ inactiveColor` | Icon inactive color.                                      | YES      | string                |         |
+| `├component`     | Icon component, this could be a function or a react node. | YES      | [`ReactNode`](#L46) |         |
+| `├activeColor`   | Icon active color.                                        | YES      | string                |         |
+| `└inactiveColor` | Icon inactive color.                                      | YES      | string                |         |
 | `background`      | Tab bar item background configurations.                   | YES      | object                |         |
-| `├ activeColor`   | Background active color.                                  | YES      | string                |         |
-| `└ inactiveColor` | Background inactive color.                                | YES      | string                |         |
+| `├activeColor`   | Background active color.                                  | YES      | string                |         |
+| `└inactiveColor` | Background inactive color.                                | YES      | string                |         |
 
 ## Interfaces
 
