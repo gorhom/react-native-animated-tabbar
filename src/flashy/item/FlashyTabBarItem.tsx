@@ -57,9 +57,10 @@ const {
 const gestureHandler = (state: Animated.Value<State>) =>
   onGestureEvent({ state });
 
-const FlashyTabBarItemComponent = (
-  props: Omit<TabBarItemProps, 'itemOuterSpace'> & FlashyTabConfig
-) => {
+export type FlashyTabBarItemProps = Omit<TabBarItemProps, 'itemOuterSpace'> &
+  FlashyTabConfig;
+
+const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   // props
   const {
     index,

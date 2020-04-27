@@ -1,1 +1,1 @@
-export { default } from './BubbleTabBarItem';
+export { default, BubbleTabBarItemProps } from './BubbleTabBarItem';

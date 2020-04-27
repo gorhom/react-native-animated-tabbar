@@ -35,9 +35,9 @@ const { add, interpolate, useCode, set, cond, eq } = Animated;
 const gestureHandler = (state: Animated.Value<State>) =>
   onGestureEvent({ state });
 
-const BubbleTabBarItemComponent = (
-  props: TabBarItemProps & BubbleTabConfig
-) => {
+export type BubbleTabBarItemProps = TabBarItemProps & BubbleTabConfig;
+
+const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   // props
   const {
     index,

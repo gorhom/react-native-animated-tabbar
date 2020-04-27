@@ -1,6 +1,16 @@
 export { AnimatedTabBar as default } from './AnimatedTabBar';
-import { BubbleTabConfig, BubbleTabIconProps } from './bubble';
-export { FlashyTabConfig, FlashyTabIconProps } from './flashy';
+import {
+  BubbleTabConfig,
+  BubbleTabIconProps,
+  BubbleTabBarItem,
+  BubbleTabBarItemProps,
+} from './bubble';
+export {
+  FlashyTabConfig,
+  FlashyTabIconProps,
+  FlashyTabBarItem,
+  FlashyTabBarItemProps,
+} from './flashy';
 import { TabsConfig } from './types';
 
 /**
@@ -9,4 +19,10 @@ import { TabsConfig } from './types';
  */
 export type TabsConfigsType = TabsConfig<BubbleTabConfig>;
 
-export { BubbleTabConfig, BubbleTabIconProps, TabsConfig };
+export {
+  BubbleTabConfig,
+  BubbleTabIconProps,
+  BubbleTabBarItem,
+  BubbleTabBarItemProps,
+  TabsConfig,
+};
