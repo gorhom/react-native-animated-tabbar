@@ -169,18 +169,18 @@ export default () => (
 
 ## Props
 
-| name         | description                                        | required | type                                                      | default                      |
-| ------------ | -------------------------------------------------- | -------- | --------------------------------------------------------- | ---------------------------- |
-| ⭐️ `preset` | Animation preset, `NEW ANIMATIONS COMING SOON 🎉`. | NO       | [`PresetEnum`](./src/presets.ts#L15)                      | 'bubble'                     |
-| `tabs`       | Tabs configurations.                               | YES      | [`TabsConfig<BubbleTabConfig>`](./src/bubble/types.ts#L4) |                              |
-| `style`      | View style to be applied to tab bar container.     | NO       |                                                           | { backgroundColor: 'white' } |
+| name     | description                                                              | required | type                                 | default  |
+| -------- | ------------------------------------------------------------------------ | -------- | ------------------------------------ | -------- |
+| `preset` | Animation preset.                                                        | NO       | [`PresetEnum`](./src/presets.ts#L15) | 'bubble' |
+| `tabs`   | Tabs configurations. A generic dictionary of selected preset tab config. | YES      | [`TabsConfig<T>`](./src/types.ts#L4) |          |
+| `style`  | View style to be applied to tab bar container.                           | NO       |                                      |          |
 
 ### [TabBarAnimationConfigurableProps](./src/types.ts#L8)
 
-| name       | description               | required | type                                                                                                               | default                |
-| ---------- | ------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------- |
-| `duration` | Animation duration.       | NO       | number                                                                                                             | 500                    |
-| `easing`   | Animation easing function | NO       | [`Animated.EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) | Easing.out(Easing.exp) |
+| name       | description                | required | type                                                                                                               | default                |
+| ---------- | -------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| `duration` | Animation duration.        | NO       | number                                                                                                             | 500                    |
+| `easing`   | Animation easing function. | NO       | [`Animated.EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) | Easing.out(Easing.exp) |
 
 ### [TabBarItemConfigurableProps](./src/types.ts#L26)
 
