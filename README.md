@@ -171,7 +171,7 @@ export default () => (
 
 | name     | description                                                                                    | required | type                                 | default  |
 | -------- | ---------------------------------------------------------------------------------------------- | -------- | ------------------------------------ | -------- |
-| `preset` | Animation preset, currently options are `bubble | flashy`.                                                                               | NO       | [`PresetEnum`](./src/presets.ts#L15) | 'bubble' |
+| `preset` | Animation preset, currently options are `['bubble', 'flashy']`.                                                                               | NO       | [`PresetEnum`](./src/presets.ts#L15) | 'bubble' |
 | `tabs`   | Tabs configurations. A generic dictionary of selected preset tab config.                       | YES      | [`TabsConfig<T>`](./src/types.ts#L4) |          |
 | `style`  | View style to be applied to tab bar container, default value will be based on selected preset. | NO       |                                      |          |
 
