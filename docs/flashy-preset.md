@@ -6,82 +6,16 @@
 
 ## FlashyTabConfig
 
-### `labelStyle`
-
-This will apply to the tab bar item label.
-
-```ts
-/**
- * @type {TextStyle}
- * @default
- * {
- *   color: '#000',
- *   fontSize: 14,
- *   fontWeight: '600'
- * }
- */
-```
-
-### `icon`
-
-Icon configurations.
-
-##### `component`
-
-Icon component, this could be a function or a react node.
-
-```ts
-/**
- * @type {(props: FlashyTabIconProps) => React.ReactNode | React.ReactNode}
- */
-```
-
-##### `color`
-
-Icon color.
-
-```ts
-/**
- * @type {string}
- */
-```
-
-### `indicator`
-
-Tab bar item indicator configurations.
-
-##### `visible`
-
-To show or hide tab bar item indicator.
-
-```ts
-/**
- * @type {boolean}
- * @default true
- */
-```
-
-##### `color`
-
-Indicator color.
-
-```ts
-/**
- * @type {string}
- * @default labelStyle.color|black
- */
-```
-
-##### `size`
-
-Indicator size.
-
-```ts
-/**
- * @type {number}
- * @default 6
- */
-```
+| name          | description                                               | required | type                  | default            |
+| ------------- | --------------------------------------------------------- | -------- | --------------------- | ------------------ |
+| `labelStyle`  | This will apply to the tab bar item label.                | NO       | TextStyle             |                    |
+| `icon`        | Icon configurations.                                      | YES      | object                |                    |
+| `├ component` | Icon component, this could be a function or a react node. | YES      | [`ReactNode`]('#L46') |                    |
+| `└ color`     | Icon color.                                               | YES      | string                |                    |
+| `indicator`   | Tab bar item indicator configurations.                    | YES      | object                |                    |
+| `├ visible`   | To show or hide tab bar item indicator.                   | NO       | boolean               | true               |
+| `├ size`      | Indicator size.                                           | NO       | number                | 6                  |
+| `└ color`     | Indicator color.                                          | NO       | string                | `labelStyle.color` |
 
 ## Interfaces
 

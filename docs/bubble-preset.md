@@ -6,79 +6,16 @@
 
 ## BubbleTabConfig
 
-### `labelStyle`
-
-This will apply to the tab bar item label.
-
-```ts
-/**
- * @type {TextStyle}
- * @default
- * {
- *   color: '#000',
- *   fontSize: 14,
- *   fontWeight: '600'
- * }
- */
-```
-
-### `icon`
-
-Icon configurations.
-
-##### `component`
-
-Icon component, this could be a function or a react node.
-
-```ts
-/**
- * @type {(props: BubbleTabIconProps) => React.ReactNode | React.ReactNode}
- */
-```
-
-##### `activeColor`
-
-Icon active color.
-
-```ts
-/**
- * @type {string}
- */
-```
-
-##### `inactiveColor`
-
-Icon inactive color.
-
-```ts
-/**
- * @type {string}
- */
-```
-
-### `background`
-
-Tab bar item background configurations.
-
-##### `activeColor`
-
-Background active color.
-
-```ts
-/**
- * @type {string}
- */
-```
-
-##### `inactiveColor`
-
-Background inactive color.
-
-```ts
-/**
- * @type {string}
- */
-```
+| name              | description                                               | required | type                  | default |
+| ----------------- | --------------------------------------------------------- | -------- | --------------------- | ------- |
+| `labelStyle`      | This will apply to the tab bar item label.                | NO       | TextStyle             |         |
+| `icon`            | Icon configurations.                                      | YES      | object                |         |
+| `├ component`     | Icon component, this could be a function or a react node. | YES      | [`ReactNode`]('#L46') |         |
+| `├ activeColor`   | Icon active color.                                        | YES      | string                |         |
+| `└ inactiveColor` | Icon inactive color.                                      | YES      | string                |         |
+| `background`      | Tab bar item background configurations.                   | YES      | object                |         |
+| `├ activeColor`   | Background active color.                                  | YES      | string                |         |
+| `└ inactiveColor` | Background inactive color.                                | YES      | string                |         |
 
 ## Interfaces
 

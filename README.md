@@ -15,11 +15,11 @@ A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a v
 
 1. [Installation](#installation)
 2. [Usage](#usage)
-    1. [Animated Icons](./docs/animated-icons.md)
+   1. [Animated Icons](./docs/animated-icons.md)
 3. [Props](#props)
 4. [Presets](#presets)
-    1. [Bubble Preset](./docs/bubble-preset.md)
-    2. [Flashy Preset](./docs/flashy-preset.md)
+   1. [Bubble Preset](./docs/bubble-preset.md)
+   2. [Flashy Preset](./docs/flashy-preset.md)
 5. [To Do](#to-do)
 6. [Credits](#built-with)
 7. [License](#license)
@@ -169,119 +169,27 @@ export default () => (
 
 ## Props
 
-### `preset`
+| name         | description                                        | required | type                                                      | default                      |
+| ------------ | -------------------------------------------------- | -------- | --------------------------------------------------------- | ---------------------------- |
+| ⭐️ `preset` | Animation preset, `NEW ANIMATIONS COMING SOON 🎉`. | NO       | [`PresetEnum`](./src/presets.ts#L15)                      | 'bubble'                     |
+| `tabs`       | Tabs configurations.                               | YES      | [`TabsConfig<BubbleTabConfig>`](./src/bubble/types.ts#L4) |                              |
+| `style`      | View style to be applied to tab bar container.     | NO       |                                                           | { backgroundColor: 'white' } |
 
-Animation preset. `NEW ANIMATIONS COMING SOON 🎉`.
+### [TabBarAnimationConfigurableProps](./src/types.ts#L8)
 
-```ts
-/**
- * @optional
- * @type {PresetEnum} 'bubble' | 'flashy'
- * @default 'bubble'
- */
-```
+| name       | description               | required | type                                                                                                               | default                |
+| ---------- | ------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| `duration` | Animation duration.       | NO       | number                                                                                                             | 500                    |
+| `easing`   | Animation easing function | NO       | [`Animated.EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) | Easing.out(Easing.exp) |
 
-### `tabs`
+### [TabBarItemConfigurableProps](./src/types.ts#L26)
 
-Tabs configurations
-
-```ts
-/**
- * @required
- * @type {TabsConfig<T>} T extends preset tab config.
- */
-```
-
-### `style`
-
-View style to be applied to tab bar container.
-
-```ts
-/**
- * @optional
- * @type {ViewStyle}
- */
-```
-
-### `duration`
-
-Animation duration.
-
-```ts
-/**
- * @optional
- * @type {number}
- * @default 500
- */
-```
-
-### `easing`
-
-Animation easing function.
-
-```ts
-/**
- * @optional
- * @type {Animated.EasingFunction}
- * @default Easing.out(Easing.exp)
- */
-```
-
-### `itemInnerSpace`
-
-Inner space to be added to the tab item.
-
-```ts
-/**
- * @optional
- * @type {Space | number}
- * @default
- * {
- *   vertical: 12,
- *   horizontal: 12
- * }
- */
-```
-
-### `itemOuterSpace`
-
-Outer space to be added to the tab item.
-
-```ts
-/**
- * @optional
- * @type {Space | number}
- * @default
- * {
- *   vertical: 12,
- *   horizontal: 12
- * }
- */
-```
-
-### `icon`
-
-Tab item icon size.
-
-```ts
-/**
- * @optional
- * @type {number}
- * @default 24
- */
-```
-
-### `isRTL`
-
-Tab bar layout and animation direction.
-
-```ts
-/**
- * @optional
- * @type {boolean}
- * @default false
- */
-```
+| name             | description                              | required | type                                    | default |
+| ---------------- | ---------------------------------------- | -------- | --------------------------------------- | ------- |
+| `itemInnerSpace` | Inner space to be added to the tab item. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `itemOuterSpace` | Outer space to be added to the tab item. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `iconSize`       | Tab item icon size.                      | NO       | number                                  | 24      |
+| `isRTL`          | Tab bar layout and animation direction.  | NO       | boolean                                 | false   |
 
 ## Presets
 
