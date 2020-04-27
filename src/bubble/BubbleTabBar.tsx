@@ -13,7 +13,7 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
 } from './constants';
 import { TabBarViewProps } from '../types';
-import { BubbleTabConfig } from './type';
+import { BubbleTabConfig } from './types';
 import { styles } from './styles';
 
 const BubbleTabBarComponent = ({
