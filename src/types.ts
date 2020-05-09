@@ -1,10 +1,16 @@
 import { StyleProp, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
+export type TabsConfigsType<
+  T = { [key: string]: TabConfigsType },
+  K extends keyof T = keyof T
+> = {
+  [key in K]: TabConfigsType
+}
 export interface TabsConfig<T> {
   [key: string]: T;
 }
-
+  
 export interface TabBarAnimationConfigurableProps {
   /**
    * Animation duration.
