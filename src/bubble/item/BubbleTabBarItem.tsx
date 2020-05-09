@@ -1,19 +1,15 @@
 import React, { useMemo, memo } from 'react';
 import { View, Text } from 'react-native';
 import Animated from 'react-native-reanimated';
-import {
-  TouchableWithoutFeedback,
-  State,
-  createNativeWrapper,
-} from 'react-native-gesture-handler';
+import { State, TapGestureHandler } from 'react-native-gesture-handler';
 import {
   interpolateColor,
-  useValues,
-  withTransition,
   onGestureEvent,
+  useValue,
 } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
+import { withTransition } from '../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
@@ -22,15 +18,7 @@ import { TabBarItemProps } from '../../types';
 import { BubbleTabConfig } from '../types';
 import { styles } from './styles';
 
-const AnimatedRawButton = createNativeWrapper(
-  Animated.createAnimatedComponent(TouchableWithoutFeedback),
-  {
-    shouldCancelWhenOutside: false,
-    shouldActivateOnStart: false,
-  }
-);
-
-const { add, interpolate, useCode, set, cond, eq } = Animated;
+const { add, interpolate, useCode, set, cond, onChange, eq } = Animated;
 
 const gestureHandler = (state: Animated.Value<State>) =>
   onGestureEvent({ state });
@@ -91,7 +79,7 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
       itemOuterHorizontalSpace: _itemOuterHorizontalSpace,
     };
   }, [itemInnerSpace, itemOuterSpace]);
-  const [labelWidth] = useValues([0], []);
+  const labelWidth = useValue(0);
 
   /**
    * @DEV
@@ -110,8 +98,10 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   const maxWidth = add(labelWidth, itemInnerHorizontalSpace, minWidth);
 
   // animations
-  const [state] = useValues([State.UNDETERMINED], [index]);
-  const animatedFocus = withTransition(cond(eq(selectedIndex, index), 1, 0), {
+  const gestureState = useValue(State.UNDETERMINED);
+  const animatedFocus = withTransition({
+    index,
+    selectedIndex,
     duration,
     easing,
   });
@@ -178,12 +168,13 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
 
   // effects
   useCode(
-    () =>
-      cond(eq(state, State.END), [
-        set(selectedIndex, index),
-        set(state, State.UNDETERMINED),
-      ]),
-    [selectedIndex, state, index]
+    () => [
+      onChange(
+        gestureState,
+        cond(eq(gestureState, State.END), set(selectedIndex, index))
+      ),
+    ],
+    [gestureState, index]
   );
 
   // render
@@ -198,7 +189,7 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   };
 
   return (
-    <AnimatedRawButton {...gestureHandler(state)}>
+    <TapGestureHandler {...gestureHandler(gestureState)}>
       <Animated.View style={containerStyle}>
         <Animated.View style={contentContainerStyle}>
           <View style={iconContainerStyle}>{renderIcon()}</View>
@@ -213,7 +204,7 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
           </Text>
         </Animated.View>
       </Animated.View>
-    </AnimatedRawButton>
+    </TapGestureHandler>
   );
 };
 

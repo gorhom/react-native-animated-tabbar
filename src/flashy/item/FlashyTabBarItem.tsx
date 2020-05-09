@@ -1,27 +1,19 @@
 import React, { useMemo, memo } from 'react';
-import {
-  View,
-  Text,
-  ViewStyle,
-  TouchableWithoutFeedbackProperties,
-} from 'react-native';
+import { View, Text } from 'react-native';
 import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
 import MaskedView from '@react-native-community/masked-view';
-import {
-  State,
-  TouchableWithoutFeedback,
-  createNativeWrapper,
-} from 'react-native-gesture-handler';
+import { State, TapGestureHandler } from 'react-native-gesture-handler';
 import {
   useValues,
-  withTransition,
   onGestureEvent,
   transformOrigin,
   toRad,
+  useValue,
 } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
+import { withTransition } from '../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_INDICATOR_VISIBLITY,
@@ -32,16 +24,6 @@ import { TabBarItemProps } from '../../types';
 import { FlashyTabConfig } from '../types';
 import { styles } from './styles';
 
-const AnimatedRawButton = (createNativeWrapper(
-  Animated.createAnimatedComponent(TouchableWithoutFeedback),
-  {
-    shouldCancelWhenOutside: false,
-    shouldActivateOnStart: false,
-  }
-) as any) as React.ComponentType<
-  Animated.AnimateProps<ViewStyle, TouchableWithoutFeedbackProperties>
->;
-
 const {
   interpolate,
   useCode,
@@ -50,6 +32,7 @@ const {
   cond,
   eq,
   divide,
+  onChange,
   multiply,
   Extrapolate,
 } = Animated;
@@ -94,7 +77,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
     iconSize,
     itemInnerVerticalSpace,
   ]);
-  const [containerWidth, labelHeight] = useValues([0, 0], []);
+  const [containerWidth, labelHeight] = useValues([0, 0]);
 
   const {
     size: _indicatorSize,
@@ -115,8 +98,10 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   }, [_indicatorVisible, _indicatorColor, _indicatorSize, labelStyleOverride]);
 
   // animations
-  const [state] = useValues([State.UNDETERMINED], [index]);
-  const animatedFocus = withTransition(cond(eq(selectedIndex, index), 1, 0), {
+  const gestureState = useValue(State.UNDETERMINED);
+  const animatedFocus = withTransition({
+    index,
+    selectedIndex,
     duration,
     easing,
   });
@@ -251,12 +236,13 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
 
   // effects
   useCode(
-    () =>
-      cond(eq(state, State.END), [
-        set(selectedIndex, index),
-        set(state, State.UNDETERMINED),
-      ]),
-    [selectedIndex, state, index]
+    () => [
+      onChange(
+        gestureState,
+        cond(eq(gestureState, State.END), set(selectedIndex, index))
+      ),
+    ],
+    [gestureState, index]
   );
 
   // callbacks
@@ -289,38 +275,35 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   };
 
   return (
-    <Animated.View onLayout={handleCotnainerlayout} style={containerStyle}>
-      <MaskedView
-        style={styles.root}
-        maskElement={<Animated.View style={iconMaskStyle} />}
-      >
-        <Animated.View pointerEvents="none" style={iconContainerStyle}>
-          <View style={iconStyle}>{renderIcon()}</View>
-        </Animated.View>
-      </MaskedView>
+    <TapGestureHandler {...gestureHandler(gestureState)}>
+      <Animated.View onLayout={handleCotnainerlayout} style={containerStyle}>
+        <MaskedView
+          style={styles.root}
+          maskElement={<Animated.View style={iconMaskStyle} />}
+        >
+          <Animated.View pointerEvents="none" style={iconContainerStyle}>
+            <View style={iconStyle}>{renderIcon()}</View>
+          </Animated.View>
+        </MaskedView>
 
-      <MaskedView
-        style={styles.root}
-        maskElement={<Animated.View style={labelMaskStyle} />}
-      >
-        <Animated.View style={labelContainerStyle}>
-          <Text
-            numberOfLines={1}
-            style={labelStyle}
-            onLayout={handleLabelLayout}
-          >
-            {label}
-          </Text>
-        </Animated.View>
-      </MaskedView>
+        <MaskedView
+          style={styles.root}
+          maskElement={<Animated.View style={labelMaskStyle} />}
+        >
+          <Animated.View style={labelContainerStyle}>
+            <Text
+              numberOfLines={1}
+              style={labelStyle}
+              onLayout={handleLabelLayout}
+            >
+              {label}
+            </Text>
+          </Animated.View>
+        </MaskedView>
 
-      {indicatorVisibility && <Animated.View style={indicatorStyle} />}
-
-      <AnimatedRawButton
-        style={{ width: containerWidth, height: containerHeight }}
-        {...gestureHandler(state)}
-      />
-    </Animated.View>
+        {indicatorVisibility && <Animated.View style={indicatorStyle} />}
+      </Animated.View>
+    </TapGestureHandler>
   );
 };
 
