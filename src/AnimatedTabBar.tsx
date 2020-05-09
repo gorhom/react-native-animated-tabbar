@@ -87,6 +87,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
     }
   }, [props, isReactNavigation5]);
   const selectedIndex = useValue(0);
+
   //#region callbacks
   const getRouteTitle = useCallback(
     (route: Route<string>) => {

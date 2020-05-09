@@ -1,8 +1,9 @@
 import React, { useMemo, memo } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
 import MaskedView from '@react-native-community/masked-view';
+import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
 import { State, TapGestureHandler } from 'react-native-gesture-handler';
 import {
   useValues,
@@ -16,13 +17,23 @@ import isEqual from 'lodash.isequal';
 import { withTransition } from '../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
-  DEFAULT_INDICATOR_VISIBLITY,
+  DEFAULT_INDICATOR_VISIBILITY,
   DEFAULT_INDICATOR_SIZE,
   DEFAULT_INDICATOR_COLOR,
 } from '../constants';
 import { TabBarItemProps } from '../../types';
 import { FlashyTabConfig } from '../types';
 import { styles } from './styles';
+
+const AnimatedSvg = Animated.createAnimatedComponent(
+  Svg
+) as React.ComponentClass<Animated.AnimateProps<ViewStyle, SvgProps>, any>;
+const AnimatedCircle = Animated.createAnimatedComponent(
+  Circle
+) as React.ComponentClass<
+  Animated.AnimateProps<ViewStyle, CircleProps & { style?: any }>,
+  any
+>;
 
 const {
   interpolate,
@@ -90,7 +101,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   };
   const { indicatorVisibility, indicatorColor, indicatorSize } = useMemo(() => {
     return {
-      indicatorVisibility: _indicatorVisible ?? DEFAULT_INDICATOR_VISIBLITY,
+      indicatorVisibility: _indicatorVisible ?? DEFAULT_INDICATOR_VISIBILITY,
       indicatorColor:
         _indicatorColor ?? labelStyleOverride.color ?? DEFAULT_INDICATOR_COLOR,
       indicatorSize: _indicatorSize ?? DEFAULT_INDICATOR_SIZE,
@@ -206,32 +217,11 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
     },
   ];
   // indicator
-  const indicatorStyle = [
-    styles.indicator,
-    {
-      width: indicatorSize,
-      height: indicatorSize,
-      borderRadius: indicatorSize,
-      backgroundColor: indicatorColor,
-      left: divide(containerWidth, 2),
-      top: sub(containerHeight, itemInnerVerticalSpace / 2),
-      transform: transformOrigin(
-        {
-          x: 0,
-          y: 0,
-        },
-        {
-          translateX: -(indicatorSize / 2),
-          translateY: -(indicatorSize / 2),
-          scale: interpolate(animatedFocus, {
-            inputRange: [0.5, 1],
-            outputRange: [0, 1],
-            extrapolate: Extrapolate.CLAMP,
-          }),
-        }
-      ) as Animated.AnimatedTransform,
-    },
-  ];
+  const animatedIndicatorSize = interpolate(animatedFocus, {
+    inputRange: [0.5, 1],
+    outputRange: [0, indicatorSize / 2],
+    extrapolate: Extrapolate.CLAMP,
+  });
   //#endregion
 
   // effects
@@ -300,8 +290,26 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
             </Text>
           </Animated.View>
         </MaskedView>
-
-        {indicatorVisibility && <Animated.View style={indicatorStyle} />}
+        {indicatorVisibility && (
+          <AnimatedSvg
+            style={[
+              styles.root,
+              {
+                left: sub(divide(containerWidth, 2), indicatorSize / 2),
+                top: sub(containerHeight, itemInnerVerticalSpace / 2),
+              },
+            ]}
+            width={indicatorSize}
+            height={indicatorSize}
+          >
+            <AnimatedCircle
+              r={animatedIndicatorSize}
+              translateY={indicatorSize / 2}
+              translateX={indicatorSize / 2}
+              fill={indicatorColor}
+            />
+          </AnimatedSvg>
+        )}
       </Animated.View>
     </TapGestureHandler>
   );
