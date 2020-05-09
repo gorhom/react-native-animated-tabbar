@@ -7,16 +7,17 @@ import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
 import { State, TapGestureHandler } from 'react-native-gesture-handler';
 import {
   useValues,
-  withTransition,
   onGestureEvent,
   transformOrigin,
   toRad,
+  useValue,
 } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
+import { withTransition } from '../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
-  DEFAULT_INDICATOR_VISIBLITY,
+  DEFAULT_INDICATOR_VISIBILITY,
   DEFAULT_INDICATOR_SIZE,
   DEFAULT_INDICATOR_COLOR,
 } from '../constants';
@@ -42,6 +43,7 @@ const {
   cond,
   eq,
   divide,
+  onChange,
   multiply,
   Extrapolate,
 } = Animated;
@@ -99,7 +101,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   };
   const { indicatorVisibility, indicatorColor, indicatorSize } = useMemo(() => {
     return {
-      indicatorVisibility: _indicatorVisible ?? DEFAULT_INDICATOR_VISIBLITY,
+      indicatorVisibility: _indicatorVisible ?? DEFAULT_INDICATOR_VISIBILITY,
       indicatorColor:
         _indicatorColor ?? labelStyleOverride.color ?? DEFAULT_INDICATOR_COLOR,
       indicatorSize: _indicatorSize ?? DEFAULT_INDICATOR_SIZE,
@@ -107,8 +109,10 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   }, [_indicatorVisible, _indicatorColor, _indicatorSize, labelStyleOverride]);
 
   // animations
-  const [state] = useValues([State.UNDETERMINED]);
-  const animatedFocus = withTransition(cond(eq(selectedIndex, index), 1, 0), {
+  const gestureState = useValue(State.UNDETERMINED);
+  const animatedFocus = withTransition({
+    index,
+    selectedIndex,
     duration,
     easing,
   });
@@ -222,12 +226,13 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
 
   // effects
   useCode(
-    () =>
-      cond(eq(state, State.END), [
-        set(selectedIndex, index),
-        set(state, State.UNDETERMINED),
-      ]),
-    [selectedIndex, state, index]
+    () => [
+      onChange(
+        gestureState,
+        cond(eq(gestureState, State.END), set(selectedIndex, index))
+      ),
+    ],
+    [gestureState, index]
   );
 
   // callbacks
@@ -260,7 +265,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   };
 
   return (
-    <TapGestureHandler {...gestureHandler(state)}>
+    <TapGestureHandler {...gestureHandler(gestureState)}>
       <Animated.View onLayout={handleCotnainerlayout} style={containerStyle}>
         <MaskedView
           style={styles.root}

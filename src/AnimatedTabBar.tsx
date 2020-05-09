@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useCallback } from 'react';
-import Animated, { useCode, onChange, call } from 'react-native-reanimated';
-import { useValues } from 'react-native-redash';
+import Animated from 'react-native-reanimated';
+import { useValue } from 'react-native-redash';
 import { CommonActions, Route } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import Presets, { PresetEnum } from './presets';
@@ -11,6 +11,7 @@ import {
   TabBarAnimationConfigurableProps,
 } from './types';
 
+const { onChange, useCode, call } = Animated;
 /**
  * @DEV
  * this is needed for react-native-svg to animate on the native thread.
@@ -85,7 +86,8 @@ export function AnimatedTabBar<T extends PresetEnum>(
       };
     }
   }, [props, isReactNavigation5]);
-  const [selectedIndex] = useValues([0]);
+  const selectedIndex = useValue(0);
+
   //#region callbacks
   const getRouteTitle = useCallback(
     (route: Route<string>) => {
@@ -169,7 +171,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
           handleSelectedIndexChange(args[0]);
         })
       ),
-    [selectedIndex]
+    []
   );
   //#endregion
 

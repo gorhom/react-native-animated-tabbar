@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { MainTabsParams } from './types';
 
 const DummyScreen = () => {
-  const { name, params } = useRoute();
+  const { name, params } = useRoute<RouteProp<MainTabsParams, 'Home'>>();
   const containerStyle = useMemo(
     () => [
       styles.container,
