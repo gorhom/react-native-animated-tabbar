@@ -9,10 +9,11 @@ import HomeSVG from '../svg/HomeSVG';
 import LikeSVG from '../svg/LikeSVG';
 import SearchSVG from '../svg/SearchSVG';
 import ProfileSVG from '../svg/ProfileSVG';
+import { MainTabsParams } from './types';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<MainTabsParams>();
 
-const tabs: TabsConfig<FlashyTabConfig> = {
+const tabs: TabsConfig<FlashyTabConfig, MainTabsParams> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
