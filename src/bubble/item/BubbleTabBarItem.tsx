@@ -91,7 +91,7 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
       itemOuterHorizontalSpace: _itemOuterHorizontalSpace,
     };
   }, [itemInnerSpace, itemOuterSpace]);
-  const [labelWidth] = useValues([0], []);
+  const [labelWidth] = useValues([0]);
 
   /**
    * @DEV
@@ -110,7 +110,7 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   const maxWidth = add(labelWidth, itemInnerHorizontalSpace, minWidth);
 
   // animations
-  const [state] = useValues([State.UNDETERMINED], [index]);
+  const [state] = useValues([State.UNDETERMINED]);
   const animatedFocus = withTransition(cond(eq(selectedIndex, index), 1, 0), {
     duration,
     easing,
