@@ -1,6 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, { TabsConfigsType } from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {
+  TabsConfig,
+  BubbleTabConfig,
+} from '@gorhom/animated-tabbar';
 import DummyScreen from './Dummy';
 import HomeSVG from '../svg/HomeSVG';
 import LikeSVG from '../svg/LikeSVG';
@@ -9,7 +12,7 @@ import ProfileSVG from '../svg/ProfileSVG';
 
 const Tab = createBottomTabNavigator();
 
-const tabs: TabsConfigsType = {
+const tabs: TabsConfig<BubbleTabConfig> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -71,7 +74,9 @@ const tabs: TabsConfigsType = {
 const BubbleScreen = () => {
   return (
     <Tab.Navigator
-      tabBar={props => <AnimatedTabBar duration={500} tabs={tabs} {...props} />}
+      tabBar={props => (
+        <AnimatedTabBar iconSize={20} duration={750} tabs={tabs} {...props} />
+      )}
     >
       <Tab.Screen
         name="Home"

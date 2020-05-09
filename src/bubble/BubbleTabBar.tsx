@@ -4,7 +4,6 @@ import { useSafeArea } from 'react-native-safe-area-context';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import BubbleTabBarItem from './item';
-import { TabBarViewProps } from '../types';
 import {
   DEFAULT_ITEM_ANIMATION_DURATION,
   DEFAULT_ITEM_ANIMATION_EASING,
@@ -13,6 +12,8 @@ import {
   DEFAULT_ITEM_ICON_SIZE,
   DEFAULT_ITEM_LAYOUT_DIRECTION,
 } from './constants';
+import { TabBarViewProps } from '../types';
+import { BubbleTabConfig } from './types';
 import { styles } from './styles';
 
 const BubbleTabBarComponent = ({
@@ -25,7 +26,7 @@ const BubbleTabBarComponent = ({
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
-}: TabBarViewProps) => {
+}: TabBarViewProps<BubbleTabConfig>) => {
   //#region Hooks
   const safeArea = useSafeArea();
   //#endregion

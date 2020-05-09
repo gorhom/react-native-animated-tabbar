@@ -1,9 +1,14 @@
 import * as React from 'react';
 import Animated from 'react-native-reanimated';
-import Svg, { Path } from 'react-native-svg';
+import Svg, { Path, PathProps } from 'react-native-svg';
 import { SVGProps } from './types';
 
-const AnimatedPath = Animated.createAnimatedComponent(Path);
+const AnimatedPath = (Animated.createAnimatedComponent(
+  Path
+) as any) as React.ComponentClass<
+  Animated.AnimateProps<{}, PathProps & { style?: any }>
+>;
+
 Animated.addWhitelistedNativeProps({
   stroke: true,
 });

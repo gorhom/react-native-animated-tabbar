@@ -1,6 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, { TabsConfigsType } from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {
+  TabsConfig,
+  BubbleTabConfig,
+} from '@gorhom/animated-tabbar';
 import DummyScreen from './Dummy';
 import HomeSVG from '../svg/HomeSVG';
 import LikeSVG from '../svg/LikeSVG';
@@ -9,7 +12,7 @@ import ProfileSVG from '../svg/ProfileSVG';
 
 const Tab = createBottomTabNavigator();
 
-const tabs: TabsConfigsType = {
+const tabs: TabsConfig<BubbleTabConfig> = {
   Home: {
     labelStyle: {
       color: 'white',
@@ -92,6 +95,7 @@ const BubbleRTLScreen = () => {
           tabBarLabel: 'الرئيسية',
         }}
         initialParams={{
+          name: 'الرئيسية',
           backgroundColor: '#000',
         }}
         component={DummyScreen}
@@ -102,6 +106,7 @@ const BubbleRTLScreen = () => {
           tabBarLabel: 'אהבתי',
         }}
         initialParams={{
+          name: 'אהבתי',
           backgroundColor: '#000',
         }}
         component={DummyScreen}
@@ -112,6 +117,7 @@ const BubbleRTLScreen = () => {
           tabBarLabel: 'ይፈልጉ',
         }}
         initialParams={{
+          name: 'ይፈልጉ',
           backgroundColor: '#000',
         }}
         component={DummyScreen}
@@ -122,6 +128,7 @@ const BubbleRTLScreen = () => {
           tabBarLabel: 'مشخصات',
         }}
         initialParams={{
+          name: 'مشخصات',
           backgroundColor: '#000',
         }}
         component={DummyScreen}

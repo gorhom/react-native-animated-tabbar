@@ -12,9 +12,11 @@ const DummyScreen = () => {
     ],
     [params]
   );
+  // @ts-ignore
+  const screeName = useMemo(() => params?.name || name, [params, name]);
   return (
     <View style={containerStyle}>
-      <Text style={styles.text}>{name}</Text>
+      <Text style={styles.text}>{screeName}</Text>
     </View>
   );
 };

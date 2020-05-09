@@ -15,11 +15,13 @@ A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a v
 
 1. [Installation](#installation)
 2. [Usage](#usage)
+   1. [Animated Icons](./docs/animated-icons.md)
 3. [Props](#props)
 4. [Presets](#presets)
-   1. [Bubble Preset](#bubble-preset)
+   1. [Bubble Preset](./docs/bubble-preset.md)
+   2. [Flashy Preset](./docs/flashy-preset.md)
 5. [To Do](#to-do)
-6. [Credits](#built-with-❤️)
+6. [Credits](#built-with)
 7. [License](#license)
 
 ## Installation
@@ -41,9 +43,9 @@ npm install @gorhom/animated-tabbar
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, {TabsConfigsType} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
 
-const tabs: TabsConfigsType = {
+const tabs: TabsConfig<BubbleTabConfig> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -109,9 +111,9 @@ import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import AnimatedTabBar, {TabsConfigsType} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
 
-const tabs: TabsConfigsType = {
+const tabs: TabsConfig<BubbleTabConfig> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -163,86 +165,46 @@ export default () => (
 
 </details>
 
-### Animated Icon
-
-In order to animate the tab icon color, you will need to use the provded prop `color` that will be provided to the icon.
-
-This example below should explain it better:
-
-```tsx
-import React from 'react';
-import Animated from 'react-native-reanimated';
-import Svg, { Path } from 'react-native-svg';
-
-const AnimatedPath = Animated.createAnimatedComponent(Path);
-
-interface AnimatedSVGProps {
-  color: Animated.Node<string>;
-  size: number;
-}
-
-const AnimatedSVG = ({ color, size }: AnimatedSVGProps) => {
-  return (
-    <Svg width={size} height={size} viewBox="0 0 20 22">
-      <AnimatedPath
-        d="M1 8l9-7 9 7v11a2 2 0 01-2 2H3a2 2 0 01-2-2V8z"
-        stroke={color}
-        strokeWidth={2}
-        fill="none"
-        fillRule="evenodd"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Svg>
-  );
-};
-
-export default AnimatedSVG;
-```
+> To configure animated icons, please have a look at [Animated Icons](./docs/animated-icons.md).
 
 ## Props
 
-| name           | required | default                          | description                                                                 |
-| -------------- | -------- | -------------------------------- | --------------------------------------------------------------------------- |
-| ⭐️ preset     | NO       | 'bubble'                         | Animation preset. `NEW ANIMATIONS COMING SOON 🎉`.                          |
-| duration       | NO       | 500                              | Duration for the tabs animation.                                            |
-| easing         | NO       | Easing.out(Easing.exp)           | `Reanimated Easing` function to be use for the tabs animation.              |
-| tabs           | YES      |                                  | A dictionary for all tabs configurations, check `TabConfigsType` interface. |
-| style          | NO       | { backgroundColor: 'white' }     | ViewStyle to be applied to the bottom bar container.                        |
-| itemInnerSpace | NO       | { vertical: 12, horizontal: 12 } | Inner space to be added to the item.                                        |
-| itemOuterSpace | NO       | { vertical: 12, horizontal: 12 } | Outer space to be added to the item.                                        |
-| iconSize       | NO       | 24                               | Tab icon size.                                                              |
-| isRTL       | NO       | false                               | Tab bar layout direction.                                                              |
+| name     | description                                                                                    | required | type                                 | default  |
+| -------- | ---------------------------------------------------------------------------------------------- | -------- | ------------------------------------ | -------- |
+| `preset` | Animation preset, currently options are `['bubble', 'flashy']`.                                | NO       | [`PresetEnum`](./src/presets.ts#L15) | 'bubble' |
+| `tabs`   | Tabs configurations. A generic dictionary of selected preset tab config.                       | YES      | [`TabsConfig<T>`](./src/types.ts#L4) |          |
+| `style`  | View style to be applied to tab bar container, default value will be based on selected preset. | NO       |                                      |          |
 
-### TabConfigsType
+### [TabBarAnimationConfigurableProps](./src/types.ts#L8)
 
-| name            | required | default | description                                                                        |
-| --------------- | -------- | ------- | ---------------------------------------------------------------------------------- |
-| icon            | YES      |         |                                                                                    |
-| ├ component     | YES      |         | Component to be render as tab icon, it will recevie an animated node prop `color`. |
-| ├ activeColor   | YES      |         | Color to be animated to when tab is active.                                        |
-| └ inactiveColor | YES      |         | Color to be animated to when tab is inactive.                                      |
-| labelStyle      | NO       |         | TextStyle to override tab label style.                                             |
-| background      | YES      |         |                                                                                    |
-| ├ activeColor   | YES      |         | Color to be animated to when tab is active.                                        |
-| └ inactiveColor | YES      |         | Color to be animated to when tab is inactive.                                      |
+| name       | description                                                                   | required | type                                                                                                      | default                |
+| ---------- | ----------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `duration` | Animation duration, default value will be based on selected preset.           | NO       | number                                                                                                    | 500                    |
+| `easing`   | `Reanimated` easing function, default value will be based on selected preset. | NO       | [`EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) | Easing.out(Easing.exp) |
+
+### [TabBarItemConfigurableProps](./src/types.ts#L26)
+
+| name             | description                                                                       | required | type                                    | default |
+| ---------------- | --------------------------------------------------------------------------------- | -------- | --------------------------------------- | ------- |
+| `itemInnerSpace` | Inner space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `itemOuterSpace` | Outer space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `iconSize`       | Tab item icon size.                                                               | NO       | number                                  | 24      |
+| `isRTL`          | Tab bar layout and animation direction.                                           | NO       | boolean                                 | false   |
 
 ## Presets
 
 Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets.
 
-### Bubble Preset
-
-This preset is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
-
-![Bubble Preview](/docs/previews/bubble.gif)
+<table>
+      <tr><td><a href="./docs/bubble-preset.md">Bubble Preset</a></td><td><a href="./docs/flashy-preset.md">Flashy Preset</a></td></tr>
+      <tr><td><a href="./docs/bubble-preset.md"><img src="./docs/previews/bubble.gif" /></a></td><td><a href="./docs/flashy-preset.md"><img src="./docs/previews/flashy.gif" /></a></td></tr>
+</table>
 
 ## To Do
 
 - [ ] Add accessibility support.
-- [ ] Add more examples.
 
-## Built With ❤️
+<h2 id="built-with">Built With ❤️</h2>
 
 - [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated)
 - [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler)
@@ -258,6 +220,14 @@ This preset is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalo
 ## License
 
 MIT
+
+<div align="center">
+
+Liked the library? 😇
+
+<a href="https://www.buymeacoffee.com/gorhom" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-red.png" alt="Buy Me A Coffee" height="50" ></a>
+
+</div>
 
 ---
 

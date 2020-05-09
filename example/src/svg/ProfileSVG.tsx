@@ -1,17 +1,26 @@
 import * as React from 'react';
 import Animated from 'react-native-reanimated';
-import Svg, { G, Path, Circle } from 'react-native-svg';
+import Svg, { G, Path, Circle, PathProps, CircleProps } from 'react-native-svg';
 import { SVGProps } from './types';
 
-const AnimatedPath = Animated.createAnimatedComponent(Path);
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+const AnimatedPath = (Animated.createAnimatedComponent(
+  Path
+) as any) as React.ComponentClass<
+  Animated.AnimateProps<{}, PathProps & { style?: any }>
+>;
+const AnimatedCircle = (Animated.createAnimatedComponent(
+  Circle
+) as any) as React.ComponentClass<
+  Animated.AnimateProps<{}, CircleProps & { style?: any }>
+>;
+
 Animated.addWhitelistedNativeProps({
   stroke: true,
 });
 
 const ProfileSVG = ({ color, size }: SVGProps) => {
   return (
-    <Svg width={size} height={size} viewBox="0 0 18 20">
+    <Svg width={size} height={size} viewBox="0 0 24 21">
       <G
         transform="translate(1 1)"
         strokeWidth={2}

@@ -3,37 +3,44 @@ import Animated, { useCode, onChange, call } from 'react-native-reanimated';
 import { useValues } from 'react-native-redash';
 import { CommonActions, Route } from '@react-navigation/native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import Presets from './presets';
+import Presets, { PresetEnum } from './presets';
 import {
-  TabsConfigsType,
+  TabsConfig,
   TabBarViewProps,
   TabBarItemConfigurableProps,
   TabBarAnimationConfigurableProps,
 } from './types';
 
+/**
+ * @DEV
+ * this is needed for react-native-svg to animate on the native thread.
+ * @external (https://github.com/software-mansion/react-native-reanimated/issues/537)
+ */
 Animated.addWhitelistedNativeProps({
   width: true,
   stroke: true,
   backgroundColor: true,
 });
 
-interface AnimatedTabBarProps
+interface AnimatedTabBarProps<T extends PresetEnum>
   extends Pick<BottomTabBarProps, 'state' | 'navigation' | 'descriptors'>,
-    Pick<TabBarViewProps, 'style'>,
+    Pick<TabBarViewProps<{}>, 'style'>,
     TabBarItemConfigurableProps,
     TabBarAnimationConfigurableProps {
   /**
    * Tabs configurations.
    */
-  tabs: TabsConfigsType;
+  tabs: TabsConfig<typeof Presets[T]['$t']>;
 
   /**
    * Animation preset.
    */
-  preset?: 'bubble';
+  preset?: T;
 }
 
-export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
+export function AnimatedTabBar<T extends PresetEnum>(
+  props: AnimatedTabBarProps<T>
+) {
   // props
   const {
     navigation,
@@ -79,7 +86,6 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
     }
   }, [props, isReactNavigation5]);
   const [selectedIndex] = useValues([0], []);
-
   //#region callbacks
   const getRouteTitle = useCallback(
     (route: Route<string>) => {
@@ -109,7 +115,7 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
     [isReactNavigation5, tabs]
   );
 
-  const getRoutes = useCallback(() => {
+  const routesWithTabConfig = useMemo(() => {
     return routes.map(route => ({
       title: getRouteTitle(route),
       key: route.key,
@@ -167,14 +173,15 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
   );
   //#endregion
 
-  const PresetComponent = Presets[preset];
+  const PresetComponent = Presets[preset].component;
 
   // render
   return (
     <PresetComponent
       style={style}
       selectedIndex={selectedIndex}
-      routes={getRoutes()}
+      // @ts-ignore
+      routes={routesWithTabConfig}
       itemInnerSpace={itemInnerSpace}
       itemOuterSpace={itemOuterSpace}
       iconSize={iconSize}
@@ -183,4 +190,4 @@ export const AnimatedTabBar = (props: AnimatedTabBarProps) => {
       isRTL={isRTL}
     />
   );
-};
+}
