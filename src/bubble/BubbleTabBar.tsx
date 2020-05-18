@@ -18,7 +18,7 @@ import { styles } from './styles';
 
 const BubbleTabBarComponent = ({
   selectedIndex,
-  routes,
+  tabs,
   duration = DEFAULT_ITEM_ANIMATION_DURATION,
   easing = DEFAULT_ITEM_ANIMATION_EASING,
   itemInnerSpace = DEFAULT_ITEM_INNER_SPACE,
@@ -46,7 +46,7 @@ const BubbleTabBarComponent = ({
   //#endregion
   return (
     <View style={containerStyle}>
-      {routes.map(({ key, title, ...configs }, index) => {
+      {tabs.map(({ key, title, ...configs }, index) => {
         return (
           <BubbleTabBarItem
             key={key}
