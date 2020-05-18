@@ -1,6 +1,5 @@
 import React, { useMemo, memo } from 'react';
 import { View, ViewStyle, StyleProp } from 'react-native';
-import { useSafeArea } from 'react-native-safe-area-context';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import BubbleTabBarItem from './item';
@@ -27,10 +26,6 @@ const BubbleTabBarComponent = ({
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
 }: TabBarViewProps<BubbleTabConfig>) => {
-  //#region Hooks
-  const safeArea = useSafeArea();
-  //#endregion
-
   //#region Styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [
@@ -38,10 +33,9 @@ const BubbleTabBarComponent = ({
       containerStyleOverride,
       {
         flexDirection: isRTL ? 'row-reverse' : 'row',
-        paddingBottom: safeArea.bottom,
       },
     ],
-    [safeArea, containerStyleOverride, isRTL]
+    [containerStyleOverride, isRTL]
   );
   //#endregion
   return (
