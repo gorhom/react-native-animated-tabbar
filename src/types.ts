@@ -46,7 +46,7 @@ export interface TabBarItemConfigurableProps {
   isRTL?: boolean;
 }
 
-export interface TabRoute {
+export interface TabInfo {
   title: string;
   key: string;
 }
@@ -59,9 +59,9 @@ export interface TabBarViewProps<T>
    */
   selectedIndex: Animated.Value<number>;
   /**
-   * Mapped routes with tab configs to be presented.
+   * Tabs configs.
    */
-  routes: Array<TabRoute & T>;
+  tabs: Array<TabInfo & T>;
   /**
    * Root container style.
    */

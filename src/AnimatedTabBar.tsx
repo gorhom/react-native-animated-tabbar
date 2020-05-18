@@ -183,7 +183,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
       style={style}
       selectedIndex={selectedIndex}
       // @ts-ignore
-      routes={routesWithTabConfig}
+      tabs={routesWithTabConfig}
       itemInnerSpace={itemInnerSpace}
       itemOuterSpace={itemOuterSpace}
       iconSize={iconSize}
