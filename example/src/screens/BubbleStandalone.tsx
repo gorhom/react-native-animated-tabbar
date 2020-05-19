@@ -94,6 +94,7 @@ const BubbleStandaloneScreen = () => {
           vertical: 12,
         }}
         itemInnerSpace={12}
+        iconSize={20}
         style={styles.tabBarContainer}
         index={index}
         onIndexChange={setIndex}
