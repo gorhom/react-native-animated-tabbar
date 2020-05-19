@@ -307,5 +307,5 @@ Liked the library? 😇
 ---
 
 <p align="center">
-<a href="https://twitter.com/gorhom"><img src="./logo.png"></a>
+<a href="https://gorhom.dev" target="_blank"><img alt="Mo Gorhom" src="./logo.png"></a>
 </p>
