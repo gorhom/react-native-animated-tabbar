@@ -5,7 +5,7 @@
 
 <img src="./preview.gif">
 
-A **60fps** animated tab bar to be used with `React Navigation v4 & v5` with a variety of cool animation presets 😎.
+A **60FPS** animated tab bar with a variety of cool animation presets 😎
 
 </div>
 
@@ -36,6 +36,81 @@ npm install @gorhom/animated-tabbar
 
 ## Usage
 
+Originally `Animated TabBar` worked only with `React Navigation`, but I notice that it could be use as a standalone component and be more useful for the community.
+
+<details>
+  <summary>Standalone Component</summary>
+
+```tsx
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
+
+const tabs: TabsConfig<BubbleTabConfig> = {
+  Home: {
+    labelStyle: {
+      color: '#5B37B7',
+    },
+    icon: {
+      component: /* ICON COMPONENT */,
+      activeColor: 'rgba(91,55,183,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(223,215,243,1)',
+      inactiveColor: 'rgba(223,215,243,0)',
+    },
+  },
+  Profile: {
+    labelStyle: {
+      color: '#1194AA',
+    },
+    icon: {
+      component: /* ICON COMPONENT */,
+      activeColor: 'rgba(17,148,170,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(207,235,239,1)',
+      inactiveColor: 'rgba(207,235,239,0)',
+    },
+  },
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tabBarContainer: {
+    borderRadius: 25,
+  },
+});
+
+export default function App() {
+  const [index, setIndex] = useState(0);
+  return (
+    <View style={styles.container}>
+      <Text>{index}</Text>
+      <AnimatedTabBarView
+        tabs={tabs}
+        itemOuterSpace={{
+          horizontal: 6,
+          vertical: 12,
+        }}
+        itemInnerSpace={12}
+        iconSize={20}
+        style={styles.tabBarContainer}
+        index={index}
+        onIndexChange={setIndex}
+      />
+    </View>
+  )
+}
+```
+
+</details>
 <details>
   <summary>React Navigation v5</summary>
 
@@ -184,12 +259,13 @@ export default () => (
 
 ### [TabBarItemConfigurableProps](./src/types.ts#L26)
 
-| name             | description                                                                       | required | type                                    | default |
-| ---------------- | --------------------------------------------------------------------------------- | -------- | --------------------------------------- | ------- |
-| `itemInnerSpace` | Inner space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
-| `itemOuterSpace` | Outer space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
-| `iconSize`       | Tab item icon size.                                                               | NO       | number                                  | 24      |
-| `isRTL`          | Tab bar layout and animation direction.                                           | NO       | boolean                                 | false   |
+| name                 | description                                                                       | required | type                                    | default |
+| -------------------- | --------------------------------------------------------------------------------- | -------- | --------------------------------------- | ------- |
+| `itemInnerSpace`     | Inner space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `itemOuterSpace`     | Outer space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
+| `itemContainerWidth` | Tab Item width stretch strategy, this may not be applied on some presets.         | NO       | 'auto' \| 'fill'                        | 'auto'  |
+| `iconSize`           | Tab item icon size.                                                               | NO       | number                                  | 24      |
+| `isRTL`              | Tab bar layout and animation direction.                                           | NO       | boolean                                 | false   |
 
 ## Presets
 
@@ -210,12 +286,11 @@ Originally `Animated TabBar` started with `Bubble` as the only animation preset 
 - [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler)
 - [react-native-redash](https://github.com/wcandillon/react-native-redash)
 - [react-native-svg](https://github.com/react-native-community/react-native-svg)
-- [react-navigation](https://github.com/react-navigation/react-navigation)
 - [@react-native-community/bob](https://github.com/react-native-community/bob)
 
 ## Author
 
-- [Mo Gorhom](https://twitter.com/gorhom)
+- [Mo Gorhom](https://gorhom.dev/)
 
 ## License
 

@@ -66,7 +66,7 @@ const RootScreen = () => {
       version={version}
       author={{
         username: '@gorhom',
-        url: 'https://twitter.com/gorhom',
+        url: 'https://gorhom.dev',
       }}
       data={examples}
       handleOnPress={handleOnExamplePress}
