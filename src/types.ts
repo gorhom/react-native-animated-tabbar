@@ -19,8 +19,8 @@ export interface TabBarAnimationConfigurableProps {
 }
 
 interface Space {
-  vertical: number;
-  horizontal: number;
+  vertical?: number;
+  horizontal?: number;
 }
 
 export interface TabBarItemConfigurableProps {
