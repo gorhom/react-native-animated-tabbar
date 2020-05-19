@@ -59,18 +59,18 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
       _itemInnerHorizontalSpace = itemInnerSpace;
     } else {
       _itemInnerVerticalSpace =
-        itemInnerSpace?.vertical || DEFAULT_ITEM_INNER_SPACE;
+        itemInnerSpace?.vertical ?? DEFAULT_ITEM_INNER_SPACE;
       _itemInnerHorizontalSpace =
-        itemInnerSpace?.horizontal || DEFAULT_ITEM_INNER_SPACE;
+        itemInnerSpace?.horizontal ?? DEFAULT_ITEM_INNER_SPACE;
     }
     if (typeof itemOuterSpace === 'number') {
       _itemOuterVerticalSpace = itemOuterSpace;
       _itemOuterHorizontalSpace = itemOuterSpace;
     } else {
       _itemOuterVerticalSpace =
-        itemOuterSpace?.vertical || DEFAULT_ITEM_OUTER_SPACE;
+        itemOuterSpace?.vertical ?? DEFAULT_ITEM_OUTER_SPACE;
       _itemOuterHorizontalSpace =
-        itemOuterSpace?.horizontal || DEFAULT_ITEM_OUTER_SPACE;
+        itemOuterSpace?.horizontal ?? DEFAULT_ITEM_OUTER_SPACE;
     }
     return {
       itemInnerVerticalSpace: _itemInnerVerticalSpace,
