@@ -4,19 +4,21 @@ export const styles = StyleSheet.create({
   root: {
     ...StyleSheet.absoluteFillObject,
   },
-  container: {
+  outerContainer: {
     overflow: 'hidden',
-    flex: 1,
   },
+  container: {},
   iconContainer: {
-    ...StyleSheet.absoluteFillObject,
-    alignItems: 'center',
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '50%',
     justifyContent: 'center',
   },
   icon: {},
   labelContainer: {
-    ...StyleSheet.absoluteFillObject,
-    alignItems: 'center',
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '50%',
     justifyContent: 'center',
   },
   label: {
