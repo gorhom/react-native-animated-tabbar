@@ -26,17 +26,22 @@ interface Space {
 export interface TabBarItemConfigurableProps {
   /**
    * Item padding space.
-   * @default 12
+   * @default PresetConstants
    */
   itemInnerSpace?: number | Space;
   /**
    * Item margin space.
-   * @default 12
+   * @default PresetConstants
    */
   itemOuterSpace?: number | Space;
   /**
+   * Item container width.
+   * @default PresetConstants
+   */
+  itemContainerWidth?: 'auto' | 'fill';
+  /**
    * Icon size.
-   * @default 24
+   * @default PresetConstants
    */
   iconSize?: number;
   /**

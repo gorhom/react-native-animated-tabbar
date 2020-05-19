@@ -59,6 +59,7 @@ export function AnimatedTabBarView<T extends PresetEnum>(
     style,
     itemInnerSpace,
     itemOuterSpace,
+    itemContainerWidth,
     iconSize,
     duration,
     easing,
@@ -128,6 +129,7 @@ export function AnimatedTabBarView<T extends PresetEnum>(
       tabs={tabs}
       itemInnerSpace={itemInnerSpace}
       itemOuterSpace={itemOuterSpace}
+      itemContainerWidth={itemContainerWidth}
       iconSize={iconSize}
       duration={duration}
       easing={easing}

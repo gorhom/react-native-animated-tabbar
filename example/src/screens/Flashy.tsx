@@ -56,12 +56,7 @@ const FlashyScreen = () => {
   return (
     <Tab.Navigator
       tabBar={props => (
-        <AnimatedTabBar
-          preset="flashy"
-          duration={1000}
-          tabs={tabs}
-          {...props}
-        />
+        <AnimatedTabBar preset="flashy" tabs={tabs} {...props} />
       )}
     >
       <Tab.Screen

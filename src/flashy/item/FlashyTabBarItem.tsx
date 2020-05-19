@@ -68,6 +68,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
     easing,
     itemInnerSpace,
     itemOuterSpace,
+    itemContainerWidth,
     iconSize,
     indicator,
     isRTL,
@@ -154,6 +155,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
       paddingHorizontal: itemOuterHorizontalSpace,
       paddingVertical: itemOuterVerticalSpace,
     },
+    itemContainerWidth === 'fill' ? { flex: 1 } : {},
   ];
   const containerStyle = [
     styles.container,

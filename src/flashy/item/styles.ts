@@ -7,7 +7,9 @@ export const styles = StyleSheet.create({
   outerContainer: {
     overflow: 'hidden',
   },
-  container: {},
+  container: {
+    alignSelf: 'center',
+  },
   iconContainer: {
     position: 'absolute',
     alignSelf: 'center',

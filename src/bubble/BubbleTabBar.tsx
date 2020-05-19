@@ -10,6 +10,7 @@ import {
   DEFAULT_ITEM_OUTER_SPACE,
   DEFAULT_ITEM_ICON_SIZE,
   DEFAULT_ITEM_LAYOUT_DIRECTION,
+  DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
 import { TabBarViewProps } from '../types';
 import { BubbleTabConfig } from './types';
@@ -22,6 +23,7 @@ const BubbleTabBarComponent = ({
   easing = DEFAULT_ITEM_ANIMATION_EASING,
   itemInnerSpace = DEFAULT_ITEM_INNER_SPACE,
   itemOuterSpace = DEFAULT_ITEM_OUTER_SPACE,
+  itemContainerWidth = DEFAULT_ITEM_CONTAINER_WIDTH,
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
@@ -51,6 +53,7 @@ const BubbleTabBarComponent = ({
             easing={easing}
             itemInnerSpace={itemInnerSpace}
             itemOuterSpace={itemOuterSpace}
+            itemContainerWidth={itemContainerWidth}
             iconSize={iconSize}
             isRTL={isRTL}
             {...configs}

@@ -71,6 +71,7 @@ const FlashyStandaloneScreen = () => {
         tabs={tabs}
         itemOuterSpace={6}
         itemInnerSpace={12}
+        itemContainerWidth="auto"
         style={styles.tabBarContainer}
         index={index}
         onIndexChange={setIndex}
