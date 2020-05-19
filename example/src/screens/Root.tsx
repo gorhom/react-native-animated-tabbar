@@ -19,6 +19,10 @@ const examples = [
         name: 'RTL',
         slug: 'BubbleRTL',
       },
+      {
+        name: 'Standalone',
+        slug: 'BubbleStandalone',
+      },
     ],
   },
   {
@@ -35,6 +39,10 @@ const examples = [
       {
         name: 'RTL',
         slug: 'FlashyRTL',
+      },
+      {
+        name: 'Standalone',
+        slug: 'FlashyStandalone',
       },
     ],
   },
