@@ -20,9 +20,9 @@ Animated.addWhitelistedNativeProps({
 
 const ProfileSVG = ({ color, size }: SVGProps) => {
   return (
-    <Svg width={size} height={size} viewBox="0 0 24 21">
+    <Svg width={size} height={size} viewBox="0 0 24 24">
       <G
-        transform="translate(1 1)"
+        transform="translate(4 3)"
         strokeWidth={2}
         fill="none"
         fillRule="evenodd"

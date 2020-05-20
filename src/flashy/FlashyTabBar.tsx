@@ -1,6 +1,5 @@
 import React, { useMemo, memo } from 'react';
 import { View, StyleProp, ViewStyle } from 'react-native';
-import { useSafeArea } from 'react-native-safe-area-context';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import FlashyTabBarItem from './item';
@@ -8,8 +7,10 @@ import {
   DEFAULT_ITEM_ANIMATION_DURATION,
   DEFAULT_ITEM_ANIMATION_EASING,
   DEFAULT_ITEM_INNER_SPACE,
+  DEFAULT_ITEM_OUTER_SPACE,
   DEFAULT_ITEM_ICON_SIZE,
   DEFAULT_ITEM_LAYOUT_DIRECTION,
+  DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
 import { TabBarViewProps } from '../types';
 import { FlashyTabConfig } from './types';
@@ -21,14 +22,12 @@ const FlashyTabBarComponent = ({
   duration = DEFAULT_ITEM_ANIMATION_DURATION,
   easing = DEFAULT_ITEM_ANIMATION_EASING,
   itemInnerSpace = DEFAULT_ITEM_INNER_SPACE,
+  itemOuterSpace = DEFAULT_ITEM_OUTER_SPACE,
+  itemContainerWidth = DEFAULT_ITEM_CONTAINER_WIDTH,
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
 }: TabBarViewProps<FlashyTabConfig>) => {
-  //#region Hooks
-  const safeArea = useSafeArea();
-  //#endregion
-
   //#region Styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [
@@ -36,10 +35,9 @@ const FlashyTabBarComponent = ({
       containerStyleOverride,
       {
         flexDirection: isRTL ? 'row-reverse' : 'row',
-        paddingBottom: safeArea.bottom,
       },
     ],
-    [safeArea, containerStyleOverride, isRTL]
+    [containerStyleOverride, isRTL]
   );
   //#endregion
   // render
@@ -55,6 +53,8 @@ const FlashyTabBarComponent = ({
             duration={duration}
             easing={easing}
             itemInnerSpace={itemInnerSpace}
+            itemOuterSpace={itemOuterSpace}
+            itemContainerWidth={itemContainerWidth}
             iconSize={iconSize}
             isRTL={isRTL}
             {...configs}

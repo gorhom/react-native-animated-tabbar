@@ -17,6 +17,7 @@ import isEqual from 'lodash.isequal';
 import { withTransition } from '../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
+  DEFAULT_ITEM_OUTER_SPACE,
   DEFAULT_INDICATOR_VISIBILITY,
   DEFAULT_INDICATOR_SIZE,
   DEFAULT_INDICATOR_COLOR,
@@ -36,10 +37,12 @@ const AnimatedCircle = Animated.createAnimatedComponent(
 >;
 
 const {
+  add,
   interpolate,
   useCode,
   sub,
   set,
+  max,
   cond,
   eq,
   divide,
@@ -51,8 +54,7 @@ const {
 const gestureHandler = (state: Animated.Value<State>) =>
   onGestureEvent({ state });
 
-export type FlashyTabBarItemProps = Omit<TabBarItemProps, 'itemOuterSpace'> &
-  FlashyTabConfig;
+export type FlashyTabBarItemProps = TabBarItemProps & FlashyTabConfig;
 
 const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   // props
@@ -65,31 +67,50 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
     duration,
     easing,
     itemInnerSpace,
+    itemOuterSpace,
+    itemContainerWidth,
     iconSize,
     indicator,
     isRTL,
   } = props;
 
-  // variables
-  const { itemInnerVerticalSpace } = useMemo(() => {
-    let _itemInnerVerticalSpace = 0;
+  //#region extract props
+  const {
+    itemInnerVerticalSpace,
+    itemInnerHorizontalSpace,
+    itemOuterVerticalSpace,
+    itemOuterHorizontalSpace,
+  } = useMemo(() => {
+    let _itemInnerVerticalSpace,
+      _itemInnerHorizontalSpace,
+      _itemOuterVerticalSpace,
+      _itemOuterHorizontalSpace = 0;
 
     if (typeof itemInnerSpace === 'number') {
       _itemInnerVerticalSpace = itemInnerSpace;
+      _itemInnerHorizontalSpace = itemInnerSpace;
     } else {
       _itemInnerVerticalSpace =
-        itemInnerSpace?.vertical || DEFAULT_ITEM_INNER_SPACE;
+        itemInnerSpace?.vertical ?? DEFAULT_ITEM_INNER_SPACE;
+      _itemInnerHorizontalSpace =
+        itemInnerSpace?.horizontal ?? DEFAULT_ITEM_INNER_SPACE;
+    }
+    if (typeof itemOuterSpace === 'number') {
+      _itemOuterVerticalSpace = itemOuterSpace;
+      _itemOuterHorizontalSpace = itemOuterSpace;
+    } else {
+      _itemOuterVerticalSpace =
+        itemOuterSpace?.vertical ?? DEFAULT_ITEM_OUTER_SPACE;
+      _itemOuterHorizontalSpace =
+        itemOuterSpace?.horizontal ?? DEFAULT_ITEM_OUTER_SPACE;
     }
     return {
       itemInnerVerticalSpace: _itemInnerVerticalSpace,
+      itemInnerHorizontalSpace: _itemInnerHorizontalSpace,
+      itemOuterVerticalSpace: _itemOuterVerticalSpace,
+      itemOuterHorizontalSpace: _itemOuterHorizontalSpace,
     };
-  }, [itemInnerSpace]);
-  const containerHeight = useMemo(() => iconSize + itemInnerVerticalSpace * 2, [
-    iconSize,
-    itemInnerVerticalSpace,
-  ]);
-  const [containerWidth, labelHeight] = useValues([0, 0]);
-
+  }, [itemInnerSpace, itemOuterSpace]);
   const {
     size: _indicatorSize,
     color: _indicatorColor,
@@ -107,6 +128,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
       indicatorSize: _indicatorSize ?? DEFAULT_INDICATOR_SIZE,
     };
   }, [_indicatorVisible, _indicatorColor, _indicatorSize, labelStyleOverride]);
+  //#endregion
 
   // animations
   const gestureState = useValue(State.UNDETERMINED);
@@ -118,9 +140,27 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   });
 
   //#region styles
+  const [labelWidth, labelHeight] = useValues([0, 0]);
+  const containerHeight = useMemo(() => iconSize + itemInnerVerticalSpace * 2, [
+    iconSize,
+    itemInnerVerticalSpace,
+  ]);
+  const containerWidth = max(
+    add(labelWidth, itemInnerHorizontalSpace * 2),
+    iconSize + itemInnerHorizontalSpace * 2
+  );
+  const outerContainerStyle = [
+    styles.outerContainer,
+    {
+      paddingHorizontal: itemOuterHorizontalSpace,
+      paddingVertical: itemOuterVerticalSpace,
+    },
+    itemContainerWidth === 'fill' ? { flex: 1 } : {},
+  ];
   const containerStyle = [
     styles.container,
     {
+      width: containerWidth,
       height: containerHeight,
     },
   ];
@@ -128,13 +168,14 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   const labelContainerStyle = [
     styles.labelContainer,
     {
-      width: containerWidth,
-      height: containerHeight,
       transform: [
         {
           translateY: interpolate(animatedFocus, {
             inputRange: [0, 1],
-            outputRange: [multiply(labelHeight, 1), 0],
+            outputRange: [
+              multiply(labelHeight, 0.5),
+              multiply(divide(labelHeight, 2), -1),
+            ],
             extrapolate: Extrapolate.CLAMP,
           }),
         },
@@ -146,7 +187,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
     styles.mask,
     {
       width: containerWidth,
-      height: multiply(labelHeight, 2),
+      height: multiply(labelHeight, 1.5),
       transform: transformOrigin(
         {
           x: 0,
@@ -155,7 +196,10 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
         {
           translateY: interpolate(animatedFocus, {
             inputRange: [0.25, 1],
-            outputRange: [0, labelHeight],
+            outputRange: [
+              0,
+              divide(sub(containerHeight, multiply(labelHeight, 1.5)), 2),
+            ],
             extrapolate: Extrapolate.CLAMP,
           }),
           rotate: interpolate(animatedFocus, {
@@ -171,13 +215,11 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   const iconContainerStyle = [
     styles.iconContainer,
     {
-      width: containerWidth,
-      height: containerHeight,
       transform: [
         {
           translateY: interpolate(animatedFocus, {
             inputRange: [0, 1],
-            outputRange: [0, iconSize * -1],
+            outputRange: [iconSize * -0.5, iconSize * -1.5],
             extrapolate: Extrapolate.CLAMP,
           }),
         },
@@ -204,7 +246,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
         {
           translateY: interpolate(animatedFocus, {
             inputRange: [0, 1],
-            outputRange: [itemInnerVerticalSpace, -iconSize],
+            outputRange: [itemInnerVerticalSpace, iconSize * -1.5],
             extrapolate: Extrapolate.CLAMP,
           }),
           rotate: interpolate(animatedFocus, {
@@ -236,22 +278,16 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   );
 
   // callbacks
-  const handleCotnainerlayout = ({
-    nativeEvent: {
-      // @ts-ignore
-      layout: { width },
-    },
-  }) =>
-    requestAnimationFrame(() => {
-      containerWidth.setValue(width);
-    });
-
   const handleLabelLayout = ({
     nativeEvent: {
       // @ts-ignore
-      layout: { height },
+      layout: { height, width },
     },
-  }) => requestAnimationFrame(() => labelHeight.setValue(height));
+  }) =>
+    requestAnimationFrame(() => {
+      labelWidth.setValue(width);
+      labelHeight.setValue(height);
+    });
 
   // render
   const renderIcon = () => {
@@ -266,50 +302,51 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
 
   return (
     <TapGestureHandler {...gestureHandler(gestureState)}>
-      <Animated.View onLayout={handleCotnainerlayout} style={containerStyle}>
-        <MaskedView
-          style={styles.root}
-          maskElement={<Animated.View style={iconMaskStyle} />}
-        >
-          <Animated.View pointerEvents="none" style={iconContainerStyle}>
-            <View style={iconStyle}>{renderIcon()}</View>
-          </Animated.View>
-        </MaskedView>
-
-        <MaskedView
-          style={styles.root}
-          maskElement={<Animated.View style={labelMaskStyle} />}
-        >
-          <Animated.View style={labelContainerStyle}>
-            <Text
-              numberOfLines={1}
-              style={labelStyle}
-              onLayout={handleLabelLayout}
-            >
-              {label}
-            </Text>
-          </Animated.View>
-        </MaskedView>
-        {indicatorVisibility && (
-          <AnimatedSvg
-            style={[
-              styles.root,
-              {
-                left: sub(divide(containerWidth, 2), indicatorSize / 2),
-                top: sub(containerHeight, itemInnerVerticalSpace / 2),
-              },
-            ]}
-            width={indicatorSize}
-            height={indicatorSize}
+      <Animated.View style={outerContainerStyle}>
+        <Animated.View style={containerStyle}>
+          <MaskedView
+            style={styles.root}
+            maskElement={<Animated.View style={iconMaskStyle} />}
           >
-            <AnimatedCircle
-              r={animatedIndicatorSize}
-              translateY={indicatorSize / 2}
-              translateX={indicatorSize / 2}
-              fill={indicatorColor}
-            />
-          </AnimatedSvg>
-        )}
+            <Animated.View pointerEvents="none" style={iconContainerStyle}>
+              <View style={iconStyle}>{renderIcon()}</View>
+            </Animated.View>
+          </MaskedView>
+          <MaskedView
+            style={styles.root}
+            maskElement={<Animated.View style={labelMaskStyle} />}
+          >
+            <Animated.View style={labelContainerStyle}>
+              <Text
+                numberOfLines={1}
+                style={labelStyle}
+                onLayout={handleLabelLayout}
+              >
+                {label}
+              </Text>
+            </Animated.View>
+          </MaskedView>
+          {indicatorVisibility && (
+            <AnimatedSvg
+              style={[
+                styles.root,
+                {
+                  left: sub(divide(containerWidth, 2), indicatorSize / 2),
+                  top: sub(containerHeight, indicatorSize),
+                },
+              ]}
+              width={indicatorSize}
+              height={indicatorSize}
+            >
+              <AnimatedCircle
+                r={animatedIndicatorSize}
+                translateY={indicatorSize / 2}
+                translateX={indicatorSize / 2}
+                fill={indicatorColor}
+              />
+            </AnimatedSvg>
+          )}
+        </Animated.View>
       </Animated.View>
     </TapGestureHandler>
   );

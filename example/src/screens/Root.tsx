@@ -19,6 +19,10 @@ const examples = [
         name: 'RTL',
         slug: 'BubbleRTL',
       },
+      {
+        name: 'Standalone',
+        slug: 'BubbleStandalone',
+      },
     ],
   },
   {
@@ -35,6 +39,10 @@ const examples = [
       {
         name: 'RTL',
         slug: 'FlashyRTL',
+      },
+      {
+        name: 'Standalone',
+        slug: 'FlashyStandalone',
       },
     ],
   },
@@ -58,7 +66,7 @@ const RootScreen = () => {
       version={version}
       author={{
         username: '@gorhom',
-        url: 'https://twitter.com/gorhom',
+        url: 'https://gorhom.dev',
       }}
       data={examples}
       handleOnPress={handleOnExamplePress}

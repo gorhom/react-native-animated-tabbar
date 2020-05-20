@@ -1,7 +1,7 @@
 {
   "name": "@gorhom/animated-tabbar",
   "version": "1.3.0",
-  "description": "a 60fps animated tab bar to be used with `React Navigation` created with `Reanimated` 😎",
+  "description": "A 60FP animated tab bar with a variety of cool animation presets.",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
@@ -11,6 +11,7 @@
     "lib"
   ],
   "keywords": [
+    "animated-tabbar",
     "react-native",
     "ios",
     "android",
@@ -21,7 +22,7 @@
     "bottom-bar"
   ],
   "repository": "https://github.com/gorhom/react-native-animated-tabbar",
-  "author": "Mo Gorhom (https://github.com/gorhom)",
+  "author": "Mo Gorhom (https://gorhom.dev)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gorhom/react-native-animated-tabbar/issues"
@@ -46,9 +47,6 @@
     "@react-native-community/bob": "^0.10.0",
     "@react-native-community/eslint-config": "^1.1.0",
     "@react-native-community/masked-view": "^0.1.10",
-    "@react-navigation/bottom-tabs": "^5.1.1",
-    "@react-navigation/native": "^5.0.9",
-    "@react-navigation/stack": "^5.1.1",
     "@release-it/conventional-changelog": "^1.1.0",
     "@types/react": "^16.9.19",
     "@types/react-native": "0.61.10",

@@ -1,42 +1,31 @@
-import React, { useMemo, useEffect, useCallback } from 'react';
-import Animated from 'react-native-reanimated';
-import { useValue } from 'react-native-redash';
-import { CommonActions, Route } from '@react-navigation/native';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import Presets, { PresetEnum } from './presets';
+import React, { useMemo, useCallback } from 'react';
+import { useSafeArea } from 'react-native-safe-area-context';
 import {
-  TabsConfig,
-  TabBarViewProps,
-  TabBarItemConfigurableProps,
-  TabBarAnimationConfigurableProps,
-} from './types';
-
-const { onChange, useCode, call } = Animated;
-/**
- * @DEV
- * this is needed for react-native-svg to animate on the native thread.
- * @external (https://github.com/software-mansion/react-native-reanimated/issues/537)
- */
-Animated.addWhitelistedNativeProps({
-  width: true,
-  stroke: true,
-  backgroundColor: true,
-});
+  AnimatedTabBarView,
+  AnimatedTabBarViewProps,
+} from './AnimatedTabBarView';
+import Presets, { PresetEnum } from './presets';
+import { TabsConfig } from './types';
 
 interface AnimatedTabBarProps<T extends PresetEnum>
-  extends Pick<BottomTabBarProps, 'state' | 'navigation' | 'descriptors'>,
-    Pick<TabBarViewProps<{}>, 'style'>,
-    TabBarItemConfigurableProps,
-    TabBarAnimationConfigurableProps {
+  extends Omit<AnimatedTabBarViewProps<T>, 'index' | 'onIndexChange' | 'tabs'> {
   /**
    * Tabs configurations.
    */
   tabs: TabsConfig<typeof Presets[T]['$t']>;
 
   /**
-   * Animation preset.
+   * React Navigation Props
    */
-  preset?: T;
+  state?: any;
+  navigation?: any;
+  descriptors?: any;
+  onTabPress?: any;
+}
+
+interface Route {
+  name: string;
+  key: string;
 }
 
 export function AnimatedTabBar<T extends PresetEnum>(
@@ -44,53 +33,61 @@ export function AnimatedTabBar<T extends PresetEnum>(
 ) {
   // props
   const {
-    navigation,
     tabs,
+    state,
+    navigation,
     descriptors,
-    preset = 'bubble',
-    style,
-    itemInnerSpace,
-    itemOuterSpace,
-    iconSize,
-    duration,
-    easing,
-    isRTL,
+    onTabPress,
+    style: overrideStyle,
+    ...rest
   } = props;
 
-  // verify props
-  if (!Object.keys(Presets).includes(preset)) {
-    throw new Error(
-      `Wrong preset been provided. expected one of these: [${Object.keys(
-        Presets
-      ).join(', ')}], but found "${preset}".`
-    );
-  }
+  //#region styles
+  const { bottom: safeBottomArea } = useSafeArea();
+  const style = useMemo(
+    () => ({
+      // @ts-ignore
+      ...overrideStyle,
+      ...{ paddingBottom: safeBottomArea },
+    }),
+    [overrideStyle, safeBottomArea]
+  );
+  //#endregion
 
-  // variables
-  const isReactNavigation5 = props.state ? true : false;
-  // @ts-ignore
+  //#region variables
+  const isReactNavigation5 = useMemo(() => Boolean(state), [state]);
+  const CommonActions = useMemo(() => {
+    if (isReactNavigation5) {
+      const {
+        CommonActions: _CommonActions,
+      } = require('@react-navigation/native');
+      return _CommonActions;
+    } else {
+      return undefined;
+    }
+  }, [isReactNavigation5]);
   const {
-    routes,
     index: navigationIndex,
     key: navigationKey,
-  }: { routes: Route<string>[]; index: number; key: string } = useMemo(() => {
+    routes,
+  }: {
+    index: number;
+    routes: Route[];
+    key: string;
+  } = useMemo(() => {
     if (isReactNavigation5) {
-      return props.state;
+      return state!;
     } else {
       return {
-        // @ts-ignore
-        index: props.navigation.state.index,
-        // @ts-ignore
-        routes: props.navigation.state.routes,
+        index: navigation!.state.index,
+        routes: navigation!.state.routes,
         key: '',
       };
     }
-  }, [props, isReactNavigation5]);
-  const selectedIndex = useValue(0);
+  }, [state, navigation, isReactNavigation5]);
 
-  //#region callbacks
   const getRouteTitle = useCallback(
-    (route: Route<string>) => {
+    (route: Route) => {
       if (isReactNavigation5) {
         const { options } = descriptors[route.key];
         return options.tabBarLabel !== undefined &&
@@ -107,7 +104,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
   );
 
   const getRouteTabConfigs = useCallback(
-    (route: Route<string>) => {
+    (route: Route) => {
       if (isReactNavigation5) {
         return tabs[route.name];
       } else {
@@ -124,11 +121,13 @@ export function AnimatedTabBar<T extends PresetEnum>(
       ...getRouteTabConfigs(route),
     }));
   }, [routes, getRouteTitle, getRouteTabConfigs]);
+  //#endregion
 
-  const handleSelectedIndexChange = (index: number) => {
+  //#region callbacks
+  const handleIndexChange = (index: number) => {
     if (isReactNavigation5) {
       const { key, name } = routes[index];
-      const event = navigation.emit({
+      const event = navigation!.emit({
         type: 'tabPress',
         target: key,
         canPreventDefault: true,
@@ -141,55 +140,20 @@ export function AnimatedTabBar<T extends PresetEnum>(
         });
       }
     } else {
-      // @ts-ignore
-      const { onTabPress } = props;
       onTabPress({ route: routes[index] });
     }
   };
   //#endregion
 
-  //#region Effects
-  /**
-   * @DEV
-   * here we listen to React Navigation index and update
-   * selectedIndex value.
-   */
-  useEffect(() => {
-    // @ts-ignore
-    selectedIndex.setValue(navigationIndex);
-  }, [navigationIndex, selectedIndex]);
-
-  /**
-   * @DEV
-   * here we listen to selectedIndex and call `handleSelectedIndexChange`
-   */
-  useCode(
-    () =>
-      onChange(
-        selectedIndex,
-        call([selectedIndex], args => {
-          handleSelectedIndexChange(args[0]);
-        })
-      ),
-    []
-  );
-  //#endregion
-
-  const PresetComponent = Presets[preset].component;
-
   // render
   return (
-    <PresetComponent
-      style={style}
-      selectedIndex={selectedIndex}
+    <AnimatedTabBarView
+      index={navigationIndex}
+      onIndexChange={handleIndexChange}
       // @ts-ignore
       tabs={routesWithTabConfig}
-      itemInnerSpace={itemInnerSpace}
-      itemOuterSpace={itemOuterSpace}
-      iconSize={iconSize}
-      duration={duration}
-      easing={easing}
-      isRTL={isRTL}
+      style={style}
+      {...rest}
     />
   );
 }
