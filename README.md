@@ -184,7 +184,6 @@ export default function App() {
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {createStackNavigator} from 'react-navigation-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
 
