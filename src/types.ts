@@ -1,14 +1,20 @@
 import { StyleProp, ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
+import Presets, { PresetEnum } from './presets';
 
 export type TabsConfig<T, P = { [key: string]: T }> = {
   [key in keyof P]: T;
 };
 
-export interface TabBarAnimationConfigurableProps {
+interface Space {
+  vertical?: number;
+  horizontal?: number;
+}
+
+export interface TabBarConfigurableProps {
   /**
    * Animation duration.
-   * @default 500
+   * @default PresetConstants
    */
   duration?: number;
   /**
@@ -16,14 +22,6 @@ export interface TabBarAnimationConfigurableProps {
    * @default Easing.out(Easing.exp)
    */
   easing?: Animated.EasingFunction;
-}
-
-interface Space {
-  vertical?: number;
-  horizontal?: number;
-}
-
-export interface TabBarItemConfigurableProps {
   /**
    * Item padding space.
    * @default PresetConstants
@@ -49,6 +47,10 @@ export interface TabBarItemConfigurableProps {
    * @default false
    */
   isRTL?: boolean;
+  /**
+   * Callback when item been long pressed.
+   */
+  onLongPress?: (index: number) => void;
 }
 
 export interface TabInfo {
@@ -56,9 +58,7 @@ export interface TabInfo {
   key: string;
 }
 
-export interface TabBarViewProps<T>
-  extends TabBarAnimationConfigurableProps,
-    TabBarItemConfigurableProps {
+export interface TabBarViewProps<T> extends TabBarConfigurableProps {
   /**
    * Selected animated index.
    */
@@ -73,13 +73,40 @@ export interface TabBarViewProps<T>
   style?: StyleProp<ViewStyle>;
 }
 
-export interface TabBarItemProps
-  extends Required<TabBarAnimationConfigurableProps>,
-    Required<TabBarItemConfigurableProps> {
+export interface TabBarItemProps extends Required<TabBarConfigurableProps> {
   /**
    * Selected animated index.
    */
   selectedIndex: Animated.Value<number>;
+  /**
+   * Tab index.
+   */
   index: number;
+  /**
+   * Tab label.
+   */
   label: string;
+}
+
+export interface AnimatedTabBarViewProps<T extends PresetEnum>
+  extends Omit<TabBarViewProps<{}>, 'selectedIndex' | 'tabs'> {
+  /**
+   * Initial index.
+   */
+  index: number;
+
+  /**
+   * Tabs configurations.
+   */
+  tabs: TabsConfig<typeof Presets[T]['$t'] & Partial<TabInfo>>;
+
+  /**
+   * Animation preset.
+   */
+  preset?: T;
+
+  /**
+   * Callback when animated index changes.
+   */
+  onIndexChange: (index: number) => void;
 }

@@ -12,6 +12,7 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
   DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
+import { noop } from '../utilities';
 import { TabBarViewProps } from '../types';
 import { BubbleTabConfig } from './types';
 import { styles } from './styles';
@@ -27,6 +28,7 @@ const BubbleTabBarComponent = ({
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
+  onLongPress = noop,
 }: TabBarViewProps<BubbleTabConfig>) => {
   //#region Styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
@@ -56,6 +58,7 @@ const BubbleTabBarComponent = ({
             itemContainerWidth={itemContainerWidth}
             iconSize={iconSize}
             isRTL={isRTL}
+            onLongPress={onLongPress}
             {...configs}
           />
         );

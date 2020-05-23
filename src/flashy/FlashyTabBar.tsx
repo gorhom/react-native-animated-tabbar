@@ -12,6 +12,7 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
   DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
+import { noop } from '../utilities';
 import { TabBarViewProps } from '../types';
 import { FlashyTabConfig } from './types';
 import { styles } from './styles';
@@ -27,6 +28,7 @@ const FlashyTabBarComponent = ({
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
+  onLongPress = noop,
 }: TabBarViewProps<FlashyTabConfig>) => {
   //#region Styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
@@ -57,6 +59,7 @@ const FlashyTabBarComponent = ({
             itemContainerWidth={itemContainerWidth}
             iconSize={iconSize}
             isRTL={isRTL}
+            onLongPress={onLongPress}
             {...configs}
           />
         );

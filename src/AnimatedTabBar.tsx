@@ -1,14 +1,14 @@
 import React, { useMemo, useCallback } from 'react';
 import { useSafeArea } from 'react-native-safe-area-context';
-import {
-  AnimatedTabBarView,
-  AnimatedTabBarViewProps,
-} from './AnimatedTabBarView';
+import { AnimatedTabBarView } from './AnimatedTabBarView';
 import Presets, { PresetEnum } from './presets';
-import { TabsConfig } from './types';
+import { TabsConfig, AnimatedTabBarViewProps } from './types';
 
 interface AnimatedTabBarProps<T extends PresetEnum>
-  extends Omit<AnimatedTabBarViewProps<T>, 'index' | 'onIndexChange' | 'tabs'> {
+  extends Omit<
+    AnimatedTabBarViewProps<T>,
+    'index' | 'onIndexChange' | 'tabs' | 'onLongPress'
+  > {
   /**
    * Tabs configurations.
    */
@@ -21,6 +21,7 @@ interface AnimatedTabBarProps<T extends PresetEnum>
   navigation?: any;
   descriptors?: any;
   onTabPress?: any;
+  onTabLongPress?: any;
 }
 
 interface Route {
@@ -38,6 +39,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
     navigation,
     descriptors,
     onTabPress,
+    onTabLongPress,
     style: overrideStyle,
     ...rest
   } = props;
@@ -127,7 +129,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
   const handleIndexChange = (index: number) => {
     if (isReactNavigation5) {
       const { key, name } = routes[index];
-      const event = navigation!.emit({
+      const event = navigation.emit({
         type: 'tabPress',
         target: key,
         canPreventDefault: true,
@@ -143,6 +145,20 @@ export function AnimatedTabBar<T extends PresetEnum>(
       onTabPress({ route: routes[index] });
     }
   };
+  const handleLongPress = useCallback(
+    (index: number) => {
+      if (isReactNavigation5) {
+        const { key } = routes[index];
+        navigation.emit({
+          type: 'tabLongPress',
+          target: key,
+        });
+      } else {
+        onTabLongPress({ route: routes[index] });
+      }
+    },
+    [isReactNavigation5, routes, navigation, onTabLongPress]
+  );
   //#endregion
 
   // render
@@ -150,6 +166,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
     <AnimatedTabBarView
       index={navigationIndex}
       onIndexChange={handleIndexChange}
+      onLongPress={handleLongPress}
       // @ts-ignore
       tabs={routesWithTabConfig}
       style={style}
