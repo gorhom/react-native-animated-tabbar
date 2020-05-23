@@ -1,7 +1,7 @@
 {
   "name": "@gorhom/animated-tabbar",
   "version": "1.4.0",
-  "description": "A 60FP animated tab bar with a variety of cool animation presets.",
+  "description": "A 60FPS animated tab bar with a variety of cool animation presets.",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
