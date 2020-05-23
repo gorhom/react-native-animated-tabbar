@@ -51,6 +51,7 @@ const BubbleTabBarComponent = ({
             key={key}
             index={index}
             selectedIndex={selectedIndex}
+            accessibilityLabel={title}
             onLongPress={onLongPress}
           >
             <BubbleTabBarItem

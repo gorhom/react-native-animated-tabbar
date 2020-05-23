@@ -57,6 +57,7 @@ const FlashyTabBarComponent = ({
             index={index}
             selectedIndex={selectedIndex}
             style={rawButtonStyle}
+            accessibilityLabel={title}
             onLongPress={onLongPress}
           >
             <FlashyTabBarItem
