@@ -126,25 +126,29 @@ export function AnimatedTabBar<T extends PresetEnum>(
   //#endregion
 
   //#region callbacks
-  const handleIndexChange = (index: number) => {
-    if (isReactNavigation5) {
-      const { key, name } = routes[index];
-      const event = navigation.emit({
-        type: 'tabPress',
-        target: key,
-        canPreventDefault: true,
-      });
-
-      if (!event.defaultPrevented) {
-        navigation.dispatch({
-          ...CommonActions.navigate(name),
-          target: navigationKey,
+  const handleIndexChange = useCallback(
+    (index: number) => {
+      if (isReactNavigation5) {
+        const { key, name } = routes[index];
+        const event = navigation.emit({
+          type: 'tabPress',
+          target: key,
+          canPreventDefault: true,
         });
+
+        if (!event.defaultPrevented) {
+          navigation.dispatch({
+            ...CommonActions.navigate(name),
+            target: navigationKey,
+          });
+        }
+      } else {
+        onTabPress({ route: routes[index] });
       }
-    } else {
-      onTabPress({ route: routes[index] });
-    }
-  };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isReactNavigation5]
+  );
   const handleLongPress = useCallback(
     (index: number) => {
       if (isReactNavigation5) {
@@ -157,7 +161,8 @@ export function AnimatedTabBar<T extends PresetEnum>(
         onTabLongPress({ route: routes[index] });
       }
     },
-    [isReactNavigation5, routes, navigation, onTabLongPress]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isReactNavigation5]
   );
   //#endregion
 
