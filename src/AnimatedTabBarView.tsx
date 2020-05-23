@@ -81,7 +81,6 @@ export function AnimatedTabBarView<T extends PresetEnum>(
     () =>
       call([selectedIndex], args => {
         if (onIndexChange) {
-          console.log('onChange', args[0]);
           indexRef.current = args[0];
           onIndexChange(args[0]);
         }
