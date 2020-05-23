@@ -3,6 +3,7 @@ import { View, ViewStyle, StyleProp } from 'react-native';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import BubbleTabBarItem from './item';
+import RawButton from '../components/rawButton';
 import {
   DEFAULT_ITEM_ANIMATION_DURATION,
   DEFAULT_ITEM_ANIMATION_EASING,
@@ -46,29 +47,32 @@ const BubbleTabBarComponent = ({
     <View style={containerStyle}>
       {tabs.map(({ key, title, ...configs }, index) => {
         return (
-          <BubbleTabBarItem
+          <RawButton
             key={key}
             index={index}
             selectedIndex={selectedIndex}
-            label={title}
-            duration={duration}
-            easing={easing}
-            itemInnerSpace={itemInnerSpace}
-            itemOuterSpace={itemOuterSpace}
-            itemContainerWidth={itemContainerWidth}
-            iconSize={iconSize}
-            isRTL={isRTL}
             onLongPress={onLongPress}
-            {...configs}
-          />
+          >
+            <BubbleTabBarItem
+              index={index}
+              selectedIndex={selectedIndex}
+              label={title}
+              duration={duration}
+              easing={easing}
+              itemInnerSpace={itemInnerSpace}
+              itemOuterSpace={itemOuterSpace}
+              itemContainerWidth={itemContainerWidth}
+              iconSize={iconSize}
+              isRTL={isRTL}
+              {...configs}
+            />
+          </RawButton>
         );
       })}
     </View>
   );
 };
 
-const BubbleTabBar = memo(BubbleTabBarComponent, (prevProps, nextProps) =>
-  isEqual(prevProps, nextProps)
-);
+const BubbleTabBar = memo(BubbleTabBarComponent, isEqual);
 
 export default BubbleTabBar;

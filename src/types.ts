@@ -73,7 +73,8 @@ export interface TabBarViewProps<T> extends TabBarConfigurableProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export interface TabBarItemProps extends Required<TabBarConfigurableProps> {
+export interface TabBarItemProps
+  extends Required<Omit<TabBarConfigurableProps, 'onLongPress'>> {
   /**
    * Selected animated index.
    */

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { View, StyleSheet, Button, StatusBar } from 'react-native';
+import { View, StyleSheet, Button, StatusBar, Alert } from 'react-native';
 import {
   AnimatedTabBarView,
   TabsConfig,
@@ -63,6 +63,9 @@ const FlashyStandaloneScreen = () => {
     ],
     [index]
   );
+  const handleLongPress = (_index: number) => {
+    Alert.alert(`${_index} long pressed !`);
+  };
   return (
     <View style={containerStyle}>
       <StatusBar barStyle="dark-content" />
@@ -75,6 +78,7 @@ const FlashyStandaloneScreen = () => {
         style={styles.tabBarContainer}
         index={index}
         onIndexChange={setIndex}
+        onLongPress={handleLongPress}
       />
 
       <Button

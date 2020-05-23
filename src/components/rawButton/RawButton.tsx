@@ -55,6 +55,7 @@ const RawButton = ({
     ],
     [index]
   );
+
   return (
     <TapGestureHandler
       waitFor={longPressGestureHandlerRef}
@@ -65,7 +66,7 @@ const RawButton = ({
           ref={longPressGestureHandlerRef}
           {...longPressGestureHandler}
         >
-          {children}
+          <Animated.View>{children}</Animated.View>
         </LongPressGestureHandler>
       </Animated.View>
     </TapGestureHandler>

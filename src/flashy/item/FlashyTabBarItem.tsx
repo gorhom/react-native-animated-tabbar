@@ -7,7 +7,6 @@ import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
 import { useValues, transformOrigin, toRad } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import RawButton from '../../components/rawButton';
 import { withTransition } from '../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
@@ -46,11 +45,9 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
     easing,
     itemInnerSpace,
     itemOuterSpace,
-    itemContainerWidth,
     iconSize,
     indicator,
     isRTL,
-    onLongPress,
   } = props;
 
   //#region extract props
@@ -133,7 +130,6 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
       paddingHorizontal: itemOuterHorizontalSpace,
       paddingVertical: itemOuterVerticalSpace,
     },
-    itemContainerWidth === 'fill' ? { flex: 1 } : {},
   ];
   const containerStyle = [
     styles.container,
@@ -268,12 +264,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   };
 
   return (
-    <RawButton
-      index={index}
-      selectedIndex={selectedIndex}
-      style={outerContainerStyle}
-      onLongPress={onLongPress}
-    >
+    <Animated.View style={outerContainerStyle}>
       <Animated.View style={containerStyle}>
         <MaskedView
           style={styles.root}
@@ -318,13 +309,10 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
           </AnimatedSvg>
         )}
       </Animated.View>
-    </RawButton>
+    </Animated.View>
   );
 };
 
-const FlashyTabBarItem = memo(
-  FlashyTabBarItemComponent,
-  (prevProps, nextProps) => isEqual(prevProps, nextProps)
-);
+const FlashyTabBarItem = memo(FlashyTabBarItemComponent, isEqual);
 
 export default FlashyTabBarItem;

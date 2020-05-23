@@ -4,7 +4,6 @@ import Animated from 'react-native-reanimated';
 import { interpolateColor, useValue } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import RawButton from '../../components/rawButton';
 import { withTransition } from '../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
@@ -33,7 +32,6 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
     itemOuterSpace,
     iconSize,
     isRTL,
-    onLongPress,
   } = props;
 
   //#region extract props
@@ -172,26 +170,16 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   };
 
   return (
-    <RawButton
-      index={index}
-      selectedIndex={selectedIndex}
-      onLongPress={onLongPress}
-    >
-      <Animated.View style={containerStyle}>
-        <Animated.View style={contentContainerStyle}>
-          <View style={iconContainerStyle}>{renderIcon()}</View>
-        </Animated.View>
-        <Animated.View style={labelContainerStyle}>
-          <Text
-            onLayout={handleTextLayout}
-            style={labelStyle}
-            numberOfLines={1}
-          >
-            {label}
-          </Text>
-        </Animated.View>
+    <Animated.View style={containerStyle}>
+      <Animated.View style={contentContainerStyle}>
+        <View style={iconContainerStyle}>{renderIcon()}</View>
       </Animated.View>
-    </RawButton>
+      <Animated.View style={labelContainerStyle}>
+        <Text onLayout={handleTextLayout} style={labelStyle} numberOfLines={1}>
+          {label}
+        </Text>
+      </Animated.View>
+    </Animated.View>
   );
 };
 
