@@ -13,6 +13,7 @@ const { useCode, set, cond, onChange, eq } = Animated;
 interface RawButtonProps {
   index: number;
   selectedIndex: Animated.Value<number>;
+  accessibilityLabel: string;
   children: React.ReactNode[] | React.ReactNode;
   style?: StyleProp<Animated.AnimateStyle<ViewStyle>>;
   onLongPress: (index: number) => void;
@@ -21,11 +22,15 @@ interface RawButtonProps {
 const RawButton = ({
   index,
   selectedIndex,
+  accessibilityLabel,
   children,
   style,
   onLongPress,
 }: RawButtonProps) => {
+  // refs
+  const rootViewRef = useRef<Animated.View>(null);
   const longPressGestureHandlerRef = useRef<LongPressGestureHandler>(null);
+
   // tap gesture
   const tapGestureState = useValue(State.UNDETERMINED);
   const tapGestureHandler = useGestureHandler({ state: tapGestureState });
@@ -52,16 +57,33 @@ const RawButton = ({
           })
         )
       ),
+      onChange(
+        selectedIndex,
+        call([selectedIndex], args => {
+          // @ts-ignore
+          rootViewRef.current.setNativeProps({
+            accessibilityState: {
+              selected: args[0] === index,
+            },
+          });
+        })
+      ),
     ],
     [index]
   );
-
   return (
     <TapGestureHandler
       waitFor={longPressGestureHandlerRef}
       {...tapGestureHandler}
     >
-      <Animated.View style={style}>
+      <Animated.View
+        ref={rootViewRef}
+        accessible={true}
+        accessibilityLabel={accessibilityLabel}
+        accessibilityRole="button"
+        accessibilityComponentType="button"
+        style={style}
+      >
         <LongPressGestureHandler
           ref={longPressGestureHandlerRef}
           {...longPressGestureHandler}
