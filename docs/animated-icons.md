@@ -1,6 +1,6 @@
 # Animated Icons
 
-In order to animate the tab icon color, shape & size. You will need to use the provded props `color` & `animatedFocus` that will be provided to the icon.
+In order to animate the tab icon color, shape & size. You will need to use the provided props `color` & `animatedFocus` that will be provided to the icon.
 
 This example for `bubble` icon below should explain it better:
 
