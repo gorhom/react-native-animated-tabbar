@@ -269,7 +269,8 @@ Originally `Animated TabBar` started with `Bubble` as the only animation preset 
 
 ## To Do
 
-- [ ] Add accessibility support.
+- [x] Add accessibility support.
+- [ ] Add more presets (PR are welcome).
 
 <h2 id="built-with">Built With ❤️</h2>
 
