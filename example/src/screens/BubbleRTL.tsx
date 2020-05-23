@@ -98,6 +98,7 @@ const BubbleRTLScreen = () => {
         initialParams={{
           name: 'الرئيسية',
           backgroundColor: '#000',
+          nextScreen: 'Likes',
         }}
         component={DummyScreen}
       />
@@ -109,6 +110,7 @@ const BubbleRTLScreen = () => {
         initialParams={{
           name: 'אהבתי',
           backgroundColor: '#000',
+          nextScreen: 'Search',
         }}
         component={DummyScreen}
       />
@@ -120,6 +122,7 @@ const BubbleRTLScreen = () => {
         initialParams={{
           name: 'ይፈልጉ',
           backgroundColor: '#000',
+          nextScreen: 'Profile',
         }}
         component={DummyScreen}
       />
@@ -131,6 +134,7 @@ const BubbleRTLScreen = () => {
         initialParams={{
           name: 'مشخصات',
           backgroundColor: '#000',
+          nextScreen: 'Home',
         }}
         component={DummyScreen}
       />

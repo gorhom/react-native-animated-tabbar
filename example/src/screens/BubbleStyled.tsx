@@ -88,6 +88,7 @@ const BubbleStyledScreen = () => {
         name="Home"
         initialParams={{
           backgroundColor: '#000',
+          nextScreen: 'Likes',
         }}
         component={DummyScreen}
       />
@@ -95,6 +96,7 @@ const BubbleStyledScreen = () => {
         name="Likes"
         initialParams={{
           backgroundColor: '#000',
+          nextScreen: 'Search',
         }}
         component={DummyScreen}
       />
@@ -102,6 +104,7 @@ const BubbleStyledScreen = () => {
         name="Search"
         initialParams={{
           backgroundColor: '#000',
+          nextScreen: 'Profile',
         }}
         component={DummyScreen}
       />
@@ -109,6 +112,7 @@ const BubbleStyledScreen = () => {
         name="Profile"
         initialParams={{
           backgroundColor: '#000',
+          nextScreen: 'Home',
         }}
         component={DummyScreen}
       />

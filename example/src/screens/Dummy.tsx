@@ -1,32 +1,78 @@
-import React, { useMemo } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import React, { useMemo, useRef, useEffect, useCallback } from 'react';
+import { Text, View, StyleSheet, Dimensions, Button } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import {
+  useRoute,
+  RouteProp,
+  useScrollToTop,
+  useNavigation,
+} from '@react-navigation/native';
 import { MainTabsParams } from './types';
+import { Alert } from 'react-native';
 
 const DummyScreen = () => {
+  // scroll event
+  const scrollViewRef = useRef(null);
+  useScrollToTop(scrollViewRef);
+
+  // route name
   const { name, params } = useRoute<RouteProp<MainTabsParams, 'Home'>>();
-  const containerStyle = useMemo(
+  const screeName = useMemo(() => params?.name || name, [params, name]);
+
+  const { navigate, addListener } = useNavigation();
+
+  // style
+  const rootStyle = useMemo(
     () => [
-      styles.container,
-      // @ts-ignore
-      { backgroundColor: params?.backgroundColor || 'white' },
+      styles.root,
+      {
+        backgroundColor: params?.backgroundColor || 'white',
+      },
     ],
     [params]
   );
-  // @ts-ignore
-  const screeName = useMemo(() => params?.name || name, [params, name]);
+
+  // effects
+  useEffect(() => {
+    // @ts-ignore
+    const unsubscribe = addListener('tabLongPress', () => {
+      // Do something
+      Alert.alert(screeName, 'Long Press !');
+    });
+
+    return unsubscribe;
+  }, [addListener, screeName]);
+
+  // callbacks
+  const handleNextScreenPress = useCallback(() => {
+    navigate(params.nextScreen);
+  }, [navigate, params]);
   return (
-    <View style={containerStyle}>
-      <Text style={styles.text}>{screeName}</Text>
-    </View>
+    <ScrollView style={rootStyle} ref={scrollViewRef}>
+      <View style={styles.container}>
+        <Text style={styles.text}>{screeName}</Text>
+        <Button
+          title={`navigate to ${params.nextScreen}`}
+          color="white"
+          onPress={handleNextScreenPress}
+        />
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.text}>{screeName}</Text>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    height: Dimensions.get('screen').height,
   },
   text: {
     fontSize: 43,
