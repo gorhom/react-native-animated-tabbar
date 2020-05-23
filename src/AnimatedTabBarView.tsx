@@ -1,16 +1,10 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useRef } from 'react';
 import Animated from 'react-native-reanimated';
 import { useValue } from 'react-native-redash';
 import Presets, { PresetEnum } from './presets';
-import {
-  TabsConfig,
-  TabInfo,
-  TabBarViewProps,
-  TabBarItemConfigurableProps,
-  TabBarAnimationConfigurableProps,
-} from './types';
+import { AnimatedTabBarViewProps } from './types';
 
-const { onChange, useCode, call } = Animated;
+const { useCode, call } = Animated;
 /**
  * @DEV
  * this is needed for react-native-svg to animate on the native thread.
@@ -22,31 +16,6 @@ Animated.addWhitelistedNativeProps({
   backgroundColor: true,
 });
 
-export interface AnimatedTabBarViewProps<T extends PresetEnum>
-  extends Pick<TabBarViewProps<{}>, 'style'>,
-    TabBarItemConfigurableProps,
-    TabBarAnimationConfigurableProps {
-  /**
-   * Initial index.
-   */
-  index: number;
-
-  /**
-   * Tabs configurations.
-   */
-  tabs: TabsConfig<typeof Presets[T]['$t'] & Partial<TabInfo>>;
-
-  /**
-   * Animation preset.
-   */
-  preset?: T;
-
-  /**
-   * Callback when animated index changes.
-   */
-  onIndexChange: (index: number) => void;
-}
-
 export function AnimatedTabBarView<T extends PresetEnum>(
   props: AnimatedTabBarViewProps<T>
 ) {
@@ -54,6 +23,7 @@ export function AnimatedTabBarView<T extends PresetEnum>(
   const {
     index: controlledIndex,
     onIndexChange,
+    onLongPress,
     tabs: _tabs,
     preset = 'bubble',
     style,
@@ -90,15 +60,18 @@ export function AnimatedTabBarView<T extends PresetEnum>(
   }, [_tabs]);
 
   //#region Effects
+  const indexRef = useRef(controlledIndex);
   /**
    * @DEV
    * here we listen to the controlled index and update
    * selectedIndex value.
    */
   useEffect(() => {
-    // @ts-ignore
-    selectedIndex.setValue(controlledIndex);
-  }, [selectedIndex, controlledIndex]);
+    if (indexRef.current !== controlledIndex) {
+      selectedIndex.setValue(controlledIndex);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [controlledIndex]);
 
   /**
    * @DEV
@@ -106,14 +79,12 @@ export function AnimatedTabBarView<T extends PresetEnum>(
    */
   useCode(
     () =>
-      onChange(
-        selectedIndex,
-        call([selectedIndex], args => {
-          if (onIndexChange) {
-            onIndexChange(args[0]);
-          }
-        })
-      ),
+      call([selectedIndex], args => {
+        if (onIndexChange) {
+          indexRef.current = args[0];
+          onIndexChange(args[0]);
+        }
+      }),
     []
   );
   //#endregion
@@ -134,6 +105,7 @@ export function AnimatedTabBarView<T extends PresetEnum>(
       duration={duration}
       easing={easing}
       isRTL={isRTL}
+      onLongPress={onLongPress}
     />
   );
 }

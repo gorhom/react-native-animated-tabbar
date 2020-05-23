@@ -3,6 +3,7 @@ import { View, StyleProp, ViewStyle } from 'react-native';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import FlashyTabBarItem from './item';
+import RawButton from '../components/rawButton';
 import {
   DEFAULT_ITEM_ANIMATION_DURATION,
   DEFAULT_ITEM_ANIMATION_EASING,
@@ -12,6 +13,7 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
   DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
+import { noop } from '../utilities';
 import { TabBarViewProps } from '../types';
 import { FlashyTabConfig } from './types';
 import { styles } from './styles';
@@ -27,6 +29,7 @@ const FlashyTabBarComponent = ({
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
+  onLongPress = noop,
 }: TabBarViewProps<FlashyTabConfig>) => {
   //#region Styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
@@ -39,26 +42,37 @@ const FlashyTabBarComponent = ({
     ],
     [containerStyleOverride, isRTL]
   );
+  const rawButtonStyle = useMemo(
+    () => (itemContainerWidth === 'fill' ? { flex: 1 } : {}),
+    [itemContainerWidth]
+  );
   //#endregion
   // render
   return (
     <View style={containerStyle}>
       {tabs.map(({ key, title, ...configs }, index) => {
         return (
-          <FlashyTabBarItem
+          <RawButton
             key={key}
             index={index}
             selectedIndex={selectedIndex}
-            label={title}
-            duration={duration}
-            easing={easing}
-            itemInnerSpace={itemInnerSpace}
-            itemOuterSpace={itemOuterSpace}
-            itemContainerWidth={itemContainerWidth}
-            iconSize={iconSize}
-            isRTL={isRTL}
-            {...configs}
-          />
+            style={rawButtonStyle}
+            onLongPress={onLongPress}
+          >
+            <FlashyTabBarItem
+              index={index}
+              selectedIndex={selectedIndex}
+              label={title}
+              duration={duration}
+              easing={easing}
+              itemInnerSpace={itemInnerSpace}
+              itemOuterSpace={itemOuterSpace}
+              itemContainerWidth={itemContainerWidth}
+              iconSize={iconSize}
+              isRTL={isRTL}
+              {...configs}
+            />
+          </RawButton>
         );
       })}
     </View>

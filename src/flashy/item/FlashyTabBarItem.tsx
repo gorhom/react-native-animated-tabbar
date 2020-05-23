@@ -4,14 +4,7 @@ import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
 import MaskedView from '@react-native-community/masked-view';
 import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
-import { State, TapGestureHandler } from 'react-native-gesture-handler';
-import {
-  useValues,
-  onGestureEvent,
-  transformOrigin,
-  toRad,
-  useValue,
-} from 'react-native-redash';
+import { useValues, transformOrigin, toRad } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { withTransition } from '../../withTransition';
@@ -36,23 +29,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(
   any
 >;
 
-const {
-  add,
-  interpolate,
-  useCode,
-  sub,
-  set,
-  max,
-  cond,
-  eq,
-  divide,
-  onChange,
-  multiply,
-  Extrapolate,
-} = Animated;
-
-const gestureHandler = (state: Animated.Value<State>) =>
-  onGestureEvent({ state });
+const { add, interpolate, sub, max, divide, multiply, Extrapolate } = Animated;
 
 export type FlashyTabBarItemProps = TabBarItemProps & FlashyTabConfig;
 
@@ -68,7 +45,6 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
     easing,
     itemInnerSpace,
     itemOuterSpace,
-    itemContainerWidth,
     iconSize,
     indicator,
     isRTL,
@@ -131,7 +107,6 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   //#endregion
 
   // animations
-  const gestureState = useValue(State.UNDETERMINED);
   const animatedFocus = withTransition({
     index,
     selectedIndex,
@@ -155,7 +130,6 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
       paddingHorizontal: itemOuterHorizontalSpace,
       paddingVertical: itemOuterVerticalSpace,
     },
-    itemContainerWidth === 'fill' ? { flex: 1 } : {},
   ];
   const containerStyle = [
     styles.container,
@@ -266,17 +240,6 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   });
   //#endregion
 
-  // effects
-  useCode(
-    () => [
-      onChange(
-        gestureState,
-        cond(eq(gestureState, State.END), set(selectedIndex, index))
-      ),
-    ],
-    [gestureState, index]
-  );
-
   // callbacks
   const handleLabelLayout = ({
     nativeEvent: {
@@ -301,60 +264,55 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   };
 
   return (
-    <TapGestureHandler {...gestureHandler(gestureState)}>
-      <Animated.View style={outerContainerStyle}>
-        <Animated.View style={containerStyle}>
-          <MaskedView
-            style={styles.root}
-            maskElement={<Animated.View style={iconMaskStyle} />}
-          >
-            <Animated.View pointerEvents="none" style={iconContainerStyle}>
-              <View style={iconStyle}>{renderIcon()}</View>
-            </Animated.View>
-          </MaskedView>
-          <MaskedView
-            style={styles.root}
-            maskElement={<Animated.View style={labelMaskStyle} />}
-          >
-            <Animated.View style={labelContainerStyle}>
-              <Text
-                numberOfLines={1}
-                style={labelStyle}
-                onLayout={handleLabelLayout}
-              >
-                {label}
-              </Text>
-            </Animated.View>
-          </MaskedView>
-          {indicatorVisibility && (
-            <AnimatedSvg
-              style={[
-                styles.root,
-                {
-                  left: sub(divide(containerWidth, 2), indicatorSize / 2),
-                  top: sub(containerHeight, indicatorSize),
-                },
-              ]}
-              width={indicatorSize}
-              height={indicatorSize}
+    <Animated.View style={outerContainerStyle}>
+      <Animated.View style={containerStyle}>
+        <MaskedView
+          style={styles.root}
+          maskElement={<Animated.View style={iconMaskStyle} />}
+        >
+          <Animated.View pointerEvents="none" style={iconContainerStyle}>
+            <View style={iconStyle}>{renderIcon()}</View>
+          </Animated.View>
+        </MaskedView>
+        <MaskedView
+          style={styles.root}
+          maskElement={<Animated.View style={labelMaskStyle} />}
+        >
+          <Animated.View style={labelContainerStyle}>
+            <Text
+              numberOfLines={1}
+              style={labelStyle}
+              onLayout={handleLabelLayout}
             >
-              <AnimatedCircle
-                r={animatedIndicatorSize}
-                translateY={indicatorSize / 2}
-                translateX={indicatorSize / 2}
-                fill={indicatorColor}
-              />
-            </AnimatedSvg>
-          )}
-        </Animated.View>
+              {label}
+            </Text>
+          </Animated.View>
+        </MaskedView>
+        {indicatorVisibility && (
+          <AnimatedSvg
+            style={[
+              styles.root,
+              {
+                left: sub(divide(containerWidth, 2), indicatorSize / 2),
+                top: sub(containerHeight, indicatorSize),
+              },
+            ]}
+            width={indicatorSize}
+            height={indicatorSize}
+          >
+            <AnimatedCircle
+              r={animatedIndicatorSize}
+              translateY={indicatorSize / 2}
+              translateX={indicatorSize / 2}
+              fill={indicatorColor}
+            />
+          </AnimatedSvg>
+        )}
       </Animated.View>
-    </TapGestureHandler>
+    </Animated.View>
   );
 };
 
-const FlashyTabBarItem = memo(
-  FlashyTabBarItemComponent,
-  (prevProps, nextProps) => isEqual(prevProps, nextProps)
-);
+const FlashyTabBarItem = memo(FlashyTabBarItemComponent, isEqual);
 
 export default FlashyTabBarItem;

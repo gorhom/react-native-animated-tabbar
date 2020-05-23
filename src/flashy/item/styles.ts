@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   outerContainer: {
-    overflow: 'hidden',
+    // overflow: 'hidden',
   },
   container: {
     alignSelf: 'center',

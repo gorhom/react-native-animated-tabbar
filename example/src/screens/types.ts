@@ -1,6 +1,7 @@
 export interface DummyScreenParams {
   name: string;
   backgroundColor: string;
+  nextScreen: string;
 }
 
 export type MainTabsParams = {

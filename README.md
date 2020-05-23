@@ -244,28 +244,19 @@ export default () => (
 
 ## Props
 
-| name     | description                                                                                    | required | type                                 | default  |
-| -------- | ---------------------------------------------------------------------------------------------- | -------- | ------------------------------------ | -------- |
-| `preset` | Animation preset, currently options are `['bubble', 'flashy']`.                                | NO       | [`PresetEnum`](./src/presets.ts#L15) | 'bubble' |
-| `tabs`   | Tabs configurations. A generic dictionary of selected preset tab config.                       | YES      | [`TabsConfig<T>`](./src/types.ts#L4) |          |
-| `style`  | View style to be applied to tab bar container, default value will be based on selected preset. | NO       |                                      |          |
-
-### [TabBarAnimationConfigurableProps](./src/types.ts#L8)
-
-| name       | description                                                                   | required | type                                                                                                      | default                |
-| ---------- | ----------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------- |
-| `duration` | Animation duration, default value will be based on selected preset.           | NO       | number                                                                                                    | 500                    |
-| `easing`   | `Reanimated` easing function, default value will be based on selected preset. | NO       | [`EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) | Easing.out(Easing.exp) |
-
-### [TabBarItemConfigurableProps](./src/types.ts#L26)
-
-| name                 | description                                                                       | required | type                                    | default |
-| -------------------- | --------------------------------------------------------------------------------- | -------- | --------------------------------------- | ------- |
-| `itemInnerSpace`     | Inner space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
-| `itemOuterSpace`     | Outer space to be added to the tab item, this may not be applied on some presets. | NO       | number \| [`Space`](./src/types.ts#L21) | 12      |
-| `itemContainerWidth` | Tab Item width stretch strategy, this may not be applied on some presets.         | NO       | 'auto' \| 'fill'                        | 'auto'  |
-| `iconSize`           | Tab item icon size.                                                               | NO       | number                                  | 24      |
-| `isRTL`              | Tab bar layout and animation direction.                                           | NO       | boolean                                 | false   |
+| name                 | description                                                                                         | required | type                                                                                                      | default  |
+| -------------------- | --------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------- | -------- |
+| `preset`             | Animation preset, currently options are `['bubble', 'flashy']`.                                     | NO       | [`PresetEnum`](./src/presets.ts#L15)                                                                      | 'bubble' |
+| `tabs`               | Tabs configurations. A generic dictionary of selected preset tab config.                            | YES      | [`TabsConfig<T>`](./src/types.ts#L4)                                                                      |          |
+| `style`              | View style to be applied to tab bar container, `default value will be based on selected preset`.    | NO       | StyleProp<ViewStyle>                                                                                      |          |
+| `duration`           | Animation duration, `default value will be based on selected preset`.                               | NO       | number                                                                                                    |          |
+| `easing`             | Animation easing function, `default value will be based on selected preset`.                        | NO       | [`EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) |          |
+| `itemInnerSpace`     | Tab item inner space to be added to the tab item, `default value will be based on selected preset`. | NO       | number \| [`Space`](./src/types.ts#L21)                                                                   |          |
+| `itemOuterSpace`     | Tab item outer space to be added to the tab item, `default value will be based on selected preset`. | NO       | number \| [`Space`](./src/types.ts#L21)                                                                   |          |
+| `itemContainerWidth` | Tab item width stretch strategy, `default value will be based on selected preset`.                  | NO       | 'auto' \| 'fill'                                                                                          |          |
+| `iconSize`           | Tab item icon size, `default value will be based on selected preset`.                               | NO       | number                                                                                                    |          |
+| `isRTL`              | Tab bar layout and animation direction.                                                             | NO       | boolean                                                                                                   | false    |
+| `onLongPress`        | Callback on item long press, `by default it is integrated with React Navigation`.                   | NO       | (index: number) => void                                                                                   | noop     |
 
 ## Presets
 

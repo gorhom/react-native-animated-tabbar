@@ -1,12 +1,7 @@
 import React, { useMemo, memo } from 'react';
 import { View, Text } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { State, TapGestureHandler } from 'react-native-gesture-handler';
-import {
-  interpolateColor,
-  onGestureEvent,
-  useValue,
-} from 'react-native-redash';
+import { interpolateColor, useValue } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { withTransition } from '../../withTransition';
@@ -18,10 +13,7 @@ import { TabBarItemProps } from '../../types';
 import { BubbleTabConfig } from '../types';
 import { styles } from './styles';
 
-const { add, interpolate, useCode, set, cond, onChange, eq } = Animated;
-
-const gestureHandler = (state: Animated.Value<State>) =>
-  onGestureEvent({ state });
+const { add, interpolate } = Animated;
 
 export type BubbleTabBarItemProps = TabBarItemProps & BubbleTabConfig;
 
@@ -42,7 +34,7 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
     isRTL,
   } = props;
 
-  // variables
+  //#region extract props
   const {
     itemInnerVerticalSpace,
     itemInnerHorizontalSpace,
@@ -79,8 +71,18 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
       itemOuterHorizontalSpace: _itemOuterHorizontalSpace,
     };
   }, [itemInnerSpace, itemOuterSpace]);
-  const labelWidth = useValue(0);
+  //#endregion
 
+  // animations
+  const animatedFocus = withTransition({
+    index,
+    selectedIndex,
+    duration,
+    easing,
+  });
+
+  //#region styles
+  const labelWidth = useValue(0);
   /**
    * @DEV
    * min width is calculated by adding outer & inner spaces
@@ -97,20 +99,10 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
    */
   const maxWidth = add(labelWidth, itemInnerHorizontalSpace, minWidth);
 
-  // animations
-  const gestureState = useValue(State.UNDETERMINED);
-  const animatedFocus = withTransition({
-    index,
-    selectedIndex,
-    duration,
-    easing,
-  });
   const animatedIconColor = interpolateColor(animatedFocus, {
     inputRange: [0, 1],
     outputRange: [icon.inactiveColor, icon.activeColor],
   });
-
-  //#region styles
   const containerStyle = [
     styles.container,
     {
@@ -159,23 +151,12 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   //#endregion
 
   // callbacks
-  const handleTextlayout = ({
+  const handleTextLayout = ({
     nativeEvent: {
       // @ts-ignore
       layout: { width },
     },
   }) => requestAnimationFrame(() => labelWidth.setValue(width));
-
-  // effects
-  useCode(
-    () => [
-      onChange(
-        gestureState,
-        cond(eq(gestureState, State.END), set(selectedIndex, index))
-      ),
-    ],
-    [gestureState, index]
-  );
 
   // render
   const renderIcon = () => {
@@ -189,22 +170,16 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   };
 
   return (
-    <TapGestureHandler {...gestureHandler(gestureState)}>
-      <Animated.View style={containerStyle}>
-        <Animated.View style={contentContainerStyle}>
-          <View style={iconContainerStyle}>{renderIcon()}</View>
-        </Animated.View>
-        <Animated.View style={labelContainerStyle}>
-          <Text
-            onLayout={handleTextlayout}
-            style={labelStyle}
-            numberOfLines={1}
-          >
-            {label}
-          </Text>
-        </Animated.View>
+    <Animated.View style={containerStyle}>
+      <Animated.View style={contentContainerStyle}>
+        <View style={iconContainerStyle}>{renderIcon()}</View>
       </Animated.View>
-    </TapGestureHandler>
+      <Animated.View style={labelContainerStyle}>
+        <Text onLayout={handleTextLayout} style={labelStyle} numberOfLines={1}>
+          {label}
+        </Text>
+      </Animated.View>
+    </Animated.View>
   );
 };
 

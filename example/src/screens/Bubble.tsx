@@ -75,14 +75,13 @@ const tabs: TabsConfig<BubbleTabConfig, MainTabsParams> = {
 const BubbleScreen = () => {
   return (
     <Tab.Navigator
-      tabBar={props => (
-        <AnimatedTabBar iconSize={20} duration={750} tabs={tabs} {...props} />
-      )}
+      tabBar={props => <AnimatedTabBar iconSize={20} tabs={tabs} {...props} />}
     >
       <Tab.Screen
         name="Home"
         initialParams={{
           backgroundColor: tabs.Home.labelStyle.color,
+          nextScreen: 'Likes',
         }}
         component={DummyScreen}
       />
@@ -90,6 +89,7 @@ const BubbleScreen = () => {
         name="Likes"
         initialParams={{
           backgroundColor: tabs.Likes.labelStyle.color,
+          nextScreen: 'Search',
         }}
         component={DummyScreen}
       />
@@ -97,6 +97,7 @@ const BubbleScreen = () => {
         name="Search"
         initialParams={{
           backgroundColor: tabs.Search.labelStyle.color,
+          nextScreen: 'Profile',
         }}
         component={DummyScreen}
       />
@@ -104,6 +105,7 @@ const BubbleScreen = () => {
         name="Profile"
         initialParams={{
           backgroundColor: tabs.Profile.labelStyle.color,
+          nextScreen: 'Home',
         }}
         component={DummyScreen}
       />

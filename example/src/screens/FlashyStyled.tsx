@@ -84,6 +84,7 @@ const FlashyStyledScreen = () => {
         name="Home"
         initialParams={{
           backgroundColor: '#000',
+          nextScreen: 'Likes',
         }}
         component={DummyScreen}
       />
@@ -91,6 +92,7 @@ const FlashyStyledScreen = () => {
         name="Likes"
         initialParams={{
           backgroundColor: '#000',
+          nextScreen: 'Search',
         }}
         component={DummyScreen}
       />
@@ -98,6 +100,7 @@ const FlashyStyledScreen = () => {
         name="Search"
         initialParams={{
           backgroundColor: '#000',
+          nextScreen: 'Profile',
         }}
         component={DummyScreen}
       />
@@ -105,6 +108,7 @@ const FlashyStyledScreen = () => {
         name="Profile"
         initialParams={{
           backgroundColor: '#000',
+          nextScreen: 'Home',
         }}
         component={DummyScreen}
       />

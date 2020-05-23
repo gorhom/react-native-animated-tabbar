@@ -1,5 +1,5 @@
 import Animated from 'react-native-reanimated';
-import { TabBarAnimationConfigurableProps } from './types';
+import { TabBarConfigurableProps } from './types';
 
 const {
   block,
@@ -20,7 +20,7 @@ const {
 } = Animated;
 
 interface withTransitionProps
-  extends Required<TabBarAnimationConfigurableProps> {
+  extends Required<Pick<TabBarConfigurableProps, 'duration' | 'easing'>> {
   index: number;
   selectedIndex: Animated.Value<number>;
 }
