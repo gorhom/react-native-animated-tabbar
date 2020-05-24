@@ -254,13 +254,20 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
 
   // render
   const renderIcon = () => {
-    return typeof icon.component === 'function'
-      ? icon.component({
-          animatedFocus,
-          color: icon.color,
-          size: iconSize,
-        })
-      : icon.component;
+    const IconComponent: any = icon.component;
+    return typeof IconComponent === 'function' ? (
+      IconComponent({
+        animatedFocus,
+        color: icon.color,
+        size: iconSize,
+      })
+    ) : (
+      <IconComponent
+        animatedFocus={animatedFocus}
+        color={icon.color}
+        size={iconSize}
+      />
+    );
   };
 
   return (
