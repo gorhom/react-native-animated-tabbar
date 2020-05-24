@@ -1,19 +1,30 @@
 import React, { useMemo, useRef, useEffect, useCallback } from 'react';
-import { Text, View, StyleSheet, Dimensions, Button } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text, View, StyleSheet, Alert } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import {
   useRoute,
   RouteProp,
   useScrollToTop,
   useNavigation,
 } from '@react-navigation/native';
+import Button from '../components/button';
 import { MainTabsParams } from './types';
-import { Alert } from 'react-native';
+import { useSafeArea } from 'react-native-safe-area-context';
+
+const data = Array(20)
+  .fill(0)
+  .map((item, index) => ({
+    id: `item-${index}`,
+    title: `Item ${index}`,
+  }));
 
 const DummyScreen = () => {
+  // safe area
+  const { top } = useSafeArea();
+
   // scroll event
-  const scrollViewRef = useRef(null);
-  useScrollToTop(scrollViewRef);
+  const flatlistRef = useRef(null);
+  useScrollToTop(flatlistRef);
 
   // route name
   const { name, params } = useRoute<RouteProp<MainTabsParams, 'Home'>>();
@@ -31,6 +42,16 @@ const DummyScreen = () => {
     ],
     [params]
   );
+  const headerStyle = useMemo(
+    () => [
+      styles.header,
+      {
+        paddingTop: top,
+        backgroundColor: params?.backgroundColor || 'white',
+      },
+    ],
+    [params, top]
+  );
 
   // effects
   useEffect(() => {
@@ -47,20 +68,32 @@ const DummyScreen = () => {
   const handleNextScreenPress = useCallback(() => {
     navigate(params.nextScreen);
   }, [navigate, params]);
+
+  // renders
+  const renderHeader = () => (
+    <View style={headerStyle}>
+      <Text style={styles.text}>{screeName}</Text>
+      <Button
+        label={`navigate to ${params.nextScreen}`}
+        onPress={handleNextScreenPress}
+      />
+    </View>
+  );
+  const renderItem = ({ item }: any) => (
+    <View key={item.id} style={styles.item}>
+      <Text>{item.title}</Text>
+    </View>
+  );
   return (
-    <ScrollView style={rootStyle} ref={scrollViewRef}>
-      <View style={styles.container}>
-        <Text style={styles.text}>{screeName}</Text>
-        <Button
-          title={`navigate to ${params.nextScreen}`}
-          color="white"
-          onPress={handleNextScreenPress}
-        />
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.text}>{screeName}</Text>
-      </View>
-    </ScrollView>
+    <FlatList
+      ref={flatlistRef}
+      data={data}
+      stickyHeaderIndices={[0]}
+      ListHeaderComponent={renderHeader}
+      renderItem={renderItem}
+      style={rootStyle}
+      contentContainerStyle={styles.flatlistContainer}
+    />
   );
 };
 
@@ -68,17 +101,26 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: Dimensions.get('screen').height,
+  flatlistContainer: {
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+  },
+  header: {
+    paddingVertical: 24,
+    alignItems: 'flex-start',
   },
   text: {
     fontSize: 43,
     fontWeight: '600',
     textTransform: 'uppercase',
     color: 'white',
+  },
+  item: {
+    paddingHorizontal: 12,
+    paddingVertical: 24,
+    marginVertical: 6,
+    borderRadius: 2,
+    backgroundColor: '#eee',
   },
 });
 

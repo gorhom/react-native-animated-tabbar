@@ -107,22 +107,22 @@ const BubbleStandaloneScreen = () => {
 
       <Button
         title="Set Index to 0"
-        color={'white'}
+        color="black"
         onPress={() => setIndex(0)}
       />
       <Button
         title="Set Index to 1"
-        color={'white'}
+        color="black"
         onPress={() => setIndex(1)}
       />
       <Button
         title="Set Index to 2"
-        color={'white'}
+        color="black"
         onPress={() => setIndex(2)}
       />
       <Button
         title="Set Index to 3"
-        color={'white'}
+        color="black"
         onPress={() => setIndex(3)}
       />
     </View>
