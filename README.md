@@ -13,16 +13,27 @@ A **60FPS** animated tab bar with a variety of cool animation presets 😎
 
 ## Table of Contents
 
-1. [Installation](#installation)
-2. [Usage](#usage)
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
    1. [Animated Icons](./docs/animated-icons.md)
-3. [Props](#props)
-4. [Presets](#presets)
+4. [Props](#props)
+5. [Presets](#presets)
    1. [Bubble Preset](./docs/bubble-preset.md)
    2. [Flashy Preset](./docs/flashy-preset.md)
-5. [To Do](#to-do)
-6. [Credits](#built-with)
-7. [License](#license)
+6. [To Do](#to-do)
+7. [Credits](#built-with)
+8. [License](#license)
+
+## Features
+
+- `60FPS` smooth animation for all presets.
+- Fully integrated with `React Navigation` v4 & v5.
+- Standalone usage.
+- Right-to-left layout support.
+- Accessibility support.
+- Written in `TypeScript`.
+
 
 ## Installation
 
@@ -37,6 +48,11 @@ npm install @gorhom/animated-tabbar
 ## Usage
 
 Originally `Animated TabBar` worked only with `React Navigation`, but I notice that it could be use as a standalone component and be more useful for the community.
+
+Now the library export two main components:
+
+- `AnimatedTabBar` ( **default** ) : the `React Navigation` integrated tab bar.
+- `AnimatedTabBarView`: the standalone tab bar.
 
 <details>
   <summary>Standalone Component</summary>
@@ -247,12 +263,12 @@ export default () => (
 | name                 | description                                                                                         | required | type                                                                                                      | default  |
 | -------------------- | --------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------- | -------- |
 | `preset`             | Animation preset, currently options are `['bubble', 'flashy']`.                                     | NO       | [`PresetEnum`](./src/presets.ts#L15)                                                                      | 'bubble' |
-| `tabs`               | Tabs configurations. A generic dictionary of selected preset tab config.                            | YES      | [`TabsConfig<T>`](./src/types.ts#L4)                                                                      |          |
+| `tabs`               | Tabs configurations. A generic dictionary of selected preset tab config.                            | YES      | [`TabsConfig<T>`](./src/types.ts#L5)                                                                      |          |
 | `style`              | View style to be applied to tab bar container, `default value will be based on selected preset`.    | NO       | StyleProp<ViewStyle>                                                                                      |          |
 | `duration`           | Animation duration, `default value will be based on selected preset`.                               | NO       | number                                                                                                    |          |
 | `easing`             | Animation easing function, `default value will be based on selected preset`.                        | NO       | [`EasingFunction`](https://github.com/software-mansion/react-native-reanimated/blob/master/src/Easing.js) |          |
-| `itemInnerSpace`     | Tab item inner space to be added to the tab item, `default value will be based on selected preset`. | NO       | number \| [`Space`](./src/types.ts#L21)                                                                   |          |
-| `itemOuterSpace`     | Tab item outer space to be added to the tab item, `default value will be based on selected preset`. | NO       | number \| [`Space`](./src/types.ts#L21)                                                                   |          |
+| `itemInnerSpace`     | Tab item inner space to be added to the tab item, `default value will be based on selected preset`. | NO       | number \| [`Space`](./src/types.ts#L29)                                                                   |          |
+| `itemOuterSpace`     | Tab item outer space to be added to the tab item, `default value will be based on selected preset`. | NO       | number \| [`Space`](./src/types.ts#L34)                                                                   |          |
 | `itemContainerWidth` | Tab item width stretch strategy, `default value will be based on selected preset`.                  | NO       | 'auto' \| 'fill'                                                                                          |          |
 | `iconSize`           | Tab item icon size, `default value will be based on selected preset`.                               | NO       | number                                                                                                    |          |
 | `isRTL`              | Tab bar layout and animation direction.                                                             | NO       | boolean                                                                                                   | false    |
