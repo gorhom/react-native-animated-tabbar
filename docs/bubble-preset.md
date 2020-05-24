@@ -6,16 +6,16 @@
 
 ## BubbleTabConfig
 
-| name              | description                                               | required | type                  | default |
-| ----------------- | --------------------------------------------------------- | -------- | --------------------- | ------- |
-| `labelStyle`      | This will apply to the tab bar item label.                | NO       | TextStyle             |         |
-| `icon`            | Icon configurations.                                      | YES      | object                |         |
-| `├component`     | Icon component, this could be a function or a react node. | YES      | [`ReactNode`](#L46) |         |
-| `├activeColor`   | Icon active color.                                        | YES      | string                |         |
-| `└inactiveColor` | Icon inactive color.                                      | YES      | string                |         |
-| `background`      | Tab bar item background configurations.                   | YES      | object                |         |
-| `├activeColor`   | Background active color.                                  | YES      | string                |         |
-| `└inactiveColor` | Background inactive color.                                | YES      | string                |         |
+| name             | description                                                  | required | type                | default |
+| ---------------- | ------------------------------------------------------------ | -------- | ------------------- | ------- |
+| `labelStyle`     | This will apply to the tab bar item label.                   | NO       | TextStyle           |         |
+| `icon`           | Icon configurations.                                         | YES      | object              |         |
+| `├component`     | Icon component, this could be a function or class component. | YES      | [`ReactNode`](#L46) |         |
+| `├activeColor`   | Icon active color.                                           | YES      | string              |         |
+| `└inactiveColor` | Icon inactive color.                                         | YES      | string              |         |
+| `background`     | Tab bar item background configurations.                      | YES      | object              |         |
+| `├activeColor`   | Background active color.                                     | YES      | string              |         |
+| `└inactiveColor` | Background inactive color.                                   | YES      | string              |         |
 
 ## Interfaces
 
@@ -39,13 +39,12 @@ export interface BubbleTabConfig {
    */
   icon: {
     /**
-     * Tab bar item icon component, this could be a function or
-     * a react node.
-     * @type {(props: BubbleTabIconProps) => React.ReactNode | React.ReactNode}
+     * Tab bar item icon component, this could be a function or class component.
+     * @type {React.FC<BubbleTabIconProps> | React.ComponentClass<BubbleTabIconProps>}
      */
     component:
-      | ((props: BubbleTabIconProps) => React.ReactNode)
-      | React.ReactNode;
+      | React.FC<BubbleTabIconProps>
+      | React.ComponentClass<BubbleTabIconProps>;
 
     /**
      * Icon active color.

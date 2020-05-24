@@ -6,16 +6,16 @@
 
 ## FlashyTabConfig
 
-| name          | description                                               | required | type                  | default            |
-| ------------- | --------------------------------------------------------- | -------- | --------------------- | ------------------ |
-| `labelStyle`  | This will apply to the tab bar item label.                | NO       | TextStyle             |                    |
-| `icon`        | Icon configurations.                                      | YES      | object                |                    |
-| `├component` | Icon component, this could be a function or a react node. | YES      | [`ReactNode`](#L46) |                    |
-| `└color`     | Icon color.                                               | YES      | string                |                    |
-| `indicator`   | Tab bar item indicator configurations.                    | YES      | object                |                    |
-| `├visible`   | To show or hide tab bar item indicator.                   | NO       | boolean               | true               |
-| `├size`      | Indicator size.                                           | NO       | number                | 6                  |
-| `└color`     | Indicator color.                                          | NO       | string                | `label color` |
+| name         | description                                                  | required | type                | default       |
+| ------------ | ------------------------------------------------------------ | -------- | ------------------- | ------------- |
+| `labelStyle` | This will apply to the tab bar item label.                   | NO       | TextStyle           |               |
+| `icon`       | Icon configurations.                                         | YES      | object              |               |
+| `├component` | Icon component, this could be a function or class component. | YES      | [`ReactNode`](#L45) |               |
+| `└color`     | Icon color.                                                  | YES      | string              |               |
+| `indicator`  | Tab bar item indicator configurations.                       | YES      | object              |               |
+| `├visible`   | To show or hide tab bar item indicator.                      | NO       | boolean             | true          |
+| `├size`      | Indicator size.                                              | NO       | number              | 6             |
+| `└color`     | Indicator color.                                             | NO       | string              | `label color` |
 
 ## Interfaces
 
@@ -39,13 +39,12 @@ export interface FlashyTabConfig {
    */
   icon: {
     /**
-     * Tab bar item icon component, this could be a function or
-     * a react node.
-     * @type {(props: FlashyTabIconProps) => React.ReactNode | React.ReactNode}
+     * Tab bar item icon component, this could be a function or class component.
+     * @type {React.FC<FlashyTabIconProps> | React.ComponentClass<FlashyTabIconProps>}
      */
     component:
-      | ((props: FlashyTabIconProps) => React.ReactNode)
-      | React.ReactNode;
+      | React.FC<FlashyTabIconProps>
+      | React.ComponentClass<FlashyTabIconProps>;
 
     /**
      * Icon color.
