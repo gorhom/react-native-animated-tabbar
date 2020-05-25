@@ -1,9 +1,9 @@
 import React, { useMemo, memo } from 'react';
-import { View, ViewStyle, StyleProp } from 'react-native';
+import { View, StyleProp, ViewStyle } from 'react-native';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import BubbleTabBarItem from './item';
-import RawButton from '../components/rawButton';
+import FlashyTabBarItem from './item';
+import RawButton from '../../components/rawButton';
 import {
   DEFAULT_ITEM_ANIMATION_DURATION,
   DEFAULT_ITEM_ANIMATION_EASING,
@@ -13,12 +13,12 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
   DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
-import { noop } from '../utilities';
-import { TabBarViewProps } from '../types';
-import { BubbleTabConfig } from './types';
+import { noop } from '../../utilities';
+import { TabBarViewProps } from '../../types';
+import { FlashyTabConfig } from './types';
 import { styles } from './styles';
 
-const BubbleTabBarComponent = ({
+const FlashyTabBarComponent = ({
   selectedIndex,
   tabs,
   duration = DEFAULT_ITEM_ANIMATION_DURATION,
@@ -30,7 +30,7 @@ const BubbleTabBarComponent = ({
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
   onLongPress = noop,
-}: TabBarViewProps<BubbleTabConfig>) => {
+}: TabBarViewProps<FlashyTabConfig>) => {
   //#region Styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [
@@ -42,7 +42,12 @@ const BubbleTabBarComponent = ({
     ],
     [containerStyleOverride, isRTL]
   );
+  const rawButtonStyle = useMemo(
+    () => (itemContainerWidth === 'fill' ? { flex: 1 } : {}),
+    [itemContainerWidth]
+  );
   //#endregion
+  // render
   return (
     <View style={containerStyle}>
       {tabs.map(({ key, title, ...configs }, index) => {
@@ -51,10 +56,11 @@ const BubbleTabBarComponent = ({
             key={key}
             index={index}
             selectedIndex={selectedIndex}
+            style={rawButtonStyle}
             accessibilityLabel={title}
             onLongPress={onLongPress}
           >
-            <BubbleTabBarItem
+            <FlashyTabBarItem
               index={index}
               selectedIndex={selectedIndex}
               label={title}
@@ -74,6 +80,8 @@ const BubbleTabBarComponent = ({
   );
 };
 
-const BubbleTabBar = memo(BubbleTabBarComponent, isEqual);
+const FlashyTabBar = memo(FlashyTabBarComponent, (prevProps, nextProps) =>
+  isEqual(prevProps, nextProps)
+);
 
-export default BubbleTabBar;
+export default FlashyTabBar;

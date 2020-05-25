@@ -7,7 +7,7 @@ import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
 import { useValues, transformOrigin, toRad } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import { withTransition } from '../../withTransition';
+import { withTransition } from '../../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
@@ -15,7 +15,7 @@ import {
   DEFAULT_INDICATOR_SIZE,
   DEFAULT_INDICATOR_COLOR,
 } from '../constants';
-import { TabBarItemProps } from '../../types';
+import { TabBarItemProps } from '../../../types';
 import { FlashyTabConfig } from '../types';
 import { styles } from './styles';
 

@@ -5,7 +5,7 @@ import {
   BubbleTabIconProps,
   BubbleTabBarItem,
   BubbleTabBarItemProps,
-} from './bubble';
+} from './presets/bubble';
 import { TabsConfig } from './types';
 
 /**
@@ -31,4 +31,4 @@ export {
   FlashyTabIconProps,
   FlashyTabBarItem,
   FlashyTabBarItemProps,
-} from './flashy';
+} from './presets/flashy';
