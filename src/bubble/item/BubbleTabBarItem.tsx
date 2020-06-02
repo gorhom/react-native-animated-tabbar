@@ -160,13 +160,20 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
 
   // render
   const renderIcon = () => {
-    return typeof icon.component === 'function'
-      ? icon.component({
-          animatedFocus,
-          color: animatedIconColor,
-          size: iconSize,
-        })
-      : icon.component;
+    const IconComponent: any = icon.component;
+    return typeof IconComponent === 'function' ? (
+      IconComponent({
+        animatedFocus,
+        color: animatedIconColor,
+        size: iconSize,
+      })
+    ) : (
+      <IconComponent
+        animatedFocus={animatedFocus}
+        color={animatedIconColor}
+        size={iconSize}
+      />
+    );
   };
 
   return (

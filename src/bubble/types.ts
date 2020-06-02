@@ -18,13 +18,12 @@ export interface BubbleTabConfig {
    */
   icon: {
     /**
-     * Tab bar item icon component, this could be a function or
-     * a react node.
-     * @type {(props: BubbleTabIconProps) => React.ReactNode | React.ReactNode}
+     * Tab bar item icon component, this could be a function or class component.
+     * @type {React.FC<BubbleTabIconProps> | React.ComponentClass<BubbleTabIconProps>}
      */
     component:
-      | ((props: BubbleTabIconProps) => React.ReactNode)
-      | React.ReactNode;
+      | React.FC<BubbleTabIconProps>
+      | React.ComponentClass<BubbleTabIconProps>;
 
     /**
      * Icon active color.

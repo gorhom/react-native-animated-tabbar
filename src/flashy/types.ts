@@ -18,13 +18,12 @@ export interface FlashyTabConfig {
    */
   icon: {
     /**
-     * Tab bar item icon component, this could be a function or
-     * a react node.
-     * @type {(props: FlashyTabIconProps) => React.ReactNode | React.ReactNode}
+     * Tab bar item icon component, this could be a function or class component.
+     * @type {React.FC<FlashyTabIconProps> | React.ComponentClass<FlashyTabIconProps>}
      */
     component:
-      | ((props: FlashyTabIconProps) => React.ReactNode)
-      | React.ReactNode;
+      | React.FC<FlashyTabIconProps>
+      | React.ComponentClass<FlashyTabIconProps>;
 
     /**
      * Icon color.
