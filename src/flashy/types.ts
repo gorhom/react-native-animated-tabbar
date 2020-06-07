@@ -23,8 +23,8 @@ export interface FlashyTabConfig {
      */
     component:
       | React.FC<FlashyTabIconProps>
-      | React.ComponentClass<FlashyTabIconProps>;
-
+      | React.ComponentClass<FlashyTabIconProps>
+      | React.ReactNode;
     /**
      * Icon color.
      * @type {string}

@@ -23,7 +23,8 @@ export interface BubbleTabConfig {
      */
     component:
       | React.FC<BubbleTabIconProps>
-      | React.ComponentClass<BubbleTabIconProps>;
+      | React.ComponentClass<BubbleTabIconProps>
+      | React.ReactNode;
 
     /**
      * Icon active color.
