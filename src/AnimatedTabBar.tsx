@@ -1,4 +1,5 @@
 import React, { useMemo, useCallback } from 'react';
+import { Insets } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { AnimatedTabBarView } from './AnimatedTabBarView';
 import Presets, { PresetEnum } from './presets';
@@ -22,6 +23,7 @@ interface AnimatedTabBarProps<T extends PresetEnum>
   descriptors?: any;
   onTabPress?: any;
   onTabLongPress?: any;
+  safeAreaInsets?: Insets;
 }
 
 interface Route {
@@ -41,11 +43,16 @@ export function AnimatedTabBar<T extends PresetEnum>(
     onTabPress,
     onTabLongPress,
     style: overrideStyle,
+    safeAreaInsets: overrideSafeAreaInsets,
     ...rest
   } = props;
 
   //#region styles
-  const { bottom: safeBottomArea } = useSafeArea();
+  const { bottom: _safeBottomArea } = useSafeArea();
+  const safeBottomArea = useMemo(
+    () => overrideSafeAreaInsets?.bottom ?? _safeBottomArea,
+    [overrideSafeAreaInsets, _safeBottomArea]
+  );
   const style = useMemo(
     () => ({
       // @ts-ignore
