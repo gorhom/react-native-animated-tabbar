@@ -29,7 +29,7 @@ const DummyScreen = () => {
   // route name
   const { name, params } = useRoute<RouteProp<MainTabsParams, 'Home'>>();
   const screeName = useMemo(() => params?.name || name, [params, name]);
-
+  const paddingBottom = useMemo(() => params?.paddingBottom || 0, [params]);
   const { navigate, addListener } = useNavigation();
 
   // style
@@ -41,6 +41,15 @@ const DummyScreen = () => {
       },
     ],
     [params]
+  );
+  const contentContainerStyle = useMemo(
+    () => [
+      styles.flatlistContainer,
+      {
+        paddingBottom,
+      },
+    ],
+    [paddingBottom]
   );
   const headerStyle = useMemo(
     () => [
@@ -92,7 +101,7 @@ const DummyScreen = () => {
       ListHeaderComponent={renderHeader}
       renderItem={renderItem}
       style={rootStyle}
-      contentContainerStyle={styles.flatlistContainer}
+      contentContainerStyle={contentContainerStyle}
     />
   );
 };
