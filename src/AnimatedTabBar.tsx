@@ -9,7 +9,7 @@ import { TabsConfig, AnimatedTabBarViewProps } from './types';
 interface AnimatedTabBarProps<T extends PresetEnum>
   extends Omit<
     AnimatedTabBarViewProps<T>,
-    'index' | 'onIndexChange' | 'tabs' | 'onLongPress'
+    'index' | 'onIndexChange' | 'tabs' | 'onLongPress' | 'animatedOnChange'
   > {
   /**
    * Tabs configurations.
