@@ -64,6 +64,10 @@ export interface TabBarViewProps<T> extends TabBarConfigurableProps {
    */
   selectedIndex: Animated.Value<number>;
   /**
+   * Callback when animated index change.
+   */
+  animatedOnChange: (index: number) => Animated.Node<number>;
+  /**
    * Tabs configs.
    */
   tabs: Array<TabInfo & T>;

@@ -8,7 +8,7 @@ import {
 } from 'react-native-gesture-handler';
 import { useValue, useGestureHandler } from 'react-native-redash';
 
-const { useCode, set, cond, onChange, eq } = Animated;
+const { useCode, cond, onChange, eq } = Animated;
 
 interface RawButtonProps {
   index: number;
@@ -16,6 +16,7 @@ interface RawButtonProps {
   accessibilityLabel: string;
   children: React.ReactNode[] | React.ReactNode;
   style?: StyleProp<Animated.AnimateStyle<ViewStyle>>;
+  animatedOnChange: (index: number) => Animated.Node<number>;
   onLongPress: (index: number) => void;
 }
 
@@ -25,6 +26,7 @@ const RawButton = ({
   accessibilityLabel,
   children,
   style,
+  animatedOnChange,
   onLongPress,
 }: RawButtonProps) => {
   // refs
@@ -46,7 +48,7 @@ const RawButton = ({
     () => [
       onChange(
         tapGestureState,
-        cond(eq(tapGestureState, State.END), set(selectedIndex, index))
+        cond(eq(tapGestureState, State.END), animatedOnChange(index))
       ),
       onChange(
         longPressGestureState,
