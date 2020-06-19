@@ -100,7 +100,7 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
     return {
       indicatorVisibility: _indicatorVisible ?? DEFAULT_INDICATOR_VISIBILITY,
       indicatorColor:
-        _indicatorColor ?? labelStyleOverride.color ?? DEFAULT_INDICATOR_COLOR,
+        _indicatorColor ?? labelStyleOverride?.color ?? DEFAULT_INDICATOR_COLOR,
       indicatorSize: _indicatorSize ?? DEFAULT_INDICATOR_SIZE,
     };
   }, [_indicatorVisible, _indicatorColor, _indicatorSize, labelStyleOverride]);
