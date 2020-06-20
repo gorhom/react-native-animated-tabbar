@@ -86,11 +86,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
     key: string;
   } = useMemo(() => {
     if (isReactNavigation5) {
-      return {
-        index: state.index,
-        routes: state.routes,
-        key: state.key,
-      };
+      return state;
     } else {
       return {
         index: navigation!.state.index,
@@ -98,7 +94,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
         key: '',
       };
     }
-  }, [state.index, state.routes, state.key, navigation, isReactNavigation5]);
+  }, [state, navigation, isReactNavigation5]);
 
   const getRouteTitle = useCallback(
     (route: Route) => {
