@@ -2,13 +2,14 @@ import React, { useMemo, useCallback } from 'react';
 import { Insets } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { AnimatedTabBarView } from './AnimatedTabBarView';
+import { useStableCallback } from './utilities';
 import Presets, { PresetEnum } from './presets';
 import { TabsConfig, AnimatedTabBarViewProps } from './types';
 
 interface AnimatedTabBarProps<T extends PresetEnum>
   extends Omit<
     AnimatedTabBarViewProps<T>,
-    'index' | 'onIndexChange' | 'tabs' | 'onLongPress'
+    'index' | 'onIndexChange' | 'tabs' | 'onLongPress' | 'animatedOnChange'
   > {
   /**
    * Tabs configurations.
@@ -85,7 +86,11 @@ export function AnimatedTabBar<T extends PresetEnum>(
     key: string;
   } = useMemo(() => {
     if (isReactNavigation5) {
-      return state!;
+      return {
+        index: state.index,
+        routes: state.routes,
+        key: state.key,
+      };
     } else {
       return {
         index: navigation!.state.index,
@@ -93,7 +98,7 @@ export function AnimatedTabBar<T extends PresetEnum>(
         key: '',
       };
     }
-  }, [state, navigation, isReactNavigation5]);
+  }, [state.index, state.routes, state.key, navigation, isReactNavigation5]);
 
   const getRouteTitle = useCallback(
     (route: Route) => {
@@ -133,44 +138,38 @@ export function AnimatedTabBar<T extends PresetEnum>(
   //#endregion
 
   //#region callbacks
-  const handleIndexChange = useCallback(
-    (index: number) => {
-      if (isReactNavigation5) {
-        const { key, name } = routes[index];
-        const event = navigation.emit({
-          type: 'tabPress',
-          target: key,
-          canPreventDefault: true,
-        });
+  const handleIndexChange = useStableCallback((index: number) => {
+    if (isReactNavigation5) {
+      const focused = index === navigationIndex;
+      const { key, name } = routes[index];
 
-        if (!event.defaultPrevented) {
-          navigation.dispatch({
-            ...CommonActions.navigate(name),
-            target: navigationKey,
-          });
-        }
-      } else {
-        onTabPress({ route: routes[index] });
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isReactNavigation5]
-  );
-  const handleLongPress = useCallback(
-    (index: number) => {
-      if (isReactNavigation5) {
-        const { key } = routes[index];
-        navigation.emit({
-          type: 'tabLongPress',
-          target: key,
+      const event = navigation.emit({
+        type: 'tabPress',
+        target: key,
+        canPreventDefault: true,
+      });
+
+      if (!focused && !event.defaultPrevented) {
+        navigation.dispatch({
+          ...CommonActions.navigate(name),
+          target: navigationKey,
         });
-      } else {
-        onTabLongPress({ route: routes[index] });
       }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isReactNavigation5]
-  );
+    } else {
+      onTabPress({ route: routes[index] });
+    }
+  });
+  const handleLongPress = useStableCallback((index: number) => {
+    if (isReactNavigation5) {
+      const { key } = routes[index];
+      navigation.emit({
+        type: 'tabLongPress',
+        target: key,
+      });
+    } else {
+      onTabLongPress({ route: routes[index] });
+    }
+  });
   //#endregion
 
   // render
