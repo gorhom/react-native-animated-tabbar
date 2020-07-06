@@ -4,7 +4,7 @@ import { useValue } from 'react-native-redash';
 import Presets, { PresetEnum } from './presets';
 import { AnimatedTabBarViewProps } from './types';
 
-const { useCode, call } = Animated;
+const { proc, call } = Animated;
 /**
  * @DEV
  * this is needed for react-native-svg to animate on the native thread.
@@ -67,9 +67,7 @@ export function AnimatedTabBarView<T extends PresetEnum>(
    * selectedIndex value.
    */
   useEffect(() => {
-    if (indexRef.current !== controlledIndex) {
-      selectedIndex.setValue(controlledIndex);
-    }
+    selectedIndex.setValue(controlledIndex);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [controlledIndex]);
 
@@ -77,14 +75,17 @@ export function AnimatedTabBarView<T extends PresetEnum>(
    * @DEV
    * here we listen to selectedIndex and call `onIndexChange`
    */
-  useCode(
+  const animatedOnChange = useMemo(
     () =>
-      call([selectedIndex], args => {
-        if (onIndexChange) {
-          indexRef.current = args[0];
-          onIndexChange(args[0]);
-        }
-      }),
+      proc((index: number) =>
+        call([index], args => {
+          if (onIndexChange) {
+            indexRef.current = args[0];
+            onIndexChange(args[0]);
+          }
+        })
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
   //#endregion
@@ -96,6 +97,7 @@ export function AnimatedTabBarView<T extends PresetEnum>(
     <PresetComponent
       style={style}
       selectedIndex={selectedIndex}
+      animatedOnChange={animatedOnChange}
       // @ts-ignore
       tabs={tabs}
       itemInnerSpace={itemInnerSpace}

@@ -30,6 +30,7 @@ const FlashyTabBarComponent = ({
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
   onLongPress = noop,
+  animatedOnChange,
 }: TabBarViewProps<FlashyTabConfig>) => {
   //#region Styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
@@ -47,6 +48,7 @@ const FlashyTabBarComponent = ({
     [itemContainerWidth]
   );
   //#endregion
+
   // render
   return (
     <View style={containerStyle}>
@@ -58,6 +60,7 @@ const FlashyTabBarComponent = ({
             selectedIndex={selectedIndex}
             style={rawButtonStyle}
             accessibilityLabel={title}
+            animatedOnChange={animatedOnChange}
             onLongPress={onLongPress}
           >
             <FlashyTabBarItem

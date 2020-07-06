@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useSafeArea } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AnimatedTabBar, {
   TabsConfig,
@@ -73,15 +74,57 @@ const tabs: TabsConfig<BubbleTabConfig, MainTabsParams> = {
 };
 
 const BubbleStyledScreen = () => {
+  // hooks
+  const { bottom } = useSafeArea();
+
+  // memos
+  const screenPaddingBottom = useMemo(() => {
+    // icon size + margin padding + outer space + inner space + screen bottom padding
+    return 20 + bottom + 12 * 2 + 12 * 2 + 12;
+  }, [bottom]);
+
+  const tabBarOptions = useMemo(
+    () => ({
+      safeAreaInsets: {
+        bottom: 0,
+      },
+      style: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        borderRadius: 16,
+        marginLeft: 32,
+        marginRight: 32,
+        marginBottom: bottom,
+        backgroundColor: '#000',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.0,
+
+        elevation: 24,
+      },
+    }),
+    [bottom]
+  );
+
+  // render
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        style: {
-          backgroundColor: '#080808',
-        },
-      }}
+      tabBarOptions={tabBarOptions}
       tabBar={props => (
-        <AnimatedTabBar iconSize={20} duration={750} tabs={tabs} {...props} />
+        <AnimatedTabBar
+          iconSize={20}
+          itemOuterSpace={12}
+          itemInnerSpace={12}
+          duration={750}
+          tabs={tabs}
+          {...props}
+        />
       )}
     >
       <Tab.Screen
@@ -89,6 +132,7 @@ const BubbleStyledScreen = () => {
         initialParams={{
           backgroundColor: '#000',
           nextScreen: 'Likes',
+          paddingBottom: screenPaddingBottom,
         }}
         component={DummyScreen}
       />
@@ -97,6 +141,7 @@ const BubbleStyledScreen = () => {
         initialParams={{
           backgroundColor: '#000',
           nextScreen: 'Search',
+          paddingBottom: screenPaddingBottom,
         }}
         component={DummyScreen}
       />
@@ -105,6 +150,7 @@ const BubbleStyledScreen = () => {
         initialParams={{
           backgroundColor: '#000',
           nextScreen: 'Profile',
+          paddingBottom: screenPaddingBottom,
         }}
         component={DummyScreen}
       />
@@ -113,6 +159,7 @@ const BubbleStyledScreen = () => {
         initialParams={{
           backgroundColor: '#000',
           nextScreen: 'Home',
+          paddingBottom: screenPaddingBottom,
         }}
         component={DummyScreen}
       />

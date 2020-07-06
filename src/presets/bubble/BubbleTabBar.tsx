@@ -29,6 +29,7 @@ const BubbleTabBarComponent = ({
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
   style: containerStyleOverride,
+  animatedOnChange,
   onLongPress = noop,
 }: TabBarViewProps<BubbleTabConfig>) => {
   //#region Styles
@@ -52,6 +53,7 @@ const BubbleTabBarComponent = ({
             index={index}
             selectedIndex={selectedIndex}
             accessibilityLabel={title}
+            animatedOnChange={animatedOnChange}
             onLongPress={onLongPress}
           >
             <BubbleTabBarItem
