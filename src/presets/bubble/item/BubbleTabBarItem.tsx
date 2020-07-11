@@ -1,10 +1,9 @@
 import React, { useMemo, memo } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { interpolateColor, useValue } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import { withTransition } from '../../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
@@ -17,23 +16,17 @@ const { add, interpolate } = Animated;
 
 export type BubbleTabBarItemProps = TabBarItemProps & BubbleTabConfig;
 
-const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
-  // props
-  const {
-    index,
-    selectedIndex,
-    label,
-    icon,
-    background,
-    labelStyle: labelStyleOverride,
-    duration,
-    easing,
-    itemInnerSpace,
-    itemOuterSpace,
-    iconSize,
-    isRTL,
-  } = props;
-
+const BubbleTabBarItemComponent = ({
+  animatedFocus,
+  label,
+  icon,
+  background,
+  labelStyle: labelStyleOverride,
+  itemInnerSpace,
+  itemOuterSpace,
+  iconSize,
+  isRTL,
+}: BubbleTabBarItemProps) => {
   //#region extract props
   const {
     itemInnerVerticalSpace,
@@ -73,16 +66,8 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   }, [itemInnerSpace, itemOuterSpace]);
   //#endregion
 
-  // animations
-  const animatedFocus = withTransition({
-    index,
-    selectedIndex,
-    duration,
-    easing,
-  });
-
-  //#region styles
-  const labelWidth = useValue(0);
+  //#region variables
+  const labelWidth = useValue<number>(0);
   /**
    * @DEV
    * min width is calculated by adding outer & inner spaces
@@ -98,7 +83,9 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
    * max width is calculated by adding inner space with label width
    */
   const maxWidth = add(labelWidth, itemInnerHorizontalSpace, minWidth);
+  //#endregion
 
+  //#region styles
   const animatedIconColor = interpolateColor(animatedFocus, {
     inputRange: [0, 1],
     outputRange: [icon.inactiveColor, icon.activeColor],
@@ -153,10 +140,10 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   // callbacks
   const handleTextLayout = ({
     nativeEvent: {
-      // @ts-ignore
       layout: { width },
     },
-  }) => requestAnimationFrame(() => labelWidth.setValue(width));
+  }: LayoutChangeEvent) =>
+    requestAnimationFrame(() => labelWidth.setValue(width));
 
   // render
   const renderIcon = () => {
@@ -190,9 +177,6 @@ const BubbleTabBarItemComponent = (props: BubbleTabBarItemProps) => {
   );
 };
 
-const BubbleTabBarItem = memo(
-  BubbleTabBarItemComponent,
-  (prevProps, nextProps) => isEqual(prevProps, nextProps)
-);
+const BubbleTabBarItem = memo(BubbleTabBarItemComponent, isEqual);
 
 export default BubbleTabBarItem;
