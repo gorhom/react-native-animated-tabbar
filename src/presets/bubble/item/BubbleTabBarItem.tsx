@@ -4,12 +4,12 @@ import Animated from 'react-native-reanimated';
 import { interpolateColor, useValue } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import { withTransition } from '../../withTransition';
+import { withTransition } from '../../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
 } from '../constants';
-import { TabBarItemProps } from '../../types';
+import { TabBarItemProps } from '../../../types';
 import { BubbleTabConfig } from '../types';
 import { styles } from './styles';
 

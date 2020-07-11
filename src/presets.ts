@@ -1,5 +1,5 @@
-import BubbleTabBar, { BubbleTabConfig } from './bubble';
-import FlashyTabBar, { FlashyTabConfig } from './flashy';
+import BubbleTabBar, { BubbleTabConfig } from './presets/bubble';
+import FlashyTabBar, { FlashyTabConfig } from './presets/flashy';
 
 const Presets = {
   bubble: {
