@@ -78,11 +78,13 @@ export interface TabBarViewProps<T> extends TabBarConfigurableProps {
 }
 
 export interface TabBarItemProps
-  extends Required<Omit<TabBarConfigurableProps, 'onLongPress'>> {
+  extends Required<
+    Omit<TabBarConfigurableProps, 'onLongPress' | 'duration' | 'easing'>
+  > {
   /**
-   * Selected animated index.
+   * Animated focus value.
    */
-  selectedIndex: Animated.Value<number>;
+  animatedFocus: Animated.Node<number>;
   /**
    * Tab index.
    */

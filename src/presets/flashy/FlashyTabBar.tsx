@@ -13,6 +13,7 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
   DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
+import { withTransition } from '../../withTransition';
 import { noop } from '../../utilities';
 import { TabBarViewProps } from '../../types';
 import { FlashyTabConfig } from './types';
@@ -32,7 +33,23 @@ const FlashyTabBarComponent = ({
   onLongPress = noop,
   animatedOnChange,
 }: TabBarViewProps<FlashyTabConfig>) => {
-  //#region Styles
+  //#region variables
+  const animatedFocusValues = useMemo(
+    () =>
+      tabs.map((_, index) =>
+        withTransition({
+          index,
+          selectedIndex,
+          duration,
+          easing,
+        })
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [tabs, duration, easing]
+  );
+  //#endregion
+
+  //#region styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [
       styles.container,
@@ -65,10 +82,8 @@ const FlashyTabBarComponent = ({
           >
             <FlashyTabBarItem
               index={index}
-              selectedIndex={selectedIndex}
+              animatedFocus={animatedFocusValues[index]}
               label={title}
-              duration={duration}
-              easing={easing}
               itemInnerSpace={itemInnerSpace}
               itemOuterSpace={itemOuterSpace}
               itemContainerWidth={itemContainerWidth}

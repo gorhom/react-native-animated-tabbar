@@ -1,5 +1,5 @@
 import React, { useMemo, memo } from 'react';
-import { View, Text, ViewStyle } from 'react-native';
+import { View, Text, ViewStyle, LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
 import MaskedView from '@react-native-community/masked-view';
@@ -7,7 +7,6 @@ import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
 import { useValues, transformOrigin, toRad } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import { withTransition } from '../../../withTransition';
 import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
@@ -33,23 +32,17 @@ const { add, interpolate, sub, max, divide, multiply, Extrapolate } = Animated;
 
 export type FlashyTabBarItemProps = TabBarItemProps & FlashyTabConfig;
 
-const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
-  // props
-  const {
-    index,
-    selectedIndex,
-    label,
-    icon,
-    labelStyle: labelStyleOverride,
-    duration,
-    easing,
-    itemInnerSpace,
-    itemOuterSpace,
-    iconSize,
-    indicator,
-    isRTL,
-  } = props;
-
+const FlashyTabBarItemComponent = ({
+  animatedFocus,
+  label,
+  icon,
+  labelStyle: labelStyleOverride,
+  itemInnerSpace,
+  itemOuterSpace,
+  iconSize,
+  indicator,
+  isRTL,
+}: FlashyTabBarItemProps) => {
   //#region extract props
   const {
     itemInnerVerticalSpace,
@@ -106,16 +99,8 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   }, [_indicatorVisible, _indicatorColor, _indicatorSize, labelStyleOverride]);
   //#endregion
 
-  // animations
-  const animatedFocus = withTransition({
-    index,
-    selectedIndex,
-    duration,
-    easing,
-  });
-
-  //#region styles
-  const [labelWidth, labelHeight] = useValues([0, 0]);
+  //#region variables
+  const [labelWidth, labelHeight] = useValues<number>([0, 0]);
   const containerHeight = useMemo(() => iconSize + itemInnerVerticalSpace * 2, [
     iconSize,
     itemInnerVerticalSpace,
@@ -124,6 +109,9 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
     add(labelWidth, itemInnerHorizontalSpace * 2),
     iconSize + itemInnerHorizontalSpace * 2
   );
+  //#endregion
+
+  //#region styles
   const outerContainerStyle = [
     styles.outerContainer,
     {
@@ -243,10 +231,9 @@ const FlashyTabBarItemComponent = (props: FlashyTabBarItemProps) => {
   // callbacks
   const handleLabelLayout = ({
     nativeEvent: {
-      // @ts-ignore
       layout: { height, width },
     },
-  }) =>
+  }: LayoutChangeEvent) =>
     requestAnimationFrame(() => {
       labelWidth.setValue(width);
       labelHeight.setValue(height);

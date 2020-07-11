@@ -13,6 +13,7 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
   DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
+import { withTransition } from '../../withTransition';
 import { noop } from '../../utilities';
 import { TabBarViewProps } from '../../types';
 import { BubbleTabConfig } from './types';
@@ -32,7 +33,23 @@ const BubbleTabBarComponent = ({
   animatedOnChange,
   onLongPress = noop,
 }: TabBarViewProps<BubbleTabConfig>) => {
-  //#region Styles
+  //#region variables
+  const animatedFocusValues = useMemo(
+    () =>
+      tabs.map((_, index) =>
+        withTransition({
+          index,
+          selectedIndex,
+          duration,
+          easing,
+        })
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [tabs, duration, easing]
+  );
+  //#endregion
+
+  //#region styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [
       styles.container,
@@ -44,6 +61,8 @@ const BubbleTabBarComponent = ({
     [containerStyleOverride, isRTL]
   );
   //#endregion
+
+  // render
   return (
     <View style={containerStyle}>
       {tabs.map(({ key, title, ...configs }, index) => {
@@ -58,10 +77,8 @@ const BubbleTabBarComponent = ({
           >
             <BubbleTabBarItem
               index={index}
-              selectedIndex={selectedIndex}
+              animatedFocus={animatedFocusValues[index]}
               label={title}
-              duration={duration}
-              easing={easing}
               itemInnerSpace={itemInnerSpace}
               itemOuterSpace={itemOuterSpace}
               itemContainerWidth={itemContainerWidth}
