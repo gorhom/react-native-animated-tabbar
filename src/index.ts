@@ -1,6 +1,7 @@
 export { AnimatedTabBar as default } from './AnimatedTabBar';
 export { AnimatedTabBarView } from './AnimatedTabBarView';
 import {
+  BubbleConfig,
   BubbleTabConfig,
   BubbleTabIconProps,
   BubbleTabBarItem,
@@ -19,6 +20,7 @@ export type TabsConfigsType = TabsConfig<BubbleTabConfig>;
  * exports presets for customisations
  */
 export {
+  BubbleConfig,
   BubbleTabConfig,
   BubbleTabIconProps,
   BubbleTabBarItem,
@@ -27,6 +29,7 @@ export {
 };
 
 export {
+  FlashyConfig,
   FlashyTabConfig,
   FlashyTabIconProps,
   FlashyTabBarItem,

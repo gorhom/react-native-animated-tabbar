@@ -1,6 +1,8 @@
 import { TextStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
+export interface BubbleConfig {}
+
 export interface BubbleTabConfig {
   /**
    * Tab bar item label style.

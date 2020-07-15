@@ -1,6 +1,8 @@
 import { TextStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
+export interface FlashyConfig {}
+
 export interface FlashyTabConfig {
   /**
    * Tab bar item label style.
