@@ -6,11 +6,7 @@ import { useStableCallback } from './utilities';
 import Presets, { PresetEnum } from './presets';
 import { TabsConfig, AnimatedTabBarViewProps } from './types';
 
-interface AnimatedTabBarProps<T extends PresetEnum>
-  extends Omit<
-    AnimatedTabBarViewProps<T>,
-    'index' | 'onIndexChange' | 'tabs' | 'onLongPress' | 'animatedOnChange'
-  > {
+type AnimatedTabBarProps<T extends PresetEnum> = {
   /**
    * Tabs configurations.
    */
@@ -25,7 +21,10 @@ interface AnimatedTabBarProps<T extends PresetEnum>
   onTabPress?: any;
   onTabLongPress?: any;
   safeAreaInsets?: Insets;
-}
+} & Omit<
+  AnimatedTabBarViewProps<T>,
+  'index' | 'tabs' | 'onIndexChange' | 'onLongPress' | 'animatedOnChange'
+>;
 
 interface Route {
   name: string;
@@ -125,12 +124,14 @@ export function AnimatedTabBar<T extends PresetEnum>(
   );
 
   const routesWithTabConfig = useMemo(() => {
-    return routes.map(route => ({
-      title: getRouteTitle(route),
-      key: route.key,
-      ...getRouteTabConfigs(route),
-    }));
-  }, [routes, getRouteTitle, getRouteTabConfigs]);
+    return routes.reduce((result: { [key: string]: {} }, route) => {
+      result[route.key] = {
+        title: getRouteTitle(route),
+        ...getRouteTabConfigs(route),
+      };
+      return result;
+    }, {});
+  }, [routes, getRouteTitle, getRouteTabConfigs]) as any;
   //#endregion
 
   //#region callbacks

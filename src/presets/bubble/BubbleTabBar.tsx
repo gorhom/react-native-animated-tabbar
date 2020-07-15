@@ -16,7 +16,7 @@ import {
 import { withTransition } from '../../withTransition';
 import { noop } from '../../utilities';
 import { TabBarViewProps } from '../../types';
-import { BubbleTabConfig } from './types';
+import { BubbleConfig, BubbleTabConfig } from './types';
 import { styles } from './styles';
 
 const BubbleTabBarComponent = ({
@@ -32,7 +32,7 @@ const BubbleTabBarComponent = ({
   style: containerStyleOverride,
   animatedOnChange,
   onLongPress = noop,
-}: TabBarViewProps<BubbleTabConfig>) => {
+}: TabBarViewProps<BubbleConfig, BubbleTabConfig>) => {
   //#region variables
   const animatedFocusValues = useMemo(
     () =>
