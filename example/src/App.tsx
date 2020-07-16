@@ -10,6 +10,14 @@ import FlashyScreen from './screens/Flashy';
 import FlashyStyledScreen from './screens/FlashyStyled';
 import FlashyRTLScreen from './screens/FlashyRTL';
 import FlashyStandaloneScreen from './screens/FlashyStandalone';
+import {
+  MaterialIconWithLabelScreen,
+  MaterialIconWithLabelOnFocusScreen,
+  MaterialIconOnlyScreen,
+} from './screens/Material';
+import MaterialStyledScreen from './screens/MaterialStyled';
+import MaterialRTLScreen from './screens/MaterialRTL';
+import MaterialStandaloneScreen from './screens/MaterialStandalone';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +39,24 @@ export default function App() {
         <Stack.Screen
           name="FlashyStandalone"
           component={FlashyStandaloneScreen}
+        />
+        <Stack.Screen
+          name="MaterialIconWithLabel"
+          component={MaterialIconWithLabelScreen}
+        />
+        <Stack.Screen
+          name="MaterialIconOnly"
+          component={MaterialIconOnlyScreen}
+        />
+        <Stack.Screen
+          name="MaterialIconWithLabelOnFocus"
+          component={MaterialIconWithLabelOnFocusScreen}
+        />
+        <Stack.Screen name="MaterialStyled" component={MaterialStyledScreen} />
+        <Stack.Screen name="MaterialRTL" component={MaterialRTLScreen} />
+        <Stack.Screen
+          name="MaterialStandalone"
+          component={MaterialStandaloneScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
