@@ -1,5 +1,10 @@
 import React, { useRef } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import {
+  StyleProp,
+  ViewStyle,
+  LayoutChangeEvent,
+  LayoutRectangle,
+} from 'react-native';
 import Animated, { call } from 'react-native-reanimated';
 import {
   State,
@@ -7,6 +12,7 @@ import {
   LongPressGestureHandler,
 } from 'react-native-gesture-handler';
 import { useValue, useGestureHandler } from 'react-native-redash';
+import { useStableCallback } from '../../utilities';
 
 const { useCode, cond, onChange, eq } = Animated;
 
@@ -18,6 +24,7 @@ interface RawButtonProps {
   style?: StyleProp<Animated.AnimateStyle<ViewStyle>>;
   animatedOnChange: (index: number) => Animated.Node<number>;
   onLongPress: (index: number) => void;
+  onLayout?: (index: number, layout: LayoutRectangle) => void;
 }
 
 const RawButton = ({
@@ -28,6 +35,7 @@ const RawButton = ({
   style,
   animatedOnChange,
   onLongPress,
+  onLayout,
 }: RawButtonProps) => {
   // refs
   const rootViewRef = useRef<Animated.View>(null);
@@ -73,6 +81,13 @@ const RawButton = ({
     ],
     [index]
   );
+
+  // callbacks
+  const handleContainerLayout = useStableCallback(
+    ({ nativeEvent: { layout } }: LayoutChangeEvent) =>
+      onLayout && onLayout(index, layout)
+  );
+
   return (
     <TapGestureHandler
       waitFor={longPressGestureHandlerRef}
@@ -84,6 +99,7 @@ const RawButton = ({
         accessibilityLabel={accessibilityLabel}
         accessibilityRole="button"
         accessibilityComponentType="button"
+        onLayout={handleContainerLayout}
         style={style}
       >
         <LongPressGestureHandler
