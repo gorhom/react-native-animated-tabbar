@@ -31,22 +31,17 @@ interface Route {
   key: string;
 }
 
-export function AnimatedTabBar<T extends PresetEnum>(
-  props: AnimatedTabBarProps<T>
-) {
-  // props
-  const {
-    tabs,
-    state,
-    navigation,
-    descriptors,
-    onTabPress,
-    onTabLongPress,
-    style: overrideStyle,
-    safeAreaInsets: overrideSafeAreaInsets,
-    ...rest
-  } = props;
-
+export function AnimatedTabBar<T extends PresetEnum>({
+  tabs,
+  state,
+  navigation,
+  descriptors,
+  onTabPress,
+  onTabLongPress,
+  style: overrideStyle,
+  safeAreaInsets: overrideSafeAreaInsets,
+  ...rest
+}: AnimatedTabBarProps<T>) {
   //#region styles
   const { bottom: _safeBottomArea } = useSafeArea();
   const safeBottomArea = useMemo(
@@ -175,7 +170,6 @@ export function AnimatedTabBar<T extends PresetEnum>(
       index={navigationIndex}
       onIndexChange={handleIndexChange}
       onLongPress={handleLongPress}
-      // @ts-ignore
       tabs={routesWithTabConfig}
       style={style}
       {...rest}

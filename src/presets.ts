@@ -1,5 +1,9 @@
 import BubbleTabBar, { BubbleConfig, BubbleTabConfig } from './presets/bubble';
 import FlashyTabBar, { FlashyConfig, FlashyTabConfig } from './presets/flashy';
+import MaterialTabBar, {
+  MaterialTabBarConfig,
+  MaterialTabBarItemConfig,
+} from './presets/material';
 
 const Presets = {
   bubble: {
@@ -11,6 +15,11 @@ const Presets = {
     component: FlashyTabBar,
     $c: (undefined as any) as FlashyConfig,
     $t: (undefined as any) as FlashyTabConfig,
+  },
+  material: {
+    component: MaterialTabBar,
+    $c: (undefined as any) as MaterialTabBarConfig,
+    $t: (undefined as any) as MaterialTabBarItemConfig,
   },
 };
 
