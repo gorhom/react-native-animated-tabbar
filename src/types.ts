@@ -1,4 +1,4 @@
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle, Insets } from 'react-native';
 import Animated from 'react-native-reanimated';
 import Presets, { PresetEnum } from './presets';
 
@@ -95,6 +95,34 @@ export interface TabBarItemProps
    */
   label: string;
 }
+
+export type AnimatedTabBarProps<T extends PresetEnum = 'bubble'> = {
+  /**
+   * Animation preset.
+   */
+  preset?: T;
+
+  /**
+   * Tabs configurations.
+   */
+  tabs: TabsConfig<typeof Presets[T]['$t']>;
+
+  /**
+   * Root container style.
+   */
+  style?: StyleProp<ViewStyle>;
+
+  /**
+   * React Navigation Props
+   */
+  state?: any;
+  navigation?: any;
+  descriptors?: any;
+  onTabPress?: any;
+  onTabLongPress?: any;
+  safeAreaInsets?: Insets;
+} & Omit<TabBarConfigurableProps, 'onLongPress'> &
+  ExtractPresetConfig<T>;
 
 export type AnimatedTabBarViewProps<T extends PresetEnum> = {
   /**

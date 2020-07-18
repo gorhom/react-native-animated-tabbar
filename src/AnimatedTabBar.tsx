@@ -1,47 +1,31 @@
 import React, { useMemo, useCallback } from 'react';
-import { Insets } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { AnimatedTabBarView } from './AnimatedTabBarView';
 import { useStableCallback } from './utilities';
-import Presets, { PresetEnum } from './presets';
-import { TabsConfig, AnimatedTabBarViewProps } from './types';
-
-type AnimatedTabBarProps<T extends PresetEnum> = {
-  /**
-   * Tabs configurations.
-   */
-  tabs: TabsConfig<typeof Presets[T]['$t']>;
-
-  /**
-   * React Navigation Props
-   */
-  state?: any;
-  navigation?: any;
-  descriptors?: any;
-  onTabPress?: any;
-  onTabLongPress?: any;
-  safeAreaInsets?: Insets;
-} & Omit<
-  AnimatedTabBarViewProps<T>,
-  'index' | 'tabs' | 'onIndexChange' | 'onLongPress' | 'animatedOnChange'
->;
+import { PresetEnum } from './presets';
+import { AnimatedTabBarProps } from './types';
 
 interface Route {
   name: string;
   key: string;
 }
 
-export function AnimatedTabBar<T extends PresetEnum>({
-  tabs,
-  state,
-  navigation,
-  descriptors,
-  onTabPress,
-  onTabLongPress,
-  style: overrideStyle,
-  safeAreaInsets: overrideSafeAreaInsets,
-  ...rest
-}: AnimatedTabBarProps<T>) {
+export function AnimatedTabBar<T extends PresetEnum>(
+  props: AnimatedTabBarProps<T>
+) {
+  // props
+  const {
+    tabs,
+    state,
+    navigation,
+    descriptors,
+    onTabPress,
+    onTabLongPress,
+    style: overrideStyle,
+    safeAreaInsets: overrideSafeAreaInsets,
+    ...rest
+  } = props;
+
   //#region styles
   const { bottom: _safeBottomArea } = useSafeArea();
   const safeBottomArea = useMemo(
