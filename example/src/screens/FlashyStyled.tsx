@@ -4,7 +4,7 @@ import { useSafeArea } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AnimatedTabBar, {
   TabsConfig,
-  FlashyTabConfig,
+  FlashyTabBarItemConfig,
 } from '@gorhom/animated-tabbar';
 import DummyScreen from './Dummy';
 import HomeSVG from '../svg/HomeSVG';
@@ -15,7 +15,7 @@ import { MainTabsParams } from './types';
 
 const Tab = createBottomTabNavigator<MainTabsParams>();
 
-const tabs: TabsConfig<FlashyTabConfig, MainTabsParams> = {
+const tabs: TabsConfig<FlashyTabBarItemConfig, MainTabsParams> = {
   Home: {
     labelStyle: {
       color: 'white',

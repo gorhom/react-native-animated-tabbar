@@ -4,15 +4,15 @@
 
 ### Icon with label
 
-<img height="200" src="../docs/previews/material-1.gif" />
+<img alt="Icon with label" height="200" src="../docs/previews/material-1.gif" />
 
 ### Icon only
 
-<img height="200" src="../docs/previews/material-2.gif" />
+<img alt="Icon only" height="200" src="../docs/previews/material-2.gif" />
 
 ### Icon with label on focus
 
-<img height="200" src="../docs/previews/material-3.gif" />
+<img alt="Icon with label on focus" height="200" src="../docs/previews/material-3.gif" />
 
 ## Interfaces
 

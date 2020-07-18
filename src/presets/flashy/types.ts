@@ -1,9 +1,10 @@
 import { TextStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
+import { TabBarItemProps } from '../../types';
 
-export interface FlashyConfig {}
+export interface FlashyTabBarConfig {}
 
-export interface FlashyTabConfig {
+export interface FlashyTabBarItemConfig {
   /**
    * Tab bar item label style.
    * @type {TextStyle}
@@ -21,11 +22,11 @@ export interface FlashyTabConfig {
   icon: {
     /**
      * Tab bar item icon component, this could be a function or class component.
-     * @type {React.FC<FlashyTabIconProps> | React.ComponentClass<FlashyTabIconProps>}
+     * @type {React.FC<FlashyTabBarIconProps> | React.ComponentClass<FlashyTabBarIconProps>}
      */
     component:
-      | React.FC<FlashyTabIconProps>
-      | React.ComponentClass<FlashyTabIconProps>
+      | React.FC<FlashyTabBarIconProps>
+      | React.ComponentClass<FlashyTabBarIconProps>
       | React.ReactNode;
     /**
      * Icon color.
@@ -60,8 +61,22 @@ export interface FlashyTabConfig {
   };
 }
 
-export interface FlashyTabIconProps {
+export type FlashyTabBarItemProps = TabBarItemProps & FlashyTabBarItemConfig;
+
+export interface FlashyTabBarIconProps {
+  /**
+   * Tab bar item animated focus value.
+   * @type {Animated.Node<number>}
+   */
   animatedFocus: Animated.Node<number>;
+  /**
+   * Tab bar item icon color.
+   * @type {string}
+   */
   color: string;
+  /**
+   * Tab bar item icon size.
+   * @type {number}
+   */
   size: number;
 }

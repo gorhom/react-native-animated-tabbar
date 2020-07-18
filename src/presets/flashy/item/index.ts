@@ -1,1 +1,1 @@
-export { default, FlashyTabBarItemProps } from './FlashyTabBarItem';
+export { default } from './FlashyTabBarItem';

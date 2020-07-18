@@ -1,39 +1,33 @@
 export { AnimatedTabBar as default } from './AnimatedTabBar';
 export { AnimatedTabBarView } from './AnimatedTabBarView';
 import {
-  BubbleConfig,
-  BubbleTabConfig,
-  BubbleTabIconProps,
+  BubbleTabBarConfig,
+  BubbleTabBarItemConfig,
   BubbleTabBarItem,
   BubbleTabBarItemProps,
+  BubbleTabBarIconProps,
 } from './presets/bubble';
 import { TabsConfig } from './types';
-
-/**
- * @todo
- * remove this on the next major release
- */
-export type TabsConfigsType = TabsConfig<BubbleTabConfig>;
 
 /**
  * @dev
  * exports presets for customisations
  */
 export {
-  BubbleConfig,
-  BubbleTabConfig,
-  BubbleTabIconProps,
+  TabsConfig,
+  BubbleTabBarConfig,
+  BubbleTabBarItemConfig,
   BubbleTabBarItem,
   BubbleTabBarItemProps,
-  TabsConfig,
+  BubbleTabBarIconProps,
 };
 
 export {
-  FlashyConfig,
-  FlashyTabConfig,
-  FlashyTabIconProps,
+  FlashyTabBarConfig,
+  FlashyTabBarItemConfig,
   FlashyTabBarItem,
   FlashyTabBarItemProps,
+  FlashyTabBarIconProps,
 } from './presets/flashy';
 
 export {

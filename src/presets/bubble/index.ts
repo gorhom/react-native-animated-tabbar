@@ -1,3 +1,8 @@
 export { default } from './BubbleTabBar';
-export { default as BubbleTabBarItem, BubbleTabBarItemProps } from './item';
-export { BubbleConfig, BubbleTabConfig, BubbleTabIconProps } from './types';
+export { default as BubbleTabBarItem } from './item';
+export {
+  BubbleTabBarConfig,
+  BubbleTabBarItemConfig,
+  BubbleTabBarItemProps,
+  BubbleTabBarIconProps,
+} from './types';

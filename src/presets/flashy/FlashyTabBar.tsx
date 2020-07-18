@@ -16,7 +16,7 @@ import {
 import { withTransition } from '../../withTransition';
 import { noop } from '../../utilities';
 import { TabBarViewProps } from '../../types';
-import { FlashyConfig, FlashyTabConfig } from './types';
+import { FlashyTabBarConfig, FlashyTabBarItemConfig } from './types';
 import { styles } from './styles';
 
 const FlashyTabBarComponent = ({
@@ -32,7 +32,7 @@ const FlashyTabBarComponent = ({
   style: containerStyleOverride,
   onLongPress = noop,
   animatedOnChange,
-}: TabBarViewProps<FlashyConfig, FlashyTabConfig>) => {
+}: TabBarViewProps<FlashyTabBarConfig, FlashyTabBarItemConfig>) => {
   //#region variables
   const animatedFocusValues = useMemo(
     () =>

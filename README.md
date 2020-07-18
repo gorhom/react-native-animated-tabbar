@@ -22,9 +22,10 @@ A **60FPS** animated tab bar with a variety of cool animation presets 😎
    1. [Bubble Preset](./docs/bubble-preset.md)
    2. [Flashy Preset](./docs/flashy-preset.md)
    3. [Material Preset](./docs/material-preset.md)
-6. [To Do](#to-do)
-7. [Credits](#built-with)
-8. [License](#license)
+6. [Migration](#migration)
+7. [To Do](#to-do)
+8. [Credits](#built-with)
+9. [License](#license)
 
 ## Features
 
@@ -60,9 +61,9 @@ Now the library export two main components:
 ```tsx
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabBarItemConfig} from '@gorhom/animated-tabbar';
 
-const tabs: TabsConfig<BubbleTabConfig> = {
+const tabs: TabsConfig<BubbleTabBarItemConfig> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -135,9 +136,9 @@ export default function App() {
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabBarItemConfig} from '@gorhom/animated-tabbar';
 
-const tabs: TabsConfig<BubbleTabConfig> = {
+const tabs: TabsConfig<BubbleTabBarItemConfig> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -202,7 +203,7 @@ import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabBarItemConfig} from '@gorhom/animated-tabbar';
 
 const tabs: TabsConfig<BubbleTabConfig> = {
   Home: {
@@ -274,6 +275,76 @@ export default () => (
 | `isRTL`              | Tab bar layout and animation direction.                                                             | NO       | boolean                                                                                                   | false    |
 | `onLongPress`        | Callback on item long press, `by default it is integrated with React Navigation`.                   | NO       | (index: number) => void                                                                                   | noop     |
 
+### Preset Configurations
+
+Some presets will have its own configurations - like `material` - which they will be added the root view props.
+
+<details>
+
+  <summary>Material Preset Example</summary>
+
+notice here we added `animation`, `inactiveOpacity` & `inactiveScale` to the root view.
+
+```tsx
+
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AnimatedTabBar, {TabsConfig, MaterialTabBarItemConfig} from '@gorhom/animated-tabbar';
+
+const tabs: TabsConfig<MaterialTabBarItemConfig> = {
+Home: {
+  icon: {
+    component: /* ICON COMPONENT */,
+    color: 'rgba(255,255,255,1)',
+  },
+  ripple: {
+    color: '#5B37B7',
+  },
+},
+Profile: {
+  icon: {
+    component: /* ICON COMPONENT */,
+    color: 'rgba(255,255,255,1)',
+  },
+  ripple: {
+    color: '#1194AA',
+  },
+},
+};
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+return (
+  <NavigationContainer>
+    <Tab.Navigator
+      tabBar={props => (
+        <AnimatedTabBar
+          tabs={tabs}
+          animation="iconWithLabelOnFocus"
+          inactiveOpacity={0.25}
+          inactiveScale={0.5}
+          {...props}
+        />
+      )}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+      />
+    </Tab.Navigator>
+  </NavigationContainer>
+)
+}
+```
+
+</details>
+
 ## Presets
 
 Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets.
@@ -289,6 +360,21 @@ Originally `Animated TabBar` started with `Bubble` as the only animation preset 
 ### [Material Preset](./docs/material-preset.md)
 
 <a href="./docs/material-preset.md"><img height="200" src="./docs/previews/material-1.gif" /></a>
+
+## Migration
+
+<details>
+
+  <summary>V1 to V2</summary>
+
+Due to extend the library functionality, I had to rename existing interfaces as following:
+
+- `BubbleTabConfig` to `BubbleTabBarItemConfig`
+- `BubbleTabIconProps` to `BubbleTabBarIconProps`
+- `FlashyTabConfig` to `FlashyTabBarItemConfig`
+- `FlashyTabIconProps` to `FlashyTabBarIconProps`
+
+</details>
 
 ## To Do
 
