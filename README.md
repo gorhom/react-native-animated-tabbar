@@ -262,7 +262,7 @@ export default () => (
 
 | name                 | description                                                                                         | required | type                                                                                                      | default  |
 | -------------------- | --------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------- | -------- |
-| `preset`             | Animation preset, currently options are `['bubble', 'flashy', 'material']`.                         | NO       | [`PresetEnum`](./src/presets.ts#L8)                                                                      | 'bubble' |
+| `preset`             | Animation preset, currently options are `['bubble', 'flashy', 'material']`.                         | NO       | [`PresetEnum`](./src/presets.ts#L8)                                                                       | 'bubble' |
 | `tabs`               | Tabs configurations. A generic dictionary of selected preset tab config.                            | YES      | [`TabsConfig<T>`](./src/types.ts#L5)                                                                      |          |
 | `style`              | View style to be applied to tab bar container, `default value will be based on selected preset`.    | NO       | StyleProp<ViewStyle>                                                                                      |          |
 | `duration`           | Animation duration, `default value will be based on selected preset`.                               | NO       | number                                                                                                    |          |
@@ -278,10 +278,17 @@ export default () => (
 
 Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets.
 
-<table>
-      <tr><td><a href="./docs/bubble-preset.md">Bubble Preset</a></td><td><a href="./docs/flashy-preset.md">Flashy Preset</a></td><td><a href="./docs/material-preset.md">Material Preset</a></td></tr>
-      <tr><td><a href="./docs/bubble-preset.md"><img src="./docs/previews/bubble.gif" /></a></td><td><a href="./docs/flashy-preset.md"><img src="./docs/previews/flashy.gif" /></a></td><td><a href="./docs/material-preset.md"><img src="./docs/previews/material-#1.gif" /></a></td></tr>
-</table>
+### [Bubble Preset](./docs/bubble-preset.md)
+
+<a href="./docs/bubble-preset.md"><img height="128" src="./docs/previews/bubble.gif" /></a>
+
+### [Flashy Preset](./docs/flashy-preset.md)
+
+<a href="./docs/flashy-preset.md"><img height="128" src="./docs/previews/flashy.gif" /></a>
+
+### [Material Preset](./docs/material-preset.md)
+
+<a href="./docs/material-preset.md"><img height="128" src="./docs/previews/material-1.gif" /></a>
 
 ## To Do
 
