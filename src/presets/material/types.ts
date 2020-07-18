@@ -1,6 +1,6 @@
-import { TextStyle, StyleProp } from 'react-native';
-import Animated from 'react-native-reanimated';
-import { TabBarItemProps } from '../../types';
+import type { TextStyle, StyleProp } from 'react-native';
+import type Animated from 'react-native-reanimated';
+import type { TabBarItemProps } from '../../types';
 
 export interface MaterialTabBarConfig {
   /**

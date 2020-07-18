@@ -14,7 +14,7 @@ import {
   DEFAULT_INDICATOR_SIZE,
   DEFAULT_INDICATOR_COLOR,
 } from '../constants';
-import { FlashyTabBarItemProps } from '../types';
+import type { FlashyTabBarItemProps } from '../types';
 import { styles } from './styles';
 
 const AnimatedSvg = Animated.createAnimatedComponent(

@@ -1,5 +1,5 @@
 import Animated from 'react-native-reanimated';
-import { TabBarConfigurableProps } from './types';
+import type { TabBarConfigurableProps } from './types';
 
 const {
   block,

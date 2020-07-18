@@ -2,8 +2,8 @@ import React, { useMemo, useCallback } from 'react';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { AnimatedTabBarView } from './AnimatedTabBarView';
 import { useStableCallback } from './utilities';
-import { PresetEnum } from './presets';
-import { AnimatedTabBarProps } from './types';
+import type { PresetEnum } from './presets';
+import type { AnimatedTabBarProps } from './types';
 
 interface Route {
   name: string;

@@ -1,6 +1,6 @@
-import { TextStyle } from 'react-native';
-import Animated from 'react-native-reanimated';
-import { TabBarItemProps } from '../../types';
+import type { TextStyle } from 'react-native';
+import type Animated from 'react-native-reanimated';
+import type { TabBarItemProps } from '../../types';
 
 export interface BubbleTabBarConfig {}
 

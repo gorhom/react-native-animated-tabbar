@@ -1,6 +1,7 @@
-import { StyleProp, ViewStyle, Insets } from 'react-native';
-import Animated from 'react-native-reanimated';
-import Presets, { PresetEnum } from './presets';
+import type { StyleProp, ViewStyle, Insets } from 'react-native';
+import type Animated from 'react-native-reanimated';
+import type Presets from './presets';
+import type { PresetEnum } from './presets';
 
 export type TabsConfig<T, P = { [key: string]: T }> = {
   [key in keyof P]: T;

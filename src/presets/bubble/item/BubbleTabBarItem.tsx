@@ -8,7 +8,7 @@ import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
 } from '../constants';
-import { BubbleTabBarItemProps } from '../types';
+import type { BubbleTabBarItemProps } from '../types';
 import { styles } from './styles';
 
 const { add, interpolate } = Animated;
