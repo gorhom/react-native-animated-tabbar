@@ -21,6 +21,7 @@ A **60FPS** animated tab bar with a variety of cool animation presets 😎
 5. [Presets](#presets)
    1. [Bubble Preset](./docs/bubble-preset.md)
    2. [Flashy Preset](./docs/flashy-preset.md)
+   3. [Material Preset](./docs/material-preset.md)
 6. [To Do](#to-do)
 7. [Credits](#built-with)
 8. [License](#license)
@@ -33,7 +34,6 @@ A **60FPS** animated tab bar with a variety of cool animation presets 😎
 - Right-to-left layout support.
 - Accessibility support.
 - Written in `TypeScript`.
-
 
 ## Installation
 
@@ -262,7 +262,7 @@ export default () => (
 
 | name                 | description                                                                                         | required | type                                                                                                      | default  |
 | -------------------- | --------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------- | -------- |
-| `preset`             | Animation preset, currently options are `['bubble', 'flashy']`.                                     | NO       | [`PresetEnum`](./src/presets.ts#L15)                                                                      | 'bubble' |
+| `preset`             | Animation preset, currently options are `['bubble', 'flashy', 'material']`.                         | NO       | [`PresetEnum`](./src/presets.ts#L8)                                                                      | 'bubble' |
 | `tabs`               | Tabs configurations. A generic dictionary of selected preset tab config.                            | YES      | [`TabsConfig<T>`](./src/types.ts#L5)                                                                      |          |
 | `style`              | View style to be applied to tab bar container, `default value will be based on selected preset`.    | NO       | StyleProp<ViewStyle>                                                                                      |          |
 | `duration`           | Animation duration, `default value will be based on selected preset`.                               | NO       | number                                                                                                    |          |
@@ -279,8 +279,8 @@ export default () => (
 Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets.
 
 <table>
-      <tr><td><a href="./docs/bubble-preset.md">Bubble Preset</a></td><td><a href="./docs/flashy-preset.md">Flashy Preset</a></td></tr>
-      <tr><td><a href="./docs/bubble-preset.md"><img src="./docs/previews/bubble.gif" /></a></td><td><a href="./docs/flashy-preset.md"><img src="./docs/previews/flashy.gif" /></a></td></tr>
+      <tr><td><a href="./docs/bubble-preset.md">Bubble Preset</a></td><td><a href="./docs/flashy-preset.md">Flashy Preset</a></td><td><a href="./docs/material-preset.md">Material Preset</a></td></tr>
+      <tr><td><a href="./docs/bubble-preset.md"><img src="./docs/previews/bubble.gif" /></a></td><td><a href="./docs/flashy-preset.md"><img src="./docs/previews/flashy.gif" /></a></td><td><a href="./docs/material-preset.md"><img src="./docs/previews/material-#1.gif" /></a></td></tr>
 </table>
 
 ## To Do
