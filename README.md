@@ -1,7 +1,7 @@
 <div align="center">
 <h1>Animated TabBar</h1>
 
-[![npm](https://badgen.net/npm/v/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar) [![npm](https://badgen.net/npm/license/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar) [![npm](https://badgen.net/npm/types/@gorhom/animated-tabbar)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
+[![npm](https://img.shields.io/npm/v/@gorhom/animated-tabbar?style=flat-square)](https://www.npmjs.com/package/@gorhom/animated-tabbar) [![npm](https://img.shields.io/npm/l/@gorhom/animated-tabbar?style=flat-square)](https://www.npmjs.com/package/@gorhom/animated-tabbar) [![npm](https://img.shields.io/badge/types-included-blue?style=flat-square)](https://www.npmjs.com/package/@gorhom/animated-tabbar)
 
 <img src="./preview.gif">
 
@@ -154,6 +154,72 @@ const tabs: TabsConfig<BubbleTabBarItemConfig> = {
     },
   },
   Profile: {
+    labelStyle: {
+      color: '#1194AA',
+    },
+    icon: {
+      component: /* ICON COMPONENT */,
+      activeColor: 'rgba(17,148,170,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(207,235,239,1)',
+      inactiveColor: 'rgba(207,235,239,0)',
+    },
+  },
+};
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        tabBar={props => (
+          <AnimatedTabBar tabs={tabs} {...props} />
+        )}
+      >
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
+}
+```
+
+</details>
+
+<details>
+  <summary>React Navigation v5 ( JavaScript )</summary>
+
+```jsx
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AnimatedTabBar from '@gorhom/animated-tabbar';
+
+const tabs = {
+  Home: { // < Screen name
+    labelStyle: {
+      color: '#5B37B7',
+    },
+    icon: {
+      component: /* ICON COMPONENT */,
+      activeColor: 'rgba(91,55,183,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(223,215,243,1)',
+      inactiveColor: 'rgba(223,215,243,0)',
+    },
+  },
+  Profile: { // < Screen name
     labelStyle: {
       color: '#1194AA',
     },
