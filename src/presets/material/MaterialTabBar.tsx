@@ -76,8 +76,11 @@ const MaterialTabBarComponent = ({
       containerStyleOverride,
       {
         flexDirection: isRTL ? 'row-reverse' : 'row',
+        // @ts-ignore
+        backgroundColor: tabs[selectedIndex._value ?? 0].ripple.color,
       },
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [containerStyleOverride, isRTL]
   );
   const rawButtonStyle = useMemo(

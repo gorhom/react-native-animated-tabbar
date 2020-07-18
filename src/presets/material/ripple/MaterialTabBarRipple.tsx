@@ -56,7 +56,6 @@ const MaterialTabBarRippleComponent = ({
     () => [
       styles.container,
       {
-        backgroundColor: 'red',
         width,
         height,
       },
