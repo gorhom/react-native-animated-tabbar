@@ -2,11 +2,17 @@
 
 > This preset is inspired by [timomeh](https://github.com/timomeh) works on [react-native-material-bottom-navigation](https://github.com/timomeh/react-native-material-bottom-navigation).
 
-<div>
-  <img height="128" style="margin-right: 6px" src="../docs/previews/material-1.gif" />
-  <img height="128" style="margin-right: 6px" src="../docs/previews/material-2.gif" />
-  <img height="128" style="margin-right: 6px" src="../docs/previews/material-3.gif" />
-</div>
+### Icon with label
+
+<img height="200" src="../docs/previews/material-1.gif" />
+
+### Icon only
+
+<img height="200" src="../docs/previews/material-2.gif" />
+
+### Icon with label on focus
+
+<img height="200" src="../docs/previews/material-3.gif" />
 
 ## Interfaces
 

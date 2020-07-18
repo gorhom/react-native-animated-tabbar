@@ -280,15 +280,15 @@ Originally `Animated TabBar` started with `Bubble` as the only animation preset 
 
 ### [Bubble Preset](./docs/bubble-preset.md)
 
-<a href="./docs/bubble-preset.md"><img height="128" src="./docs/previews/bubble.gif" /></a>
+<a href="./docs/bubble-preset.md"><img height="200" src="./docs/previews/bubble.gif" /></a>
 
 ### [Flashy Preset](./docs/flashy-preset.md)
 
-<a href="./docs/flashy-preset.md"><img height="128" src="./docs/previews/flashy.gif" /></a>
+<a href="./docs/flashy-preset.md"><img height="200" src="./docs/previews/flashy.gif" /></a>
 
 ### [Material Preset](./docs/material-preset.md)
 
-<a href="./docs/material-preset.md"><img height="128" src="./docs/previews/material-1.gif" /></a>
+<a href="./docs/material-preset.md"><img height="200" src="./docs/previews/material-1.gif" /></a>
 
 ## To Do
 
