@@ -22,9 +22,10 @@ A **60FPS** animated tab bar with a variety of cool animation presets 😎
    1. [Bubble Preset](./docs/bubble-preset.md)
    2. [Flashy Preset](./docs/flashy-preset.md)
    3. [Material Preset](./docs/material-preset.md)
-6. [To Do](#to-do)
-7. [Credits](#built-with)
-8. [License](#license)
+6. [Migration](#migration)
+7. [To Do](#to-do)
+8. [Credits](#built-with)
+9. [License](#license)
 
 ## Features
 
@@ -289,6 +290,21 @@ Originally `Animated TabBar` started with `Bubble` as the only animation preset 
 ### [Material Preset](./docs/material-preset.md)
 
 <a href="./docs/material-preset.md"><img height="200" src="./docs/previews/material-1.gif" /></a>
+
+## Migration
+
+<details>
+
+  <summary>V1 to V2</summary>
+
+Due to extend the library functionality, I had to rename existing interfaces as following:
+
+- `BubbleTabConfig` to `BubbleTabBarItemConfig`
+- `BubbleTabIconProps` to `BubbleTabBarIconProps`
+- `FlashyTabConfig` to `FlashyTabBarItemConfig`
+- `FlashyTabIconProps` to `FlashyTabBarIconProps`
+
+</details>
 
 ## To Do
 
