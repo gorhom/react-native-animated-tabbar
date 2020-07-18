@@ -34,6 +34,7 @@ export function AnimatedTabBarView<T extends PresetEnum>(
     duration,
     easing,
     isRTL,
+    ...rest
   } = props;
 
   // verify props
@@ -108,6 +109,7 @@ export function AnimatedTabBarView<T extends PresetEnum>(
       easing={easing}
       isRTL={isRTL}
       onLongPress={onLongPress}
+      {...rest}
     />
   );
 }

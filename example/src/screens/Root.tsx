@@ -46,6 +46,35 @@ const examples = [
       },
     ],
   },
+  {
+    title: 'Material',
+    data: [
+      {
+        name: 'Default',
+        slug: 'MaterialIconWithLabel',
+      },
+      {
+        name: 'Icon Only',
+        slug: 'MaterialIconOnly',
+      },
+      {
+        name: 'Icon With Label On Focus',
+        slug: 'MaterialIconWithLabelOnFocus',
+      },
+      {
+        name: 'Styled',
+        slug: 'MaterialStyled',
+      },
+      {
+        name: 'RTL',
+        slug: 'MaterialRTL',
+      },
+      {
+        name: 'Standalone',
+        slug: 'MaterialStandalone',
+      },
+    ],
+  },
 ];
 
 const RootScreen = () => {

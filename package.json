@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "lodash.isequal": "^4.5.0",
-    "react-native-redash": "^13.6.0"
+    "react-native-redash": "^14.2.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
@@ -59,7 +59,7 @@
     "react": "~16.9.0",
     "react-native": "~0.61.5",
     "react-native-gesture-handler": "^1.6.1",
-    "react-native-reanimated": "^1.8.0",
+    "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-svg": "^12.1.0",
     "release-it": "^13.1.1",

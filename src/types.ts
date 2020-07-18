@@ -124,32 +124,6 @@ export type AnimatedTabBarViewProps<T extends PresetEnum> = {
 } & TabBarConfigurableProps &
   ExtractPresetConfig<T>;
 
-// export interface AnimatedTabBarViewProps<T extends PresetEnum>
-//   extends Omit<
-//     TabBarViewProps<{}, {}>,
-//     'selectedIndex' | 'tabs' | 'animatedOnChange'
-//   > {
-//   /**
-//    * Initial index.
-//    */
-//   index: number;
-
-//   /**
-//    * Tabs configurations.
-//    */
-//   tabs: TabsConfig<typeof Presets[T]['$t'] & Partial<TabInfo>>;
-
-//   /**
-//    * Animation preset.
-//    */
-//   preset?: T;
-
-//   /**
-//    * Callback when animated index changes.
-//    */
-//   onIndexChange: (index: number) => void;
-// }
-
 export type ExtractPresetConfig<T extends PresetEnum> = {
   [k in keyof typeof Presets[T]['$c']]: typeof Presets[T]['$c'][k];
 };

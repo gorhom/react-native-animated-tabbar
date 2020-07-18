@@ -35,3 +35,11 @@ export {
   FlashyTabBarItem,
   FlashyTabBarItemProps,
 } from './presets/flashy';
+
+export {
+  MaterialTabBarConfig,
+  MaterialTabBarItemConfig,
+  MaterialTabBarItem,
+  MaterialTabBarItemProps,
+  MaterialTabBarIconProps,
+} from './presets/material';
