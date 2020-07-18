@@ -47,6 +47,9 @@ export interface MaterialTabBarItemConfig {
      */
     color: string;
   };
+  /**
+   * Tab bar item ripple config.
+   */
   ripple: {
     /**
      * Tab bar item ripple color.
@@ -66,7 +69,19 @@ export type MaterialTabBarItemProps = TabBarItemProps &
   >;
 
 export interface MaterialTabBarIconProps {
+  /**
+   * Tab bar item animated focus value.
+   * @type {Animated.Node<number>}
+   */
   animatedFocus: Animated.Node<number>;
+  /**
+   * Tab bar item icon color.
+   * @type {string}
+   */
   color: string;
+  /**
+   * Tab bar item icon size.
+   * @type {number}
+   */
   size: number;
 }
