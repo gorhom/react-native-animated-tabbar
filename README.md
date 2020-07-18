@@ -275,6 +275,76 @@ export default () => (
 | `isRTL`              | Tab bar layout and animation direction.                                                             | NO       | boolean                                                                                                   | false    |
 | `onLongPress`        | Callback on item long press, `by default it is integrated with React Navigation`.                   | NO       | (index: number) => void                                                                                   | noop     |
 
+### Preset Configurations
+
+Some presets will have its own configurations - like `material` - which they will be added the root view props.
+
+<details>
+
+  <summary>Material Preset Example</summary>
+
+notice here we added `animation`, `inactiveOpacity` & `inactiveScale` to the root view.
+
+```tsx
+
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AnimatedTabBar, {TabsConfig, MaterialTabBarItemConfig} from '@gorhom/animated-tabbar';
+
+const tabs: TabsConfig<MaterialTabBarItemConfig> = {
+Home: {
+  icon: {
+    component: /* ICON COMPONENT */,
+    color: 'rgba(255,255,255,1)',
+  },
+  ripple: {
+    color: '#5B37B7',
+  },
+},
+Profile: {
+  icon: {
+    component: /* ICON COMPONENT */,
+    color: 'rgba(255,255,255,1)',
+  },
+  ripple: {
+    color: '#1194AA',
+  },
+},
+};
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+return (
+  <NavigationContainer>
+    <Tab.Navigator
+      tabBar={props => (
+        <AnimatedTabBar
+          tabs={tabs}
+          animation="iconWithLabelOnFocus"
+          inactiveOpacity={0.25}
+          inactiveScale={0.5}
+          {...props}
+        />
+      )}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+      />
+    </Tab.Navigator>
+  </NavigationContainer>
+)
+}
+```
+
+</details>
+
 ## Presets
 
 Originally `Animated TabBar` started with `Bubble` as the only animation preset embedded. However, I felt the library structure could include many other variety of animation presets.
