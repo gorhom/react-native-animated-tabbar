@@ -1,9 +1,10 @@
 import { TextStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
+import { TabBarItemProps } from '../../types';
 
-export interface BubbleConfig {}
+export interface BubbleTabBarConfig {}
 
-export interface BubbleTabConfig {
+export interface BubbleTabBarItemConfig {
   /**
    * Tab bar item label style.
    * @type {TextStyle}
@@ -21,11 +22,11 @@ export interface BubbleTabConfig {
   icon: {
     /**
      * Tab bar item icon component, this could be a function or class component.
-     * @type {React.FC<BubbleTabIconProps> | React.ComponentClass<BubbleTabIconProps>}
+     * @type {React.FC<BubbleTabBarIconProps> | React.ComponentClass<BubbleTabBarIconProps>}
      */
     component:
-      | React.FC<BubbleTabIconProps>
-      | React.ComponentClass<BubbleTabIconProps>
+      | React.FC<BubbleTabBarIconProps>
+      | React.ComponentClass<BubbleTabBarIconProps>
       | React.ReactNode;
 
     /**
@@ -53,8 +54,22 @@ export interface BubbleTabConfig {
   };
 }
 
-export interface BubbleTabIconProps {
+export type BubbleTabBarItemProps = TabBarItemProps & BubbleTabBarItemConfig;
+
+export interface BubbleTabBarIconProps {
+  /**
+   * Tab bar item animated focus value.
+   * @type {Animated.Node<number>}
+   */
   animatedFocus: Animated.Node<number>;
+  /**
+   * Tab bar item animated icon color.
+   * @type {Animated.Node<string | number>}
+   */
   color: Animated.Node<string | number>;
+  /**
+   * Tab bar item icon size.
+   * @type {number}
+   */
   size: number;
 }

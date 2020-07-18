@@ -1,3 +1,8 @@
 export { default } from './FlashyTabBar';
-export { default as FlashyTabBarItem, FlashyTabBarItemProps } from './item';
-export { FlashyConfig, FlashyTabConfig, FlashyTabIconProps } from './types';
+export { default as FlashyTabBarItem } from './item';
+export {
+  FlashyTabBarConfig,
+  FlashyTabBarItemConfig,
+  FlashyTabBarItemProps,
+  FlashyTabBarIconProps,
+} from './types';

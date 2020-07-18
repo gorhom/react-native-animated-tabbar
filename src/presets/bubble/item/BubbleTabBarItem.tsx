@@ -8,13 +8,10 @@ import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
 } from '../constants';
-import { TabBarItemProps } from '../../../types';
-import { BubbleTabConfig } from '../types';
+import { BubbleTabBarItemProps } from '../types';
 import { styles } from './styles';
 
 const { add, interpolate } = Animated;
-
-export type BubbleTabBarItemProps = TabBarItemProps & BubbleTabConfig;
 
 const BubbleTabBarItemComponent = ({
   animatedFocus,

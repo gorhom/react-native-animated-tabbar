@@ -14,8 +14,7 @@ import {
   DEFAULT_INDICATOR_SIZE,
   DEFAULT_INDICATOR_COLOR,
 } from '../constants';
-import { TabBarItemProps } from '../../../types';
-import { FlashyTabConfig } from '../types';
+import { FlashyTabBarItemProps } from '../types';
 import { styles } from './styles';
 
 const AnimatedSvg = Animated.createAnimatedComponent(
@@ -29,8 +28,6 @@ const AnimatedCircle = Animated.createAnimatedComponent(
 >;
 
 const { add, interpolate, sub, max, divide, multiply, Extrapolate } = Animated;
-
-export type FlashyTabBarItemProps = TabBarItemProps & FlashyTabConfig;
 
 const FlashyTabBarItemComponent = ({
   animatedFocus,

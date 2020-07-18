@@ -3,7 +3,7 @@ import { View, StyleSheet, Button, StatusBar, Alert } from 'react-native';
 import {
   AnimatedTabBarView,
   TabsConfig,
-  BubbleTabConfig,
+  BubbleTabBarItemConfig,
 } from '@gorhom/animated-tabbar';
 import HomeSVG from '../svg/HomeSVG';
 import LikeSVG from '../svg/LikeSVG';
@@ -11,7 +11,7 @@ import SearchSVG from '../svg/SearchSVG';
 import ProfileSVG from '../svg/ProfileSVG';
 import { MainTabsParams } from './types';
 
-const tabs: TabsConfig<BubbleTabConfig, MainTabsParams> = {
+const tabs: TabsConfig<BubbleTabBarItemConfig, MainTabsParams> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',

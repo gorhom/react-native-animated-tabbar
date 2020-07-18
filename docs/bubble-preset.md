@@ -2,9 +2,15 @@
 
 > This preset is inspired by [Aurélien Salomon](https://dribbble.com/aureliensalomon) works on [Dribbble](https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern-Mobile-UX-Design).
 
-![Bubble Preview](/docs/previews/bubble.gif)
+<img alt="Default" height="200" src="../docs/previews/bubble.gif" />
 
-## BubbleTabConfig
+## Interfaces
+
+### BubbleTabBarConfig
+
+> no preset config
+
+### BubbleTabBarItemConfig
 
 | name             | description                                                  | required | type                | default |
 | ---------------- | ------------------------------------------------------------ | -------- | ------------------- | ------- |
@@ -17,12 +23,11 @@
 | `├activeColor`   | Background active color.                                     | YES      | string              |         |
 | `└inactiveColor` | Background inactive color.                                   | YES      | string              |         |
 
-## Interfaces
-
-### `BubbleTabConfig`
+<details>
+  <summary>TypeScript Interface</summary>
 
 ```ts
-export interface BubbleTabConfig {
+export interface BubbleTabBarItemConfig {
   /**
    * Tab bar item label style.
    * @type {TextStyle}
@@ -40,11 +45,12 @@ export interface BubbleTabConfig {
   icon: {
     /**
      * Tab bar item icon component, this could be a function or class component.
-     * @type {React.FC<BubbleTabIconProps> | React.ComponentClass<BubbleTabIconProps>}
+     * @type {React.FC<BubbleTabBarIconProps> | React.ComponentClass<BubbleTabBarIconProps>}
      */
     component:
-      | React.FC<BubbleTabIconProps>
-      | React.ComponentClass<BubbleTabIconProps>;
+      | React.FC<BubbleTabBarIconProps>
+      | React.ComponentClass<BubbleTabBarIconProps>
+      | React.ReactNode;
 
     /**
      * Icon active color.
@@ -72,12 +78,37 @@ export interface BubbleTabConfig {
 }
 ```
 
-### `BubbleTabIconProps`
+</details>
+
+### BubbleTabBarIconProps
+
+| name            | description                        | required | type                           | default |
+| --------------- | ---------------------------------- | -------- | ------------------------------ | ------- |
+| `animatedFocus` | Tab bar item animated focus value. | YES      | `Animated.Node<number>`        |
+| `color`         | Tab bar item animated icon color.  | YES      | `Animated.Node<number|string>` |         |
+| `size`          | Tab bar item icon size.            | YES      | number                         |         |
+
+<details>
+  <summary>TypeScript Interface</summary>
 
 ```ts
-export interface BubbleTabIconProps {
+export interface MaterialTabBarIconProps {
+  /**
+   * Tab bar item animated focus value.
+   * @type {Animated.Node<number>}
+   */
   animatedFocus: Animated.Node<number>;
+  /**
+   * Tab bar item animated icon color.
+   * @type {Animated.Node<string | number>}
+   */
   color: Animated.Node<string | number>;
+  /**
+   * Tab bar item icon size.
+   * @type {number}
+   */
   size: number;
 }
 ```
+
+</details>

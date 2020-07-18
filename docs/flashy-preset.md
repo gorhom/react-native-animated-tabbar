@@ -2,9 +2,15 @@
 
 > This preset is inspired by [Cuberto](https://dribbble.com/cuberto) works on [Dribbble](https://dribbble.com/shots/5605168-Toolbar-icons-animation).
 
-![Flashy Preview](/docs/previews/flashy.gif)
+<img alt="Default" height="200" src="../docs/previews/flashy.gif" />
 
-## FlashyTabConfig
+## Interfaces
+
+## FlashyTabBarConfig
+
+> no preset config
+
+### FlashyTabBarItemConfig
 
 | name         | description                                                  | required | type                | default       |
 | ------------ | ------------------------------------------------------------ | -------- | ------------------- | ------------- |
@@ -17,12 +23,11 @@
 | `├size`      | Indicator size.                                              | NO       | number              | 6             |
 | `└color`     | Indicator color.                                             | NO       | string              | `label color` |
 
-## Interfaces
+<details>
+  <summary>TypeScript Interface</summary>
 
-### `FlashyTabConfig`
-
-```ts
-export interface FlashyTabConfig {
+```tsx
+export interface FlashyTabBarItemConfig {
   /**
    * Tab bar item label style.
    * @type {TextStyle}
@@ -40,12 +45,12 @@ export interface FlashyTabConfig {
   icon: {
     /**
      * Tab bar item icon component, this could be a function or class component.
-     * @type {React.FC<FlashyTabIconProps> | React.ComponentClass<FlashyTabIconProps>}
+     * @type {React.FC<FlashyTabBarIconProps> | React.ComponentClass<FlashyTabBarIconProps>}
      */
     component:
-      | React.FC<FlashyTabIconProps>
-      | React.ComponentClass<FlashyTabIconProps>;
-
+      | React.FC<FlashyTabBarIconProps>
+      | React.ComponentClass<FlashyTabBarIconProps>
+      | React.ReactNode;
     /**
      * Icon color.
      * @type {string}
@@ -80,12 +85,37 @@ export interface FlashyTabConfig {
 }
 ```
 
-### `FlashyTabIconProps`
+</details>
+
+### FlashyTabBarIconProps
+
+| name            | description                        | required | type                    | default |
+| --------------- | ---------------------------------- | -------- | ----------------------- | ------- |
+| `animatedFocus` | Tab bar item animated focus value. | YES      | `Animated.Node<number>` |
+| `color`         | Tab bar item icon color.           | YES      | number                  |         |
+| `size`          | Tab bar item icon size.            | YES      | number                  |         |
+
+<details>
+  <summary>TypeScript Interface</summary>
 
 ```ts
-export interface FlashyTabIconProps {
+export interface FlashyTabBarIconProps {
+  /**
+   * Tab bar item animated focus value.
+   * @type {Animated.Node<number>}
+   */
   animatedFocus: Animated.Node<number>;
+  /**
+   * Tab bar item icon color.
+   * @type {string}
+   */
   color: string;
+  /**
+   * Tab bar item icon size.
+   * @type {number}
+   */
   size: number;
 }
 ```
+
+</details>
