@@ -61,9 +61,9 @@ Now the library export two main components:
 ```tsx
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabBarItemConfig} from '@gorhom/animated-tabbar';
 
-const tabs: TabsConfig<BubbleTabConfig> = {
+const tabs: TabsConfig<BubbleTabBarItemConfig> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -136,9 +136,9 @@ export default function App() {
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabBarItemConfig} from '@gorhom/animated-tabbar';
 
-const tabs: TabsConfig<BubbleTabConfig> = {
+const tabs: TabsConfig<BubbleTabBarItemConfig> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
@@ -203,7 +203,7 @@ import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import AnimatedTabBar, {TabsConfig, BubbleTabConfig} from '@gorhom/animated-tabbar';
+import AnimatedTabBar, {TabsConfig, BubbleTabBarItemConfig} from '@gorhom/animated-tabbar';
 
 const tabs: TabsConfig<BubbleTabConfig> = {
   Home: {
