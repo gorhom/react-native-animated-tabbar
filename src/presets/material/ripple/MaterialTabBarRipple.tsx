@@ -18,7 +18,7 @@ import Animated, {
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { useValues, get, useValue } from 'react-native-redash';
-import { MaterialTabBarItemConfig } from '../types';
+import type { MaterialTabBarItemConfig } from '../types';
 import { styles } from './styles';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);

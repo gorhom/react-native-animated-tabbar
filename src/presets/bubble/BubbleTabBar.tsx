@@ -15,8 +15,8 @@ import {
 } from './constants';
 import { withTransition } from '../../withTransition';
 import { noop } from '../../utilities';
-import { TabBarViewProps } from '../../types';
-import { BubbleTabBarConfig, BubbleTabBarItemConfig } from './types';
+import type { TabBarViewProps } from '../../types';
+import type { BubbleTabBarConfig, BubbleTabBarItemConfig } from './types';
 import { styles } from './styles';
 
 const BubbleTabBarComponent = ({

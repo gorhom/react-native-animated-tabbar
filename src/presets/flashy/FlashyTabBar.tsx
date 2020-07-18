@@ -15,8 +15,8 @@ import {
 } from './constants';
 import { withTransition } from '../../withTransition';
 import { noop } from '../../utilities';
-import { TabBarViewProps } from '../../types';
-import { FlashyTabBarConfig, FlashyTabBarItemConfig } from './types';
+import type { TabBarViewProps } from '../../types';
+import type { FlashyTabBarConfig, FlashyTabBarItemConfig } from './types';
 import { styles } from './styles';
 
 const FlashyTabBarComponent = ({

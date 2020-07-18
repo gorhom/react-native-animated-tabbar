@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import {
+import type {
   StyleProp,
   ViewStyle,
   LayoutChangeEvent,

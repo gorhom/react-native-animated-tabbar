@@ -2,7 +2,7 @@ import React, { useMemo, useEffect, useRef } from 'react';
 import Animated from 'react-native-reanimated';
 import { useValue } from 'react-native-redash';
 import Presets, { PresetEnum } from './presets';
-import { AnimatedTabBarViewProps } from './types';
+import type { AnimatedTabBarViewProps } from './types';
 
 const { proc, call } = Animated;
 /**

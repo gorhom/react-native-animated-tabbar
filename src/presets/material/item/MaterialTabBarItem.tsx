@@ -1,5 +1,5 @@
 import React, { useMemo, memo, useCallback } from 'react';
-import { LayoutChangeEvent } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { transformOrigin, useValue } from 'react-native-redash';
 // @ts-ignore 😞
@@ -9,7 +9,7 @@ import {
   DEFAULT_ITEM_INNER_SPACE,
   DEFAULT_ITEM_OUTER_SPACE,
 } from '../constants';
-import { MaterialTabBarItemProps } from '../types';
+import type { MaterialTabBarItemProps } from '../types';
 import { styles } from './styles';
 
 const { interpolate, divide, Extrapolate } = Animated;

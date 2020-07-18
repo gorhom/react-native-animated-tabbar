@@ -25,8 +25,8 @@ import {
 } from './constants';
 import { withTransition } from '../../withTransition';
 import { noop, useStableCallback } from '../../utilities';
-import { TabBarViewProps } from '../../types';
-import { MaterialTabBarConfig, MaterialTabBarItemConfig } from './types';
+import type { TabBarViewProps } from '../../types';
+import type { MaterialTabBarConfig, MaterialTabBarItemConfig } from './types';
 import { styles } from './styles';
 
 const MaterialTabBarComponent = ({
