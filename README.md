@@ -130,7 +130,7 @@ export default function App() {
 
 </details>
 <details>
-  <summary>React Navigation v5</summary>
+  <summary>React Navigation v5 (TypeScript)</summary>
 
 ```tsx
 import React from 'react';
@@ -196,7 +196,7 @@ export default function App() {
 </details>
 
 <details>
-  <summary>React Navigation v5 ( JavaScript )</summary>
+  <summary>React Navigation v5 (JavaScript)</summary>
 
 ```jsx
 import React from 'react';
