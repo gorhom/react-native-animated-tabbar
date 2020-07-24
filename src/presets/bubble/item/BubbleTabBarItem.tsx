@@ -23,6 +23,7 @@ const BubbleTabBarItemComponent = ({
   itemOuterSpace,
   iconSize,
   isRTL,
+  tabStyle,
 }: BubbleTabBarItemProps) => {
   //#region extract props
   const {
@@ -110,6 +111,7 @@ const BubbleTabBarItemComponent = ({
         outputRange: [background.inactiveColor, background.activeColor],
       }),
     },
+    tabStyle,
   ];
   const labelContainerStyle = [
     styles.labelContainer,

@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  BottomTabBarOptions,
+} from '@react-navigation/bottom-tabs';
 import AnimatedTabBar, {
   TabsConfig,
   BubbleTabBarItemConfig,
@@ -84,7 +87,7 @@ const BubbleStyledScreen = () => {
     return 20 + bottom + 12 * 2 + 12 * 2 + 12;
   }, [bottom]);
 
-  const tabBarStyle = useMemo<StyleProp<ViewStyle>>(
+  const tabBarStyle = useMemo<ViewStyle>(
     () => ({
       position: 'absolute',
       left: 0,
@@ -108,14 +111,22 @@ const BubbleStyledScreen = () => {
     [bottom]
   );
 
-  const tabBarOptions = useMemo(
+  const tabStyle = useMemo<ViewStyle>(
+    () => ({
+      borderRadius: 8,
+    }),
+    []
+  );
+
+  const tabBarOptions: BottomTabBarOptions = useMemo(
     () => ({
       safeAreaInsets: {
         bottom: 0,
       },
+      tabStyle,
       style: tabBarStyle,
     }),
-    [tabBarStyle]
+    [tabBarStyle, tabStyle]
   );
 
   // render

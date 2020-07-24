@@ -22,6 +22,7 @@ import { styles } from './styles';
 const BubbleTabBarComponent = ({
   selectedIndex,
   tabs,
+  tabStyle,
   duration = DEFAULT_ITEM_ANIMATION_DURATION,
   easing = DEFAULT_ITEM_ANIMATION_EASING,
   itemInnerSpace = DEFAULT_ITEM_INNER_SPACE,
@@ -84,6 +85,7 @@ const BubbleTabBarComponent = ({
               itemContainerWidth={itemContainerWidth}
               iconSize={iconSize}
               isRTL={isRTL}
+              tabStyle={tabStyle}
               {...configs}
             />
           </RawButton>
