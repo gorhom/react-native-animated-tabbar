@@ -3,10 +3,15 @@ import type Animated from 'react-native-reanimated';
 import type { TabBarItemProps } from '../../types';
 
 export interface BubbleTabBarConfig {
+  /**
+   * description
+   * @type {ViewStyle}
+   */
   tabStyle?: ViewStyle;
 }
 
-export interface BubbleTabBarItemConfig {
+export interface BubbleTabBarItemConfig
+  extends Pick<BubbleTabBarConfig, 'tabStyle'> {
   /**
    * Tab bar item label style.
    * @type {TextStyle}
@@ -54,7 +59,6 @@ export interface BubbleTabBarItemConfig {
      */
     inactiveColor: string;
   };
-  tabStyle?: ViewStyle;
 }
 
 export type BubbleTabBarItemProps = TabBarItemProps & BubbleTabBarItemConfig;

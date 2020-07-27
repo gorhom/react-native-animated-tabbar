@@ -101,6 +101,7 @@ const BubbleTabBarItemComponent = ({
   ];
   const contentContainerStyle = [
     styles.contentContainer,
+    tabStyle,
     {
       flexDirection: isRTL ? 'row-reverse' : 'row',
       paddingHorizontal: itemInnerHorizontalSpace,
@@ -111,7 +112,6 @@ const BubbleTabBarItemComponent = ({
         outputRange: [background.inactiveColor, background.activeColor],
       }),
     },
-    tabStyle,
   ];
   const labelContainerStyle = [
     styles.labelContainer,
