@@ -1,10 +1,17 @@
-import type { TextStyle } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
 import type Animated from 'react-native-reanimated';
 import type { TabBarItemProps } from '../../types';
 
-export interface BubbleTabBarConfig {}
+export interface BubbleTabBarConfig {
+  /**
+   * description
+   * @type {ViewStyle}
+   */
+  tabStyle?: ViewStyle;
+}
 
-export interface BubbleTabBarItemConfig {
+export interface BubbleTabBarItemConfig
+  extends Pick<BubbleTabBarConfig, 'tabStyle'> {
   /**
    * Tab bar item label style.
    * @type {TextStyle}
