@@ -41,11 +41,6 @@ export function AnimatedTabBar<T extends PresetEnum>(
   //#region variables
   const tabBarContainerRef = useRef<Animated.View>(null);
   const isReactNavigation5 = useMemo(() => Boolean(state), [state]);
-
-  // const focusedRoute = state.routes[state.index];
-  // const focusedDescriptor = descriptors[focusedRoute.key];
-  // const focusedOptions = focusedDescriptor.options;
-  // const shouldShowTabBar = focusedOptions.tabBarVisible ?? true;
   const tabBarHeight = useValue<number>(0);
 
   const CommonActions = useMemo(() => {
