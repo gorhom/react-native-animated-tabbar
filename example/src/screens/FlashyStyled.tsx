@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AnimatedTabBar, {
@@ -80,38 +79,33 @@ const FlashyStyledScreen = () => {
     return 20 + bottom + 12 * 2 + 12 * 2 + 12;
   }, [bottom]);
 
-  const tabBarStyle = useMemo<StyleProp<ViewStyle>>(
-    () => ({
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      bottom: 0,
-      borderRadius: 16,
-      marginLeft: 32,
-      marginRight: 32,
-      marginBottom: bottom,
-      backgroundColor: '#000',
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 12,
-      },
-      shadowOpacity: 0.58,
-      shadowRadius: 16.0,
-
-      elevation: 24,
-    }),
-    [bottom]
-  );
-
   const tabBarOptions = useMemo(
     () => ({
       safeAreaInsets: {
         bottom: 0,
       },
-      style: tabBarStyle,
+      style: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        borderRadius: 16,
+        marginLeft: 32,
+        marginRight: 32,
+        marginBottom: bottom,
+        backgroundColor: '#000',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.0,
+
+        elevation: 24,
+      },
     }),
-    [tabBarStyle]
+    [bottom]
   );
 
   // render
