@@ -1,9 +1,21 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useEffect, useRef } from 'react';
+import type { LayoutChangeEvent } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { AnimatedTabBarView } from './AnimatedTabBarView';
 import { useStableCallback } from './utilities';
+import { useTabBarVisibility } from './hooks';
 import type { PresetEnum } from './presets';
 import type { AnimatedTabBarProps } from './types';
+import Animated, {
+  interpolate,
+  Extrapolate,
+  useCode,
+  cond,
+  eq,
+  call,
+  onChange,
+} from 'react-native-reanimated';
+import { useValue } from 'react-native-redash';
 
 interface Route {
   name: string;
@@ -26,24 +38,16 @@ export function AnimatedTabBar<T extends PresetEnum>(
     ...rest
   } = props;
 
-  //#region styles
-  const { bottom: _safeBottomArea } = useSafeArea();
-  const safeBottomArea = useMemo(
-    () => overrideSafeAreaInsets?.bottom ?? _safeBottomArea,
-    [overrideSafeAreaInsets, _safeBottomArea]
-  );
-  const style = useMemo(
-    () => ({
-      // @ts-ignore
-      ...overrideStyle,
-      ...{ paddingBottom: safeBottomArea },
-    }),
-    [overrideStyle, safeBottomArea]
-  );
-  //#endregion
-
   //#region variables
+  const tabBarContainerRef = useRef<Animated.View>(null);
   const isReactNavigation5 = useMemo(() => Boolean(state), [state]);
+
+  // const focusedRoute = state.routes[state.index];
+  // const focusedDescriptor = descriptors[focusedRoute.key];
+  // const focusedOptions = focusedDescriptor.options;
+  // const shouldShowTabBar = focusedOptions.tabBarVisible ?? true;
+  const tabBarHeight = useValue<number>(0);
+
   const CommonActions = useMemo(() => {
     if (isReactNavigation5) {
       const {
@@ -73,6 +77,21 @@ export function AnimatedTabBar<T extends PresetEnum>(
       };
     }
   }, [state, navigation, isReactNavigation5]);
+
+  const shouldShowTabBar = useMemo(() => {
+    /**
+     * In React Navigation 4 the router view takes care of
+     * hiding the tab bar.
+     */
+    if (!isReactNavigation5) {
+      return true;
+    }
+    const route = routes[navigationIndex];
+    const { options } = descriptors[route.key];
+    return options.tabBarVisible ?? true;
+  }, [isReactNavigation5, routes, descriptors, navigationIndex]);
+
+  const shouldShowTabBarAnimated = useTabBarVisibility(shouldShowTabBar);
 
   const getRouteTitle = useCallback(
     (route: Route) => {
@@ -113,6 +132,40 @@ export function AnimatedTabBar<T extends PresetEnum>(
   }, [routes, getRouteTitle, getRouteTabConfigs]) as any;
   //#endregion
 
+  //#region styles
+  const { bottom: _safeBottomArea } = useSafeArea();
+  const safeBottomArea = useMemo(
+    () => overrideSafeAreaInsets?.bottom ?? _safeBottomArea,
+    [overrideSafeAreaInsets, _safeBottomArea]
+  );
+  const style = useMemo(
+    () => ({
+      // @ts-ignore
+      ...overrideStyle,
+      paddingBottom: safeBottomArea,
+    }),
+    [overrideStyle, safeBottomArea]
+  );
+  const containerStyle = useMemo(
+    () => ({
+      bottom: 0,
+      left: 0,
+      right: 0,
+      transform: [
+        {
+          translateY: interpolate(shouldShowTabBarAnimated, {
+            inputRange: [0, 1],
+            outputRange: [tabBarHeight, 0],
+            extrapolate: Extrapolate.CLAMP,
+          }),
+        },
+      ],
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+  //#endregion
+
   //#region callbacks
   const handleIndexChange = useStableCallback((index: number) => {
     if (isReactNavigation5) {
@@ -146,17 +199,69 @@ export function AnimatedTabBar<T extends PresetEnum>(
       onTabLongPress({ route: routes[index] });
     }
   });
+  const handleLayout = useCallback(
+    ({
+      nativeEvent: {
+        layout: { height },
+      },
+    }: LayoutChangeEvent) => {
+      tabBarHeight.setValue(height);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+  //#endregion
+
+  //#region effects
+  useCode(
+    () =>
+      onChange(
+        shouldShowTabBarAnimated,
+        cond(
+          eq(shouldShowTabBarAnimated, 1),
+          call([], () => {
+            if (tabBarContainerRef.current) {
+              // @ts-ignore
+              tabBarContainerRef.current.setNativeProps({
+                style: {
+                  position: 'relative',
+                },
+              });
+            }
+          })
+        )
+      ),
+    []
+  );
+  useEffect(() => {
+    if (!shouldShowTabBar) {
+      if (tabBarContainerRef.current) {
+        // @ts-ignore
+        tabBarContainerRef.current.setNativeProps({
+          style: {
+            position: 'absolute',
+          },
+        });
+      }
+    }
+  }, [shouldShowTabBar]);
   //#endregion
 
   // render
   return (
-    <AnimatedTabBarView
-      index={navigationIndex}
-      onIndexChange={handleIndexChange}
-      onLongPress={handleLongPress}
-      tabs={routesWithTabConfig}
-      style={style}
-      {...rest}
-    />
+    <Animated.View
+      ref={tabBarContainerRef}
+      style={containerStyle}
+      onLayout={handleLayout}
+    >
+      <AnimatedTabBarView
+        index={navigationIndex}
+        onIndexChange={handleIndexChange}
+        onLongPress={handleLongPress}
+        tabs={routesWithTabConfig}
+        style={style}
+        {...rest}
+      />
+    </Animated.View>
   );
 }
