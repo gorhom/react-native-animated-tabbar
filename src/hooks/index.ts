@@ -1,0 +1,1 @@
+export { useTabBarVisibility } from './useTabBarVisibility';
