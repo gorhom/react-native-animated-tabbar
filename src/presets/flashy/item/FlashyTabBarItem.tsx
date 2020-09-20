@@ -8,8 +8,6 @@ import { useValues, transformOrigin, toRad } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import {
-  DEFAULT_ITEM_INNER_SPACE,
-  DEFAULT_ITEM_OUTER_SPACE,
   DEFAULT_INDICATOR_VISIBILITY,
   DEFAULT_INDICATOR_SIZE,
   DEFAULT_INDICATOR_COLOR,
@@ -34,49 +32,18 @@ const FlashyTabBarItemComponent = ({
   label,
   icon,
   labelStyle: labelStyleOverride,
-  itemInnerSpace,
-  itemOuterSpace,
+  spacing,
   iconSize,
   indicator,
   isRTL,
 }: FlashyTabBarItemProps) => {
   //#region extract props
   const {
-    itemInnerVerticalSpace,
-    itemInnerHorizontalSpace,
-    itemOuterVerticalSpace,
-    itemOuterHorizontalSpace,
-  } = useMemo(() => {
-    let _itemInnerVerticalSpace,
-      _itemInnerHorizontalSpace,
-      _itemOuterVerticalSpace,
-      _itemOuterHorizontalSpace = 0;
-
-    if (typeof itemInnerSpace === 'number') {
-      _itemInnerVerticalSpace = itemInnerSpace;
-      _itemInnerHorizontalSpace = itemInnerSpace;
-    } else {
-      _itemInnerVerticalSpace =
-        itemInnerSpace?.vertical ?? DEFAULT_ITEM_INNER_SPACE;
-      _itemInnerHorizontalSpace =
-        itemInnerSpace?.horizontal ?? DEFAULT_ITEM_INNER_SPACE;
-    }
-    if (typeof itemOuterSpace === 'number') {
-      _itemOuterVerticalSpace = itemOuterSpace;
-      _itemOuterHorizontalSpace = itemOuterSpace;
-    } else {
-      _itemOuterVerticalSpace =
-        itemOuterSpace?.vertical ?? DEFAULT_ITEM_OUTER_SPACE;
-      _itemOuterHorizontalSpace =
-        itemOuterSpace?.horizontal ?? DEFAULT_ITEM_OUTER_SPACE;
-    }
-    return {
-      itemInnerVerticalSpace: _itemInnerVerticalSpace,
-      itemInnerHorizontalSpace: _itemInnerHorizontalSpace,
-      itemOuterVerticalSpace: _itemOuterVerticalSpace,
-      itemOuterHorizontalSpace: _itemOuterHorizontalSpace,
-    };
-  }, [itemInnerSpace, itemOuterSpace]);
+    innerVerticalSpace,
+    innerHorizontalSpace,
+    outerVerticalSpace,
+    outerHorizontalSpace,
+  } = spacing;
   const {
     size: _indicatorSize,
     color: _indicatorColor,
@@ -98,13 +65,13 @@ const FlashyTabBarItemComponent = ({
 
   //#region variables
   const [labelWidth, labelHeight] = useValues<number>(0, 0);
-  const containerHeight = useMemo(() => iconSize + itemInnerVerticalSpace * 2, [
+  const containerHeight = useMemo(() => iconSize + innerVerticalSpace * 2, [
     iconSize,
-    itemInnerVerticalSpace,
+    innerVerticalSpace,
   ]);
   const containerWidth = max(
-    add(labelWidth, itemInnerHorizontalSpace * 2),
-    iconSize + itemInnerHorizontalSpace * 2
+    add(labelWidth, innerHorizontalSpace * 2),
+    iconSize + innerHorizontalSpace * 2
   );
   //#endregion
 
@@ -112,8 +79,8 @@ const FlashyTabBarItemComponent = ({
   const outerContainerStyle = [
     styles.outerContainer,
     {
-      paddingHorizontal: itemOuterHorizontalSpace,
-      paddingVertical: itemOuterVerticalSpace,
+      paddingHorizontal: outerHorizontalSpace,
+      paddingVertical: outerVerticalSpace,
     },
   ];
   const containerStyle = [
@@ -205,7 +172,7 @@ const FlashyTabBarItemComponent = ({
         {
           translateY: interpolate(animatedFocus, {
             inputRange: [0, 1],
-            outputRange: [itemInnerVerticalSpace, iconSize * -1.5],
+            outputRange: [innerVerticalSpace, iconSize * -1.5],
             extrapolate: Extrapolate.CLAMP,
           }),
           rotate: interpolate(animatedFocus, {

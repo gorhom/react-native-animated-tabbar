@@ -13,7 +13,10 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
   DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
-import { useTabBarItemFocusTransition } from '../../hooks';
+import {
+  useTabBarItemFocusTransition,
+  useTabBarItemSpacing,
+} from '../../hooks';
 import { noop } from '../../utilities';
 import type { TabBarViewProps } from '../../types';
 import type { BubbleTabBarConfig, BubbleTabBarItemConfig } from './types';
@@ -24,8 +27,8 @@ const BubbleTabBarComponent = ({
   tabs,
   duration = DEFAULT_ITEM_ANIMATION_DURATION,
   easing = DEFAULT_ITEM_ANIMATION_EASING,
-  itemInnerSpace = DEFAULT_ITEM_INNER_SPACE,
-  itemOuterSpace = DEFAULT_ITEM_OUTER_SPACE,
+  itemInnerSpace,
+  itemOuterSpace,
   itemContainerWidth = DEFAULT_ITEM_CONTAINER_WIDTH,
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
@@ -47,6 +50,12 @@ const BubbleTabBarComponent = ({
       ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [tabs, duration, easing]
+  );
+  const tabBarItemSpacing = useTabBarItemSpacing(
+    itemInnerSpace,
+    itemOuterSpace,
+    DEFAULT_ITEM_INNER_SPACE,
+    DEFAULT_ITEM_OUTER_SPACE
   );
   //#endregion
 
@@ -80,8 +89,7 @@ const BubbleTabBarComponent = ({
               index={index}
               animatedFocus={animatedFocusValues[index]}
               label={title}
-              itemInnerSpace={itemInnerSpace}
-              itemOuterSpace={itemOuterSpace}
+              spacing={tabBarItemSpacing}
               itemContainerWidth={itemContainerWidth}
               iconSize={iconSize}
               isRTL={isRTL}
