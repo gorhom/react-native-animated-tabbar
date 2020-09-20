@@ -102,6 +102,9 @@ const DummyScreen = () => {
       renderItem={renderItem}
       style={rootStyle}
       contentContainerStyle={contentContainerStyle}
+      windowSize={10}
+      maxToRenderPerBatch={10}
+      initialNumToRender={10}
     />
   );
 };

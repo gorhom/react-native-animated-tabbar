@@ -5,11 +5,11 @@ import {
   TabsConfig,
   MaterialTabBarItemConfig,
 } from '@gorhom/animated-tabbar';
-import HomeSVG from '../svg/HomeSVG';
-import LikeSVG from '../svg/LikeSVG';
-import SearchSVG from '../svg/SearchSVG';
-import ProfileSVG from '../svg/ProfileSVG';
-import { MainTabsParams } from './types';
+import HomeSVG from '../../svg/HomeSVG';
+import LikeSVG from '../../svg/LikeSVG';
+import SearchSVG from '../../svg/SearchSVG';
+import ProfileSVG from '../../svg/ProfileSVG';
+import { MainTabsParams } from '../types';
 
 const tabs: TabsConfig<MaterialTabBarItemConfig, MainTabsParams> = {
   Home: {
