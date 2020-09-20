@@ -23,7 +23,7 @@ import {
   DEFAULT_CONFIG_INACTIVE_OPACITY,
   DEFAULT_CONFIG_INACTIVE_SCALE,
 } from './constants';
-import { withTransition } from '../../withTransition';
+import { useTabBarItemFocusTransition } from '../../hooks';
 import { noop, useStableCallback } from '../../utilities';
 import type { TabBarViewProps } from '../../types';
 import type { MaterialTabBarConfig, MaterialTabBarItemConfig } from './types';
@@ -57,7 +57,8 @@ const MaterialTabBarComponent = ({
   const animatedFocusValues = useMemo(
     () =>
       tabs.map((_, index) =>
-        withTransition({
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useTabBarItemFocusTransition({
           index,
           selectedIndex,
           duration,

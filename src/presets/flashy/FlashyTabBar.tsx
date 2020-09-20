@@ -13,7 +13,7 @@ import {
   DEFAULT_ITEM_LAYOUT_DIRECTION,
   DEFAULT_ITEM_CONTAINER_WIDTH,
 } from './constants';
-import { withTransition } from '../../withTransition';
+import { useTabBarItemFocusTransition } from '../../hooks';
 import { noop } from '../../utilities';
 import type { TabBarViewProps } from '../../types';
 import type { FlashyTabBarConfig, FlashyTabBarItemConfig } from './types';
@@ -37,7 +37,8 @@ const FlashyTabBarComponent = ({
   const animatedFocusValues = useMemo(
     () =>
       tabs.map((_, index) =>
-        withTransition({
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useTabBarItemFocusTransition({
           index,
           selectedIndex,
           duration,
