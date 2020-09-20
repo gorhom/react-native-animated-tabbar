@@ -4,89 +4,116 @@ import AnimatedTabBar, {
   TabsConfig,
   FlashyTabBarItemConfig,
 } from '@gorhom/animated-tabbar';
-import DummyScreen from './Dummy';
-import HomeSVG from '../svg/HomeSVG';
-import LikeSVG from '../svg/LikeSVG';
-import SearchSVG from '../svg/SearchSVG';
-import ProfileSVG from '../svg/ProfileSVG';
-import { MainTabsParams } from './types';
+import DummyScreen from '../Dummy';
+import HomeSVG from '../../svg/HomeSVG';
+import LikeSVG from '../../svg/LikeSVG';
+import SearchSVG from '../../svg/SearchSVG';
+import ProfileSVG from '../../svg/ProfileSVG';
+import { MainTabsParams } from '../types';
 
 const Tab = createBottomTabNavigator<MainTabsParams>();
 
 const tabs: TabsConfig<FlashyTabBarItemConfig, MainTabsParams> = {
   Home: {
     labelStyle: {
-      color: '#5B37B7',
+      color: 'white',
     },
     icon: {
       component: HomeSVG,
-      color: 'rgba(91,55,183,0.5)',
+      color: '#444',
     },
   },
   Likes: {
     labelStyle: {
-      color: '#C9379D',
+      color: 'white',
     },
     icon: {
       component: LikeSVG,
-      color: 'rgba(201,55,157,0.5)',
+      color: '#444',
     },
   },
   Search: {
     labelStyle: {
-      color: '#E6A919',
+      color: 'white',
     },
     icon: {
       component: SearchSVG,
-      color: 'rgba(230,169,25,0.5)',
+      color: '#444',
     },
   },
   Profile: {
     labelStyle: {
-      color: '#1194AA',
+      color: 'white',
     },
     icon: {
       component: ProfileSVG,
-      color: 'rgba(17,148,170,0.5)',
+      color: '#444',
     },
   },
 };
 
-const FlashyScreen = () => {
+const FlashyStyledScreen = () => {
   return (
     <Tab.Navigator
+      tabBarOptions={{
+        style: {
+          backgroundColor: '#080808',
+        },
+      }}
       tabBar={props => (
-        <AnimatedTabBar preset="flashy" tabs={tabs} {...props} />
+        <AnimatedTabBar
+          preset="flashy"
+          tabs={tabs}
+          iconSize={20}
+          isRTL={true}
+          {...props}
+        />
       )}
     >
       <Tab.Screen
         name="Home"
+        options={{
+          tabBarLabel: 'الرئيسية',
+        }}
         initialParams={{
-          backgroundColor: tabs.Home.labelStyle.color,
+          name: 'الرئيسية',
+          backgroundColor: '#000',
           nextScreen: 'Likes',
         }}
         component={DummyScreen}
       />
       <Tab.Screen
         name="Likes"
+        options={{
+          tabBarLabel: 'אהבתי',
+        }}
         initialParams={{
-          backgroundColor: tabs.Likes.labelStyle.color,
+          name: 'אהבתי',
+          backgroundColor: '#000',
           nextScreen: 'Search',
         }}
         component={DummyScreen}
       />
       <Tab.Screen
         name="Search"
+        options={{
+          tabBarLabel: 'ይፈልጉ',
+        }}
         initialParams={{
-          backgroundColor: tabs.Search.labelStyle.color,
+          name: 'ይፈልጉ',
+          backgroundColor: '#000',
           nextScreen: 'Profile',
         }}
         component={DummyScreen}
       />
       <Tab.Screen
         name="Profile"
+        options={{
+          tabBarLabel: 'مشخصات',
+        }}
         initialParams={{
-          backgroundColor: tabs.Profile.labelStyle.color,
+          name: 'مشخصات',
+          backgroundColor: '#000',
           nextScreen: 'Home',
         }}
         component={DummyScreen}
@@ -95,4 +122,4 @@ const FlashyScreen = () => {
   );
 };
 
-export default FlashyScreen;
+export default FlashyStyledScreen;

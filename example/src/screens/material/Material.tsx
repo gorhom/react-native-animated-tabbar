@@ -4,12 +4,12 @@ import AnimatedTabBar, {
   TabsConfig,
   MaterialTabBarItemConfig,
 } from '@gorhom/animated-tabbar';
-import DummyScreen from './Dummy';
-import HomeSVG from '../svg/HomeSVG';
-import LikeSVG from '../svg/LikeSVG';
-import SearchSVG from '../svg/SearchSVG';
-import ProfileSVG from '../svg/ProfileSVG';
-import { MainTabsParams } from './types';
+import DummyScreen from '../Dummy';
+import HomeSVG from '../../svg/HomeSVG';
+import LikeSVG from '../../svg/LikeSVG';
+import SearchSVG from '../../svg/SearchSVG';
+import ProfileSVG from '../../svg/ProfileSVG';
+import { MainTabsParams } from '../types';
 import { StatusBar } from 'react-native';
 
 const Tab = createBottomTabNavigator<MainTabsParams>();

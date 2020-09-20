@@ -6,12 +6,12 @@ import AnimatedTabBar, {
   TabsConfig,
   MaterialTabBarItemConfig,
 } from '@gorhom/animated-tabbar';
-import DummyScreen from './Dummy';
-import HomeIcon from '../components/iconWithBadge';
-import LikeSVG from '../svg/LikeSVG';
-import SearchSVG from '../svg/SearchSVG';
-import ProfileSVG from '../svg/ProfileSVG';
-import { MainTabsParams } from './types';
+import HomeIcon from '../../components/iconWithBadge';
+import DummyScreen from '../Dummy';
+import LikeSVG from '../../svg/LikeSVG';
+import SearchSVG from '../../svg/SearchSVG';
+import ProfileSVG from '../../svg/ProfileSVG';
+import { MainTabsParams } from '../types';
 
 const Tab = createBottomTabNavigator<MainTabsParams>();
 

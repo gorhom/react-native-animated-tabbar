@@ -5,10 +5,6 @@ import { transformOrigin, useValue } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { useStableCallback } from '../../../utilities';
-import {
-  DEFAULT_ITEM_INNER_SPACE,
-  DEFAULT_ITEM_OUTER_SPACE,
-} from '../constants';
 import type { MaterialTabBarItemProps } from '../types';
 import { styles } from './styles';
 
@@ -25,47 +21,16 @@ const MaterialTabBarItemComponent = (props: MaterialTabBarItemProps) => {
     labelStyle: labelStyleOverride,
     icon,
     iconSize,
-    itemInnerSpace,
-    itemOuterSpace,
+    spacing,
   } = props;
 
   //#region extract props
   const {
-    itemInnerVerticalSpace,
-    itemInnerHorizontalSpace,
-    itemOuterVerticalSpace,
-    itemOuterHorizontalSpace,
-  } = useMemo(() => {
-    let _itemInnerVerticalSpace,
-      _itemInnerHorizontalSpace,
-      _itemOuterVerticalSpace,
-      _itemOuterHorizontalSpace = 0;
-
-    if (typeof itemInnerSpace === 'number') {
-      _itemInnerVerticalSpace = itemInnerSpace;
-      _itemInnerHorizontalSpace = itemInnerSpace;
-    } else {
-      _itemInnerVerticalSpace =
-        itemInnerSpace?.vertical ?? DEFAULT_ITEM_INNER_SPACE;
-      _itemInnerHorizontalSpace =
-        itemInnerSpace?.horizontal ?? DEFAULT_ITEM_INNER_SPACE;
-    }
-    if (typeof itemOuterSpace === 'number') {
-      _itemOuterVerticalSpace = itemOuterSpace;
-      _itemOuterHorizontalSpace = itemOuterSpace;
-    } else {
-      _itemOuterVerticalSpace =
-        itemOuterSpace?.vertical ?? DEFAULT_ITEM_OUTER_SPACE;
-      _itemOuterHorizontalSpace =
-        itemOuterSpace?.horizontal ?? DEFAULT_ITEM_OUTER_SPACE;
-    }
-    return {
-      itemInnerVerticalSpace: _itemInnerVerticalSpace,
-      itemInnerHorizontalSpace: _itemInnerHorizontalSpace,
-      itemOuterVerticalSpace: _itemOuterVerticalSpace,
-      itemOuterHorizontalSpace: _itemOuterHorizontalSpace,
-    };
-  }, [itemInnerSpace, itemOuterSpace]);
+    innerVerticalSpace,
+    innerHorizontalSpace,
+    outerVerticalSpace,
+    outerHorizontalSpace,
+  } = spacing;
   //#endregion
 
   //#region variables
@@ -77,18 +42,18 @@ const MaterialTabBarItemComponent = (props: MaterialTabBarItemProps) => {
     () => [
       styles.outerContainer,
       {
-        paddingHorizontal: itemOuterHorizontalSpace,
-        paddingVertical: itemOuterVerticalSpace,
+        paddingHorizontal: outerHorizontalSpace,
+        paddingVertical: outerVerticalSpace,
       },
     ],
-    [itemOuterHorizontalSpace, itemOuterVerticalSpace]
+    [outerHorizontalSpace, outerVerticalSpace]
   );
   const innerContainerStyle = useMemo(
     () => [
       styles.innerContainer,
       {
-        paddingHorizontal: itemInnerHorizontalSpace,
-        paddingVertical: itemInnerVerticalSpace,
+        paddingHorizontal: innerHorizontalSpace,
+        paddingVertical: innerVerticalSpace,
         opacity: interpolate(animatedFocus, {
           inputRange: [0, 1],
           outputRange: [inactiveOpacity, 1],
@@ -110,8 +75,8 @@ const MaterialTabBarItemComponent = (props: MaterialTabBarItemProps) => {
       },
     ],
     [
-      itemInnerHorizontalSpace,
-      itemInnerVerticalSpace,
+      innerHorizontalSpace,
+      innerVerticalSpace,
       animatedFocus,
       inactiveOpacity,
       inactiveScale,
@@ -146,11 +111,11 @@ const MaterialTabBarItemComponent = (props: MaterialTabBarItemProps) => {
       styles.label,
       labelStyleOverride,
       {
-        marginTop: itemInnerVerticalSpace / 2,
+        marginTop: innerVerticalSpace / 2,
         opacity: animation === 'iconWithLabelOnFocus' ? animatedFocus : 1,
       },
     ],
-    [labelStyleOverride, itemInnerVerticalSpace, animation, animatedFocus]
+    [labelStyleOverride, innerVerticalSpace, animation, animatedFocus]
   );
   //#endregion
 

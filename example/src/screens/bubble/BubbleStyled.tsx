@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useSafeArea } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AnimatedTabBar, {
   TabsConfig,
   BubbleTabBarItemConfig,
 } from '@gorhom/animated-tabbar';
-import DummyScreen from './Dummy';
-import HomeSVG from '../svg/HomeSVG';
-import LikeSVG from '../svg/LikeSVG';
-import SearchSVG from '../svg/SearchSVG';
-import ProfileSVG from '../svg/ProfileSVG';
-import { MainTabsParams } from './types';
+import DummyScreen from '../Dummy';
+import HomeIcon from '../../components/iconWithBadge';
+import LikeSVG from '../../svg/LikeSVG';
+import SearchSVG from '../../svg/SearchSVG';
+import ProfileSVG from '../../svg/ProfileSVG';
+import { MainTabsParams } from '../types';
 
 const Tab = createBottomTabNavigator<MainTabsParams>();
 
@@ -19,7 +20,7 @@ const tabs: TabsConfig<BubbleTabBarItemConfig, MainTabsParams> = {
       color: 'white',
     },
     icon: {
-      component: HomeSVG,
+      component: HomeIcon,
       activeColor: 'rgba(255,255,255,1)',
       inactiveColor: 'rgba(68,68,68,1)',
     },
@@ -72,19 +73,55 @@ const tabs: TabsConfig<BubbleTabBarItemConfig, MainTabsParams> = {
   },
 };
 
-const BubbleRTLScreen = () => {
+const BubbleStyledScreen = () => {
+  // hooks
+  const { bottom } = useSafeArea();
+
+  // memos
+  const screenPaddingBottom = useMemo(() => {
+    // icon size + margin padding + outer space + inner space + screen bottom padding
+    return 20 + bottom + 12 * 2 + 12 * 2 + 12;
+  }, [bottom]);
+
+  const tabBarOptions = useMemo(
+    () => ({
+      safeAreaInsets: {
+        bottom: 0,
+      },
+      style: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        borderRadius: 16,
+        marginLeft: 32,
+        marginRight: 32,
+        marginBottom: bottom,
+        backgroundColor: '#000',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.0,
+
+        elevation: 24,
+      },
+    }),
+    [bottom]
+  );
+
+  // render
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        style: {
-          backgroundColor: '#080808',
-        },
-      }}
+      tabBarOptions={tabBarOptions}
       tabBar={props => (
         <AnimatedTabBar
-          isRTL={true}
           iconSize={20}
-          duration={500}
+          itemOuterSpace={12}
+          itemInnerSpace={12}
+          duration={750}
           tabs={tabs}
           {...props}
         />
@@ -92,49 +129,37 @@ const BubbleRTLScreen = () => {
     >
       <Tab.Screen
         name="Home"
-        options={{
-          tabBarLabel: 'الرئيسية',
-        }}
         initialParams={{
-          name: 'الرئيسية',
           backgroundColor: '#000',
           nextScreen: 'Likes',
+          paddingBottom: screenPaddingBottom,
         }}
         component={DummyScreen}
       />
       <Tab.Screen
         name="Likes"
-        options={{
-          tabBarLabel: 'אהבתי',
-        }}
         initialParams={{
-          name: 'אהבתי',
           backgroundColor: '#000',
           nextScreen: 'Search',
+          paddingBottom: screenPaddingBottom,
         }}
         component={DummyScreen}
       />
       <Tab.Screen
         name="Search"
-        options={{
-          tabBarLabel: 'ይፈልጉ',
-        }}
         initialParams={{
-          name: 'ይፈልጉ',
           backgroundColor: '#000',
           nextScreen: 'Profile',
+          paddingBottom: screenPaddingBottom,
         }}
         component={DummyScreen}
       />
       <Tab.Screen
         name="Profile"
-        options={{
-          tabBarLabel: 'مشخصات',
-        }}
         initialParams={{
-          name: 'مشخصات',
           backgroundColor: '#000',
           nextScreen: 'Home',
+          paddingBottom: screenPaddingBottom,
         }}
         component={DummyScreen}
       />
@@ -142,4 +167,4 @@ const BubbleRTLScreen = () => {
   );
 };
 
-export default BubbleRTLScreen;
+export default BubbleStyledScreen;

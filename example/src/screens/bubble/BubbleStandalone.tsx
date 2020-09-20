@@ -3,22 +3,27 @@ import { View, StyleSheet, Button, StatusBar, Alert } from 'react-native';
 import {
   AnimatedTabBarView,
   TabsConfig,
-  FlashyTabBarItemConfig,
+  BubbleTabBarItemConfig,
 } from '@gorhom/animated-tabbar';
-import HomeSVG from '../svg/HomeSVG';
-import LikeSVG from '../svg/LikeSVG';
-import SearchSVG from '../svg/SearchSVG';
-import ProfileSVG from '../svg/ProfileSVG';
-import { MainTabsParams } from './types';
+import HomeSVG from '../../svg/HomeSVG';
+import LikeSVG from '../../svg/LikeSVG';
+import SearchSVG from '../../svg/SearchSVG';
+import ProfileSVG from '../../svg/ProfileSVG';
+import { MainTabsParams } from '../types';
 
-const tabs: TabsConfig<FlashyTabBarItemConfig, MainTabsParams> = {
+const tabs: TabsConfig<BubbleTabBarItemConfig, MainTabsParams> = {
   Home: {
     labelStyle: {
       color: '#5B37B7',
     },
     icon: {
       component: HomeSVG,
-      color: 'rgba(91,55,183,0.5)',
+      activeColor: 'rgba(91,55,183,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(223,215,243,1)',
+      inactiveColor: 'rgba(223,215,243,0)',
     },
   },
   Likes: {
@@ -27,7 +32,12 @@ const tabs: TabsConfig<FlashyTabBarItemConfig, MainTabsParams> = {
     },
     icon: {
       component: LikeSVG,
-      color: 'rgba(201,55,157,0.5)',
+      activeColor: 'rgba(201,55,157,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(247,215,243,1)',
+      inactiveColor: 'rgba(247,215,243,0)',
     },
   },
   Search: {
@@ -36,7 +46,12 @@ const tabs: TabsConfig<FlashyTabBarItemConfig, MainTabsParams> = {
     },
     icon: {
       component: SearchSVG,
-      color: 'rgba(230,169,25,0.5)',
+      activeColor: 'rgba(230,169,25,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(251,239,211,1)',
+      inactiveColor: 'rgba(251,239,211,0)',
     },
   },
   Profile: {
@@ -45,12 +60,17 @@ const tabs: TabsConfig<FlashyTabBarItemConfig, MainTabsParams> = {
     },
     icon: {
       component: ProfileSVG,
-      color: 'rgba(17,148,170,0.5)',
+      activeColor: 'rgba(17,148,170,1)',
+      inactiveColor: 'rgba(0,0,0,1)',
+    },
+    background: {
+      activeColor: 'rgba(207,235,239,1)',
+      inactiveColor: 'rgba(207,235,239,0)',
     },
   },
 };
 
-const FlashyStandaloneScreen = () => {
+const BubbleStandaloneScreen = () => {
   const [index, setIndex] = useState(0);
 
   const containerStyle = useMemo(
@@ -63,6 +83,7 @@ const FlashyStandaloneScreen = () => {
     ],
     [index]
   );
+
   const handleLongPress = (_index: number) => {
     Alert.alert(`${_index} long pressed !`);
   };
@@ -70,11 +91,14 @@ const FlashyStandaloneScreen = () => {
     <View style={containerStyle}>
       <StatusBar barStyle="dark-content" />
       <AnimatedTabBarView
-        preset="flashy"
+        preset="bubble"
         tabs={tabs}
-        itemOuterSpace={6}
+        itemOuterSpace={{
+          horizontal: 6,
+          vertical: 12,
+        }}
         itemInnerSpace={12}
-        itemContainerWidth="auto"
+        iconSize={20}
         style={styles.tabBarContainer}
         index={index}
         onIndexChange={setIndex}
@@ -116,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FlashyStandaloneScreen;
+export default BubbleStandaloneScreen;

@@ -7,9 +7,16 @@ export type TabsConfig<T, P = { [key: string]: T }> = {
   [key in keyof P]: T;
 };
 
-interface Space {
+export interface Space {
   vertical?: number;
   horizontal?: number;
+}
+
+interface TabBarItemSpacing {
+  innerVerticalSpace: number;
+  innerHorizontalSpace: number;
+  outerVerticalSpace: number;
+  outerHorizontalSpace: number;
 }
 
 export interface TabBarConfigurableProps {
@@ -81,7 +88,14 @@ export type TabBarViewProps<C, T> = {
 
 export interface TabBarItemProps
   extends Required<
-    Omit<TabBarConfigurableProps, 'onLongPress' | 'duration' | 'easing'>
+    Omit<
+      TabBarConfigurableProps,
+      | 'itemInnerSpace'
+      | 'itemOuterSpace'
+      | 'onLongPress'
+      | 'duration'
+      | 'easing'
+    >
   > {
   /**
    * Animated focus value.
@@ -95,6 +109,10 @@ export interface TabBarItemProps
    * Tab label.
    */
   label: string;
+  /**
+   * Tab spacing
+   */
+  spacing: TabBarItemSpacing;
 }
 
 export type AnimatedTabBarProps<T extends PresetEnum = 'bubble'> = {

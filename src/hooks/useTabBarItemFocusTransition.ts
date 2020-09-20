@@ -1,5 +1,5 @@
 import Animated from 'react-native-reanimated';
-import type { TabBarConfigurableProps } from './types';
+import type { TabBarConfigurableProps } from '../types';
 
 const {
   block,
@@ -19,18 +19,18 @@ const {
   stopClock,
 } = Animated;
 
-interface withTransitionProps
+interface useTabBarItemFocusTransitionProps
   extends Required<Pick<TabBarConfigurableProps, 'duration' | 'easing'>> {
   index: number;
   selectedIndex: Animated.Value<number>;
 }
 
-export const withTransition = ({
+export const useTabBarItemFocusTransition = ({
   index,
   selectedIndex,
   duration,
   easing,
-}: withTransitionProps) => {
+}: useTabBarItemFocusTransitionProps) => {
   //#region variables
   const clock = new Clock();
   const state = {

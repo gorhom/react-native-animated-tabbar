@@ -2,22 +2,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import RootScreen from './screens/Root';
-import BubbleScreen from './screens/Bubble';
-import BubbleStyledScreen from './screens/BubbleStyled';
-import BubbleRTLScreen from './screens/BubbleRTL';
-import BubbleStandaloneScreen from './screens/BubbleStandalone';
-import FlashyScreen from './screens/Flashy';
-import FlashyStyledScreen from './screens/FlashyStyled';
-import FlashyRTLScreen from './screens/FlashyRTL';
-import FlashyStandaloneScreen from './screens/FlashyStandalone';
-import {
-  MaterialIconWithLabelScreen,
-  MaterialIconWithLabelOnFocusScreen,
-  MaterialIconOnlyScreen,
-} from './screens/Material';
-import MaterialStyledScreen from './screens/MaterialStyled';
-import MaterialRTLScreen from './screens/MaterialRTL';
-import MaterialStandaloneScreen from './screens/MaterialStandalone';
 
 const Stack = createStackNavigator();
 
@@ -26,37 +10,82 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Root" headerMode="none">
         <Stack.Screen name="Root" component={RootScreen} />
-        <Stack.Screen name="Bubble" component={BubbleScreen} />
-        <Stack.Screen name="BubbleStyled" component={BubbleStyledScreen} />
-        <Stack.Screen name="BubbleRTL" component={BubbleRTLScreen} />
+
+        {/* Bubble Preset */}
+        <Stack.Screen
+          name="Bubble"
+          getComponent={() => require('./screens/bubble/Bubble').default}
+        />
+        <Stack.Screen
+          name="BubbleStyled"
+          getComponent={() => require('./screens/bubble/BubbleStyled').default}
+        />
+        <Stack.Screen
+          name="BubbleRTL"
+          getComponent={() => require('./screens/bubble/BubbleRTL').default}
+        />
         <Stack.Screen
           name="BubbleStandalone"
-          component={BubbleStandaloneScreen}
+          getComponent={() =>
+            require('./screens/bubble/BubbleStandalone').default
+          }
         />
-        <Stack.Screen name="Flashy" component={FlashyScreen} />
-        <Stack.Screen name="FlashyStyled" component={FlashyStyledScreen} />
-        <Stack.Screen name="FlashyRTL" component={FlashyRTLScreen} />
+
+        {/* Flashy Preset */}
+        <Stack.Screen
+          name="Flashy"
+          getComponent={() => require('./screens/flashy/Flashy').default}
+        />
+        <Stack.Screen
+          name="FlashyStyled"
+          getComponent={() => require('./screens/flashy/FlashyStyled').default}
+        />
+        <Stack.Screen
+          name="FlashyRTL"
+          getComponent={() => require('./screens/flashy/FlashyRTL').default}
+        />
         <Stack.Screen
           name="FlashyStandalone"
-          component={FlashyStandaloneScreen}
+          getComponent={() =>
+            require('./screens/flashy/FlashyStandalone').default
+          }
         />
+
+        {/* Material Preset */}
         <Stack.Screen
           name="MaterialIconWithLabel"
-          component={MaterialIconWithLabelScreen}
+          getComponent={() =>
+            require('./screens/material/Material').MaterialIconWithLabelScreen
+          }
         />
         <Stack.Screen
           name="MaterialIconOnly"
-          component={MaterialIconOnlyScreen}
+          getComponent={() =>
+            require('./screens/material/Material').MaterialIconOnlyScreen
+          }
         />
         <Stack.Screen
           name="MaterialIconWithLabelOnFocus"
-          component={MaterialIconWithLabelOnFocusScreen}
+          getComponent={() =>
+            require('./screens/material/Material')
+              .MaterialIconWithLabelOnFocusScreen
+          }
         />
-        <Stack.Screen name="MaterialStyled" component={MaterialStyledScreen} />
-        <Stack.Screen name="MaterialRTL" component={MaterialRTLScreen} />
+        <Stack.Screen
+          name="MaterialStyled"
+          getComponent={() =>
+            require('./screens/material/MaterialStyled').default
+          }
+        />
+        <Stack.Screen
+          name="MaterialRTL"
+          getComponent={() => require('./screens/material/MaterialRTL').default}
+        />
         <Stack.Screen
           name="MaterialStandalone"
-          component={MaterialStandaloneScreen}
+          getComponent={() =>
+            require('./screens/material/MaterialStandalone').default
+          }
         />
       </Stack.Navigator>
     </NavigationContainer>

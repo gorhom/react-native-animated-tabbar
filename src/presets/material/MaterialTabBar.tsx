@@ -23,7 +23,10 @@ import {
   DEFAULT_CONFIG_INACTIVE_OPACITY,
   DEFAULT_CONFIG_INACTIVE_SCALE,
 } from './constants';
-import { withTransition } from '../../withTransition';
+import {
+  useTabBarItemFocusTransition,
+  useTabBarItemSpacing,
+} from '../../hooks';
 import { noop, useStableCallback } from '../../utilities';
 import type { TabBarViewProps } from '../../types';
 import type { MaterialTabBarConfig, MaterialTabBarItemConfig } from './types';
@@ -37,8 +40,8 @@ const MaterialTabBarComponent = ({
   animation = DEFAULT_CONFIG_ANIMATION,
   inactiveOpacity = DEFAULT_CONFIG_INACTIVE_OPACITY,
   inactiveScale = DEFAULT_CONFIG_INACTIVE_SCALE,
-  itemInnerSpace = DEFAULT_ITEM_INNER_SPACE,
-  itemOuterSpace = DEFAULT_ITEM_OUTER_SPACE,
+  itemInnerSpace,
+  itemOuterSpace,
   itemContainerWidth = DEFAULT_ITEM_CONTAINER_WIDTH,
   iconSize = DEFAULT_ITEM_ICON_SIZE,
   isRTL = DEFAULT_ITEM_LAYOUT_DIRECTION,
@@ -57,7 +60,8 @@ const MaterialTabBarComponent = ({
   const animatedFocusValues = useMemo(
     () =>
       tabs.map((_, index) =>
-        withTransition({
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useTabBarItemFocusTransition({
           index,
           selectedIndex,
           duration,
@@ -66,6 +70,12 @@ const MaterialTabBarComponent = ({
       ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [tabs, duration, easing]
+  );
+  const tabBarItemSpacing = useTabBarItemSpacing(
+    itemInnerSpace,
+    itemOuterSpace,
+    DEFAULT_ITEM_INNER_SPACE,
+    DEFAULT_ITEM_OUTER_SPACE
   );
   //#endregion
 
@@ -138,8 +148,7 @@ const MaterialTabBarComponent = ({
               inactiveOpacity={inactiveOpacity}
               inactiveScale={inactiveScale}
               label={title}
-              itemInnerSpace={itemInnerSpace}
-              itemOuterSpace={itemOuterSpace}
+              spacing={tabBarItemSpacing}
               itemContainerWidth={itemContainerWidth}
               iconSize={iconSize}
               isRTL={isRTL}
