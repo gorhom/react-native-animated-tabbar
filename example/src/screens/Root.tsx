@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Showcase from '@gorhom/showcase-template';
 import { version, description } from '../../../package.json';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const examples = [
   {
@@ -80,6 +81,17 @@ const examples = [
 const RootScreen = () => {
   // hooks
   const { navigate } = useNavigation();
+  const safeInsets = useSafeAreaInsets();
+
+  // variables
+  const data = useMemo(() => examples.reverse(), []);
+  const author = useMemo(
+    () => ({
+      username: '@gorhom',
+      url: 'https://gorhom.dev',
+    }),
+    []
+  );
 
   // callbacks
   const handleOnExamplePress = (slug: string) => {
@@ -93,12 +105,10 @@ const RootScreen = () => {
       name="Animated TabBar"
       description={description}
       version={version}
-      author={{
-        username: '@gorhom',
-        url: 'https://gorhom.dev',
-      }}
-      data={examples}
+      author={author}
+      data={data}
       handleOnPress={handleOnExamplePress}
+      safeInsets={safeInsets}
     />
   );
 };
