@@ -1,4 +1,4 @@
-package com.animatedtabbarexample;
+package dev.gorhom.animatedtabbar;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
