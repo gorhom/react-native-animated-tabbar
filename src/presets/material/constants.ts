@@ -1,8 +1,8 @@
-import Animated, { Easing } from 'react-native-reanimated';
+import * as RNA from 'react-native-reanimated';
+// @ts-ignore fallback for react-native-reanimated v2
+const Easing = RNA.EasingNode ?? RNA.Easing;
 
-const DEFAULT_ITEM_ANIMATION_EASING: Animated.EasingFunction = Easing.out(
-  Easing.exp
-);
+const DEFAULT_ITEM_ANIMATION_EASING = Easing.out(Easing.exp);
 const DEFAULT_ITEM_ANIMATION_DURATION = 500;
 const DEFAULT_ITEM_INNER_SPACE = 6;
 const DEFAULT_ITEM_OUTER_SPACE = 6;

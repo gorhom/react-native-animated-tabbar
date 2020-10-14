@@ -4,7 +4,11 @@ import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
 import MaskedView from '@react-native-community/masked-view';
 import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
-import { useValues, transformOrigin, toRad } from 'react-native-redash';
+import {
+  useValues,
+  transformOrigin,
+  toRad,
+} from 'react-native-redash/lib/module/v1';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import {
@@ -25,7 +29,9 @@ const AnimatedCircle = Animated.createAnimatedComponent(
   any
 >;
 
-const { add, interpolate, sub, max, divide, multiply, Extrapolate } = Animated;
+const { add, sub, max, divide, multiply, Extrapolate } = Animated;
+// @ts-ignore fallback for react-native-reanimated v2
+const interpolate = Animated.interpolateNode ?? Animated.interpolate;
 
 const FlashyTabBarItemComponent = ({
   animatedFocus,

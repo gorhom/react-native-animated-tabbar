@@ -7,7 +7,6 @@ import { useTabBarVisibility } from './hooks';
 import type { PresetEnum } from './presets';
 import type { AnimatedTabBarProps } from './types';
 import Animated, {
-  interpolate,
   Extrapolate,
   useCode,
   cond,
@@ -15,7 +14,10 @@ import Animated, {
   call,
   onChange,
 } from 'react-native-reanimated';
-import { useValue } from 'react-native-redash';
+import { useValue } from 'react-native-redash/lib/module/v1';
+
+// @ts-ignore fallback for react-native-reanimated v2
+const interpolate = Animated.interpolateNode ?? Animated.interpolate;
 
 interface Route {
   name: string;

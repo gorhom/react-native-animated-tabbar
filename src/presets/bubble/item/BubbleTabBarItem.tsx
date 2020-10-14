@@ -1,13 +1,15 @@
 import React, { useMemo, memo } from 'react';
 import { View, Text, LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { interpolateColor, useValue } from 'react-native-redash';
+import { interpolateColor, useValue } from 'react-native-redash/lib/module/v1';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import type { BubbleTabBarItemProps } from '../types';
 import { styles } from './styles';
 
-const { add, interpolate } = Animated;
+const { add } = Animated;
+// @ts-ignore fallback for react-native-reanimated v2
+const interpolate = Animated.interpolateNode ?? Animated.interpolate;
 
 const BubbleTabBarItemComponent = ({
   animatedFocus,
