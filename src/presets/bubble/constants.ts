@@ -1,6 +1,4 @@
-import * as RNA from 'react-native-reanimated';
-// @ts-ignore fallback for react-native-reanimated v2
-const Easing = RNA.EasingNode ?? RNA.Easing;
+import { Easing } from '../../utilities';
 
 const DEFAULT_ITEM_ANIMATION_EASING = Easing.out(Easing.exp);
 const DEFAULT_ITEM_ANIMATION_DURATION = 500;

@@ -17,11 +17,9 @@ import Animated, {
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { useValues, get, useValue } from 'react-native-redash/lib/module/v1';
+import { interpolate } from '../../../utilities';
 import type { MaterialTabBarItemConfig } from '../types';
 import { styles } from './styles';
-
-// @ts-ignore fallback for react-native-reanimated v2
-const interpolate = Animated.interpolateNode ?? Animated.interpolate;
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 

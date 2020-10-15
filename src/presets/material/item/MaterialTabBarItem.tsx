@@ -4,13 +4,12 @@ import Animated from 'react-native-reanimated';
 import { transformOrigin, useValue } from 'react-native-redash/lib/module/v1';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import { useStableCallback } from '../../../utilities';
+import { useStableCallback } from '../../../hooks';
+import { interpolate } from '../../../utilities';
 import type { MaterialTabBarItemProps } from '../types';
 import { styles } from './styles';
 
 const { divide, Extrapolate } = Animated;
-// @ts-ignore fallback for react-native-reanimated v2
-const interpolate = Animated.interpolateNode ?? Animated.interpolate;
 
 const MaterialTabBarItemComponent = (props: MaterialTabBarItemProps) => {
   // props

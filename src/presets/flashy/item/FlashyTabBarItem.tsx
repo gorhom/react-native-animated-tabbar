@@ -16,6 +16,7 @@ import {
   DEFAULT_INDICATOR_SIZE,
   DEFAULT_INDICATOR_COLOR,
 } from '../constants';
+import { interpolate } from '../../../utilities';
 import type { FlashyTabBarItemProps } from '../types';
 import { styles } from './styles';
 
@@ -30,8 +31,6 @@ const AnimatedCircle = Animated.createAnimatedComponent(
 >;
 
 const { add, sub, max, divide, multiply, Extrapolate } = Animated;
-// @ts-ignore fallback for react-native-reanimated v2
-const interpolate = Animated.interpolateNode ?? Animated.interpolate;
 
 const FlashyTabBarItemComponent = ({
   animatedFocus,

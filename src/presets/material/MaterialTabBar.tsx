@@ -26,8 +26,9 @@ import {
 import {
   useTabBarItemFocusTransition,
   useTabBarItemSpacing,
+  useStableCallback,
 } from '../../hooks';
-import { noop, useStableCallback } from '../../utilities';
+import { noop } from '../../utilities';
 import type { TabBarViewProps } from '../../types';
 import type { MaterialTabBarConfig, MaterialTabBarItemConfig } from './types';
 import { styles } from './styles';

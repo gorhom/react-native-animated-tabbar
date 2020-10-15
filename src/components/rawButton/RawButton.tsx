@@ -12,7 +12,7 @@ import {
   LongPressGestureHandler,
 } from 'react-native-gesture-handler';
 import { useValue, useGestureHandler } from 'react-native-redash/lib/module/v1';
-import { useStableCallback } from '../../utilities';
+import { useStableCallback } from '../../hooks';
 
 const { useCode, cond, onChange, eq } = Animated;
 
