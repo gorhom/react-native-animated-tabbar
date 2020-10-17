@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useRef } from 'react';
 import Animated from 'react-native-reanimated';
-import { useValue } from 'react-native-redash';
+import { useValue } from 'react-native-redash/lib/module/v1';
 import Presets, { PresetEnum } from './presets';
 import type { AnimatedTabBarViewProps } from './types';
 

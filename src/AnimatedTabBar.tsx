@@ -2,12 +2,11 @@ import React, { useMemo, useCallback, useEffect, useRef } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { AnimatedTabBarView } from './AnimatedTabBarView';
-import { useStableCallback } from './utilities';
-import { useTabBarVisibility } from './hooks';
+import { interpolate } from './utilities';
+import { useTabBarVisibility, useStableCallback } from './hooks';
 import type { PresetEnum } from './presets';
 import type { AnimatedTabBarProps } from './types';
 import Animated, {
-  interpolate,
   Extrapolate,
   useCode,
   cond,
@@ -15,7 +14,7 @@ import Animated, {
   call,
   onChange,
 } from 'react-native-reanimated';
-import { useValue } from 'react-native-redash';
+import { useValue } from 'react-native-redash/lib/module/v1';
 
 interface Route {
   name: string;

@@ -4,7 +4,11 @@ import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
 import MaskedView from '@react-native-community/masked-view';
 import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
-import { useValues, transformOrigin, toRad } from 'react-native-redash';
+import {
+  useValues,
+  transformOrigin,
+  toRad,
+} from 'react-native-redash/lib/module/v1';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import {
@@ -12,6 +16,7 @@ import {
   DEFAULT_INDICATOR_SIZE,
   DEFAULT_INDICATOR_COLOR,
 } from '../constants';
+import { interpolate } from '../../../utilities';
 import type { FlashyTabBarItemProps } from '../types';
 import { styles } from './styles';
 
@@ -25,7 +30,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(
   any
 >;
 
-const { add, interpolate, sub, max, divide, multiply, Extrapolate } = Animated;
+const { add, sub, max, divide, multiply, Extrapolate } = Animated;
 
 const FlashyTabBarItemComponent = ({
   animatedFocus,

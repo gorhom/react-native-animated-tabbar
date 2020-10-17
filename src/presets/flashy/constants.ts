@@ -1,4 +1,5 @@
-import Animated, { Easing } from 'react-native-reanimated';
+import type Animated from 'react-native-reanimated';
+import { Easing } from '../../utilities';
 
 const DEFAULT_ITEM_ANIMATION_EASING: Animated.EasingFunction = Easing.out(
   Easing.exp
