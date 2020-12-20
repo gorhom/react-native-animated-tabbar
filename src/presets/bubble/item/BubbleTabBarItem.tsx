@@ -2,6 +2,7 @@ import React, { useMemo, memo } from 'react';
 import { View, Text, LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { interpolateColor, useValue } from 'react-native-redash/lib/module/v1';
+import { RectButton } from 'react-native-gesture-handler';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { interpolate } from '../../../utilities';
@@ -30,6 +31,7 @@ const BubbleTabBarItemComponent = ({
   //#endregion
 
   //#region variables
+  const borderRadius = innerVerticalSpace * 2 + iconSize;
   const labelWidth = useValue<number>(0);
   /**
    * @DEV
@@ -62,13 +64,14 @@ const BubbleTabBarItemComponent = ({
       }),
     },
   ];
+  const buttonStyle = { borderRadius };
   const contentContainerStyle = [
     styles.contentContainer,
     {
       flexDirection: isRTL ? 'row-reverse' : 'row',
       paddingHorizontal: innerHorizontalSpace,
       paddingVertical: innerVerticalSpace,
-      borderRadius: innerVerticalSpace * 2 + iconSize,
+      borderRadius,
       backgroundColor: interpolateColor(animatedFocus, {
         inputRange: [0, 1],
         outputRange: [background.inactiveColor, background.activeColor],
@@ -126,9 +129,11 @@ const BubbleTabBarItemComponent = ({
 
   return (
     <Animated.View style={containerStyle}>
-      <Animated.View style={contentContainerStyle}>
-        <View style={iconContainerStyle}>{renderIcon()}</View>
-      </Animated.View>
+      <RectButton rippleColor={background.activeColor} style={buttonStyle}>
+        <Animated.View style={contentContainerStyle}>
+          <View style={iconContainerStyle}>{renderIcon()}</View>
+        </Animated.View>
+      </RectButton>
       <Animated.View style={labelContainerStyle}>
         <Text onLayout={handleTextLayout} style={labelStyle} numberOfLines={1}>
           {label}
