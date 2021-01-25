@@ -1,4 +1,9 @@
-import type { StyleProp, ViewStyle, Insets } from 'react-native';
+import type {
+  StyleProp,
+  ViewStyle,
+  Insets,
+  Animated as RNAnimated,
+} from 'react-native';
 import type Animated from 'react-native-reanimated';
 import type Presets from './presets';
 import type { PresetEnum } from './presets';
@@ -129,7 +134,9 @@ export type AnimatedTabBarProps<T extends PresetEnum = 'bubble'> = {
   /**
    * Root container style.
    */
-  style?: StyleProp<ViewStyle>;
+  style?:
+    | StyleProp<ViewStyle>
+    | RNAnimated.WithAnimatedValue<StyleProp<ViewStyle>>;
 
   /**
    * React Navigation Props
