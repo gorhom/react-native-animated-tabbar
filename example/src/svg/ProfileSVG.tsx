@@ -3,14 +3,14 @@ import Animated from 'react-native-reanimated';
 import Svg, { G, Path, Circle, PathProps, CircleProps } from 'react-native-svg';
 import { SVGProps } from './types';
 
-const AnimatedPath = (Animated.createAnimatedComponent(
+const AnimatedPath = Animated.createAnimatedComponent(
   Path
-) as any) as React.ComponentClass<
+) as any as React.ComponentClass<
   Animated.AnimateProps<{}, PathProps & { style?: any }>
 >;
-const AnimatedCircle = (Animated.createAnimatedComponent(
+const AnimatedCircle = Animated.createAnimatedComponent(
   Circle
-) as any) as React.ComponentClass<
+) as any as React.ComponentClass<
   Animated.AnimateProps<{}, CircleProps & { style?: any }>
 >;
 

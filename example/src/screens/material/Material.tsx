@@ -110,9 +110,8 @@ const createMaterialScreen = (
   };
 };
 
-export const MaterialIconWithLabelScreen = createMaterialScreen(
-  'iconWithLabel'
-);
+export const MaterialIconWithLabelScreen =
+  createMaterialScreen('iconWithLabel');
 export const MaterialIconWithLabelOnFocusScreen = createMaterialScreen(
   'iconWithLabelOnFocus'
 );

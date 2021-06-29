@@ -4,11 +4,7 @@ import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
 import MaskedView from '@react-native-community/masked-view';
 import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
-import {
-  useValues,
-  transformOrigin,
-  toRad,
-} from 'react-native-redash/lib/module/v1';
+import { useValues, transformOrigin, toRad } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import {
@@ -70,10 +66,10 @@ const FlashyTabBarItemComponent = ({
 
   //#region variables
   const [labelWidth, labelHeight] = useValues<number>(0, 0);
-  const containerHeight = useMemo(() => iconSize + innerVerticalSpace * 2, [
-    iconSize,
-    innerVerticalSpace,
-  ]);
+  const containerHeight = useMemo(
+    () => iconSize + innerVerticalSpace * 2,
+    [iconSize, innerVerticalSpace]
+  );
   const containerWidth = max(
     add(labelWidth, innerHorizontalSpace * 2),
     iconSize + innerHorizontalSpace * 2

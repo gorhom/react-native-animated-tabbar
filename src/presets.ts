@@ -14,18 +14,18 @@ import MaterialTabBar, {
 const Presets = {
   bubble: {
     component: BubbleTabBar,
-    $c: (undefined as any) as BubbleTabBarConfig,
-    $t: (undefined as any) as BubbleTabBarItemConfig,
+    $c: undefined as any as BubbleTabBarConfig,
+    $t: undefined as any as BubbleTabBarItemConfig,
   },
   flashy: {
     component: FlashyTabBar,
-    $c: (undefined as any) as FlashyTabBarConfig,
-    $t: (undefined as any) as FlashyTabBarItemConfig,
+    $c: undefined as any as FlashyTabBarConfig,
+    $t: undefined as any as FlashyTabBarItemConfig,
   },
   material: {
     component: MaterialTabBar,
-    $c: (undefined as any) as MaterialTabBarConfig,
-    $t: (undefined as any) as MaterialTabBarItemConfig,
+    $c: undefined as any as MaterialTabBarConfig,
+    $t: undefined as any as MaterialTabBarItemConfig,
   },
 };
 

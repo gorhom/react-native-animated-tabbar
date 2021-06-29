@@ -1,7 +1,7 @@
 import React, { useMemo, memo, useCallback } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { transformOrigin, useValue } from 'react-native-redash/lib/module/v1';
+import { transformOrigin, useValue } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { useStableCallback } from '../../../hooks';
