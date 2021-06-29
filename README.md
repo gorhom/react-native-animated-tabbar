@@ -387,6 +387,7 @@ return (
     <Tab.Navigator
       tabBar={props => (
         <AnimatedTabBar
+          preset='material'
           tabs={tabs}
           animation="iconWithLabelOnFocus"
           inactiveOpacity={0.25}
