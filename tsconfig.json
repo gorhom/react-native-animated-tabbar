@@ -3,7 +3,6 @@
     "baseUrl": ".",
     "paths": {
       "@gorhom/animated-tabbar": ["./src/index"],
-      "react-native-redash/lib/module/v1":["./node_modules/react-native-redash/lib/typescript/v1/index.d.ts"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
