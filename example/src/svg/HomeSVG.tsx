@@ -3,9 +3,9 @@ import Animated from 'react-native-reanimated';
 import Svg, { Path, PathProps } from 'react-native-svg';
 import { SVGProps } from './types';
 
-const AnimatedPath = (Animated.createAnimatedComponent(
+const AnimatedPath = Animated.createAnimatedComponent(
   Path
-) as any) as React.ComponentClass<
+) as any as React.ComponentClass<
   Animated.AnimateProps<{}, PathProps & { style?: any }>
 >;
 

@@ -70,10 +70,10 @@ const FlashyTabBarItemComponent = ({
 
   //#region variables
   const [labelWidth, labelHeight] = useValues<number>(0, 0);
-  const containerHeight = useMemo(() => iconSize + innerVerticalSpace * 2, [
-    iconSize,
-    innerVerticalSpace,
-  ]);
+  const containerHeight = useMemo(
+    () => iconSize + innerVerticalSpace * 2,
+    [iconSize, innerVerticalSpace]
+  );
   const containerWidth = max(
     add(labelWidth, innerHorizontalSpace * 2),
     iconSize + innerHorizontalSpace * 2
