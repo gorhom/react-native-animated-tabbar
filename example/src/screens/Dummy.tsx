@@ -8,12 +8,12 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import Button from '../components/button';
-import { MainTabsParams } from './types';
+import type { MainTabsParams } from './types';
 import { useSafeArea } from 'react-native-safe-area-context';
 
 const data = Array(20)
   .fill(0)
-  .map((item, index) => ({
+  .map((_, index) => ({
     id: `item-${index}`,
     title: `Item ${index}`,
   }));
@@ -30,7 +30,7 @@ const DummyScreen = () => {
   const { name, params } = useRoute<RouteProp<MainTabsParams, 'Home'>>();
   const screeName = useMemo(() => params?.name || name, [params, name]);
   const paddingBottom = useMemo(() => params?.paddingBottom || 0, [params]);
-  const { navigate, addListener } = useNavigation();
+  const { addListener } = useNavigation();
 
   // style
   const rootStyle = useMemo(
@@ -75,8 +75,8 @@ const DummyScreen = () => {
 
   // callbacks
   const handleNextScreenPress = useCallback(() => {
-    navigate(params.nextScreen);
-  }, [navigate, params]);
+    // navigate(params.nextScreen);
+  }, []);
 
   // renders
   const renderHeader = () => (

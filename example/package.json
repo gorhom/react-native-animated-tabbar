@@ -1,36 +1,45 @@
 {
   "name": "@gorhom/animated-tabbar-example",
-  "description": "Example app for @gorhom/animated-tabbar",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.0.0",
+  "main": "__generated__/AppEntry.js",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "postinstall": "yarn expo-yarn-workspaces postinstall"
   },
   "dependencies": {
-    "@gorhom/showcase-template": "^1.0.2",
-    "@react-native-community/masked-view": "^0.1.10",
-    "@react-navigation/bottom-tabs": "^5.9.2",
-    "@react-navigation/native": "^5.7.6",
-    "@react-navigation/stack": "^5.9.3",
-    "lodash.isequal": "^4.5.0",
+    "@gorhom/animated-tabbar-bubble": "^3.0.0-alpha.0",
+    "@gorhom/animated-tabbar-core": "^3.0.0-alpha.0",
+    "@gorhom/animated-tabbar-flashy": "^3.0.0-alpha.0",
+    "@gorhom/animated-tabbar-material": "^3.0.0-alpha.0",
+    "@gorhom/showcase-template": "^2.0.4",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/bottom-tabs": "^6.0.5",
+    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/stack": "^6.0.7",
+    "expo": "~42.0.1",
+    "expo-status-bar": "~1.0.4",
     "react": "16.13.1",
-    "react-native": "0.63.3",
-    "react-native-gesture-handler": "^1.8.0",
-    "react-native-reanimated": "1.13.1",
-    "react-native-redash": "14.2.4",
-    "react-native-safe-area-context": "^3.1.8",
-    "react-native-screens": "^2.11.0",
-    "react-native-svg": "^12.1.0"
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-gesture-handler": "~1.10.2",
+    "react-native-reanimated": "~2.2.0",
+    "react-native-safe-area-context": "3.2.0",
+    "react-native-screens": "~3.4.0",
+    "react-native-svg": "12.1.1",
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/runtime": "^7.11.2",
-    "@types/react": "^16.9.51",
-    "@types/react-native": "^0.63.25",
-    "metro-react-native-babel-preset": "^0.63.0",
-    "rn-snoopy": "^2.0.2",
-    "typescript": "4.0.3"
-  }
+    "@babel/core": "^7.9.0",
+    "@expo/webpack-config": "^0.15.0",
+    "@types/react": "~16.9.35",
+    "@types/react-native": "~0.63.2",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "typescript": "~4.0.0"
+  },
+  "private": true
 }

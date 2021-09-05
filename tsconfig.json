@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@gorhom/animated-tabbar": ["./src/index"],
+      "@gorhom/animated-tabbar-core": ["./packages/core/src"],
+      "@gorhom/animated-tabbar-bubble": ["./packages/bubble"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -23,6 +24,5 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext"
-  },
-  "include": ["src"]
+  }
 }
