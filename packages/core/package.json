@@ -1,0 +1,67 @@
+{
+  "name": "@gorhom/animated-tabbar-core",
+  "version": "3.0.0-alpha.0",
+  "description": "Core functionalities for animated tab bar presets",
+  "keywords": [
+    "animated-tabbar",
+    "react-native",
+    "ios",
+    "android",
+    "react-navigation",
+    "reanimated",
+    "tabbar",
+    "tab-bar",
+    "bottom-bar"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gorhom/react-native-animated-tabbar.git",
+    "directory": "packages/core"
+  },
+  "author": "Mo Gorhom (https://gorhom.dev)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gorhom/react-native-animated-tabbar/issues"
+  },
+  "homepage": "https://github.com/gorhom/react-native-animated-tabbar#readme",
+  "main": "lib/commonjs/index.js",
+  "react-native": "src/index.tsx",
+  "source": "src/index.tsx",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/src/index.d.ts",
+  "files": [
+    "src",
+    "lib"
+  ],
+  "scripts": {
+    "lint": "eslint \"**/*.{js,ts,tsx}\" --fix",
+    "build": "bob build",
+    "clean": "del lib"
+  },
+  "dependencies": {
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-reanimated": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.19",
+    "@types/react-native": "~0.64.13",
+    "del-cli": "^4.0.1",
+    "react": "~16.13.1",
+    "react-native": "~0.63.4",
+    "react-native-builder-bob": "^0.18.1",
+    "typescript": "^4.4.2"
+  },
+  "peerDependencies": {
+    "react-native-gesture-handler": ">=1.10.3",
+    "react-native-reanimated": ">=2.2.0"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  }
+}
