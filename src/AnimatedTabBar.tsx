@@ -82,7 +82,16 @@ export function AnimatedTabBar<T extends PresetEnum>(
     }
     const route = routes[navigationIndex];
     const { options } = descriptors[route.key];
-    return options.tabBarVisible ?? true;
+
+    // React Navigation 5
+    if (typeof options.tabBarVisible === 'boolean') {
+      return options.tabBarVisible;
+    }
+
+    // React Navigation 6
+    const { tabBarStyle } = options;
+
+    return (tabBarStyle?.display || 'flex') === 'flex';
   }, [isReactNavigation5, routes, descriptors, navigationIndex]);
 
   const shouldShowTabBarAnimated = useTabBarVisibility(shouldShowTabBar);
