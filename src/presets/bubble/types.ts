@@ -39,6 +39,22 @@ export interface BubbleTabBarItemConfig {
      * @type {string}
      */
     inactiveColor: string;
+
+    /**
+     * Icon second color.
+     */
+    secondColor?: {
+      /**
+       * Tab bar item second color active variant.
+       * @type {string}
+       */
+      activeColor: string;
+      /**
+       * Tab bar item second color inactive variant.
+       * @type {string}
+       */
+      inactiveColor: string;
+    };
   };
   background: {
     /**
@@ -62,6 +78,12 @@ export interface BubbleTabBarIconProps {
    * @type {Animated.Node<number>}
    */
   animatedFocus: Animated.Node<number>;
+
+  /**
+   * Tab bar item animated focus value reverse.
+   * @type {Animated.Node<number>}
+   */
+  reverseAnimatedFocus: Animated.Node<number>;
   /**
    * Tab bar item animated icon color.
    * @type {Animated.Node<string | number>}

@@ -21,6 +21,7 @@ import { noop } from '../../utilities';
 import type { TabBarViewProps } from '../../types';
 import type { BubbleTabBarConfig, BubbleTabBarItemConfig } from './types';
 import { styles } from './styles';
+import { useReverseTabBarItemFocusTransition } from '../../hooks/useReverseTabBarItemFocusTransition';
 
 const BubbleTabBarComponent = ({
   selectedIndex,
@@ -42,6 +43,20 @@ const BubbleTabBarComponent = ({
       tabs.map((_, index) =>
         // eslint-disable-next-line react-hooks/rules-of-hooks
         useTabBarItemFocusTransition({
+          index,
+          selectedIndex,
+          duration,
+          easing,
+        })
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [tabs, duration, easing]
+  );
+  const reverseAnimatedFocusValues = useMemo(
+    () =>
+      tabs.map((_, index) =>
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useReverseTabBarItemFocusTransition({
           index,
           selectedIndex,
           duration,
@@ -88,6 +103,7 @@ const BubbleTabBarComponent = ({
             <BubbleTabBarItem
               index={index}
               animatedFocus={animatedFocusValues[index]}
+              reverseAnimatedFocus={reverseAnimatedFocusValues[index]}
               label={title}
               spacing={tabBarItemSpacing}
               itemContainerWidth={itemContainerWidth}

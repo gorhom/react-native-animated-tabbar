@@ -19,6 +19,7 @@ const BubbleTabBarItemComponent = ({
   spacing,
   iconSize,
   isRTL,
+  reverseAnimatedFocus,
 }: BubbleTabBarItemProps) => {
   //#region extract props
   const {
@@ -51,6 +52,16 @@ const BubbleTabBarItemComponent = ({
     inputRange: [0, 1],
     outputRange: [icon.inactiveColor, icon.activeColor],
   });
+  const animatedIconSecondColor = useMemo(() => {
+    if (!icon.secondColor) return undefined;
+    return interpolateColor(animatedFocus, {
+      inputRange: [0, 1],
+      outputRange: [
+        icon.secondColor.inactiveColor,
+        icon.secondColor.activeColor,
+      ],
+    });
+  }, [animatedFocus, icon.secondColor]);
   const containerStyle = [
     styles.container,
     {
@@ -113,13 +124,17 @@ const BubbleTabBarItemComponent = ({
       IconComponent({
         animatedFocus,
         color: animatedIconColor,
+        secondColor: animatedIconSecondColor,
         size: iconSize,
+        reverseAnimatedFocus,
       })
     ) : (
       <IconComponent
         animatedFocus={animatedFocus}
         color={animatedIconColor}
+        secondColor={animatedIconSecondColor}
         size={iconSize}
+        reverseAnimatedFocus={reverseAnimatedFocus}
       />
     );
   };
