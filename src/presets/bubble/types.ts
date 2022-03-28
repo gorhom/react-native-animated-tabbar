@@ -81,14 +81,21 @@ export interface BubbleTabBarIconProps {
 
   /**
    * Tab bar item animated focus value reverse.
-   * @type {Animated.Node<number>}
+   * @type {Animated.Node<number> | undefined}
    */
-  reverseAnimatedFocus: Animated.Node<number>;
+  reverseAnimatedFocus?: Animated.Node<number>;
   /**
    * Tab bar item animated icon color.
    * @type {Animated.Node<string | number>}
    */
   color: Animated.Node<string | number>;
+
+  /**
+   * Tab bar item animated second icon color.
+   * @type {Animated.Node<string | number> | undefined}
+   */
+  secondColor?: Animated.Node<string | number>;
+
   /**
    * Tab bar item icon size.
    * @type {number}
