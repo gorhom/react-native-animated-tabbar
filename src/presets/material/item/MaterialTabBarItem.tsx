@@ -1,13 +1,14 @@
 import React, { useMemo, memo, useCallback } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { transformOrigin, useValue } from 'react-native-redash';
+import { transformOrigin } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { useStableCallback } from '../../../hooks';
 import { interpolate } from '../../../utilities';
 import type { MaterialTabBarItemProps } from '../types';
 import { styles } from './styles';
+import { useValue } from 'react-native-redash/lib/module/v1';
 
 const { divide, Extrapolate } = Animated;
 
@@ -65,13 +66,15 @@ const MaterialTabBarItemComponent = (props: MaterialTabBarItemProps) => {
             x: 0,
             y: 0,
           },
-          {
-            scale: interpolate(animatedFocus, {
-              inputRange: [0, 1],
-              outputRange: [inactiveScale, 1],
-              extrapolate: Extrapolate.CLAMP,
-            }),
-          }
+          [
+            {
+              scale: interpolate(animatedFocus, {
+                inputRange: [0, 1],
+                outputRange: [inactiveScale, 1],
+                extrapolate: Extrapolate.CLAMP,
+              }),
+            },
+          ]
         ),
       },
     ],
@@ -95,13 +98,15 @@ const MaterialTabBarItemComponent = (props: MaterialTabBarItemProps) => {
                 x: 0,
                 y: 0,
               },
-              {
-                translateY: interpolate(animatedFocus, {
-                  inputRange: [0, 1],
-                  outputRange: [divide(labelHeight, 2), 0],
-                  extrapolate: Extrapolate.CLAMP,
-                }),
-              }
+              [
+                {
+                  translateY: interpolate(animatedFocus, {
+                    inputRange: [0, 1],
+                    outputRange: [divide(labelHeight, 2), 0],
+                    extrapolate: Extrapolate.CLAMP,
+                  }),
+                },
+              ]
             ),
           }
         : {}),
