@@ -1,16 +1,16 @@
 {
   "git": {
-    "push": true,
+    "push": false,
     "tagName": "v${version}",
     "commitMessage": "chore: release v${version}",
     "changelog": "auto-changelog --stdout --commit-limit false --ignore-commit-pattern \"^chore: release v\" --unreleased --template ./release-template.hbs"
   },
   "github": {
-    "release": true,
+    "release": false,
     "releaseNotes": "auto-changelog --stdout --commit-limit false --ignore-commit-pattern \"^chore: release v\" --unreleased --template ./release-template.hbs"
   },
   "npm": {
-    "publish": false
+    "publish": true
   },
   "plugins": {
     "@release-it/conventional-changelog": {
