@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 // @ts-ignore 😞
 import MaskedView from '@react-native-community/masked-view';
 import { Svg, Circle, SvgProps, CircleProps } from 'react-native-svg';
-import { useValues, transformOrigin, toRad } from 'react-native-redash';
+import { transformOrigin, toRad } from 'react-native-redash';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import {
@@ -15,6 +15,7 @@ import {
 import { interpolate } from '../../../utilities';
 import type { FlashyTabBarItemProps } from '../types';
 import { styles } from './styles';
+import { useValues } from 'react-native-redash/lib/module/v1';
 
 const AnimatedSvg = Animated.createAnimatedComponent(
   Svg
@@ -120,21 +121,23 @@ const FlashyTabBarItemComponent = ({
           x: 0,
           y: 0,
         },
-        {
-          translateY: interpolate(animatedFocus, {
-            inputRange: [0.25, 1],
-            outputRange: [
-              0,
-              divide(sub(containerHeight, multiply(labelHeight, 1.5)), 2),
-            ],
-            extrapolate: Extrapolate.CLAMP,
-          }),
-          rotate: interpolate(animatedFocus, {
-            inputRange: [0, 0.5],
-            outputRange: [toRad(0), toRad(isRTL ? -15 : 15)],
-            extrapolate: Extrapolate.CLAMP,
-          }),
-        }
+        [
+          {
+            translateY: interpolate(animatedFocus, {
+              inputRange: [0.25, 1],
+              outputRange: [
+                0,
+                divide(sub(containerHeight, multiply(labelHeight, 1.5)), 2),
+              ],
+              extrapolate: Extrapolate.CLAMP,
+            }),
+            rotate: interpolate(animatedFocus, {
+              inputRange: [0, 0.5],
+              outputRange: [toRad(0), toRad(isRTL ? -15 : 15)],
+              extrapolate: Extrapolate.CLAMP,
+            }),
+          },
+        ]
       ) as Animated.AnimatedTransform,
     },
   ];
@@ -170,18 +173,20 @@ const FlashyTabBarItemComponent = ({
           x: 0,
           y: 0,
         },
-        {
-          translateY: interpolate(animatedFocus, {
-            inputRange: [0, 1],
-            outputRange: [innerVerticalSpace, iconSize * -1.5],
-            extrapolate: Extrapolate.CLAMP,
-          }),
-          rotate: interpolate(animatedFocus, {
-            inputRange: [0, 0.5],
-            outputRange: [0, toRad(isRTL ? -15 : 15)],
-            extrapolate: Extrapolate.CLAMP,
-          }),
-        }
+        [
+          {
+            translateY: interpolate(animatedFocus, {
+              inputRange: [0, 1],
+              outputRange: [innerVerticalSpace, iconSize * -1.5],
+              extrapolate: Extrapolate.CLAMP,
+            }),
+            rotate: interpolate(animatedFocus, {
+              inputRange: [0, 0.5],
+              outputRange: [0, toRad(isRTL ? -15 : 15)],
+              extrapolate: Extrapolate.CLAMP,
+            }),
+          },
+        ]
       ) as Animated.AnimatedTransform,
     },
   ];
