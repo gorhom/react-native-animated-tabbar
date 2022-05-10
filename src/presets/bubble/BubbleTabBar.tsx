@@ -37,7 +37,7 @@ const BubbleTabBarComponent = ({
   animatedOnChange,
   onLongPress = noop,
 }: TabBarViewProps<BubbleTabBarConfig, BubbleTabBarItemConfig>) => {
-  //#region variables
+  // #region variables
   const animatedFocusValues = useMemo(
     () =>
       tabs.map((_, index) =>
