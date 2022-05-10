@@ -1,4 +1,4 @@
-import type { TextStyle } from 'react-native';
+import type { TextProps, TextStyle } from 'react-native';
 import type Animated from 'react-native-reanimated';
 import type { TabBarItemProps } from '../../types';
 
@@ -16,6 +16,10 @@ export interface BubbleTabBarItemConfig {
    * }
    */
   labelStyle: TextStyle;
+  /**
+   * Specifies whether fonts should scale to respect Text Size accessibility settings. The default is true.
+   */
+  labelAllowFontScaling: TextProps['allowFontScaling'];
   /**
    * Tab bar item icon config.
    */
@@ -39,6 +43,22 @@ export interface BubbleTabBarItemConfig {
      * @type {string}
      */
     inactiveColor: string;
+
+    /**
+     * Icon second color.
+     */
+    secondColor?: {
+      /**
+       * Tab bar item second color active variant.
+       * @type {string}
+       */
+      activeColor: string;
+      /**
+       * Tab bar item second color inactive variant.
+       * @type {string}
+       */
+      inactiveColor: string;
+    };
   };
   background: {
     /**
@@ -62,11 +82,24 @@ export interface BubbleTabBarIconProps {
    * @type {Animated.Node<number>}
    */
   animatedFocus: Animated.Node<number>;
+
+  /**
+   * Tab bar item animated focus value reverse.
+   * @type {Animated.Node<number> | undefined}
+   */
+  reverseAnimatedFocus?: Animated.Node<number>;
   /**
    * Tab bar item animated icon color.
    * @type {Animated.Node<string | number>}
    */
   color: Animated.Node<string | number>;
+
+  /**
+   * Tab bar item animated second icon color.
+   * @type {Animated.Node<string | number> | undefined}
+   */
+  secondColor?: Animated.Node<string | number>;
+
   /**
    * Tab bar item icon size.
    * @type {number}

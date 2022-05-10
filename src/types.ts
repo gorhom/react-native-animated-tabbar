@@ -107,6 +107,10 @@ export interface TabBarItemProps
    */
   animatedFocus: Animated.Node<number>;
   /**
+   * Animated focus value.
+   */
+  reverseAnimatedFocus?: Animated.Node<number>;
+  /**
    * Tab index.
    */
   index: number;

@@ -1,7 +1,7 @@
 import React, { useMemo, memo } from 'react';
 import { View, Text, LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { interpolateColor, useValue } from 'react-native-redash';
+import { interpolateColor, useValue } from 'react-native-redash/lib/module/v1';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
 import { interpolate } from '../../../utilities';
@@ -16,9 +16,11 @@ const BubbleTabBarItemComponent = ({
   icon,
   background,
   labelStyle: labelStyleOverride,
+  labelAllowFontScaling,
   spacing,
   iconSize,
   isRTL,
+  reverseAnimatedFocus,
 }: BubbleTabBarItemProps) => {
   //#region extract props
   const {
@@ -51,6 +53,16 @@ const BubbleTabBarItemComponent = ({
     inputRange: [0, 1],
     outputRange: [icon.inactiveColor, icon.activeColor],
   });
+  const animatedIconSecondColor = useMemo(() => {
+    if (!icon.secondColor) return undefined;
+    return interpolateColor(animatedFocus, {
+      inputRange: [0, 1],
+      outputRange: [
+        icon.secondColor.inactiveColor,
+        icon.secondColor.activeColor,
+      ],
+    });
+  }, [animatedFocus, icon.secondColor]);
   const containerStyle = [
     styles.container,
     {
@@ -113,13 +125,17 @@ const BubbleTabBarItemComponent = ({
       IconComponent({
         animatedFocus,
         color: animatedIconColor,
+        secondColor: animatedIconSecondColor,
         size: iconSize,
+        reverseAnimatedFocus,
       })
     ) : (
       <IconComponent
         animatedFocus={animatedFocus}
         color={animatedIconColor}
+        secondColor={animatedIconSecondColor}
         size={iconSize}
+        reverseAnimatedFocus={reverseAnimatedFocus}
       />
     );
   };
@@ -130,7 +146,12 @@ const BubbleTabBarItemComponent = ({
         <View style={iconContainerStyle}>{renderIcon()}</View>
       </Animated.View>
       <Animated.View style={labelContainerStyle}>
-        <Text onLayout={handleTextLayout} style={labelStyle} numberOfLines={1}>
+        <Text
+          allowFontScaling={labelAllowFontScaling}
+          onLayout={handleTextLayout}
+          style={labelStyle}
+          numberOfLines={1}
+        >
           {label}
         </Text>
       </Animated.View>

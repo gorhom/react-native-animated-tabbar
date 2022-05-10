@@ -14,7 +14,7 @@ import Animated, {
   call,
   onChange,
 } from 'react-native-reanimated';
-import { useValue } from 'react-native-redash';
+import { useValue } from 'react-native-redash/lib/module/v1';
 
 interface Route {
   name: string;

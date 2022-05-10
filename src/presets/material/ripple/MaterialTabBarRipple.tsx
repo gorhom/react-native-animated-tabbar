@@ -16,7 +16,7 @@ import Animated, {
 } from 'react-native-reanimated';
 // @ts-ignore 😞
 import isEqual from 'lodash.isequal';
-import { useValues, get, useValue } from 'react-native-redash';
+import { useValues, get, useValue } from 'react-native-redash/lib/module/v1';
 import { interpolate } from '../../../utilities';
 import type { MaterialTabBarItemConfig } from '../types';
 import { styles } from './styles';
