@@ -1,4 +1,4 @@
-import type { TextStyle } from 'react-native';
+import type { TextProps, TextStyle } from 'react-native';
 import type Animated from 'react-native-reanimated';
 import type { TabBarItemProps } from '../../types';
 
@@ -16,6 +16,10 @@ export interface BubbleTabBarItemConfig {
    * }
    */
   labelStyle: TextStyle;
+  /**
+   * Specifies whether fonts should scale to respect Text Size accessibility settings. The default is true.
+   */
+  labelAllowFontScaling: TextProps['allowFontScaling'];
   /**
    * Tab bar item icon config.
    */

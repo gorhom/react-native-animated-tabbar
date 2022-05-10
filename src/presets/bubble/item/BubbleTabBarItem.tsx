@@ -16,6 +16,7 @@ const BubbleTabBarItemComponent = ({
   icon,
   background,
   labelStyle: labelStyleOverride,
+  labelAllowFontScaling,
   spacing,
   iconSize,
   isRTL,
@@ -145,7 +146,12 @@ const BubbleTabBarItemComponent = ({
         <View style={iconContainerStyle}>{renderIcon()}</View>
       </Animated.View>
       <Animated.View style={labelContainerStyle}>
-        <Text onLayout={handleTextLayout} style={labelStyle} numberOfLines={1}>
+        <Text
+          allowFontScaling={labelAllowFontScaling}
+          onLayout={handleTextLayout}
+          style={labelStyle}
+          numberOfLines={1}
+        >
           {label}
         </Text>
       </Animated.View>
