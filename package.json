@@ -45,7 +45,7 @@
     "@commitlint/config-conventional": "^9.1.1",
     "@react-native-community/bob": "^0.16.2",
     "@react-native-community/eslint-config": "^2.0.0",
-    "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-masked-view/masked-view": "^0.2.8",
     "@release-it/conventional-changelog": "^1.1.4",
     "@types/react": "^16.9.19",
     "@types/react-native": "0.61.10",
@@ -66,7 +66,7 @@
   },
   "peerDependencies": {
     "@react-navigation/native": ">=5.0.0",
-    "@react-native-community/masked-view": ">=0.1.10",
+    "@react-native-masked-view/masked-view": "^0.2.8",
     "react": "*",
     "react-native": "*",
     "react-native-gesture-handler": ">=1.6.1",
