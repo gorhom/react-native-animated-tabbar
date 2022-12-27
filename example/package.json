@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@gorhom/showcase-template": "^1.0.2",
-    "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-masked-view/masked-view": "^0.2.8",
     "@react-navigation/bottom-tabs": "^5.9.2",
     "@react-navigation/native": "^5.7.6",
     "@react-navigation/stack": "^5.9.3",
